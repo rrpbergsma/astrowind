@@ -11,7 +11,7 @@ metadata:
   title:
     default: 365DevNet
     template: '%s — 365DevNet'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  description: "The website 365DevNet serves as the personal portfolio of Richard Bergsma, an IT Systems and Automation Manager with over 15 years of experience. The site provides detailed information about his professional background, including his work experience, skills, and certifications.  "
   robots:
     index: true
     follow: true
