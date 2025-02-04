@@ -1,0 +1,291 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import { getPermalink } from '~/utils/permalinks';
+import HomePageImage from '~/assets/images/richardbergsma.png'
+import MicrosoftAssociate from '~/assets/images/microsoft-certified-associate-badge.webp'
+import NexthinkAssociate from '~/assets/images/NexthinkAssociate.webp'
+import NexthinkAdministrator from '~/assets/images/NexthinkAdministrator.webp'
+import pcep from '~/assets/images/PCEP.webp'
+import MicrosoftFundamentals from '~/assets/images/microsoft-certified-fundamentals-badge.webp'
+
+
+const metadata = {
+  title: 'Über mich',
+};
+
+const fixedYear = 2010; // Ersetze dies durch das gewünschte Jahr
+const currentYear = new Date().getFullYear();
+const yearsSince = currentYear - fixedYear;
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement"></Fragment>
+  <Fragment slot="header">
+    <Header
+      links={[
+        { text: 'Startseite', href: '#hero' },
+        { text: 'Über mich', href: '#about' },
+        { text: 'Lebenslauf', href: '#resume' },
+        { text: 'Fähigkeiten', href: '#skills' },
+        { text: 'Portfolio', href: '#porfolio' },
+        { text: 'Blog', href: '#blog' },
+      ]}
+      actions={[
+        {
+          text: 'Kontaktiere mich',
+          href: getPermalink('/contact#form'),
+        },
+      ]}
+      isSticky
+      showToggleTheme
+    />
+  </Fragment>
+
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    id="hero"
+    title="Systeme vereinfachen, Ergebnisse verstärken"
+  >
+    <Fragment slot="subtitle">
+      <strong class="text-4xl">Hallo! Ich bin Richard Bergsma.</strong></br></br>
+      Ich automatisiere Arbeitsabläufe mit Power Automate, entwickle intelligente Chatbots im Copilot Studio und verbinde Systeme durch nahtlose API-Integrationen. Von der Optimierung der IT-Infrastruktur und dem Management globaler Umgebungen bis hin zur Verbesserung der Zusammenarbeit mit SharePoint und Azure – ich optimiere Prozesse, damit Technologie intelligenter arbeitet, und verbessere dabei kontinuierlich meine Python-Kenntnisse.
+    </Fragment>
+  </Hero>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="about"
+    columns={2}
+    items={[]}
+    image={{
+      src: HomePageImage,
+      alt: 'Richard Bergsma lächelt in den Schweizer Alpen, während er Revella hält',
+      loading: 'eager',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Über mich</h2>
+      Mit über 15 Jahren IT-Erfahrung bin ich ein leidenschaftlicher IT-System- und Automatisierungsmanager, der optimale Lösungen für komplexe Cloud- und On-Premise-Systeme entwickelt. Ich konzentriere mich darauf, Automatisierung mit Power Automate voranzutreiben, intelligente Chatbots im Copilot Studio zu bauen und APIs zu integrieren, um Arbeitsabläufe zu optimieren. Zudem verwalte ich die Microsoft 365-Umgebung, unterstütze Anfragen der dritten Ebene und steigere die Effizienz mit Tools wie Power Apps, Nexthink und TOPdesk.
+      
+      </br></br>
+      Früher leitete ich Implementierungen von Microsoft 365 und SharePoint Online, migrierte E-Mail-Systeme und verbesserte die Automatisierung mit SCCM. Darüber hinaus gründete ich Bergsma IT, um kleinen Unternehmen beim Umstieg in die Cloud zu helfen und individuelle WordPress-Websites zu betreuen.
+      
+      </br></br>
+      Ich besitze Zertifizierungen in Microsoft Teams Administration, Azure Fundamentals und Nexthink Administration. Meine Mission ist es, IT-Exzellenz voranzutreiben, indem ich Cloud-Lösungen optimiere, Prozesse automatisiere und herausragenden technischen Support leiste.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Steps Widget: Berufserfahrung ****************** -->
+
+  <Steps
+    id="resume"
+    title="Berufserfahrung"
+    items={[
+      {
+        title:
+          'IT-Systeme und Automatisierungsmanager<br /> <span class="font-normal">COFRA Holding C.V. - Amsterdam</span> <br /> <span class="text-sm font-normal">02-2025 - Aktuell</span>',
+        description: `Als IT-Systeme- und Automatisierungsmanager bei COFRA Holding konzentriere ich mich darauf, die Automatisierung mit Power Automate voranzutreiben und fortschrittliche Chatbots im Copilot Studio zu entwickeln, um Prozesse zu optimieren und die operative Effizienz zu steigern. Meine Arbeit umfasst die Integration von APIs, um nahtlose Arbeitsabläufe zu schaffen, wiederkehrende Aufgaben zu automatisieren und digitale Transformationsinitiativen zu unterstützen. Zusätzlich zu meinen Automatisierungsaufgaben verwalte ich unsere Microsoft 365-Umgebung, unterstütze Anfragen der dritten Ebene, entwickle Power Apps, überwache unsere Nexthink-Umgebung, manage TOPdesk und trage bei Bedarf zu diversen IT-Projekten bei.`,
+        icon: 'tabler:automation',
+      },
+      {
+        title:
+          'Office 365 Professional<br /> <span class="font-normal">COFRA Holding C.V. - Amsterdam</span> <br /> <span class="text-sm font-normal">08-2020 - 01-2025</span>',
+        description: `Als Microsoft 365-Experte bei COFRA Holding sorge ich dafür, dass die Umgebung verwaltet wird, neue Funktionen kommuniziert werden und Kollegen bei Anfragen der dritten Ebene unterstützt werden. Anfragen reichen von neuen Power Automate-Flows bis hin zu Power Apps. Zudem konzentriere ich mich auf die Einrichtung und Verwaltung unserer Nexthink-Umgebung, manage TOPdesk und unterstütze weitere Projekte nach Bedarf. In letzter Zeit habe ich mich darauf fokussiert, Power Automate zur Verbesserung der Automatisierung in verschiedenen Bereichen zu nutzen.`,
+        icon: 'tabler:brand-office',
+      },
+      {
+        title:
+          'Cloud-Systeme und Anwendungsingenieur<br /> <span class="font-normal">Hyva - Alphen aan den Rijn</span> <br /> <span class="text-sm font-normal">09-2018 - 04-2020</span>',
+        description: `Ich verwaltete die globale IT-Infrastruktur in 35 Ländern, trieb die Implementierung und Integration von Office 365 und SharePoint Online zur Förderung der Zusammenarbeit voran und leitete nahtlose Migrationen von unterschiedlichen E-Mail-Systemen zu Office 365, wodurch Effizienz und Zuverlässigkeit der Kommunikation gesteigert wurden. Zudem leitete ich die Konsolidierung globaler IT-Operationen durch den Austausch von zwei Rechenzentren, das Einrichten und Optimieren von Azure-Umgebungen sowie ein effektives Kostenmanagement. Mit SCCM automatisierte ich zentrale Prozesse, was die Effizienz des Service Desks erhöhte, und bot darüber hinaus dritte Ebene Unterstützung über TOPdesk, löste komplexe IT-Probleme und stellte eine hohe Servicequalität sicher.`,
+        icon: 'tabler:car-crane',
+      },
+      {
+        title:
+          'IT-Berater<br /> <span class="font-normal">Bergsma.IT - Zoetermeer</span> <br /> <span class="text-sm font-normal">01-2018 - 07-2019</span>',
+        description: `Ich gründete das Unternehmen, um kleinen Unternehmen zu helfen, ihre IT-Infrastruktur mittels cloudbasierter Lösungen zu modernisieren – mit einem besonderen Fokus auf Microsoft-Technologien, um Effizienz, Skalierbarkeit und Zusammenarbeit zu verbessern. Erfolgreich führte ich E-Mail- und Dateiservermigrationen zu Microsoft-Cloud-Plattformen durch, bot kontinuierlichen technischen Support und gestaltete maßgeschneiderte WordPress-Websites. Zudem optimierte ich Arbeitsabläufe mit Microsoft 365 und lieferte individuelle IT-Lösungen, die den Geschäftszielen der Kunden entsprachen.`,
+        icon: 'tabler:binary-tree-2',
+      },
+      {
+        title:
+          'Technischer Applikationsingenieur SharePoint<br /> <span class="font-normal">Allseas - Delft</span> <br /> <span class="text-sm font-normal">04-2018 - 09-2018</span>',
+        description: `Ich verwaltete und optimierte SharePoint 2013- und SharePoint Online-Umgebungen, um die Zusammenarbeit und Produktivität zu fördern. Dabei erstellte und passte ich SharePoint-Seiten an, implementierte Workflows und leistete fachkundige Unterstützung für Cadac Organice. In enger Zusammenarbeit mit den Stakeholdern entwickelte ich maßgeschneiderte Lösungen, die sichere, aktuelle und leistungsfähige SharePoint-Systeme gewährleisteten.`,
+        icon: 'tabler:cloud-share',
+      },
+      {
+        title:
+          'IT-Systemadministrator<br /> <span class="font-normal">OZ Export - De Kwakel</span> <br /> <span class="text-sm font-normal">10-2015 - 12-2017</span>',
+        description: `Ich verwaltete und wartete die IT-Infrastruktur der Organisation, um Systemzuverlässigkeit und reibungslose Abläufe sicherzustellen. Dabei überwachte ich Server, Client-PCs, mobile Scanner und Drucker, optimierte deren Leistung und minimierte Ausfallzeiten. Ich konfigurierte VoIP-Systeme, managte Netzwerk-Switches und administrierte Citrix-Umgebungen für sicheren Fernzugriff. Zudem installierte und unterstützte ich On-Premise-SharePoint-Umgebungen, um die Zusammenarbeit zu fördern, und entwickelte sowie wartete das Überwachungssystem und die Helpdesk-Plattform der Organisation, was den IT-Support vereinfachte und die Sicherheit erhöhte. Praktische Fehlerbehebung bei Hardware-, Software- und Netzwerkproblemen rundete meine Aufgaben ab.`,
+        icon: 'tabler:server',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- Steps Widget: Ausbildung ****************** -->
+
+  <Steps
+    id="resume"
+    title="Ausbildung"
+    items={[
+      {
+        title: `Bachelor of Applied Science - BASc, Mechatronik, Robotik und Automatisierungstechnik<br /> <span class="font-normal">De Haagse Hogeschool / The Hague University of Applied Sciences</span> <br /> <span class="text-sm font-normal">2011 - 2013</span>`,
+        icon: 'tabler:school',
+      },
+      {
+        title: `Bachelor of Applied Science - BASc, Informationstechnologie<br /> <span class="font-normal">De Haagse Hogeschool / The Hague University of Applied Sciences</span> <br /> <span class="text-sm font-normal">2011 - 2011</span>`,
+        icon: 'tabler:school',
+      },
+      {
+        title: `Associate's Degree, Informationstechnologie<br /> <span class="font-normal">ID College</span> <br /> <span class="text-sm font-normal">2007 - 2011</span>`,
+        icon: 'tabler:books',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- Testimonials Widget: Zertifizierungen *********** -->
+
+  <Testimonials
+    title="Zertifizierungen"
+    subtitle="Wo Wissen auf Anerkennung trifft"
+    testimonials={[
+      {
+        name: 'Zertifizierter Nexthink Administrator',
+        description: 'Das Erlangen der Nexthink Platform Administration-Zertifizierung beweist, dass Sie in der Konfiguration und Anpassung der Nexthink-Plattform zur Erfüllung organisatorischer Anforderungen versiert sind.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        image: {
+          src: NexthinkAdministrator,
+          alt: 'Nexthink Administrator Abzeichen',
+        },
+      },
+      {
+        name: 'Zertifizierter Nexthink Associate',
+        description: 'Das Erlangen der Nexthink Infinity Fundamentals-Zertifizierung bestätigt Ihr Verständnis der Nexthink Infinity-Plattform und ihrer Rolle bei der Verbesserung der digitalen Mitarbeitererfahrung.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-infinity-fundamentals',
+        image: {
+          src: NexthinkAssociate,
+          alt: 'Nexthink Associate Abzeichen',
+        },
+      },
+      {
+        name: 'Teams Administrator Associate',
+        description: 'Das Erlangen der Teams Administrator Associate-Zertifizierung zeigt Ihre Fähigkeit, Microsoft Teams zu planen, bereitzustellen, zu konfigurieren und zu verwalten, um eine effiziente Zusammenarbeit und Kommunikation in einer Microsoft 365-Umgebung zu ermöglichen.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate Abzeichen',
+        },
+      },
+      {
+        name: 'Modern Desktop Administrator Associate',
+        description: 'Das Erlangen der Modern Desktop Administrator Associate-Zertifizierung belegt Ihre Fachkenntnisse in der Bereitstellung, Konfiguration, Absicherung, Verwaltung und Überwachung von Geräten und Client-Anwendungen in einer Unternehmensumgebung.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate Abzeichen',
+        },
+      },
+      {
+        name: 'Zertifizierter Python-Programmierer (Einsteiger)',
+        description: 'Das Erlangen der PCEP™-Zertifizierung demonstriert Ihre Kenntnisse der grundlegenden Konzepte der Python-Programmierung – einschließlich Datentypen, Kontrollstrukturen, Datenstrukturen, Funktionen und Fehlerbehandlung.',
+        linkUrl: 'https://pythoninstitute.org/pcep',
+        image: {
+          src: pcep,
+          alt: 'PCEP™ – Zertifizierter Python-Programmierer (Einsteiger) Abzeichen',
+        },
+      },
+      {
+        name: 'Microsoft 365 Fundamentals',
+        description: 'Das Erlangen der Microsoft 365 Certified: Fundamentals-Zertifizierung zeigt grundlegende Kenntnisse über cloudbasierte Lösungen, einschließlich Produktivität, Zusammenarbeit, Sicherheit, Compliance und Microsoft 365-Dienste.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Microsoft 365 Fundamentals Abzeichen',
+        },
+      },
+      {
+        name: 'Azure Fundamentals',
+        description: 'Das Erlangen der Microsoft Certified: Azure Fundamentals-Zertifizierung belegt grundlegende Kenntnisse über Cloud-Konzepte, Kern-Azure-Dienste sowie Verwaltungs- und Governance-Funktionen und -Tools von Azure.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Azure Fundamentals Abzeichen',
+        },
+      },
+    ]}
+  />
+
+  <!-- Features3 Widget: Fähigkeiten ************** -->
+
+  <Features3
+    id="skills"
+    title="Fähigkeiten"
+    subtitle="Entdecke die Fähigkeiten, die es mir ermöglichen, Vorstellungskraft durch Design zum Leben zu erwecken."
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'Power Automate',
+        description: 'Fachkenntnisse in der Gestaltung und Implementierung fortschrittlicher Automatisierungs-Workflows mit Microsoft Power Automate, um Geschäftsprozesse zu optimieren, manuelle Arbeit zu reduzieren und die operative Effizienz zu steigern.',
+      },
+      {
+        title: 'Copilot Studio',
+        description: 'Erfahrung in der Entwicklung intelligenter Chatbots im Copilot Studio, die verbesserte Benutzerinteraktionen und Unterstützung durch natürliche Sprachverarbeitung sowie automatisierte Antworten ermöglichen.',
+      },
+      {
+        title: 'API-Integrationen',
+        description: 'Erfahren im Erstellen benutzerdefinierter Connectoren und der Integration verschiedener Anwendungen und Services über APIs, um einen nahtlosen Datenaustausch und eine automatisierte Prozesssteuerung zwischen Plattformen zu ermöglichen.',
+      },
+      {
+        title: 'Microsoft 365 Administration',
+        description: 'Umfassende Erfahrung in der Verwaltung von Microsoft 365-Umgebungen, einschließlich Benutzerverwaltung, Sicherheitskonfigurationen und Serviceoptimierung zur Förderung globaler Zusammenarbeit und Produktivität.',
+      },
+      {
+        title: 'SharePoint Online & On-Premise',
+        description: 'Versiert in der Einrichtung, Verwaltung und Optimierung von SharePoint Online sowie On-Premise-Implementierungen, um ein effektives Dokumentenmanagement, Zusammenarbeit und Informationsaustausch innerhalb von Organisationen zu gewährleisten.',
+      },
+      {
+        title: 'Nexthink Platform Administration',
+        description: 'Erfahren in der Verwaltung der Nexthink-Plattform, wobei ich deren Fähigkeiten zur Überwachung der IT-Infrastruktur, Durchführung von Fernaktionen und Entwicklung von Workflows nutze, um IT-Services und die Benutzererfahrung zu verbessern.',
+      },
+      {
+        title: 'Microsoft Power Apps',
+        description: 'Erfahren im Einsatz von Microsoft Power Apps zur Gestaltung und Entwicklung maßgeschneiderter Geschäftsanwendungen mit minimalem Code. Fundiert in der Erstellung von Canvas- sowie modellgesteuerten Apps, die sich mit unterschiedlichen Datenquellen verbinden.',
+      },
+      {
+        title: 'IT-Infrastrukturanagement',
+        description: 'Umfangreiche Erfahrung in der Überwachung globaler IT-Infrastrukturen, im Management von Servern, Netzwerken und Endgeräten in verschiedenen Ländern, um einen zuverlässigen und effizienten IT-Betrieb sicherzustellen.',
+      },
+      {
+        title: 'ITSM (TOPdesk)',
+        description: 'Erfahren im Management von ITSM-Prozessen mit TOPdesk. Versiert in Kernfunktionen wie Incident Management und Asset Management sowie im Einsatz von APIs für nahtlose Integrationen mit anderen Systemen.',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPosts Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Entdecke meine aufschlussreichen Artikel in meinem Blog"
+    information={`Willkommen in meinem Blog, in dem ich Einblicke, Tipps und Lösungen zu Microsoft 365, Nexthink, Power Automate, PowerShell und weiteren Automatisierungstools teile. Ob du Arbeitsabläufe optimieren, die Produktivität steigern oder dich in technische Problemlösungen vertiefen möchtest – hier findest du praxisnahe Inhalte, die dich auf deinem Weg unterstützen.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

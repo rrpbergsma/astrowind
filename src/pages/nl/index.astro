@@ -1,0 +1,294 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import { getPermalink } from '~/utils/permalinks';
+import HomePageImage from '~/assets/images/richardbergsma.png'
+import MicrosoftAssociate from '~/assets/images/microsoft-certified-associate-badge.webp'
+import NexthinkAssociate from '~/assets/images/NexthinkAssociate.webp'
+import NexthinkAdministrator from '~/assets/images/NexthinkAdministrator.webp'
+import pcep from '~/assets/images/PCEP.webp'
+import MicrosoftFundamentals from '~/assets/images/microsoft-certified-fundamentals-badge.webp'
+
+
+const metadata = {
+  title: 'Over mij',
+};
+
+const fixedYear = 2010; // Vervang door het gewenste jaar
+const currentYear = new Date().getFullYear();
+const yearsSince = currentYear - fixedYear;
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement"></Fragment>
+  <Fragment slot="header">
+    <Header
+      links={[
+        { text: 'Home', href: '#hero' },
+        { text: 'Over', href: '#about' },
+        { text: 'CV', href: '#resume' },
+        { text: 'Vaardigheden', href: '#skills' },
+        { text: 'Portfolio', href: '#porfolio' },
+        { text: 'Blog', href: '#blog' },
+      ]}
+      actions={[
+        {
+          text: 'Contacteer mij',
+          href: getPermalink('/contact#form'),
+        },
+      ]}
+      isSticky
+      showToggleTheme
+    />
+  </Fragment>
+
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero
+    id="hero"
+    title="Systemen vereenvoudigen, Resultaten versterken"
+  >
+    
+    <Fragment slot="subtitle">
+      <strong class="text-4xl">Hoi! Ik ben Richard Bergsma.</strong></br></br>
+      Ik automatiseer werkstromen met Power Automate, bouw slimme chatbots in Copilot Studio en verbind systemen via naadloze API-integraties. Van het optimaliseren van IT-infrastructuur en het beheren van wereldwijde omgevingen tot het verbeteren van samenwerking met SharePoint en Azure, stroomlijn ik processen om technologie slimmer te laten werken – terwijl ik mijn Python-vaardigheden verder ontwikkel.
+    </Fragment>
+    
+  </Hero>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="about"
+    columns={2}
+    items={[
+      
+    ]}
+    image={{
+      src: HomePageImage,
+      alt: 'Richard Bergsma die glimlacht in de bergen van Zwitserland terwijl hij Revella vasthoudt',
+      loading: 'eager',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Over mij</h2>
+        Met meer dan 15 jaar IT-ervaring ben ik een gepassioneerde IT-systemen- en automatiseringsmanager die uitblinkt in het leveren van optimale oplossingen voor complexe cloud- en on-premise systemen. Ik richt mij op het stimuleren van automatisering met Power Automate, het bouwen van intelligente chatbots in Copilot Studio en het integreren van API's om werkstromen te stroomlijnen. Ik beheer ook de Microsoft 365-omgeving, ondersteun derde-lijnsaanvragen en verhoog de efficiëntie met tools zoals Power Apps, Nexthink en TOPdesk.
+
+      </br></br>Vroeger leidde ik de implementaties van Microsoft 365 en SharePoint Online, migreerde ik mailsystemen en verbeterde ik de automatisering met SCCM. Daarnaast richtte ik Bergsma IT op, waarmee ik kleine bedrijven hielp de overstap naar de cloud te maken en beheer ik op maat gemaakte WordPress-websites.
+
+      </br></br>Ik ben gecertificeerd in Microsoft Teams Administration, Azure Fundamentals en Nexthink Administration. Mijn missie is IT-excellentie te bevorderen door het optimaliseren van cloudoplossingen, het automatiseren van processen en het leveren van uitstekende technische ondersteuning.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    id="resume"
+    title="Werkervaring"
+    items={[
+      {
+        title:
+          'IT-systemen en automatiseringsmanager<br /> <span class="font-normal">COFRA Holding C.V. - Amsterdam</span> <br /> <span class="text-sm font-normal">02-2025 - Heden</span>',
+        description: `Als IT-systemen en automatiseringsmanager bij COFRA Holding richt ik mij op het stimuleren van automatisering met Power Automate en het bouwen van geavanceerde chatbots in Copilot Studio om processen te stroomlijnen en de operationele efficiëntie te verbeteren. Mijn werk omvat het integreren van API's om naadloze werkstromen te creëren, het automatiseren van terugkerende taken en het ondersteunen van digitale transformatie-initiatieven. Naast mijn verantwoordelijkheden op het gebied van automatisering beheer ik onze Microsoft 365-omgeving, ondersteun ik derde-lijnsaanvragen, ontwikkel ik Power Apps, houd ik toezicht op onze Nexthink-omgeving, beheer ik TOPdesk en draag ik bij aan diverse IT-projecten waar nodig.`,
+        icon: 'tabler:automation',
+      },
+      {
+        title:
+          'Office 365 Professional<br /> <span class="font-normal">COFRA Holding C.V. - Amsterdam</span> <br /> <span class="text-sm font-normal">08-2020 - 01-2025</span>',
+        description: `Als de Microsoft 365-expert binnen COFRA Holding zorg ik ervoor dat de omgeving wordt beheerd, nieuwe functies worden gecommuniceerd en collega's worden ondersteund bij derde-lijnsaanvragen. Nieuwe aanvragen variëren van nieuwe Power Automate-stromen tot Power Apps. Daarnaast richt ik mij op de opzet en het beheer van onze Nexthink-omgeving, beheer ik TOPdesk en ondersteun ik andere projecten waar nodig. De laatste tijd concentreer ik mij op het benutten van Power Automate om de automatisering op verschillende gebieden te verbeteren.`,
+        icon: 'tabler:brand-office',
+      },
+      {
+        title:
+          'Cloudsystemen- en applicatie-ingenieur<br /> <span class="font-normal">Hyva - Alphen aan den Rijn</span> <br /> <span class="text-sm font-normal">09-2018 - 04-2020</span>',
+        description: `Beheerde de wereldwijde IT-infrastructuur in 35 landen en stimuleerde de implementatie en integratie van Office 365 en SharePoint Online om de samenwerking te verbeteren. Leidde naadloze migraties van diverse mailsystemen naar Office 365, waardoor de communicatie-efficiëntie en betrouwbaarheid werden verbeterd. Stuurde de consolidatie van wereldwijde IT-operaties door vervanging van twee datacenters, het opzetten en optimaliseren van Azure-omgevingen en het effectief beheren van kosten. Implementeerde SCCM om belangrijke processen te automatiseren, wat de efficiëntie van de servicedesk verhoogde. Bood derde-lijnsondersteuning via TOPdesk, loste complexe IT-problemen op en zorgde voor hoge servicekwaliteit.`,
+        icon: 'tabler:car-crane',
+      },
+      {
+        title:
+          'IT-consultant<br /> <span class="font-normal">Bergsma.IT - Zoetermeer</span> <br /> <span class="text-sm font-normal">01-2018 - 07-2019</span>',
+        description: `Richtte het bedrijf op om kleine bedrijven te helpen hun IT-infrastructuur te moderniseren via cloudoplossingen, met de focus op Microsoft-technologieën om efficiëntie, schaalbaarheid en samenwerking te verbeteren. Voerde met succes e-mail- en bestandserversmigraties uit naar Microsoft-cloudplatforms, bood doorlopende technische ondersteuning en ontwierp op maat gemaakte WordPress-websites. Stroomlijnde werkstromen met Microsoft 365 en leverde aangepaste IT-oplossingen die aansloten op de bedrijfsdoelen van de klanten.`,
+        icon: 'tabler:binary-tree-2',
+      },
+      {
+        title:
+          'Technisch applicatie-ingenieur SharePoint<br /> <span class="font-normal">Allseas - Delft</span> <br /> <span class="text-sm font-normal">04-2018 - 09-2018</span>',
+        description: `Beheerde en optimaliseerde SharePoint 2013- en SharePoint Online-omgevingen om samenwerking en productiviteit te ondersteunen. Creëerde en paste SharePoint-sites aan, implementeerde workflows en bood deskundige ondersteuning voor Cadac Organice. Werkte nauw samen met belanghebbenden om op maat gemaakte oplossingen te leveren, waarmee veilige, actuele en hoogpresterende SharePoint-systemen werden gegarandeerd.`,
+        icon: 'tabler:cloud-share',
+      },
+      {
+        title:
+          'IT-systeembeheerder<br /> <span class="font-normal">OZ Export - De Kwakel</span> <br /> <span class="text-sm font-normal">10-2015 - 12-2017</span>',
+        description: `Beheerde en onderhield de IT-infrastructuur van de organisatie om de betrouwbaarheid van systemen en naadloze operaties te waarborgen. Toezicht gehouden op servers, client-pc's, draagbare scanners en printers, waarbij de prestaties werden geoptimaliseerd en de uitvaltijd werd geminimaliseerd. Configureerde VoIP-systemen, beheerde netwerk switches en administreerde Citrix-omgevingen voor veilige externe toegang. Installeerde en ondersteunde on-premise SharePoint-omgevingen om samenwerking te bevorderen. Ontwierp en onderhield het bewakingssysteem en de helpdesk van de organisatie, waardoor IT-ondersteuning werd gestroomlijnd en de beveiliging werd versterkt. Bood praktische probleemoplossing voor hardware-, software- en netwerkproblemen om de dagelijkse operaties te ondersteunen.`,
+        icon: 'tabler:server',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    id="resume"
+    title="Opleiding"
+    items={[
+      {
+        title: `Bachelor of Applied Science - BASc, Mechatronica, Robotica en Automatiseringstechniek<br /> <span class="font-normal">De Haagse Hogeschool / The Hague University of Applied Sciences</span> <br /> <span class="text-sm font-normal">2011 - 2013</span>`,
+        icon: 'tabler:school',
+      },
+      {
+        title: `Bachelor of Applied Science - BASc, Informatietechnologie<br /> <span class="font-normal">De Haagse Hogeschool / The Hague University of Applied Sciences</span> <br /> <span class="text-sm font-normal">2011 - 2011</span>`,
+        icon: 'tabler:school',
+      },
+      {
+        title: `Associate degree, Informatietechnologie<br /> <span class="font-normal">ID College</span> <br /> <span class="text-sm font-normal">2007 - 2011</span>`,
+        icon: 'tabler:books',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+   <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="Certificeringen"
+    subtitle="Waar kennis erkenning ontmoet"
+    testimonials={[
+      {
+        name: 'Gecertificeerd Nexthink Administrator',
+        description: 'Het behalen van de Nexthink Platform Administration-certificering toont aan dat men bedreven is in het configureren en aanpassen van het Nexthink-platform om te voldoen aan de behoeften van de organisatie.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        image: {
+          src: NexthinkAdministrator,
+          alt: 'Nexthink Administrator-badge',
+        },
+      },
+      {
+        name: 'Gecertificeerd Nexthink Associate',
+        description: 'Het behalen van de Nexthink Infinity Fundamentals-certificering bevestigt je begrip van het Nexthink Infinity-platform en de rol ervan bij het verbeteren van de digitale werknemerservaring.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-infinity-fundamentals',
+        image: {
+          src: NexthinkAssociate,
+          alt: 'Nexthink Associate-badge',
+        },
+      },
+      {
+        name: 'Teams Administrator Associate',
+        description: 'Het behalen van de Teams Administrator Associate-certificering toont je vermogen aan om Microsoft Teams te plannen, implementeren, configureren en beheren, zodat efficiënte samenwerking en communicatie binnen een Microsoft 365-omgeving mogelijk worden gemaakt.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate-badge',
+        },
+      },
+      {
+        name: 'Modern Desktop Administrator Associate',
+        description: 'Het behalen van de Modern Desktop Administrator Associate-certificering toont aan dat men bedreven is in het implementeren, configureren, beveiligen, beheren en monitoren van apparaten en clientapplicaties binnen een bedrijfsomgeving.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate-badge',
+        },
+      },
+      {
+        name: 'Gecertificeerd Entry-Level Python Programmeur',
+        description: 'Het behalen van de PCEP™-certificering toont aan dat men bedreven is in de fundamentele concepten van Python-programmeren, waaronder datatypes, control flow, gegevensverzamelingen, functies en foutafhandeling.',
+        linkUrl: 'https://pythoninstitute.org/pcep',
+        image: {
+          src: pcep,
+          alt: 'PCEP™ – Gecertificeerd Entry-Level Python Programmeur-badge',
+        },
+      },
+      {
+        name: 'Microsoft 365 Fundamentals',
+        description: 'Het behalen van de Microsoft 365 Certified: Fundamentals-certificering toont fundamentele kennis aan van cloudgebaseerde oplossingen, waaronder productiviteit, samenwerking, beveiliging, naleving en Microsoft 365-diensten.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Microsoft 365 Fundamentals-badge',
+        },
+      },
+      {
+        name: 'Azure Fundamentals',
+        description: 'Het behalen van de Microsoft Certified: Azure Fundamentals-certificering toont fundamentele kennis aan van cloudconcepten, kern Azure-diensten en de beheer- en governancefuncties en -tools van Azure.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Azure Fundamentals-badge',
+        },
+      },
+      
+    ]}
+  />
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    id="skills"
+    title="Vaardigheden"
+    subtitle="Ontdek de vaardigheden die mij in staat stellen om verbeelding tot leven te brengen door middel van ontwerp."
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'Power Automate',
+        description: 'Expertise in het ontwerpen en implementeren van geavanceerde automatiseringswerkstromen met Microsoft Power Automate om bedrijfsprocessen te stroomlijnen, handmatige inspanningen te verminderen en de operationele efficiëntie te verbeteren.',
+      },
+      {
+        title: 'Copilot Studio',
+        description: 'Bedreven in het ontwikkelen van intelligente chatbots binnen Copilot Studio, waarmee verbeterde gebruikersinteracties en ondersteuning mogelijk worden gemaakt via natuurlijke taalverwerking en geautomatiseerde antwoorden.',
+      },
+      {
+        title: 'API Integraties',
+        description: 'Bekwaam in het creëren van aangepaste connectors en het integreren van diverse applicaties en services via API\'s om naadloze gegevensuitwisseling en procesautomatisering tussen platforms te faciliteren.',
+      },
+      {
+        title: 'Microsoft 365 Administratie',
+        description: 'Uitgebreide ervaring in het beheren van Microsoft 365-omgevingen, inclusief gebruikersbeheer, beveiligingsconfiguraties en service-optimalisatie om wereldwijde samenwerking en productiviteit te ondersteunen.',
+      },
+      {
+        title: 'SharePoint Online & On-Premise',
+        description: 'Bedreven in het opzetten, beheren en optimaliseren van zowel SharePoint Online als on-premise implementaties, wat zorgt voor effectief documentbeheer, samenwerking en informatie-uitwisseling binnen organisaties.',
+      },
+      {
+        title: 'Nexthink Platform Administratie',
+        description: 'Bedreven in het beheren van het Nexthink-platform, waarbij ik de mogelijkheden gebruik voor het monitoren van IT-infrastructuren, het uitvoeren van externe acties en het ontwikkelen van werkstromen om de levering van IT-diensten en de gebruikerservaring te verbeteren.',
+      },
+      {
+        title: 'Microsoft Power Apps',
+        description: 'Bedreven in het gebruik van Microsoft Power Apps voor het ontwerpen en ontwikkelen van op maat gemaakte zakelijke applicaties met minimale code. Ervaren in het creëren van zowel canvas- als modelgestuurde apps die verbinding maken met diverse databronnen.',
+      },
+      {
+        title: 'IT Infrastructuurbeheer',
+        description: 'Uitgebreide ervaring in het beheren van wereldwijde IT-infrastructuren, inclusief het beheer van servers, netwerken en eindgebruikersapparaten in meerdere landen om betrouwbare en efficiënte IT-operaties te waarborgen.',
+      },
+      {
+        title: 'ITSM (TOPdesk)',
+        description: 'Ervaren in het beheren van ITSM-processen met TOPdesk. Bedreven in kernfunctionaliteiten zoals Incident Management en Asset Management, en benut API\'s voor naadloze integraties met andere systemen.',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Ontdek mijn inzichtelijke artikelen op mijn blog"
+    information={`Welkom op mijn blog, waar ik inzichten, tips en oplossingen deel over Microsoft 365, Nexthink, Power Automate, PowerShell en andere automatiseringstools. Of je nu werkstromen wilt stroomlijnen, de productiviteit wilt verhogen of technische probleemoplossing wilt verkennen, je vindt hier praktische content om je te ondersteunen.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

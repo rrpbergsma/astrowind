@@ -5,6 +5,7 @@ import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import Button from '~/components/ui/Button.astro';
 
+
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
@@ -45,6 +46,36 @@ const {
 } = Astro.props;
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+
+// Define the available languages.
+const languages = [
+  { code: 'en', label: 'English' },
+  { code: 'nl', label: 'Nederlands' },
+  { code: 'de', label: 'Deutsch' },
+];
+
+// Get the current URL segments.
+const pathSegments = new URL(Astro.url).pathname.split('/').filter(Boolean);
+const currentLang = pathSegments[0] || 'en';
+
+// When the user selects a new language, update the URL accordingly.
+// This function assumes your pages are structured as /<lang>/page...
+function handleLanguageChange(event: Event) {
+  const select = event.target as HTMLSelectElement;
+  const selectedLang = select.value;
+  const newSegments = [...pathSegments];
+
+  // Replace the first segment if it matches a known language code; otherwise, add it.
+  if (['en', 'nl', 'de'].includes(newSegments[0])) {
+    newSegments[0] = selectedLang;
+  } else {
+    newSegments.unshift(selectedLang);
+  }
+
+  const newPath = '/' + newSegments.join('/');
+  window.location.href = newPath;
+}
+
 ---
 
 <header
@@ -150,17 +181,41 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             )
           }
         </div>
-        {
-          actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4">
-              {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+        <!-- Somewhere in your header markup (e.g., near your theme toggle) -->
+          <div class="ml-4">
+            <!-- Notice we add an id so we can easily select it in our client script -->
+            <select id="language-selector" class="p-2 border rounded bg-white text-gray-700">
+              {languages.map((lang) => (
+                <option value={lang.code} selected={lang.code === currentLang}>
+                  {lang.label}
+                </option>
               ))}
-            </span>
-          ) : (
-            ''
-          )
-        }
+            </select>
+          </div>
+
+          <!-- Attach a client-side script to handle the change event -->
+          <script client:load>
+            const select = document.getElementById('language-selector');
+            select.addEventListener('change', (event) => {
+              const selectedLang = event.target.value;
+              // Get the current path from the browser (client-side)
+              const currentPath = window.location.pathname;
+              // Split the path into segments
+              const segments = currentPath.split('/').filter(Boolean);
+              // If the first segment is a supported language, replace it;
+              // otherwise, add the language code to the beginning.
+              const supportedLangs = ['en', 'nl', 'de'];
+              if (supportedLangs.includes(segments[0])) {
+                segments[0] = selectedLang;
+              } else {
+                segments.unshift(selectedLang);
+              }
+              // Rebuild the URL path and redirect
+              const newPath = '/' + segments.join('/');
+              window.location.href = newPath;
+            });
+          </script>
+
       </div>
     </div>
   </div>
