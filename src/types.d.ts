@@ -157,8 +157,9 @@ export interface Testimonial {
   title?: string;
   testimonial?: string;
   name?: string;
-  job?: string;
+  description?: string;
   image?: string | unknown;
+  linkUrl?: string;
 }
 
 export interface Input {

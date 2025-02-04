@@ -1,5 +1,5 @@
 site:
-  name: AstroWind
+  name: 365DevNet
   site: 'https://astrowind.vercel.app'
   base: '/'
   trailingSlash: false

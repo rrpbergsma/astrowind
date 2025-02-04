@@ -22,49 +22,43 @@ const {
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
 
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr justify-center">
     {
       testimonials &&
-        testimonials.map(({ title, testimonial, name, job, image }) => (
-          <div class="flex h-auto intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
-            <div class="flex flex-col p-4 md:p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-              {title && <h2 class="text-lg font-medium leading-6 pb-4">{title}</h2>}
-              {testimonial && (
-                <blockquote class="flex-auto">
-                  <p class="text-muted">" {testimonial} "</p>
-                </blockquote>
-              )}
-
-              <hr class="border-slate-200 dark:border-slate-600 my-4" />
-
-              <div class="flex items-center">
-                {image && (
-                  <div class="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600">
-                    {typeof image === 'string' ? (
-                      <Fragment set:html={image} />
-                    ) : (
-                      <Image
-                        class="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600 min-w-full min-h-full"
-                        width={40}
-                        height={40}
-                        widths={[400, 768]}
-                        layout="fixed"
-                        {...image}
-                      />
-                    )}
-                  </div>
+        testimonials.map(({ title, linkUrl, name, description, image }) => (
+          <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="flex flex-col justify-start items-center p-2 md:p-4 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600 w-[300px] mx-auto sm:mx-0">
+            {title && <h2 class="text-lg font-medium leading-6 pb-4 text-center">{title}</h2>}
+            {image && (
+              <div class="h-[160px] w-[160px] border-slate-200 dark:border-slate-600 mx-auto">
+                {typeof image === 'string' ? (
+                  <Fragment set:html={image} />
+                ) : (
+                  <Image
+                    class="h-full w-full object-cover"
+                    width={160}
+                    height={160}
+                    widths={[400, 768]}
+                    layout="fixed"
+                    {...image}
+                  />
                 )}
-
-                <div class="grow ml-3 rtl:ml-0 rtl:mr-3">
-                  {name && <p class="text-base font-semibold">{name}</p>}
-                  {job && <p class="text-xs text-muted">{job}</p>}
-                </div>
               </div>
+            )}
+  
+            {/* Horizontal line directly under the image */}
+            <hr class="border-slate-200 dark:border-slate-600 my-4" />
+  
+            {/* Text content takes up the remaining space */}
+            <div class="flex flex-col flex-grow items-center">
+              {name && <p class="text-base font-semibold text-center">{name}</p>}
+              {description && <p class="text-xs text-muted text-center">{description}</p>}
             </div>
-          </div>
+          </a>
         ))
     }
   </div>
+  
+  
   {
     callToAction && (
       <div class="flex justify-center mx-auto w-fit mt-8 md:mt-12 font-medium">
@@ -73,3 +67,14 @@ const {
     )
   }
 </WidgetWrapper>
+
+<style>
+@media (max-width: 640px) {
+  .grid {
+    justify-content: center;
+  }
+  .grid > a {
+    margin: 0 auto;
+  }
+}
+</style>
