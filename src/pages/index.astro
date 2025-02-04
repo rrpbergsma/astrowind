@@ -18,6 +18,10 @@ import NexthinkAdministrator from '../assets/images/NexthinkAdministrator.webp'
 const metadata = {
   title: 'About me',
 };
+
+const fixedYear = 2010; // Replace with your desired year
+const currentYear = new Date().getFullYear();
+const yearsSince = currentYear - fixedYear;
 ---
 
 <Layout metadata={metadata}>
@@ -25,9 +29,10 @@ const metadata = {
   <Fragment slot="header">
     <Header
       links={[
-        { text: 'Home', href: '#' },
+        { text: 'Home', href: '#hero' },
         { text: 'About', href: '#about' },
         { text: 'Resume', href: '#resume' },
+        { text: 'Skills', href: '#skills' },
         { text: 'Porfolio', href: '#porfolio' },
         { text: 'Blog', href: '#blog' },
       ]}
@@ -46,7 +51,7 @@ const metadata = {
 
   <Hero
     id="hero"
-    title="Richard Bergsma"
+    title="Hi! I am Richard Bergsma"
     actions={[{ variant: 'primary', text: 'Contact me', href: getPermalink('/contact#form') }]}
   >
     <Fragment slot="subtitle">
@@ -71,7 +76,7 @@ const metadata = {
   >
     <Fragment slot="content">
       <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">About me</h2>
-      With over 13 years of IT experience, I am a passionate and proficient Microsoft 365 professional who thrives on delivering optimal solutions for complex cloud and on-premise systems. As the Microsoft 365 expert in my current position, I manage the Microsoft 365 environment, communicate new features, and support colleagues with 3rd line requests. I also leverage my skills in Power Automate, Power Apps, and Nexthink to enhance automation and efficiency across various areas.</br></br>
+      With over {yearsSince} years of IT experience, I am a passionate and proficient Microsoft 365 professional who thrives on delivering optimal solutions for complex cloud and on-premise systems. As the Microsoft 365 expert in my current position, I manage the Microsoft 365 environment, communicate new features, and support colleagues with 3rd line requests. I also leverage my skills in Power Automate, Power Apps, and Nexthink to enhance automation and efficiency across various areas.</br></br>
 
       Previously, I worked as a cloud systems and application engineer, where I set up and managed Microsoft 365 and SharePoint Online environments, migrated from different mail systems to Microsoft 365, and implemented SCCM for more automation. I also founded Bergsma IT, a company that helped small businesses migrate to the cloud and created and managed WordPress websites. I hold Microsoft certifications in Teams Administration, Azure Fundamentals, and Modern Desktop Administration. My mission is to drive IT excellence for organizational success by optimizing cloud solutions and providing outstanding technical support.
 
@@ -125,6 +130,7 @@ const metadata = {
   <!-- Features3 Widget ************** -->
 
   <Features3
+    id="skills"
     title="Skills"
     subtitle="Discover the proficiencies that allow me to bring imagination to life through design."
     columns={3}
