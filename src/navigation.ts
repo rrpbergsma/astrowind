@@ -1,4 +1,4 @@
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getPermalink, getAsset } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -8,9 +8,9 @@ export const headerData = {
     },
     { text: 'About', href: getPermalink('/#about')},
     { text: 'Resume', href: getPermalink('/#resume') },
+    { text: 'Skills', href: getPermalink('//#skills') },
     { text: 'Porfolio', href: getPermalink('/#porfolio') },
     { text: 'Blog', href: getPermalink('/blog')  },
-
   ]
 };
 
