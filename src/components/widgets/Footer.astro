@@ -44,17 +44,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 
         <!-- Terms & Privacy Policy Links -->
         <div class="flex items-center space-x-4 text-sm text-muted">
-          {
-            secondaryLinks.map(({ text, href }, index) => (
-              <a
-                key={index}
-                class="hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
-                href={href}
-              >
-                {text}
-              </a>
-            ))
-          }
+          
         </div>
       </div>
 

@@ -4,7 +4,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import Header from '~/components/widgets/Header.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import Steps from '~/components/widgets/Steps.astro';
@@ -14,6 +13,9 @@ import HomePageImage from '../assets/images/richardbergsma.png'
 import MicrosoftAssociate from '../assets/images/microsoft-certified-associate-badge.webp'
 import NexthinkAssociate from '../assets/images/NexthinkAssociate.webp'
 import NexthinkAdministrator from '../assets/images/NexthinkAdministrator.webp'
+import pcep from '../assets/images/PCEP.webp'
+import MicrosoftFundamentals from '../assets/images/microsoft-certified-fundamentals-badge.webp'
+
 
 const metadata = {
   title: 'About me',
@@ -51,11 +53,19 @@ const yearsSince = currentYear - fixedYear;
 
   <Hero
     id="hero"
+<<<<<<< HEAD
     title="Turning automation into action, one workflow at a time."
     actions={[{ variant: 'primary', text: 'Contact me', href: getPermalink('/contact#form') }]}
   >
     <Fragment slot="subtitle">
       <strong>Hi! I am Richard Bergsma</strong> </br>I streamline processes with Power Automate, build smart chatbots in Copilot Studio, and connect the dots with seamless API integrations—all while leveling up my Python skills.
+=======
+    title="Simplifying Systems, Amplifying Results"
+    
+  >
+    <Fragment slot="subtitle">
+      <strong>Hi! I am Richard Bergsma</strong></br>I automate workflows with Power Automate, build smart chatbots in Copilot Studio, and connect systems through seamless API integrations. From optimizing IT infrastructure and managing global environments to enhancing collaboration with SharePoint and Azure, I streamline processes to make technology work smarter—all while leveling up my Python skills.
+>>>>>>> 35c7b27 (Main page information updated)
     </Fragment>
     
   </Hero>
@@ -70,16 +80,17 @@ const yearsSince = currentYear - fixedYear;
     ]}
     image={{
       src: HomePageImage,
-      alt: 'Colorful Image',
+      alt: 'Richard Bergsma smiling in the mountains of Switzerland holding Revella',
       loading: 'eager',
     }}
   >
     <Fragment slot="content">
       <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">About me</h2>
-      With over {yearsSince} years of IT experience, I am a passionate and proficient Microsoft 365 professional who thrives on delivering optimal solutions for complex cloud and on-premise systems. As the Microsoft 365 expert in my current position, I manage the Microsoft 365 environment, communicate new features, and support colleagues with 3rd line requests. I also leverage my skills in Power Automate, Power Apps, and Nexthink to enhance automation and efficiency across various areas.</br></br>
+        With over 15 years of IT experience, I am a passionate IT Systems and Automation Manager who thrives on delivering optimal solutions for complex cloud and on-premise systems. I focus on driving automation with Power Automate, building intelligent chatbots in Copilot Studio, and integrating APIs to streamline workflows. I also manage the Microsoft 365 environment, support 3rd line requests, and enhance efficiency with tools like Power Apps, Nexthink, and TOPdesk.
 
-      Previously, I worked as a cloud systems and application engineer, where I set up and managed Microsoft 365 and SharePoint Online environments, migrated from different mail systems to Microsoft 365, and implemented SCCM for more automation. I also founded Bergsma IT, a company that helped small businesses migrate to the cloud and created and managed WordPress websites. I hold Microsoft certifications in Teams Administration, Azure Fundamentals, and Modern Desktop Administration. My mission is to drive IT excellence for organizational success by optimizing cloud solutions and providing outstanding technical support.
+      </br></br>Previously, I led Microsoft 365 and SharePoint Online implementations, migrated mail systems, and improved automation with SCCM. Additionally, I founded Bergsma IT, helping small businesses move to the cloud and managing tailored WordPress websites.
 
+      </br></br>I hold certifications in Microsoft Teams Administration, Azure Fundamentals, and Nexthink Administration. My mission is to drive IT excellence by optimizing cloud solutions, automating processes, and providing outstanding technical support.  
     </Fragment>
 
     <Fragment slot="bg">
@@ -105,6 +116,30 @@ const yearsSince = currentYear - fixedYear;
         description: `As the Microsoft 365 expert within COFRA Holding, I ensure that the environment is managed, new features are communicated, and colleagues are supported with 3rd line requests. New requests that come to me range from new Power Automate flows to Power Apps. Additionally, I focus on the setup and management of our Nexthink environment, manage TopDesk, and support other projects as required. Lately, I’ve been concentrating on leveraging Power Automate to enhance automation across various areas.`,
         icon: 'tabler:brand-office',
       },
+      {
+        title:
+          'Cloud systems and Application Engineer<br /> <span class="font-normal">Hyva - Alphen aan den Rijn</span> <br /> <span class="text-sm font-normal">09-2018 - 04-2020</span>',
+        description: `Managed global IT infrastructure across 35 countries, driving the implementation and integration of Office 365 and SharePoint Online to enhance collaboration. Led seamless migrations from diverse mail systems to Office 365, improving communication efficiency and reliability. Spearheaded the consolidation of global IT operations by replacing two data centers, setting up and optimizing Azure environments, and managing costs effectively. Implemented SCCM to automate key processes, boosting service desk efficiency. Provided third-line support via TOPdesk, resolving complex IT issues and ensuring high service quality.`,
+        icon: 'tabler:car-crane',
+      },
+      {
+        title:
+          'IT Consultant<br /> <span class="font-normal">Bergsma.IT - Zoetermeer</span> <br /> <span class="text-sm font-normal">01-2018 - 07-2019</span>',
+        description: `Founded the company to help small businesses modernize their IT infrastructure through cloud-based solutions, focusing on Microsoft technologies to enhance efficiency, scalability, and collaboration. Successfully executed email and file server migrations to Microsoft cloud platforms, provided ongoing technical support, and designed tailored WordPress websites. Streamlined workflows with Microsoft 365 and delivered customized IT solutions aligned with clients’ business goals.`,
+        icon: 'tabler:binary-tree-2',
+      },
+      {
+        title:
+          'Technical Application Engineer SharePoint<br /> <span class="font-normal">Allseas - Delft</span> <br /> <span class="text-sm font-normal">04-2018 - 09-2018</span>',
+        description: `Managed and optimized SharePoint 2013 and SharePoint Online environments to support collaboration and productivity. Created and customized SharePoint sites, implemented workflows, and provided expert support for Cadac Organice. Worked closely with stakeholders to deliver tailored solutions, ensuring secure, up-to-date, and high-performing SharePoint systems.`,
+        icon: 'tabler:cloud-share',
+      },
+      {
+        title:
+          'IT System Administrator<br /> <span class="font-normal">OZ Export - De Kwakel</span> <br /> <span class="text-sm font-normal">10-2015 - 12-2017</span>',
+        description: `Managed and maintained the organization’s IT infrastructure to ensure system reliability and seamless operations. Oversaw servers, client PCs, portable scanners, and printers, optimizing performance and minimizing downtime. Configured VoIP systems, managed network switches, and administered Citrix environments for secure remote access. Installed and supported on-premise SharePoint environments to enhance collaboration. Designed and maintained the organization’s surveillance system and helpdesk platform, streamlining IT support and strengthening security. Provided hands-on troubleshooting for hardware, software, and network issues to support daily operations.`,
+        icon: 'tabler:server',
+      },
     ]}
     classes={{ container: 'max-w-3xl' }}
   />
@@ -116,16 +151,94 @@ const yearsSince = currentYear - fixedYear;
     title="Education"
     items={[
       {
-        title: `Master of Fine Arts in Graphic Design <br /> <span class="font-normal">New York University's School of Design</span> <br /> <span class="text-sm font-normal">2018 - 2020</span>`,
+        title: `Bachelor of Applied Science - BASc, Mechatronics, Robotics, and Automation Engineering<br /> <span class="font-normal">De Haagse Hogeschool / The Hague University of Applied Sciences</span> <br /> <span class="text-sm font-normal">2011 - 2013</span>`,
         icon: 'tabler:school',
       },
       {
-        title: `Bachelor of Arts in Graphic Design <br /> <span class="font-normal">New York University's School of Design</span> <br /> <span class="text-sm font-normal">2014 - 2018</span>`,
+        title: `Bachelor of Applied Science - BASc, Information Technology<br /> <span class="font-normal">De Haagse Hogeschool / The Hague University of Applied Sciences</span> <br /> <span class="text-sm font-normal">2011 - 2011</span>`,
         icon: 'tabler:school',
+      },
+      {
+        title: `Associate's degree, Information Technology<br /> <span class="font-normal">ID College</span> <br /> <span class="text-sm font-normal">2007 - 2011</span>`,
+        icon: 'tabler:books',
       },
     ]}
     classes={{ container: 'max-w-3xl' }}
   />
+
+   <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="Certifications"
+    subtitle="Where Knowledge Meets Recognition"
+    testimonials={[
+      {
+        name: 'Certified Nexthink Administrator',
+        description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs. ',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        image: {
+          src: NexthinkAdministrator,
+          alt: 'Nexthink Administrator badge',
+        },
+      },
+      {
+        name: 'Certified Nexthink Associate',
+        description: 'Earning the Nexthink Infinity Fundamentals certification validates your understanding of the Nexthink Infinity platform and its role in enhancing digital employee experience.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-infinity-fundamentals',
+        image: {
+          src: NexthinkAssociate,
+          alt: 'Nexthink Associate badge',
+        },
+      },
+      {
+        name: 'Teams Administrator Associate',
+        description: 'Earning the Teams Administrator Associate certification demonstrates your ability to plan, deploy, configure, and manage Microsoft Teams to facilitate efficient collaboration and communication within a Microsoft 365 environment.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate badge',
+        },
+      },
+      {
+        name: 'Modern Desktop Administrator Associate',
+        description: 'Earning the Modern Desktop Administrator Associate certification demonstrates proficiency in deploying, configuring, securing, managing, and monitoring devices and client applications within an enterprise environment.',
+        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate badge',
+        },
+      },
+      {
+        name: 'Certified Entry-Level Python Programmer',
+        description: 'Earning the PCEP™ certification demonstrates proficiency in fundamental Python programming concepts, including data types, control flow, data collections, functions, and exception handling.',
+        linkUrl: 'https://pythoninstitute.org/pcep',
+        image: {
+          src: pcep,
+          alt: 'PCEP™ – Certified Entry-Level Python Programmer badge',
+        },
+      },
+      {
+        name: 'Microsoft 365 Fundamentals',
+        description: 'Earning the Microsoft 365 Certified: Fundamentals certification demonstrates foundational knowledge of cloud-based solutions, including productivity, collaboration, security, compliance, and Microsoft 365 services.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Microsoft 365 Fundamentals badge',
+        },
+      },
+      {
+        name: 'Azure Fundamentals',
+        description: 'Earning the Microsoft Certified: Azure Fundamentals certification demonstrates foundational knowledge of cloud concepts, core Azure services, and Azure management and governance features and tools.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Azure Fundamentals badge',
+        },
+      },
+      
+    ]}
+  />
+
 
   <!-- Features3 Widget ************** -->
 
@@ -291,84 +404,6 @@ const yearsSince = currentYear - fixedYear;
     </Fragment>
   </Content>
 
-  <!-- Testimonials Widget *********** -->
-
-  <Testimonials
-    title="Certifications"
-    subtitle="Where Knowledge Meets Recognition"
-    testimonials={[
-      {
-        name: 'Certified Nexthink Administrator',
-        description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs. ',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
-        image: {
-          src: NexthinkAdministrator,
-          alt: 'Nexthink Administrator badge',
-        },
-      },
-      {
-        name: 'Certified Nexthink Associate',
-        description: 'Earning the Nexthink Infinity Fundamentals certification validates your understanding of the Nexthink Infinity platform and its role in enhancing digital employee experience.',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-infinity-fundamentals',
-        image: {
-          src: NexthinkAssociate,
-          alt: 'Nexthink Associate badge',
-        },
-      },
-      {
-        name: 'M365: Teams Administrator Associate',
-        description: 'Earning the Teams Administrator Associate certification demonstrates your ability to plan, deploy, configure, and manage Microsoft Teams to facilitate efficient collaboration and communication within a Microsoft 365 environment.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftAssociate,
-          alt: 'Microsoft Certified Associate badge',
-        },
-      },
-      {
-        name: 'Certified Nexthink Administrator',
-        description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs. ',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
-        image: {
-          src: 'https://www.365devnet.nl/images/NexthinkAdministrator.webp',
-          alt: 'Nexthink Administrator badge',
-        },
-      },
-      {
-        name: 'Certified Nexthink Administrator',
-        description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs. ',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
-        image: {
-          src: 'https://www.365devnet.nl/images/NexthinkAdministrator.webp',
-          alt: 'Nexthink Administrator badge',
-        },
-      },
-      {
-        name: 'Certified Nexthink Administrator',
-        description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs. ',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
-        image: {
-          src: 'https://www.365devnet.nl/images/NexthinkAdministrator.webp',
-          alt: 'Nexthink Administrator badge',
-        },
-      },
-      
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    title="Let's create together"
-    subtitle="Ready to transform your vision into captivating designs?"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Contact me',
-        href: getPermalink('/contact#form'),
-      },
-    ]}
-  />
-
   <!-- BlogLatestPost Widget **************** -->
 
   <BlogLatestPosts
@@ -377,7 +412,7 @@ const yearsSince = currentYear - fixedYear;
     information={`Dive into a realm of design wisdom and creative inspiration, where you'll find invaluable insights, practical tips, and captivating narratives that elevate and enrich your creative journey.`}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      <div class="absolute inset-0"></div>
     </Fragment>
   </BlogLatestPosts>
 </Layout>
