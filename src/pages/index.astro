@@ -1,8 +1,5 @@
 ---
-// List the supported language codes.
-const supportedLangs = ['en', 'fr', 'es'];
-
-// Default language
+const supportedLangs = ['en', 'nl', 'de'];
 let chosenLang = 'en';
 
 // Get the user's Accept-Language header from the incoming request.
@@ -10,14 +7,50 @@ const acceptLang = Astro.request.headers.get('accept-language');
 
 if (acceptLang) {
   // The header may look like: "fr-CH,fr;q=0.9,en-US;q=0.8,en;q=0.7"
-  // Extract the first language code and simplify (e.g., "fr-CH" becomes "fr")
+  // Extract the first language code and simplify it (e.g., "fr-CH" becomes "fr")
   const preferredLang = acceptLang.split(',')[0].trim().split('-')[0];
   if (supportedLangs.includes(preferredLang)) {
     chosenLang = preferredLang;
   }
 }
 
-// Redirect to the language-specific version.
-// For example, if chosenLang is 'fr', then redirect to /fr/
-return Astro.redirect(`/${chosenLang}`, 302);
+const targetURL = `/${chosenLang}`;
 ---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Automatically refresh to the target URL immediately -->
+    <meta http-equiv="refresh" content={`0; url=${targetURL}`} />
+    <title>Redirecting...</title>
+    <!-- Optional: Add minimal inline CSS or Tailwind via your build for a nicer look -->
+    <style>
+      /* Example minimal styling */
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: sans-serif;
+        background-color: #f9fafb;
+        color: #374151;
+      }
+      .container {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-2xl font-bold mb-4">Redirecting...</h1>
+      <p>
+        You are being redirected to the <strong>{chosenLang.toUpperCase()}</strong> version of our site.
+      </p>
+      <p class="mt-4">
+        If you are not redirected automatically, please
+        <a href={targetURL} class="text-blue-500 underline">click here</a>.
+      </p>
+    </div>
+  </body>
+</html>
