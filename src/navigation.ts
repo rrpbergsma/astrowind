@@ -22,7 +22,7 @@ export const footerData = {
   ],
   socialLinks: [
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://www.linkedin.com/in/rrpbergsma' },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/becarta' },
+    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/rrpbergsma' },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
 };
