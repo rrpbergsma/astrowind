@@ -1,20 +1,21 @@
 ---
+import { Astro } from 'astro';
+
 const supportedLangs = ['en', 'nl', 'de'];
 let chosenLang = 'en';
 
-// Get the user's Accept-Language header from the incoming request.
+// Get the Accept-Language header from the request
 const acceptLang = Astro.request.headers.get('accept-language');
 
 if (acceptLang) {
-  // The header may look like: "fr-CH,fr;q=0.9,en-US;q=0.8,en;q=0.7"
-  // Extract the first language code and simplify it (e.g., "fr-CH" becomes "fr")
   const preferredLang = acceptLang.split(',')[0].trim().split('-')[0];
   if (supportedLangs.includes(preferredLang)) {
     chosenLang = preferredLang;
   }
 }
 
-const targetURL = `/${chosenLang}`;
+// Perform the redirect
+Astro.redirect(`/${chosenLang}`);
 ---
 
 <!DOCTYPE html>
@@ -22,7 +23,7 @@ const targetURL = `/${chosenLang}`;
   <head>
     <meta charset="UTF-8" />
     <!-- Automatically refresh to the target URL immediately -->
-    <meta http-equiv="refresh" content={`0; url=${targetURL}`} />
+    <meta http-equiv="refresh" content={`0; url=${chosenLang}`} />
     <title>Redirecting...</title>
     <!-- Optional: Add minimal inline CSS or Tailwind via your build for a nicer look -->
     <style>
@@ -49,7 +50,7 @@ const targetURL = `/${chosenLang}`;
       </p>
       <p class="mt-4">
         If you are not redirected automatically, please
-        <a href={targetURL} class="text-blue-500 underline">click here</a>.
+        <a href={chosenLang} class="text-blue-500 underline">click here</a>.
       </p>
     </div>
   </body>
