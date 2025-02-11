@@ -1,29 +1,8 @@
----
-const supportedLangs = ['en', 'nl', 'de'];
-let chosenLang = 'en';
-
-// Get the Accept-Language header from the request
-const acceptLang = Astro.request.headers.get('accept-language');
-
-if (acceptLang) {
-  const preferredLang = acceptLang.split(',')[0].trim().split('-')[0];
-  if (supportedLangs.includes(preferredLang)) {
-    chosenLang = preferredLang;
-  }
-}
-
-// Perform the redirect
-Astro.redirect(`/${chosenLang}`);
----
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Automatically refresh to the target URL immediately -->
-    <meta http-equiv="refresh" content={`0; url=${chosenLang}`} />
     <title>Redirecting...</title>
-    <!-- Optional: Add minimal inline CSS or Tailwind via your build for a nicer look -->
     <style>
       /* Example minimal styling */
       body {
@@ -43,13 +22,56 @@ Astro.redirect(`/${chosenLang}`);
   <body>
     <div class="container">
       <h1 class="text-2xl font-bold mb-4">Redirecting...</h1>
-      <p>
-        You are being redirected to the <strong>{chosenLang.toUpperCase()}</strong> version of our site.
+      <p id="redirect-message">
+        You are being redirected to the <strong></strong> version of our site.
       </p>
       <p class="mt-4">
         If you are not redirected automatically, please
-        <a href={chosenLang} class="text-blue-500 underline">click here</a>.
+        <a id="redirect-link" href="" class="text-blue-500 underline">click here</a>.
       </p>
     </div>
+    
+    <script type="module">
+      // Define the supported languages
+      const supportedLangs = ['en', 'nl', 'de'];
+      let chosenLang = 'nl'; // Default language
+
+      // Get the user's language from the browser
+      const userLang = navigator.language || (navigator.languages && navigator.languages[0]);
+      
+      if (userLang) {
+        // For example, "en-US" becomes "en"
+        const preferredLang = userLang.split('-')[0];
+        if (supportedLangs.includes(preferredLang)) {
+          chosenLang = preferredLang;
+        }
+      }
+      
+      // Construct the target URL based on the chosen language
+      const targetURL = `/${chosenLang}`;
+      console.log("Target URL:", targetURL);
+
+      // Update the DOM with the computed language values:
+      // Update the redirect message to display the chosen language.
+      const messageEl = document.getElementById('redirect-message');
+      if (messageEl) {
+        messageEl.innerHTML = `You are being redirected to the <strong>${chosenLang.toUpperCase()}</strong> version of our site.`;
+      }
+
+      // Update the href for the clickable link.
+      const linkEl = document.getElementById('redirect-link');
+      if (linkEl) {
+        linkEl.href = targetURL;
+      }
+
+      // Option 1: Dynamically add a meta refresh tag.
+      const metaRefresh = document.createElement("meta");
+      metaRefresh.httpEquiv = "refresh";
+      metaRefresh.content = `0; url=${targetURL}`;
+      document.head.appendChild(metaRefresh);
+
+      // Option 2: Alternatively, use JavaScript redirection:
+      // window.location.href = targetURL;
+    </script>
   </body>
 </html>

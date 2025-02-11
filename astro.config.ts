@@ -1,7 +1,8 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
+
 import { defineConfig } from 'astro/config';
-import netlify from "@astrojs/netlify/functions"
+
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
@@ -9,7 +10,6 @@ import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
 import type { AstroIntegration } from 'astro';
-
 import astrowind from './vendor/integration';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
@@ -21,8 +21,12 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
-  output: 'server',
-  adapter: netlify(),
+  output: 'static',
+
+  i18n: {
+    locales: ["es", "en", "pt-br"],
+    defaultLocale: "en",
+  },
 
   integrations: [
     tailwind({
