@@ -15,7 +15,7 @@ import NexthinkAssociate from '~/assets/images/NexthinkAssociate.webp'
 import NexthinkAdministrator from '~/assets/images/NexthinkAdministrator.webp'
 import pcep from '~/assets/images/PCEP.webp'
 import MicrosoftFundamentals from '~/assets/images/microsoft-certified-fundamentals-badge.webp'
-
+import NexthinkAppExp from '~/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp'
 
 const metadata = {
   title: 'About me',
@@ -166,9 +166,19 @@ const yearsSince = currentYear - fixedYear;
     subtitle="Where Knowledge Meets Recognition"
     testimonials={[
       {
+        name: 'Certified Nexthink Professional',
+        description: 'Earning the Nexthink Certified Application Experience Management certification validates the expertise in optimizing application performance, ensuring seamless user adoption, and driving cost efficiency.',
+        linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
+        image: {
+          src: NexthinkAppExp,
+          alt: 'Nexthink Professional in Application Experience Management badge',
+          loading: 'lazy',
+        },
+      },
+      {
         name: 'Certified Nexthink Administrator',
         description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs. ',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
         image: {
           src: NexthinkAdministrator,
           alt: 'Nexthink Administrator badge',
@@ -178,7 +188,7 @@ const yearsSince = currentYear - fixedYear;
       {
         name: 'Certified Nexthink Associate',
         description: 'Earning the Nexthink Infinity Fundamentals certification validates your understanding of the Nexthink Infinity platform and its role in enhancing digital employee experience.',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-infinity-fundamentals',
+        linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
         image: {
           src: NexthinkAssociate,
           alt: 'Nexthink Associate badge',
@@ -198,7 +208,7 @@ const yearsSince = currentYear - fixedYear;
       {
         name: 'Modern Desktop Administrator Associate',
         description: 'Earning the Modern Desktop Administrator Associate certification demonstrates proficiency in deploying, configuring, securing, managing, and monitoring devices and client applications within an enterprise environment.',
-        linkUrl: 'https://learn.nexthink.com/courses/nexthink-platform-administration',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
         image: {
           src: MicrosoftAssociate,
           alt: 'Microsoft Certified Associate badge',
