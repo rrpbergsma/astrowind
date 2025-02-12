@@ -162,95 +162,116 @@ const yearsSince = currentYear - fixedYear;
 
    <!-- Testimonials Widget *********** -->
 
-  <Testimonials
-    id="Certificeringen"
-    title="Certificeringen"
-    subtitle="Waar kennis erkenning ontmoet"
-    testimonials={[
-      {
-        name: 'Gecertificeerde Nexthink Professional',
-        description: 'Het behalen van de Nexthink Certified Application Experience Management‑certificering bevestigt de expertise in het optimaliseren van applicatieprestaties, het waarborgen van een soepele gebruikersacceptatie en het bevorderen van kostenbesparing.',
-        linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
-        image: {
-          src: NexthinkAppExp,
-          alt: 'Badge van de Nexthink Professional in het beheer van applicatie-ervaringen',
-          loading: 'lazy',
-        },
-      },
-      {
-        name: 'Gecertificeerd Nexthink Administrator',
-        description: 'Het behalen van de Nexthink Platform Administration-certificering toont aan dat men bedreven is in het configureren en aanpassen van het Nexthink-platform om te voldoen aan de behoeften van de organisatie.',
-        linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
-        image: {
-          src: NexthinkAdministrator,
-          alt: 'Nexthink Administrator-badge',
-          loading: 'lazy',
-        },
-      },
-      {
-        name: 'Gecertificeerd Nexthink Associate',
-        description: 'Het behalen van de Nexthink Infinity Fundamentals-certificering bevestigt je begrip van het Nexthink Infinity-platform en de rol ervan bij het verbeteren van de digitale werknemerservaring.',
-        linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
-        image: {
-          src: NexthinkAssociate,
-          alt: 'Nexthink Associate-badge',
-          loading: 'lazy',
-        },
-      },
-      {
-        name: 'Teams Administrator Associate',
-        description: 'Het behalen van de Teams Administrator Associate-certificering toont je vermogen aan om Microsoft Teams te plannen, implementeren, configureren en beheren, zodat efficiënte samenwerking en communicatie binnen een Microsoft 365-omgeving mogelijk worden gemaakt.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftAssociate,
-          alt: 'Microsoft Certified Associate-badge',
-          loading: 'lazy',
-        },
-      },
-      {
-        name: 'Modern Desktop Administrator Associate',
-        description: 'Het behalen van de Modern Desktop Administrator Associate-certificering toont aan dat men bedreven is in het implementeren, configureren, beveiligen, beheren en monitoren van apparaten en clientapplicaties binnen een bedrijfsomgeving.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftAssociate,
-          alt: 'Microsoft Certified Associate-badge',
-          loading: 'lazy',
-        },
-      },
-      {
-        name: 'Gecertificeerd Entry-Level Python Programmeur',
-        description: 'Het behalen van de PCEP™-certificering toont aan dat men bedreven is in de fundamentele concepten van Python-programmeren, waaronder datatypes, control flow, gegevensverzamelingen, functies en foutafhandeling.',
-        linkUrl: 'https://pythoninstitute.org/pcep',
-        image: {
-          src: pcep,
-          alt: 'PCEP™ – Gecertificeerd Entry-Level Python Programmeur-badge',
-          loading: 'lazy',
-        },
-      },
-      {
-        name: 'Microsoft 365 Fundamentals',
-        description: 'Het behalen van de Microsoft 365 Certified: Fundamentals-certificering toont fundamentele kennis aan van cloudgebaseerde oplossingen, waaronder productiviteit, samenwerking, beveiliging, naleving en Microsoft 365-diensten.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftFundamentals,
-          alt: 'Microsoft 365 Fundamentals-badge',
-          loading: 'lazy',
-        },
-      },
-      {
-        name: 'Azure Fundamentals',
-        description: 'Het behalen van de Microsoft Certified: Azure Fundamentals-certificering toont fundamentele kennis aan van cloudconcepten, kern Azure-diensten en de beheer- en governancefuncties en -tools van Azure.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftFundamentals,
-          alt: 'Azure Fundamentals-badge',
-          loading: 'lazy',
-        },
-      },
-      
-    ]}
-  />
-
+   <Testimonials
+   id="Certificeringen"
+   title="Certificeringen"
+   subtitle="Waar kennis op erkenning stuit"
+   testimonials={[
+     {
+       name: 'Gecertificeerde Nexthink Professional',
+       issueDate: 'Datum van afgifte: 01-2025',
+       description:
+         'Het behalen van de Nexthink Certified Application Experience Management-certificering bevestigt de expertise in het optimaliseren van applicatieprestaties, het zorgen voor een naadloze gebruikersacceptatie en het bevorderen van kostenefficiëntie.',
+       linkUrl:
+         'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
+       image: {
+         src: NexthinkAppExp,
+         alt: 'Nexthink Professional in Application Experience Management badge',
+         loading: 'lazy',
+       },
+     },
+     {
+       name: 'Gecertificeerde Nexthink-beheerder',
+       issueDate: 'Datum van afgifte: 11-2024',
+       description:
+         'Het behalen van de Nexthink Platform Administration-certificering toont aan dat men bekwaam is in het configureren en aanpassen van het Nexthink-platform om aan de behoeften van de organisatie te voldoen.',
+       linkUrl:
+         'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
+       image: {
+         src: NexthinkAdministrator,
+         alt: 'Nexthink Administrator badge',
+         loading: 'lazy',
+       },
+     },
+     {
+       name: 'Gecertificeerde Nexthink Associate',
+       issueDate: 'Datum van afgifte: 11-2024',
+       description:
+         'Het behalen van de Nexthink Infinity Fundamentals-certificering bevestigt uw begrip van het Nexthink Infinity-platform en de rol ervan bij het verbeteren van de digitale werknemerservaring.',
+       linkUrl:
+         'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
+       image: {
+         src: NexthinkAssociate,
+         alt: 'Nexthink Associate badge',
+         loading: 'lazy',
+       },
+     },
+     {
+       name: 'Gecertificeerde beginnende Python-programmeur',
+       issueDate: 'Datum van afgifte: 11-2023',
+       description:
+         'Het behalen van de PCEP™-certificering toont aan dat men bedreven is in de fundamentele concepten van Python-programmering, waaronder datatypes, controleflow, gegevensverzamelingen, functies en foutafhandeling.',
+       linkUrl: 'https://pythoninstitute.org/pcep',
+       image: {
+         src: pcep,
+         alt: 'PCEP™ – Badge voor gecertificeerde beginnende Python-programmeur',
+         loading: 'lazy',
+       },
+     },
+     {
+       name: 'Moderne Desktopbeheerder Associate',
+       issueDate: 'Datum van afgifte: 06-2023',
+       description:
+         'Het behalen van de Modern Desktop Administrator Associate-certificering toont aan dat men bedreven is in het implementeren, configureren, beveiligen, beheren en monitoren van apparaten en clientapplicaties binnen een bedrijfsomgeving.',
+       linkUrl:
+         'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
+       image: {
+         src: MicrosoftAssociate,
+         alt: 'Microsoft Certified Associate badge',
+         loading: 'lazy',
+       },
+     },
+     {
+       name: 'Microsoft 365 Basisprincipes',
+       issueDate: 'Datum van afgifte: 05-2023',
+       description:
+         'Het behalen van de Microsoft 365 Certified: Fundamentals-certificering toont fundamentele kennis van cloudgebaseerde oplossingen, waaronder productiviteit, samenwerking, beveiliging, compliance en Microsoft 365-diensten.',
+       linkUrl:
+         'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
+       image: {
+         src: MicrosoftFundamentals,
+         alt: 'Microsoft 365 Fundamentals badge',
+         loading: 'lazy',
+       },
+     },
+     {
+       name: 'Teamsbeheerder Associate',
+       issueDate: 'Datum van afgifte: 06-2021',
+       description:
+         'Het behalen van de Teams Administrator Associate-certificering toont aan dat u in staat bent om Microsoft Teams te plannen, implementeren, configureren en beheren om efficiënte samenwerking en communicatie binnen een Microsoft 365-omgeving te faciliteren.',
+       linkUrl:
+         'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
+       image: {
+         src: MicrosoftAssociate,
+         alt: 'Microsoft Certified Associate badge',
+         loading: 'lazy',
+       },
+     },
+     {
+       name: 'Azure Basisprincipes',
+       issueDate: 'Datum van afgifte: 01-2020',
+       description:
+         'Het behalen van de Microsoft Certified: Azure Fundamentals-certificering toont fundamentele kennis van cloudconcepten, kern-Azure-diensten en Azure-beheer- en governancefuncties en -hulpmiddelen.',
+       linkUrl:
+         'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
+       image: {
+         src: MicrosoftFundamentals,
+         alt: 'Azure Fundamentals badge',
+         loading: 'lazy',
+       },
+     },
+   ]}
+ />
   <!-- Features3 Widget ************** -->
 
   <Features3

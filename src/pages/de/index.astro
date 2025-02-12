@@ -161,92 +161,115 @@ const yearsSince = currentYear - fixedYear;
   <!-- Testimonials Widget: Zertifizierungen *********** -->
 
   <Testimonials
-    id="Zertifizierungen"
-    title="Zertifizierungen"
-    subtitle="Wo Wissen auf Anerkennung trifft"
-    testimonials={[
-      {
-        name: 'Zertifizierter Nexthink Professional',
-        description: 'Der Erwerb der Nexthink Certified Application Experience Management‑Zertifizierung bestätigt die Fachkenntnisse in der Optimierung der Anwendungsleistung, der Gewährleistung einer nahtlosen Benutzerakzeptanz und der Steigerung der Kosteneffizienz.',
-        linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
-        image: {
-          src: NexthinkAppExp,
-          alt: 'Abzeichen des Nexthink Professionals im Bereich Anwendungserfahrungsmanagement',
-          loading: 'lazy',
-        },
+  id="Zertifizierungen"
+  title="Zertifizierungen"
+  subtitle="Wo Wissen auf Anerkennung trifft"
+  testimonials={[
+    {
+      name: 'Zertifizierter Nexthink Professional',
+      issueDate: 'Ausstellungsdatum: 01-2025',
+      description:
+        'Der Erwerb der Zertifizierung "Nexthink Certified Application Experience Management" bestätigt die Fachkenntnisse in der Optimierung der Anwendungsleistung, der Gewährleistung einer nahtlosen Benutzerakzeptanz und der Steigerung der Kosteneffizienz.',
+      linkUrl:
+        'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
+      image: {
+        src: NexthinkAppExp,
+        alt: 'Nexthink Professional im Bereich Application Experience Management Abzeichen',
+        loading: 'lazy',
       },
-      {
-        name: 'Zertifizierter Nexthink Administrator',
-        description: 'Das Erlangen der Nexthink Platform Administration-Zertifizierung beweist, dass Sie in der Konfiguration und Anpassung der Nexthink-Plattform zur Erfüllung organisatorischer Anforderungen versiert sind.',
-        linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
-        image: {
-          src: NexthinkAdministrator,
-          alt: 'Nexthink Administrator Abzeichen',
-          loading: 'lazy',
-        },
+    },
+    {
+      name: 'Zertifizierter Nexthink-Administrator',
+      issueDate: 'Ausstellungsdatum: 11-2024',
+      description:
+        'Der Erwerb der Zertifizierung "Nexthink Platform Administration" zeigt die Kompetenz in der Konfiguration und Anpassung der Nexthink-Plattform zur Erfüllung der Anforderungen einer Organisation.',
+      linkUrl:
+        'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
+      image: {
+        src: NexthinkAdministrator,
+        alt: 'Nexthink Administrator-Abzeichen',
+        loading: 'lazy',
       },
-      {
-        name: 'Zertifizierter Nexthink Associate',
-        description: 'Das Erlangen der Nexthink Infinity Fundamentals-Zertifizierung bestätigt Ihr Verständnis der Nexthink Infinity-Plattform und ihrer Rolle bei der Verbesserung der digitalen Mitarbeitererfahrung.',
-        linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
-        image: {
-          src: NexthinkAssociate,
-          alt: 'Nexthink Associate Abzeichen',
-          loading: 'lazy',
-        },
+    },
+    {
+      name: 'Zertifizierter Nexthink Associate',
+      issueDate: 'Ausstellungsdatum: 11-2024',
+      description:
+        'Der Erwerb der Zertifizierung "Nexthink Infinity Fundamentals" bestätigt Ihr Verständnis der Nexthink Infinity-Plattform und ihrer Rolle bei der Verbesserung der digitalen Mitarbeitererfahrung.',
+      linkUrl:
+        'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
+      image: {
+        src: NexthinkAssociate,
+        alt: 'Nexthink Associate-Abzeichen',
+        loading: 'lazy',
       },
-      {
-        name: 'Teams Administrator Associate',
-        description: 'Das Erlangen der Teams Administrator Associate-Zertifizierung zeigt Ihre Fähigkeit, Microsoft Teams zu planen, bereitzustellen, zu konfigurieren und zu verwalten, um eine effiziente Zusammenarbeit und Kommunikation in einer Microsoft 365-Umgebung zu ermöglichen.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftAssociate,
-          alt: 'Microsoft Certified Associate Abzeichen',
-          loading: 'lazy',
-        },
+    },
+    {
+      name: 'Zertifizierter Python-Programmierer für Einsteiger',
+      issueDate: 'Ausstellungsdatum: 11-2023',
+      description:
+        'Der Erwerb der PCEP™-Zertifizierung demonstriert die Beherrschung grundlegender Python-Programmierkonzepte, einschließlich Datentypen, Kontrollfluss, Datensammlungen, Funktionen und Ausnahmebehandlung.',
+      linkUrl: 'https://pythoninstitute.org/pcep',
+      image: {
+        src: pcep,
+        alt: 'PCEP™ – Abzeichen für zertifizierte Python-Programmierer für Einsteiger',
+        loading: 'lazy',
       },
-      {
-        name: 'Modern Desktop Administrator Associate',
-        description: 'Das Erlangen der Modern Desktop Administrator Associate-Zertifizierung belegt Ihre Fachkenntnisse in der Bereitstellung, Konfiguration, Absicherung, Verwaltung und Überwachung von Geräten und Client-Anwendungen in einer Unternehmensumgebung.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftAssociate,
-          alt: 'Microsoft Certified Associate Abzeichen',
-          loading: 'lazy',
-        },
+    },
+    {
+      name: 'Moderner Desktop-Administrator Associate',
+      issueDate: 'Ausstellungsdatum: 06-2023',
+      description:
+        'Der Erwerb der Zertifizierung "Modern Desktop Administrator Associate" zeigt die Kompetenz im Bereitstellen, Konfigurieren, Sichern, Verwalten und Überwachen von Geräten und Client-Anwendungen in einer Unternehmensumgebung.',
+      linkUrl:
+        'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
+      image: {
+        src: MicrosoftAssociate,
+        alt: 'Microsoft Certified Associate-Abzeichen',
+        loading: 'lazy',
       },
-      {
-        name: 'Zertifizierter Python-Programmierer (Einsteiger)',
-        description: 'Das Erlangen der PCEP™-Zertifizierung demonstriert Ihre Kenntnisse der grundlegenden Konzepte der Python-Programmierung – einschließlich Datentypen, Kontrollstrukturen, Datenstrukturen, Funktionen und Fehlerbehandlung.',
-        linkUrl: 'https://pythoninstitute.org/pcep',
-        image: {
-          src: pcep,
-          alt: 'PCEP™ – Zertifizierter Python-Programmierer (Einsteiger) Abzeichen',
-          loading: 'lazy',
-        },
+    },
+    {
+      name: 'Microsoft 365 Fundamentals',
+      issueDate: 'Ausstellungsdatum: 05-2023',
+      description:
+        'Der Erwerb der Zertifizierung "Microsoft 365 Certified: Fundamentals" demonstriert grundlegende Kenntnisse über cloudbasierte Lösungen, einschließlich Produktivität, Zusammenarbeit, Sicherheit, Compliance und Microsoft 365-Diensten.',
+      linkUrl:
+        'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
+      image: {
+        src: MicrosoftFundamentals,
+        alt: 'Microsoft 365 Fundamentals-Abzeichen',
+        loading: 'lazy',
       },
-      {
-        name: 'Microsoft 365 Fundamentals',
-        description: 'Das Erlangen der Microsoft 365 Certified: Fundamentals-Zertifizierung zeigt grundlegende Kenntnisse über cloudbasierte Lösungen, einschließlich Produktivität, Zusammenarbeit, Sicherheit, Compliance und Microsoft 365-Dienste.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftFundamentals,
-          alt: 'Microsoft 365 Fundamentals Abzeichen',
-          loading: 'lazy',
-        },
+    },
+    {
+      name: 'Teams-Administrator Associate',
+      issueDate: 'Ausstellungsdatum: 06-2021',
+      description:
+        'Der Erwerb der Zertifizierung "Teams Administrator Associate" zeigt Ihre Fähigkeit, Microsoft Teams zu planen, bereitzustellen, zu konfigurieren und zu verwalten, um eine effiziente Zusammenarbeit und Kommunikation innerhalb einer Microsoft 365-Umgebung zu ermöglichen.',
+      linkUrl:
+        'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
+      image: {
+        src: MicrosoftAssociate,
+        alt: 'Microsoft Certified Associate-Abzeichen',
+        loading: 'lazy',
       },
-      {
-        name: 'Azure Fundamentals',
-        description: 'Das Erlangen der Microsoft Certified: Azure Fundamentals-Zertifizierung belegt grundlegende Kenntnisse über Cloud-Konzepte, Kern-Azure-Dienste sowie Verwaltungs- und Governance-Funktionen und -Tools von Azure.',
-        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
-        image: {
-          src: MicrosoftFundamentals,
-          alt: 'Azure Fundamentals Abzeichen',
-          loading: 'lazy',
-        },
+    },
+    {
+      name: 'Azure Grundlagen',
+      issueDate: 'Ausstellungsdatum: 01-2020',
+      description:
+        'Der Erwerb der Zertifizierung "Microsoft Certified: Azure Fundamentals" demonstriert grundlegende Kenntnisse über Cloud-Konzepte, zentrale Azure-Dienste sowie Azure-Management- und Governance-Funktionen und -Werkzeuge.',
+      linkUrl:
+        'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
+      image: {
+        src: MicrosoftFundamentals,
+        alt: 'Azure Fundamentals-Abzeichen',
+        loading: 'lazy',
       },
-    ]}
-  />
+    },
+  ]}
+/>
 
   <!-- Features3 Widget: Fähigkeiten ************** -->
 

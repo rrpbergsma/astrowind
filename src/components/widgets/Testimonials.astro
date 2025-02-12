@@ -25,23 +25,24 @@ const {
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr justify-center">
     {
       testimonials &&
-        testimonials.map(({ title, linkUrl, name, description, image }) => (
+        testimonials.map(({ title, linkUrl, name, issueDate, description, image }) => (
           <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="flex flex-col justify-start items-center p-2 md:p-4 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600 w-[425px] mx-auto sm:mx-0">
             {title && <h2 class="text-lg font-medium leading-6 pb-4 text-center">{title}</h2>}
             {image && (
               <div class="h-[160px] w-[160px] border-slate-200 dark:border-slate-600 mx-auto">
-                {typeof image === 'string' ? (
-                  <Fragment set:html={image} />
-                ) : (
-                  <Image
-                    class="h-full w-full object-cover"
-                    width={160}
-                    height={160}
-                    widths={[400, 768]}
-                    layout="fixed"
-                    {...image}
-                  />
-                )}
+                <Image
+                  class="h-full w-full object-cover"
+                  width={160}
+                  height={160}
+                  widths={[400, 768]}
+                  layout="fixed"
+                  // If image is a string, use it as the src; otherwise assume it's an object with a src property.
+                  src={typeof image === 'string' ? image : image.src}
+                  // Use a default alt text if image is a string; otherwise use the provided alt.
+                  alt={typeof image === 'string' ? 'Image' : image.alt}
+                  // Spread the rest of the properties if image is an object.
+                  {...(typeof image === 'string' ? {} : image)}
+                />
               </div>
             )}
   
@@ -51,6 +52,7 @@ const {
             {/* Text content takes up the remaining space */}
             <div class="flex flex-col flex-grow items-center">
               {name && <p class="text-lg font-semibold text-center">{name}</p>}
+              {issueDate && <p class="text-base underline italic text-muted text-center">{issueDate}</p>}
               {description && <p class="text-base text-muted text-center">{description}</p>}
             </div>
           </a>
