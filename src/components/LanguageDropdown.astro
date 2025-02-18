@@ -7,11 +7,14 @@ interface Props {
 
 const { currentLang } = Astro.props;
 
+import { supportedLanguages } from '~/i18n/translations';
+
 const languages = [
   { code: 'en', name: 'English', flag: 'gb' },
   { code: 'nl', name: 'Dutch', flag: 'nl' },
   { code: 'de', name: 'German', flag: 'de' },
-];
+  { code: 'fr', name: 'French', flag: 'fr' },
+].filter(lang => supportedLanguages.includes(lang.code));
 
 const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
 ---

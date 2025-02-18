@@ -1,0 +1,251 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import HomePageImage from '~/assets/images/richardbergsma.png'
+import MicrosoftAssociate from '~/assets/images/microsoft-certified-associate-badge.webp'
+import NexthinkAssociate from '~/assets/images/NexthinkAssociate.webp'
+import NexthinkAdministrator from '~/assets/images/NexthinkAdministrator.webp'
+import pcep from '~/assets/images/PCEP.webp'
+import MicrosoftFundamentals from '~/assets/images/microsoft-certified-fundamentals-badge.webp'
+import NexthinkAppExp from '~/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp'
+
+import { getTranslation, supportedLanguages } from '~/i18n/translations';
+
+export async function getStaticPaths() {
+  return supportedLanguages.map(lang => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params;
+if (!supportedLanguages.includes(lang)) {
+  return Astro.redirect('/en/');
+}
+
+const t = getTranslation(lang);
+
+const metadata = {
+  title: t.metadata.title,
+};
+
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement"></Fragment>
+  <Fragment slot="header">
+    <Header
+      links={[
+        { text: t.navigation.home, href: '#hero' },
+        { text: t.navigation.about, href: '#about' },
+        { text: t.navigation.resume, href: '#resume' },
+        { text: t.navigation.certifications, href: '#certifications' },
+        { text: t.navigation.skills, href: '#skills' },
+        { text: t.navigation.blog, href: '#blog' },
+      ]}
+      isSticky
+      showToggleTheme
+    />
+  </Fragment>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 50,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+
+  <!-- Hero Widget -->
+  <Hero
+    id="hero"
+    title={t.hero.title}
+  >
+    <Fragment slot="subtitle">
+      <strong class="text-3xl md:text-4xl">{t.hero.greeting}</strong><br /><br />{t.hero.subtitle}
+    </Fragment>
+  </Hero>
+
+  <!-- Content Widget -->
+  <Content
+    id="about"
+    columns={2}
+    items={[]}
+    image={{
+      src: HomePageImage,
+      alt: 'Richard Bergsma smiling in the mountains of Switzerland holding Revella',
+      loading: 'lazy',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-3xl font-bold tracking-tight dark:text-white sm:text-4xl mb-2">{t.about.title}</h2>
+      {t.about.content.map((paragraph) => (
+        <p>{paragraph}</p>
+        <br />
+      ))}
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Steps Widget -->
+  <Steps
+    id="resume"
+    title={t.resume.title}
+    items={t.resume.experience.map(exp => ({
+      title: `${exp.title}<br /> <span class="font-normal">${exp.company} - ${exp.location}</span> <br /> <span class="text-sm font-normal">${exp.period}</span>`,
+      description: exp.description,
+      icon: 'tabler:automation',
+    }))}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- Steps Widget -->
+  <Steps
+    id="education"
+    title={t.education.title}
+    items={t.education.items.map(item => ({
+      title: item.title,
+      icon: 'tabler:school'
+    }))}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- Testimonials Widget -->
+  <Testimonials
+    id="certifications"
+    title={t.certifications.title}
+    subtitle={t.certifications.subtitle}
+    testimonials={[
+      {
+        name: t.certifications.items[0].name,
+        issueDate: t.certifications.items[0].issueDate,
+        description: t.certifications.items[0].description,
+        linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
+        image: {
+          src: NexthinkAppExp,
+          alt: 'Nexthink Professional in Application Experience Management badge',
+          loading: 'lazy',
+        },
+      },
+      {
+        name: 'Certified Nexthink Administrator',
+        issueDate: 'Date Issued: 11-2024',
+        description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs.',
+        linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
+        image: {
+          src: NexthinkAdministrator,
+          alt: 'Nexthink Administrator badge',
+          loading: 'lazy',
+        },
+      },
+      {
+        name: 'Certified Nexthink Associate',
+        issueDate: 'Date Issued: 11-2024',
+        description: 'Earning the Nexthink Infinity Fundamentals certification validates your understanding of the Nexthink Infinity platform and its role in enhancing digital employee experience.',
+        linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
+        image: {
+          src: NexthinkAssociate,
+          alt: 'Nexthink Associate badge',
+          loading: 'lazy',
+        },
+      },
+      {
+        name: 'Certified Entry-Level Python Programmer',
+        issueDate: 'Date Issued: 11-2023',
+        description: 'Earning the PCEP™ certification demonstrates proficiency in fundamental Python programming concepts, including data types, control flow, data collections, functions, and exception handling.',
+        linkUrl: 'https://pythoninstitute.org/pcep',
+        image: {
+          src: pcep,
+          alt: 'PCEP™ – Certified Entry-Level Python Programmer badge',
+          loading: 'lazy',
+        },
+      },
+      {
+        name: 'Modern Desktop Administrator Associate',
+        issueDate: 'Date Issued: 06-2023',
+        description: 'Earning the Modern Desktop Administrator Associate certification demonstrates proficiency in deploying, configuring, securing, managing, and monitoring devices and client applications within an enterprise environment.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate badge',
+          loading: 'lazy',
+        },
+      },
+      {
+        name: 'Microsoft 365 Fundamentals',
+        issueDate: 'Date Issued: 05-2023',
+        description: 'Earning the Microsoft 365 Certified: Fundamentals certification demonstrates foundational knowledge of cloud-based solutions, including productivity, collaboration, security, compliance, and Microsoft 365 services.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Microsoft 365 Fundamentals badge',
+          loading: 'lazy',
+        },
+      },
+      {
+        name: 'Teams Administrator Associate',
+        issueDate: 'Date Issued: 06-2021',
+        description: 'Earning the Teams Administrator Associate certification demonstrates your ability to plan, deploy, configure, and manage Microsoft Teams to facilitate efficient collaboration and communication within a Microsoft 365 environment.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftAssociate,
+          alt: 'Microsoft Certified Associate badge',
+          loading: 'lazy',
+        },
+      },
+      {
+        name: 'Azure Fundamentals',
+        issueDate: 'Date Issued: 01-2020',
+        description: 'Earning the Microsoft Certified: Azure Fundamentals certification demonstrates foundational knowledge of cloud concepts, core Azure services, and Azure management and governance features and tools.',
+        linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
+        image: {
+          src: MicrosoftFundamentals,
+          alt: 'Azure Fundamentals badge',
+          loading: 'lazy',
+        },
+      },
+    ]}
+  />
+
+  <!-- Features3 Widget -->
+  <Features3
+    id="skills"
+    title={t.skills.title}
+    subtitle={t.skills.subtitle}
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={t.skills.items.map(item => ({
+      title: item.title,
+      description: item.description,
+    }))}
+  />
+
+  <!-- BlogLatestPost Widget -->
+  <BlogLatestPosts
+    id="blog"
+    title={t.blog.title}
+    information={t.blog.information}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>
