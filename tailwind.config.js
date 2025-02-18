@@ -32,9 +32,28 @@ export default {
     },
   },
   plugins: [
-    typographyPlugin,
-    plugin(({ addVariant }) => {
+    typographyPlugin({
+      modifiers: [],
+      className: 'text-container',
+      styles: {
+        DEFAULT: {
+          p: {
+            marginRight: '1rem',
+            paddingRight: '1rem',
+          },
+        },
+      },
+    }),
+    plugin(({ addVariant, addComponents }) => {
       addVariant('intersect', '&:not([no-intersect])');
+      addComponents({
+        '.text-container': {
+          '@screen sm': {
+            paddingRight: '0', // Remove padding on larger screens
+            marginRight: '0',
+          },
+        },
+      });
     }),
   ],
   darkMode: 'class',

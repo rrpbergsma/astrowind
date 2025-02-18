@@ -62,8 +62,9 @@ const metadata = {
         const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
+          const headerHeight = document.getElementById('header')?.offsetHeight || 0;
           window.scrollTo({
-            top: targetElement.offsetTop - 50,
+            top: targetElement.offsetTop - headerHeight,
             behavior: 'smooth'
           });
         }
@@ -93,7 +94,7 @@ const metadata = {
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-3xl font-bold tracking-tight dark:text-white sm:text-4xl mb-2">{t.about.title}</h2>
+      <h2 class="text-3xl font-bold tracking-tight dark:text-white sm:text-4xl mb-2 text-container">{t.about.title}</h2>
       {t.about.content.map((paragraph) => (
         <p>{paragraph}</p>
         <br />
