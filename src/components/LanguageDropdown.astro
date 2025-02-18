@@ -1,5 +1,4 @@
 ---
-// src/components/LanguageDropdown.astro
 import { Icon } from 'astro-icon/components';
 
 interface Props {
@@ -47,15 +46,16 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
   >
     <div class="py-1" role="none">
       {languages.map(lang => (
-        <a 
-          href={`/${lang.code}`} 
-          class="text-gray-700 dark:text-gray-300 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
-          role="menuitem" 
+        <button
+          type="button"
+          data-lang-code={lang.code}
+          class="text-gray-700 dark:text-gray-300 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+          role="menuitem"
           tabindex="-1"
         >
           <Icon name={`circle-flags:${lang.flag}`} class="inline-block w-5 h-5 mr-2" />
           {lang.name}
-        </a>
+        </button>
       ))}
     </div>
   </div>
@@ -83,8 +83,10 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     const button = document.querySelector<HTMLButtonElement>('#menu-button');
     const menu = document.querySelector<HTMLDivElement>('#language-menu');
     const chevronIcon = document.querySelector<HTMLElement>('#chevron-icon');
+    const selectedLanguageText = document.querySelector<HTMLElement>('#selected-language');
+    const languageButtons = document.querySelectorAll<HTMLButtonElement>('[data-lang-code]');
 
-    if (!button || !menu || !chevronIcon) {
+    if (!button || !menu || !chevronIcon || !selectedLanguageText) {
       return;
     }
 
@@ -121,6 +123,37 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
       }
     });
 
+    // Handle language selection
+    languageButtons.forEach(langButton => {
+      langButton.addEventListener('click', () => {
+        const langCode = langButton.dataset.langCode;
+        if (!langCode) return;
+
+        // Update button text and icon
+        const langName = langButton.textContent?.trim();
+        const flagIcon = langButton.querySelector('svg');
+        if (langName && flagIcon) {
+          selectedLanguageText.textContent = langName;
+          const currentFlag = button.querySelector('svg:first-child');
+          if (currentFlag) {
+            currentFlag.replaceWith(flagIcon.cloneNode(true));
+          }
+        }
+
+        // Close menu
+        closeMenu();
+
+        // Get current path and redirect
+        const currentPath = window.location.pathname.replace(/\/$/, '');
+        const pathSegments = currentPath.split('/').filter(Boolean);
+        const isBlogPost = pathSegments.length > 0 && !['en', 'nl', 'de'].includes(pathSegments[0]);
+        const pathWithoutLang = pathSegments.length > 1 ? `/${pathSegments.slice(1).join('/')}`.replace(/\/$/, '') : '';
+        
+        // Redirect to new language path
+        window.location.href = isBlogPost ? `/${langCode}` : `/${langCode}${pathWithoutLang || ''}`;
+      });
+    });
+
     // Close when clicking outside
     document.addEventListener('click', (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -144,4 +177,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
   } else {
     setupLanguageDropdown();
   }
+
+  // Re-run setup when the page content is updated (e.g., after navigation)
+  document.addEventListener('astro:page-load', setupLanguageDropdown);
 </script>
