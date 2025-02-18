@@ -2815,6 +2815,11 @@ video {
   color: var(--aw-color-text-muted);
 }
 
+.hero-subtitle {
+  margin-right: 1rem;
+  padding-right: 1rem;
+}
+
 #header.scroll > div:first-child {
   background-color: var(--aw-color-bg-page);
 }
@@ -3238,11 +3243,6 @@ video {
 .dark\:text-white:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.dark\:text-\[rgb\(229_236_246\)\]:is(.dark *) {
-  --tw-text-opacity: 1;
-  color: rgb(229 236 246 / var(--tw-text-opacity, 1));
 }
 
 .dark\:shadow-\[0_4px_30px_rgba\(0\2c 0\2c 0\2c 0\.1\)\]:is(.dark *) {

@@ -18,6 +18,11 @@
   .text-muted {
     color: var(--aw-color-text-muted);
   }
+  
+  .hero-subtitle {
+    margin-right: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 @layer components {
