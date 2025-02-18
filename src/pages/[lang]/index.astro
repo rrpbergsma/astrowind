@@ -78,7 +78,7 @@ const metadata = {
     title={t.hero.title}
   >
  <Fragment slot="subtitle">
-   <strong>{t.hero.greeting}</strong><br /><br /><p class="text-muted mt-2">{t.hero.subtitle}</p>
+   <strong class="text-3xl md:text-4xl">{t.hero.greeting}</strong><br /><br /><p>{t.hero.subtitle}</p>
  </Fragment>
 </Hero>
 
@@ -87,7 +87,7 @@ const metadata = {
     id="about"
     columns={2}
     items={[]}
-      classes={{ container: "text-container" }}
+      class="text-container"
       image={{
       src: HomePageImage,
       alt: 'Richard Bergsma smiling in the mountains of Switzerland holding Revella',
