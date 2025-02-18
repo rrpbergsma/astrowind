@@ -9,11 +9,13 @@ const { currentLang } = Astro.props;
 
 import { supportedLanguages } from '~/i18n/translations';
 
+type SupportedLanguage = typeof supportedLanguages[number];
+
 const languages = [
-  { code: 'en', name: 'English', flag: 'gb' },
-  { code: 'nl', name: 'Dutch', flag: 'nl' },
-  { code: 'de', name: 'German', flag: 'de' },
-  { code: 'fr', name: 'French', flag: 'fr' },
+  { code: 'en' as SupportedLanguage, name: 'English', flag: 'gb' },
+  { code: 'nl' as SupportedLanguage, name: 'Dutch', flag: 'nl' },
+  { code: 'de' as SupportedLanguage, name: 'German', flag: 'de' },
+  { code: 'fr' as SupportedLanguage, name: 'French', flag: 'fr' },
 ].filter(lang => supportedLanguages.includes(lang.code));
 
 const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
@@ -39,13 +41,14 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     </button>
   </div>
 
-  <div 
-    class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 dark:ring-gray-600 focus:outline-none transform opacity-0 scale-95 transition-all duration-200"
-    role="menu" 
-    aria-orientation="vertical" 
-    aria-labelledby="menu-button" 
+  <div
+    class="hidden absolute left-0 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 dark:ring-gray-600 focus:outline-none transform opacity-0 scale-95 transition-all duration-200 max-h-[300px] overflow-y-auto w-full"
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="menu-button"
     tabindex="-1"
     id="language-menu"
+    style="max-height: min(300px, 70vh);"
   >
     <div class="py-1" role="none">
       {languages.map(lang => (
@@ -65,11 +68,27 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
 </div>
 
 <style>
-  #language-menu:not(.hidden) {
-    animation: slideIn 0.2s ease-out forwards;
+  #language-menu.open-downward {
+    top: 100%;
+    margin-top: 0.5rem;
+    transform-origin: top;
   }
 
-  @keyframes slideIn {
+  #language-menu.open-upward {
+    bottom: 100%;
+    margin-bottom: 0.5rem;
+    transform-origin: bottom;
+  }
+
+  #language-menu:not(.hidden).open-downward {
+    animation: slideDown 0.2s ease-out forwards;
+  }
+
+  #language-menu:not(.hidden).open-upward {
+    animation: slideUp 0.2s ease-out forwards;
+  }
+
+  @keyframes slideDown {
     from {
       opacity: 0;
       transform: scale(0.95) translateY(-0.5rem);
@@ -77,6 +96,25 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     to {
       opacity: 1;
       transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .absolute.right-0.w-56.rounded-md.shadow-lg.bg-white.dark\:bg-gray-800.ring-1.ring-black.ring-opacity-5.dark\:ring-gray-600.focus\:outline-none.transform.opacity-0.scale-95.transition-all.duration-200.max-h-\[300px\].overflow-y-auto {
+      width: auto;
+      min-width: 120px;
+      max-width: calc(100vw - 6rem);
     }
   }
 </style>
@@ -106,9 +144,36 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
 
     function openMenu() {
       if (menu && button && chevronIcon) {
+        // First show the menu to calculate its height
         menu.classList.remove('hidden');
+        menu.classList.remove('open-upward', 'open-downward');
+        
+        // Calculate available space
+        const buttonRect = button.getBoundingClientRect();
+        const menuRect = menu.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const spaceBelow = viewportHeight - buttonRect.bottom;
+        const spaceAbove = buttonRect.top;
+        const menuHeight = Math.min(menuRect.height, 300); // Cap at 300px
+        
+        // Determine if menu should open upward
+        const shouldOpenUpward = spaceBelow < menuHeight && spaceAbove > spaceBelow;
+
+        // Position menu
+        menu.style.maxHeight = `${Math.min(
+          shouldOpenUpward ? spaceAbove - 8 : spaceBelow - 8,
+          300
+        )}px`;
+
+        if (shouldOpenUpward) {
+          menu.classList.add('open-upward');
+          chevronIcon.style.transform = 'rotate(180deg)';
+        } else {
+          menu.classList.add('open-downward');
+          chevronIcon.style.transform = 'rotate(0deg)';
+        }
+
         button.setAttribute('aria-expanded', 'true');
-        chevronIcon.style.transform = 'rotate(180deg)';
         isOpen = true;
       }
     }
