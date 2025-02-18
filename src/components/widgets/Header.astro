@@ -4,11 +4,10 @@ import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
-import Button from '~/components/ui/Button.astro';
+import LanguageDropdown from '~/components/LanguageDropdown.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
-import type { CallToAction } from '~/types';
 
 interface Link {
   text?: string;
@@ -24,7 +23,6 @@ interface MenuLink extends Link {
 export interface Props {
   id?: string;
   links?: Array<MenuLink>;
-  actions?: Array<CallToAction>;
   isSticky?: boolean;
   isDark?: boolean;
   isFullWidth?: boolean;
@@ -36,7 +34,6 @@ export interface Props {
 const {
   id = 'header',
   links = [],
-  actions = [],
   isSticky = false,
   isDark = false,
   isFullWidth = false,
@@ -62,7 +59,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       'relative text-default py-3 px-3 md:px-6 mx-auto w-full',
       {
         'md:flex md:justify-between': position !== 'center',
-      },
+        },
       {
         'md:grid md:grid-cols-3 md:items-center': position === 'center',
       },
@@ -150,60 +147,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               </a>
             )
           }
-          <!-- Language Selector as Borderless Buttons -->
-          <div id="language-selector" class="flex space-x-4">
-            <button
-              type="button"
-              data-lang="en"
-              class="dark:text-white:hover:text-blue-500 focus:outline-none"
-            >
-              EN
-            </button>
-            <button
-              type="button"
-              data-lang="nl"
-              class="dark:text-white:hover:text-blue-500 focus:outline-none"
-            >
-              NL
-            </button>
-            <button
-              type="button"
-              data-lang="de"
-              class="dark:text-white:hover:text-blue-500 focus:outline-none"
-            >
-              DE
-            </button>
-          </div>
+          <!-- Language Selector as Select Element -->
+          <LanguageDropdown currentLang={currentPath.split('/')[1] || 'en'} />
         </div>
       </div>
     </div>
   </div>
-  <script client:load>
-    // Define supported languages
-    const supportedLangs = ['en', 'nl', 'de'];
-    // Split current URL path into segments
-    let segments = window.location.pathname.split('/').filter(Boolean);
-    // Determine current language based on URL, defaulting to 'en'
-    const currentLang = supportedLangs.includes(segments[0]) ? segments[0] : 'en';
-    
-    // Add active styling and event listeners to language buttons
-    document.querySelectorAll('#language-selector button').forEach((button) => {
-      if (button.getAttribute('data-lang') === currentLang) {
-        button.classList.add('font-bold', 'text-blue-500');
-      }
-      button.addEventListener('click', () => {
-        // Re-read the URL segments in case the path has changed
-        segments = window.location.pathname.split('/').filter(Boolean);
-        const selectedLang = button.getAttribute('data-lang');
-        if (supportedLangs.includes(segments[0])) {
-          segments[0] = selectedLang;
-        } else {
-          segments.unshift(selectedLang);
-        }
-        // Rebuild the URL and redirect
-        const newPath = '/' + segments.join('/');
-        window.location.href = newPath;
-      });
-    });
-  </script>
 </header>

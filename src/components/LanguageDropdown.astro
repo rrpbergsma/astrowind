@@ -1,0 +1,147 @@
+---
+// src/components/LanguageDropdown.astro
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  currentLang: string;
+}
+
+const { currentLang } = Astro.props;
+
+const languages = [
+  { code: 'en', name: 'English', flag: 'gb' },
+  { code: 'nl', name: 'Dutch', flag: 'nl' },
+  { code: 'de', name: 'German', flag: 'de' },
+];
+
+const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
+---
+
+<div class="relative inline-block text-left">
+  <div>
+    <button 
+      type="button" 
+      class="inline-flex justify-center w-full rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-colors duration-200"
+      id="menu-button" 
+      aria-expanded="false" 
+      aria-haspopup="true"
+    >
+      <Icon name={`circle-flags:${currentLanguage.flag}`} class="inline-block w-5 h-5 mr-2" />
+      <span id="selected-language">{currentLanguage.name}</span>
+      <Icon 
+        name="tabler:chevron-down" 
+        class="ml-2 -mr-1 h-5 w-5 transition-transform duration-200" 
+        aria-hidden="true"
+        id="chevron-icon"
+      />
+    </button>
+  </div>
+
+  <div 
+    class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 dark:ring-gray-600 focus:outline-none transform opacity-0 scale-95 transition-all duration-200"
+    role="menu" 
+    aria-orientation="vertical" 
+    aria-labelledby="menu-button" 
+    tabindex="-1"
+    id="language-menu"
+  >
+    <div class="py-1" role="none">
+      {languages.map(lang => (
+        <a 
+          href={`/${lang.code}`} 
+          class="text-gray-700 dark:text-gray-300 block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+          role="menuitem" 
+          tabindex="-1"
+        >
+          <Icon name={`circle-flags:${lang.flag}`} class="inline-block w-5 h-5 mr-2" />
+          {lang.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  #language-menu:not(.hidden) {
+    animation: slideIn 0.2s ease-out forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+</style>
+
+<script>
+  function setupLanguageDropdown() {
+    const button = document.querySelector<HTMLButtonElement>('#menu-button');
+    const menu = document.querySelector<HTMLDivElement>('#language-menu');
+    const chevronIcon = document.querySelector<HTMLElement>('#chevron-icon');
+
+    if (!button || !menu || !chevronIcon) {
+      return;
+    }
+
+    let isOpen = false;
+
+    function closeMenu() {
+      if (menu && button && chevronIcon) {
+        menu.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
+        chevronIcon.style.transform = 'rotate(0deg)';
+        isOpen = false;
+      }
+    }
+
+    function openMenu() {
+      if (menu && button && chevronIcon) {
+        menu.classList.remove('hidden');
+        button.setAttribute('aria-expanded', 'true');
+        chevronIcon.style.transform = 'rotate(180deg)';
+        isOpen = true;
+      }
+    }
+
+    // Initialize closed state
+    closeMenu();
+
+    // Toggle menu
+    button.addEventListener('click', (e: MouseEvent) => {
+      e.stopPropagation();
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (isOpen && !menu.contains(target) && !button.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    // Handle keyboard navigation
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeMenu();
+        button.focus();
+      }
+    });
+  }
+
+  // Run setup when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupLanguageDropdown);
+  } else {
+    setupLanguageDropdown();
+  }
+</script>

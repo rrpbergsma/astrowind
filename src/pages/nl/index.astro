@@ -8,7 +8,6 @@ import Features3 from '~/components/widgets/Features3.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import { getPermalink } from '~/utils/permalinks';
 import HomePageImage from '~/assets/images/richardbergsma.png'
 import MicrosoftAssociate from '~/assets/images/microsoft-certified-associate-badge.webp'
 import NexthinkAssociate from '~/assets/images/NexthinkAssociate.webp'
@@ -17,14 +16,10 @@ import pcep from '~/assets/images/PCEP.webp'
 import MicrosoftFundamentals from '~/assets/images/microsoft-certified-fundamentals-badge.webp'
 import NexthinkAppExp from '~/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp'
 
-
 const metadata = {
   title: 'Over mij',
 };
 
-const fixedYear = 2010; // Vervang door het gewenste jaar
-const currentYear = new Date().getFullYear();
-const yearsSince = currentYear - fixedYear;
 ---
 
 <Layout metadata={metadata}>
@@ -35,20 +30,32 @@ const yearsSince = currentYear - fixedYear;
         { text: 'Home', href: '#hero' },
         { text: 'Over', href: '#about' },
         { text: 'CV', href: '#resume' },
-        { text: 'Certificeringen', href: '#Certificeringen' },
+        { text: 'Certificeringen', href: '#Certifications' },
         { text: 'Vaardigheden', href: '#skills' },
         { text: 'Blog', href: '#blog' },
-      ]}
-      actions={[
-        {
-          text: 'Contacteer mij',
-          href: getPermalink('/contact#form'),
-        },
       ]}
       isSticky
       showToggleTheme
     />
   </Fragment>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 50, // Adjust offset as needed
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
 
   <!-- Hero2 Widget ******************* -->
 
@@ -56,12 +63,11 @@ const yearsSince = currentYear - fixedYear;
     id="hero"
     title="Systemen vereenvoudigen, Resultaten versterken"
   >
-    
+
     <Fragment slot="subtitle">
-      <strong class="text-4xl">Hoi! Ik ben Richard Bergsma.</strong></br></br>
-      Ik automatiseer werkstromen met Power Automate, bouw slimme chatbots in Copilot Studio en verbind systemen via naadloze API-integraties. Van het optimaliseren van IT-infrastructuur en het beheren van wereldwijde omgevingen tot het verbeteren van samenwerking met SharePoint en Azure, stroomlijn ik processen om technologie slimmer te laten werken – terwijl ik mijn Python-vaardigheden verder ontwikkel.
+      <strong class="text-3xl md:text-4xl">Hoi! Ik ben Richard Bergsma.</strong><br /><br />Ik automatiseer werkstromen met Power Automate, bouw slimme chatbots in Copilot Studio en verbind systemen via naadloze API-integraties. Van het optimaliseren van IT-infrastructuur en het beheren van wereldwijde omgevingen tot het verbeteren van samenwerking met SharePoint en Azure, stroomlijn ik processen om technologie slimmer te laten werken – terwijl ik mijn Python-vaardigheden verder ontwikkel.
     </Fragment>
-    
+
   </Hero>
 
   <!-- Content Widget **************** -->
@@ -69,9 +75,7 @@ const yearsSince = currentYear - fixedYear;
   <Content
     id="about"
     columns={2}
-    items={[
-      
-    ]}
+    items={[]}
     image={{
       src: HomePageImage,
       alt: 'Richard Bergsma die glimlacht in de bergen van Zwitserland terwijl hij Revella vasthoudt',
@@ -79,12 +83,12 @@ const yearsSince = currentYear - fixedYear;
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Over mij</h2>
+      <h2 class="text-3xl font-bold tracking-tight dark:text-white sm:text-4xl mb-2">Over mij</h2>
         Met meer dan 15 jaar IT-ervaring ben ik een gepassioneerde IT-systemen- en automatiseringsmanager die uitblinkt in het leveren van optimale oplossingen voor complexe cloud- en on-premise systemen. Ik richt mij op het stimuleren van automatisering met Power Automate, het bouwen van intelligente chatbots in Copilot Studio en het integreren van API's om werkstromen te stroomlijnen. Ik beheer ook de Microsoft 365-omgeving, ondersteun derde-lijnsaanvragen en verhoog de efficiëntie met tools zoals Power Apps, Nexthink en TOPdesk.
 
-      </br></br>Vroeger leidde ik de implementaties van Microsoft 365 en SharePoint Online, migreerde ik mailsystemen en verbeterde ik de automatisering met SCCM. Daarnaast richtte ik Bergsma IT op, waarmee ik kleine bedrijven hielp de overstap naar de cloud te maken en beheer ik op maat gemaakte WordPress-websites.
+      <br /><br />Vroeger leidde ik de implementaties van Microsoft 365 en SharePoint Online, migreerde ik mailsystemen en verbeterde ik de automatisering met SCCM. Daarnaast richtte ik Bergsma IT op, waarmee ik kleine bedrijven hielp de overstap naar de cloud te maken en beheer ik op maat gemaakte WordPress-websites.
 
-      </br></br>Ik ben gecertificeerd in Microsoft Teams Administration, Azure Fundamentals en Nexthink Administration. Mijn missie is IT-excellentie te bevorderen door het optimaliseren van cloudoplossingen, het automatiseren van processen en het leveren van uitstekende technische ondersteuning.
+      <br /><br />Ik ben gecertificeerd in Microsoft Teams Administration, Azure Fundamentals en Nexthink Administration. Mijn missie is IT-excellentie te bevorderen door het optimaliseren van cloudoplossingen, het automatiseren van processen en het leveren van uitstekende technische ondersteuning.
     </Fragment>
 
     <Fragment slot="bg">

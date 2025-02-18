@@ -1,37 +1,11 @@
 ---
-// Define your supported languages
-const languages = [
-  { code: 'en', label: 'English' },
-  { code: 'fr', label: 'Français' },
-  { code: 'es', label: 'Español' },
-];
+import LanguageSelectorComponent from './LanguageSelectorReact';
 
-// Determine the current language from the URL for setting the selected option.
-const pathSegments = window.location.pathname.split('/').filter(Boolean);
-const currentLang = pathSegments[0] || 'en';
+interface Props {
+  defaultLang: string;
+}
+
+const { defaultLang } = Astro.props;
 ---
-<select id="language-selector" class="p-2 border rounded bg-white text-gray-700">
-  {languages.map((lang) => (
-    <option value={lang.code} selected={lang.code === currentLang}>
-      {lang.label}
-    </option>
-  ))}
-</select>
 
-<script>
-  // This script runs in the browser
-  const select = document.getElementById('language-selector');
-  select.addEventListener('change', (event) => {
-    const selectedLang = event.target.value;
-    const currentPath = window.location.pathname;
-    const segments = currentPath.split('/').filter(Boolean);
-    const supportedLangs = ['en', 'fr', 'es'];
-    if (supportedLangs.includes(segments[0])) {
-      segments[0] = selectedLang;
-    } else {
-      segments.unshift(selectedLang);
-    }
-    const newPath = '/' + segments.join('/');
-    window.location.href = newPath;
-  });
-</script>
+<LanguageSelectorComponent client:load defaultLang={defaultLang} />

@@ -8,7 +8,6 @@ import Features3 from '~/components/widgets/Features3.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import { getPermalink } from '~/utils/permalinks';
 import HomePageImage from '~/assets/images/richardbergsma.png'
 import MicrosoftAssociate from '~/assets/images/microsoft-certified-associate-badge.webp'
 import NexthinkAssociate from '~/assets/images/NexthinkAssociate.webp'
@@ -21,9 +20,6 @@ const metadata = {
   title: 'About me',
 };
 
-const fixedYear = 2010; // Replace with your desired year
-const currentYear = new Date().getFullYear();
-const yearsSince = currentYear - fixedYear;
 ---
 
 <Layout metadata={metadata}>
@@ -38,26 +34,37 @@ const yearsSince = currentYear - fixedYear;
         { text: 'Skills', href: '#skills' },
         { text: 'Blog', href: '#blog' },
       ]}
-      actions={[
-        {
-          text: 'Contact me',
-          href: getPermalink('/contact#form'),
-        },
-      ]}
       isSticky
       showToggleTheme
     />
   </Fragment>
 
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 50, // Adjust offset as needed
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+
   <!-- Hero2 Widget ******************* -->
 
   <Hero
     id="hero"
-    title="Simplifying Systems, Amplifying Results"
-  >
+    title="Simplifying Systems, Amplifying Results">
     
     <Fragment slot="subtitle">
-      <strong class="text-4xl">Hi! I am Richard Bergsma.</strong></br></br>I automate workflows with Power Automate, build smart chatbots in Copilot Studio, and connect systems through seamless API integrations. From optimizing IT infrastructure and managing global environments to enhancing collaboration with SharePoint and Azure, I streamline processes to make technology work smarter—all while leveling up my Python skills.
+      <strong class="text-3xl md:text-4xl">Hi! I am Richard Bergsma.</strong><br /><br />I automate workflows with Power Automate, build smart chatbots in Copilot Studio, and connect systems through seamless API integrations. From optimizing IT infrastructure and managing global environments to enhancing collaboration with SharePoint and Azure, I streamline processes to make technology work smarter—all while leveling up my Python skills.
     </Fragment>
     
   </Hero>
@@ -77,12 +84,12 @@ const yearsSince = currentYear - fixedYear;
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">About me</h2>
+      <h2 class="text-3xl font-bold tracking-tight dark:text-white sm:text-4xl mb-2">About me</h2>
         With over 15 years of IT experience, I am a passionate IT Systems and Automation Manager who thrives on delivering optimal solutions for complex cloud and on-premise systems. I focus on driving automation with Power Automate, building intelligent chatbots in Copilot Studio, and integrating APIs to streamline workflows. I also manage the Microsoft 365 environment, support 3rd line requests, and enhance efficiency with tools like Power Apps, Nexthink, and TOPdesk.
 
-      </br></br>Previously, I led Microsoft 365 and SharePoint Online implementations, migrated mail systems, and improved automation with SCCM. Additionally, I founded Bergsma IT, helping small businesses move to the cloud and managing tailored WordPress websites.
+      <br /><br />Previously, I led Microsoft 365 and SharePoint Online implementations, migrated mail systems, and improved automation with SCCM. Additionally, I founded Bergsma IT, helping small businesses move to the cloud and managing tailored WordPress websites.
 
-      </br></br>I hold certifications in Microsoft Teams Administration, Azure Fundamentals, and Nexthink Administration. My mission is to drive IT excellence by optimizing cloud solutions, automating processes, and providing outstanding technical support.  
+      <br /><br />I hold certifications in Microsoft Teams Administration, Azure Fundamentals, and Nexthink Administration. My mission is to drive IT excellence by optimizing cloud solutions, automating processes, and providing outstanding technical support.  
     </Fragment>
 
     <Fragment slot="bg">
@@ -251,7 +258,7 @@ const yearsSince = currentYear - fixedYear;
         linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
         image: {
           src: MicrosoftFundamentals,
-          alt: 'Azure Fundamentals badge',
+          alt: 'Microsoft Certified Associate badge',
           loading: 'lazy',
         },
       },
@@ -424,7 +431,7 @@ const yearsSince = currentYear - fixedYear;
     </Fragment>
   </Content>
 
--->
+  -->
 
   <!-- BlogLatestPost Widget **************** -->
 
