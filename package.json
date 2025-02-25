@@ -36,6 +36,7 @@
     "astro-icon": "^1.1.5",
     "limax": "4.1.0",
     "lodash.merge": "^4.6.2",
+    "node-fetch": "^3.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "unpic": "^3.22.0"

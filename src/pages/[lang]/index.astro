@@ -15,7 +15,12 @@ import pcep from '~/assets/images/PCEP.webp'
 import MicrosoftFundamentals from '~/assets/images/microsoft-certified-fundamentals-badge.webp'
 import NexthinkAppExp from '~/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp'
 
+import fetch from 'node-fetch';
 import { getTranslation, supportedLanguages } from '~/i18n/translations';
+
+interface IpApiResponse {
+  countryCode: string;
+}
 
 export async function getStaticPaths() {
   return supportedLanguages.map(lang => ({
@@ -26,6 +31,23 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 if (!supportedLanguages.includes(lang)) {
   return Astro.redirect('/en/');
+}
+
+// Geo-location based redirect
+if (Astro.request.headers.get('host') === '365devnet.nl') {
+  try {
+    const ip = Astro.clientAddress;
+    const response = await fetch(`http://ip-api.com/json/${ip}`);
+    const data = await response.json() as IpApiResponse;
+
+    if (data?.countryCode === 'NL') {
+      return Astro.redirect('/nl/');
+    }
+  } catch (error) {
+    console.error('Geo-location error:', error);
+    // Fallback: Redirect to default language (English)
+    return Astro.redirect('/en/');
+  }
 }
 
 const t = getTranslation(lang);
