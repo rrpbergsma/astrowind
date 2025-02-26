@@ -171,7 +171,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the Nexthink Certified Application Experience Management certification validates the expertise in optimizing application performance, ensuring seamless user adoption, and driving cost efficiency.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
-            src: '/src/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
+            src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
             alt: 'Nexthink Professional in Application Experience Management badge',
             loading: 'lazy',
           },
@@ -182,7 +182,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
-            src: '/src/assets/images/NexthinkAdministrator.webp',
+            src: '/images/certificates/NexthinkAdministrator.webp',
             alt: 'Nexthink Administrator badge',
             loading: 'lazy',
           },
@@ -193,7 +193,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the Nexthink Infinity Fundamentals certification validates your understanding of the Nexthink Infinity platform and its role in enhancing digital employee experience.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
-            src: '/src/assets/images/NexthinkAssociate.webp',
+            src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Nexthink Associate badge',
             loading: 'lazy',
           },
@@ -204,7 +204,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the PCEP™ certification demonstrates proficiency in fundamental Python programming concepts, including data types, control flow, data collections, functions, and exception handling.',
           linkUrl: 'https://pythoninstitute.org/pcep',
           image: {
-            src: '/src/assets/images/PCEP.webp',
+            src: '/images/certificates/PCEP.webp',
             alt: 'PCEP™ – Certified Entry-Level Python Programmer badge',
             loading: 'lazy',
           },
@@ -215,7 +215,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the Modern Desktop Administrator Associate certification demonstrates proficiency in deploying, configuring, securing, managing, and monitoring devices and client applications within an enterprise environment.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Microsoft Certified Associate badge',
             loading: 'lazy',
           },
@@ -226,7 +226,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the Microsoft 365 Certified: Fundamentals certification demonstrates foundational knowledge of cloud-based solutions, including productivity, collaboration, security, compliance, and Microsoft 365 services.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Microsoft 365 Fundamentals badge',
             loading: 'lazy',
           },
@@ -412,7 +412,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de Nexthink Certified Application Experience Management-certificering bevestigt de expertise in het optimaliseren van applicatieprestaties, het zorgen voor een naadloze gebruikersacceptatie en het bevorderen van kostenefficiëntie.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
-            src: '/src/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
+            src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
             alt: 'Nexthink Professional in Application Experience Management badge',
             loading: 'lazy',
           },
@@ -423,7 +423,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de Nexthink Platform Administration-certificering toont aan dat men bekwaam is in het configureren en aanpassen van het Nexthink-platform om aan de behoeften van de organisatie te voldoen.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
-            src: '/src/assets/images/NexthinkAdministrator.webp',
+            src: '/images/certificates/NexthinkAdministrator.webp',
             alt: 'Nexthink Administrator badge',
             loading: 'lazy',
           },
@@ -434,7 +434,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de Nexthink Infinity Fundamentals-certificering bevestigt uw begrip van het Nexthink Infinity-platform en de rol ervan bij het verbeteren van de digitale werknemerservaring.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
-            src: '/src/assets/images/NexthinkAssociate.webp',
+            src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Nexthink Associate badge',
             loading: 'lazy',
           },
@@ -445,7 +445,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de PCEP™-certificering toont aan dat men bedreven is in de fundamentele concepten van Python-programmering, waaronder datatypes, controleflow, gegevensverzamelingen, functies en foutafhandeling.',
           linkUrl: 'https://pythoninstitute.org/pcep',
           image: {
-            src: '/src/assets/images/PCEP.webp',
+            src: '/images/certificates/PCEP.webp',
             alt: 'PCEP™ – Badge voor gecertificeerde beginnende Python-programmeur',
             loading: 'lazy',
           },
@@ -456,7 +456,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de Modern Desktop Administrator Associate-certificering toont aan dat men bedreven is in het implementeren, configureren, beveiligen, beheren en monitoren van apparaten en clientapplicaties binnen een bedrijfsomgeving.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Microsoft Certified Associate badge',
             loading: 'lazy',
           },
@@ -467,7 +467,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de Microsoft 365 Certified: Fundamentals-certificering toont fundamentele kennis van cloudgebaseerde oplossingen, waaronder productiviteit, samenwerking, beveiliging, compliance en Microsoft 365-diensten.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Microsoft 365 Fundamentals badge',
             loading: 'lazy',
           },
@@ -653,7 +653,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der Nexthink Certified Application Experience Management-Zertifizierung bestätigt die Expertise in der Optimierung der Anwendungsleistung, der Gewährleistung einer nahtlosen Benutzerakzeptanz und der Förderung der Kosteneffizienz.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
-            src: '/src/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
+            src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
             alt: 'Nexthink Professional in Application Experience Management Abzeichen',
             loading: 'lazy',
           },
@@ -664,7 +664,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der Nexthink Platform Administration-Zertifizierung zeigt Kompetenz in der Konfiguration und Anpassung der Nexthink-Plattform zur Erfüllung organisatorischer Anforderungen.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
-            src: '/src/assets/images/NexthinkAdministrator.webp',
+            src: '/images/certificates/NexthinkAdministrator.webp',
             alt: 'Nexthink Administrator Abzeichen',
             loading: 'lazy',
           },
@@ -675,7 +675,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der Nexthink Infinity Fundamentals-Zertifizierung bestätigt Ihr Verständnis der Nexthink Infinity-Plattform und ihrer Rolle bei der Verbesserung der digitalen Mitarbeitererfahrung.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
-            src: '/src/assets/images/NexthinkAssociate.webp',
+            src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Nexthink Associate Abzeichen',
             loading: 'lazy',
           },
@@ -686,7 +686,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der PCEP™-Zertifizierung zeigt Kompetenz in grundlegenden Python-Programmierkonzepten, einschließlich Datentypen, Kontrollfluss, Datensammlungen, Funktionen und Fehlerbehandlung.',
           linkUrl: 'https://pythoninstitute.org/pcep',
           image: {
-            src: '/src/assets/images/PCEP.webp',
+            src: '/images/certificates/PCEP.webp',
             alt: 'PCEP™ – Zertifizierter Python-Programmierer (Einstiegsniveau) Abzeichen',
             loading: 'lazy',
           },
@@ -697,7 +697,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der Modern Desktop Administrator Associate-Zertifizierung zeigt Kompetenz in der Bereitstellung, Konfiguration, Sicherung, Verwaltung und Überwachung von Geräten und Client-Anwendungen in einer Unternehmensumgebung.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Microsoft Certified Associate Abzeichen',
             loading: 'lazy',
           },
@@ -708,7 +708,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der Microsoft 365 Certified: Fundamentals-Zertifizierung zeigt grundlegendes Wissen über Cloud-basierte Lösungen, einschließlich Produktivität, Zusammenarbeit, Sicherheit, Compliance und Microsoft 365-Dienste.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Microsoft 365 Fundamentals Abzeichen',
             loading: 'lazy',
           },
@@ -894,7 +894,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification Nexthink Certified Application Experience Management valide l\'expertise dans l\'optimisation des performances des applications, assurant une adoption transparente par les utilisateurs et favorisant l\'efficacité des coûts.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
-            src: '/src/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
+            src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
             alt: 'Badge Professionnel Nexthink en gestion de l\'expérience applicative',
             loading: 'lazy',
           },
@@ -905,7 +905,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification Nexthink Platform Administration démontre la compétence dans la configuration et la personnalisation de la plateforme Nexthink pour répondre aux besoins organisationnels.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
-            src: '/src/assets/images/NexthinkAdministrator.webp',
+            src: '/images/certificates/NexthinkAdministrator.webp',
             alt: 'Badge Administrateur Nexthink',
             loading: 'lazy',
           },
@@ -916,7 +916,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification Nexthink Infinity Fundamentals valide votre compréhension de la plateforme Nexthink Infinity et de son rôle dans l\'amélioration de l\'expérience numérique des employés.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
-            src: '/src/assets/images/NexthinkAssociate.webp',
+            src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Badge Associate Nexthink',
             loading: 'lazy',
           },
@@ -927,7 +927,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification PCEP™ démontre la maîtrise des concepts fondamentaux de la programmation Python, y compris les types de données, le contrôle de flux, les collections de données, les fonctions et la gestion des erreurs.',
           linkUrl: 'https://pythoninstitute.org/pcep',
           image: {
-            src: '/src/assets/images/PCEP.webp',
+            src: '/images/certificates/PCEP.webp',
             alt: 'Badge PCEP™ – Programmeur Python Certifié Niveau Débutant',
             loading: 'lazy',
           },
@@ -938,7 +938,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification Modern Desktop Administrator Associate démontre la compétence dans le déploiement, la configuration, la sécurisation, la gestion et la surveillance des appareils et des applications client dans un environnement d\'entreprise.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Badge Microsoft Certified Associate',
             loading: 'lazy',
           },
@@ -949,7 +949,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification Microsoft 365 Certified: Fundamentals démontre une connaissance fondamentale des solutions basées sur le cloud, y compris la productivité, la collaboration, la sécurité, la conformité et les services Microsoft 365.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Badge Microsoft 365 Fundamentals',
             loading: 'lazy',
           },
