@@ -237,7 +237,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the Teams Administrator Associate certification demonstrates your ability to plan, deploy, configure, and manage Microsoft Teams to facilitate efficient collaboration and communication within a Microsoft 365 environment.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Microsoft Certified Associate badge',
             loading: 'lazy',
           },
@@ -248,7 +248,7 @@ export const translations: Record<string, Translation> = {
           description: 'Earning the Microsoft Certified: Azure Fundamentals certification demonstrates foundational knowledge of cloud concepts, core Azure services, and Azure management and governance features and tools.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Azure Fundamentals badge',
             loading: 'lazy',
           },
@@ -478,7 +478,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de Teams Administrator Associate-certificering toont aan dat u in staat bent om Microsoft Teams te plannen, implementeren, configureren en beheren om efficiënte samenwerking en communicatie binnen een Microsoft 365-omgeving te faciliteren.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Microsoft Certified Associate badge',
             loading: 'lazy',
           },
@@ -489,7 +489,7 @@ export const translations: Record<string, Translation> = {
           description: 'Het behalen van de Microsoft Certified: Azure Fundamentals-certificering toont fundamentele kennis van cloudconcepten, kern-Azure-diensten en Azure-beheer- en governancefuncties en -hulpmiddelen.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Azure Fundamentals badge',
             loading: 'lazy',
           },
@@ -719,7 +719,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der Teams Administrator Associate-Zertifizierung zeigt Ihre Fähigkeit, Microsoft Teams zu planen, bereitzustellen, zu konfigurieren und zu verwalten, um effiziente Zusammenarbeit und Kommunikation in einer Microsoft 365-Umgebung zu ermöglichen.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Microsoft Certified Associate Abzeichen',
             loading: 'lazy',
           },
@@ -730,7 +730,7 @@ export const translations: Record<string, Translation> = {
           description: 'Der Erwerb der Microsoft Certified: Azure Fundamentals-Zertifizierung zeigt grundlegendes Wissen über Cloud-Konzepte, zentrale Azure-Dienste und Azure-Verwaltungs- und Governance-Funktionen und -Tools.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Azure Fundamentals Abzeichen',
             loading: 'lazy',
           },
@@ -960,7 +960,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification Teams Administrator Associate démontre votre capacité à planifier, déployer, configurer et gérer Microsoft Teams pour faciliter une collaboration et une communication efficaces dans un environnement Microsoft 365.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-associate-badge.webp',
+            src: '/images/certificates/microsoft-certified-associate-badge.webp',
             alt: 'Badge Microsoft Certified Associate',
             loading: 'lazy',
           },
@@ -971,7 +971,7 @@ export const translations: Record<string, Translation> = {
           description: 'L\'obtention de la certification Microsoft Certified: Azure Fundamentals démontre une connaissance fondamentale des concepts cloud, des services Azure de base et des fonctionnalités et outils de gestion et de gouvernance Azure.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
           image: {
-            src: '/src/assets/images/microsoft-certified-fundamentals-badge.webp',
+            src: '/images/certificates/microsoft-certified-fundamentals-badge.webp',
             alt: 'Badge Azure Fundamentals',
             loading: 'lazy',
           },
