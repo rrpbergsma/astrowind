@@ -1,0 +1,82 @@
+---
+import ModernTimeline from '~/components/ui/ModernTimeline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+
+export interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  compact?: boolean;
+  items?: Array<{
+    title: string;
+    description?: string;
+    company?: string;
+    date?: string;
+    location?: string;
+    icon?: string;
+    classes?: Record<string, string>;
+  }>;
+}
+
+const {
+  title = 'Work Experience',
+  subtitle = 'My professional journey',
+  tagline = '',
+  compact = false,
+  items = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = '',
+} = Astro.props as Props;
+
+// Transform the work experience items to the format expected by ModernTimeline
+const timelineItems = items.map(item => {
+  // Extract year from date if available
+  let year: string | undefined = undefined;
+  if (item.date) {
+    // The date format in translations is like "04-2018 - 09-2018" or "02-2025 - Present"
+    // We want to extract the first year (start year)
+    const dateMatch = item.date.match(/\d{2}-(\d{4})/);
+    if (dateMatch) {
+      year = dateMatch[1];
+    }
+  }
+  
+  return {
+    title: `<span class="${compact ? 'text-lg' : 'text-xl'}">${item.title}</span>${item.company ? `<span class="block ${compact ? 'text-xs' : 'text-sm'} font-normal text-gray-600 dark:text-gray-400">${item.company}</span>` : ''}`,
+    description: `<div class="transform-origin-top transition-transform duration-300">${item.description || ''}${item.description && (item.date || item.location) ? '<div class="mt-2"></div>' : ''}${item.date ? `<span class="block text-xs font-semibold text-gray-500 dark:text-gray-400">${item.date}</span>` : ''}${item.location ? `<span class="block text-xs text-gray-500 dark:text-gray-400">${item.location}</span>` : ''}</div>`,
+    icon: item.icon || 'tabler:briefcase',
+    classes: item.classes,
+    year,
+  };
+});
+---
+
+<WidgetWrapper id={id} isDark={isDark} bg={bg} classes={classes}>
+  <div class={`flex flex-col gap-${compact ? '8' : '12'} md:gap-${compact ? '12' : '16'}`}>
+    {title && (
+      <div class="flex flex-col gap-4 text-center">
+        {tagline && (
+          <p class="text-sm font-semibold uppercase tracking-wide text-primary dark:text-blue-200">{tagline}</p>
+        )}
+        {title && <h2 class={`${compact ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl'} font-bold font-heading`}>{title}</h2>}
+        {subtitle && <p class={`${compact ? 'text-lg' : 'text-xl'} text-muted dark:text-slate-400`}>{subtitle}</p>}
+      </div>
+    )}
+    <ModernTimeline
+      items={timelineItems}
+      compact={compact}
+      classes={{
+        container: 'max-w-4xl mx-auto px-4',
+        title: 'text-xl font-bold',
+        description: 'text-muted mt-2',
+        icon: 'text-primary dark:text-slate-200 border-primary dark:border-blue-700',
+        timeline: 'bg-primary/30 dark:bg-blue-700/30',
+        timelineDot: 'bg-primary dark:bg-blue-700',
+        year: 'text-primary dark:text-blue-300',
+      }}
+    />
+  </div>
+</WidgetWrapper>

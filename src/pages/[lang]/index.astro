@@ -1,19 +1,16 @@
 ---
+export const prerender = false;
 import Layout from '~/layouts/PageLayout.astro';
 import Header from '~/components/widgets/Header.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
-import Steps from '~/components/widgets/Steps.astro';
+import CompactSteps from '~/components/widgets/CompactSteps.astro';
+import WorkExperience from '~/components/widgets/WorkExperience.astro';
+import CompactCertifications from '~/components/widgets/CompactCertifications.astro';
+import CompactSkills from '~/components/widgets/CompactSkills.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import HomePageImage from '~/assets/images/richardbergsma.png'
-import MicrosoftAssociate from '~/assets/images/microsoft-certified-associate-badge.webp'
-import NexthinkAssociate from '~/assets/images/NexthinkAssociate.webp'
-import NexthinkAdministrator from '~/assets/images/NexthinkAdministrator.webp'
-import pcep from '~/assets/images/PCEP.webp'
-import MicrosoftFundamentals from '~/assets/images/microsoft-certified-fundamentals-badge.webp'
-import NexthinkAppExp from '~/assets/images/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp'
 
 import fetch from 'node-fetch';
 import { getTranslation, supportedLanguages } from '~/i18n/translations';
@@ -60,6 +57,27 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <Fragment slot="announcement"></Fragment>
+  
+  <!-- Person Structured Data for SEO -->
+  <StructuredData slot="structured-data" data={{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Richard Bergsma",
+    "jobTitle": "IT Systems and Automation Manager",
+    "description": t.hero.subtitle,
+    "image": Astro.url.origin + "/src/assets/images/richardbergsma.png",
+    "url": Astro.url.origin,
+    "sameAs": [
+      "https://www.linkedin.com/in/rrpbergsma",
+      "https://github.com/rrpbergsma"
+    ],
+    "knowsAbout": t.skills.items.map(skill => skill.title),
+    "worksFor": {
+      "@type": "Organization",
+      "name": "COFRA Holding C.V.",
+      "location": "Amsterdam"
+    }
+  }} />
   <Fragment slot="header">
     <Header
       links={[
@@ -68,6 +86,7 @@ const metadata = {
         { text: t.navigation.resume, href: '#resume' },
         { text: t.navigation.certifications, href: '#certifications' },
         { text: t.navigation.skills, href: '#skills' },
+        { text: t.navigation.education, href: '#education' },
         { text: t.navigation.blog, href: '#blog' },
       ]}
       isSticky
@@ -115,7 +134,7 @@ const metadata = {
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-3xl font-bold tracking-tight dark:text-white sm:text-4xl mb-2">{t.about.title}</h2>
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-2">{t.about.title}</h2>
       {t.about.content.map((paragraph) => (
         <p>{paragraph}</p>
         <br />
@@ -127,66 +146,54 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <!-- Steps Widget -->
-  <Steps
+  <!-- Work Experience - Modern Timeline Layout -->
+  <WorkExperience
     id="resume"
     title={t.resume.title}
+    compact={true}
     items={t.resume.experience.map(exp => ({
-      title: `${exp.title}<br /> <span class="font-normal">${exp.company} - ${exp.location}</span> <br /> <span class="text-sm font-normal">${exp.period}</span>`,
+      title: exp.title,
+      company: exp.company,
+      date: exp.period,
+      location: exp.location,
       description: exp.description,
-      icon: 'tabler:automation',
+      icon: 'tabler:briefcase',
     }))}
-    classes={{ container: 'max-w-3xl' }}
   />
 
-  <!-- Steps Widget -->
-  <Steps
+  <!-- Certifications - Compact Layout -->
+  <CompactCertifications
+    id="certifications"
+    title={t.certifications.title}
+    subtitle={t.certifications.subtitle}
+    testimonials={t.certifications.items.map((cert) => ({
+      name: cert.name,
+      issueDate: cert.issueDate,
+      description: cert.description,
+      linkUrl: cert.linkUrl,
+      image: cert.image
+    }))}
+  />
+
+  <!-- Skills - Compact Layout -->
+  <CompactSkills
+    id="skills"
+    title={t.skills.title}
+    subtitle={t.skills.subtitle}
+    defaultIcon="tabler:point-filled"
+    items={t.skills.items.map(item => ({
+      title: item.title,
+      description: item.description,
+    }))}
+  />
+
+  <!-- Education - Compact Layout -->
+  <CompactSteps
     id="education"
     title={t.education.title}
     items={t.education.items.map(item => ({
       title: item.title,
       icon: 'tabler:school'
-    }))}
-    classes={{ container: 'max-w-3xl' }}
-  />
-
-  <!-- Testimonials Widget -->
-  <Testimonials
-    id="certifications"
-    title={t.certifications.title}
-    subtitle={t.certifications.subtitle}
-    testimonials={t.certifications.items.map((cert, index) => ({
-      name: cert.name,
-      issueDate: cert.issueDate,
-      description: cert.description,
-      linkUrl: cert.linkUrl,
-      image: {
-        src: [
-          NexthinkAppExp,
-          NexthinkAdministrator,
-          NexthinkAssociate,
-          pcep,
-          MicrosoftAssociate,
-          MicrosoftFundamentals,
-          MicrosoftAssociate,
-          MicrosoftFundamentals,
-        ][index],
-        alt: cert.image.alt,
-        loading: 'lazy',
-      },
-    }))}
-  />
-
-  <!-- Features3 Widget -->
-  <Features3
-    id="skills"
-    title={t.skills.title}
-    subtitle={t.skills.subtitle}
-    columns={3}
-    defaultIcon="tabler:point-filled"
-    items={t.skills.items.map(item => ({
-      title: item.title,
-      description: item.description,
     }))}
   />
 

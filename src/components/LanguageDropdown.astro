@@ -23,12 +23,13 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
 
 <div class="relative inline-block text-left">
   <div>
-    <button 
-      type="button" 
-      class="inline-flex justify-center w-full rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-colors duration-200"
-      id="menu-button" 
-      aria-expanded="false" 
+    <button
+      type="button"
+      class="inline-flex justify-center w-full rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus-visible:ring-4 transition-colors duration-200"
+      id="menu-button"
+      aria-expanded="false"
       aria-haspopup="true"
+      aria-label={`Select language. Current language: ${currentLanguage.name}`}
     >
       <Icon name={`circle-flags:${currentLanguage.flag}`} class="inline-block w-5 h-5 mr-2" />
       <span id="selected-language">{currentLanguage.name}</span>
@@ -55,9 +56,10 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         <button
           type="button"
           data-lang-code={lang.code}
-          class="text-gray-700 dark:text-gray-300 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+          class="text-gray-700 dark:text-gray-300 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white focus:bg-gray-100 dark:focus:bg-gray-700 focus:text-gray-900 dark:focus:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-colors duration-200"
           role="menuitem"
           tabindex="-1"
+          aria-label={`Switch to ${lang.name} language`}
         >
           <Icon name={`circle-flags:${lang.flag}`} class="inline-block w-5 h-5 mr-2" />
           {lang.name}
@@ -188,6 +190,11 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         closeMenu();
       } else {
         openMenu();
+        // Focus the first menu item for better keyboard navigation
+        const firstMenuItem = menu.querySelector('button[role="menuitem"]');
+        if (firstMenuItem) {
+          (firstMenuItem as HTMLElement).focus();
+        }
       }
     });
 
@@ -235,6 +242,22 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
       if (e.key === 'Escape' && isOpen) {
         closeMenu();
         button.focus();
+      }
+      
+      // Enhanced keyboard navigation with arrow keys
+      if (isOpen && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+        e.preventDefault();
+        const menuItems = Array.from(menu.querySelectorAll('button[role="menuitem"]'));
+        const currentIndex = menuItems.findIndex(item => item === document.activeElement);
+        
+        let newIndex;
+        if (e.key === 'ArrowDown') {
+          newIndex = currentIndex < menuItems.length - 1 ? currentIndex + 1 : 0;
+        } else {
+          newIndex = currentIndex > 0 ? currentIndex - 1 : menuItems.length - 1;
+        }
+        
+        (menuItems[newIndex] as HTMLElement).focus();
       }
     });
   }

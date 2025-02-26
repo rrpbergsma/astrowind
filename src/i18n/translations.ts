@@ -1,6 +1,7 @@
 export interface Translation {
   metadata: {
     title: string;
+    aboutUs: string;
   };
   navigation: {
     home: string;
@@ -8,6 +9,7 @@ export interface Translation {
     resume: string;
     certifications: string;
     skills: string;
+    education: string;
     blog: string;
   };
   hero: {
@@ -74,6 +76,7 @@ export const translations: Record<string, Translation> = {
   en: {
     metadata: {
       title: 'About me',
+      aboutUs: 'About us',
     },
     navigation: {
       home: 'Home',
@@ -81,6 +84,7 @@ export const translations: Record<string, Translation> = {
       resume: 'Resume',
       certifications: 'Certifications',
       skills: 'Skills',
+      education: 'Education',
       blog: 'Blog',
     },
     hero: {
@@ -195,7 +199,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Certified Entry-Level Python Programmer',
+          name: 'Python Programmer (PCEP)',
           issueDate: 'Date Issued: 11-2023',
           description: 'Earning the PCEP™ certification demonstrates proficiency in fundamental Python programming concepts, including data types, control flow, data collections, functions, and exception handling.',
           linkUrl: 'https://pythoninstitute.org/pcep',
@@ -206,7 +210,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Modern Desktop Administrator Associate',
+          name: 'Desktop Administrator Associate',
           issueDate: 'Date Issued: 06-2023',
           description: 'Earning the Modern Desktop Administrator Associate certification demonstrates proficiency in deploying, configuring, securing, managing, and monitoring devices and client applications within an enterprise environment.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
@@ -276,7 +280,7 @@ export const translations: Record<string, Translation> = {
           description: 'Adept at setting up, managing, and optimizing both SharePoint Online and on-premise deployments, ensuring effective document management, collaboration, and information sharing within organizations.',
         },
         {
-          title: 'Nexthink Platform Administration',
+          title: 'Nexthink Administration',
           description: 'Proficient in administering the Nexthink platform, utilizing its capabilities for IT infrastructure monitoring, executing remote actions, and developing workflows to enhance IT service delivery and user experience.',
         },
         {
@@ -291,6 +295,18 @@ export const translations: Record<string, Translation> = {
           title: 'ITSM (TOPDesk)',
           description: 'Experienced in managing ITSM processes using TOPdesk. Proficient in core functionalities such as Incident Management and Asset Management, while leveraging API usage for seamless integrations with other systems.',
         },
+        {
+          title: 'PowerShell',
+          description: 'Proficient in utilizing PowerShell for automation, system administration, and configuration management across Microsoft environments. Experienced in creating robust scripts for task automation, system monitoring, and integration with various Microsoft services.',
+        },
+        {
+          title: 'Intune Device Management',
+          description: 'Skilled in deploying, configuring, and managing Windows 10/11 devices through Microsoft Intune. Experienced in creating and implementing device policies, application deployment, and security configurations for enterprise environments.',
+        },
+        {
+          title: '3rd Line IT Support',
+          description: 'Experienced in providing advanced technical support for complex IT issues that require in-depth knowledge and specialized expertise. Proficient in troubleshooting, diagnosing, and resolving critical system problems across various platforms and applications.',
+        },
       ],
     },
     blog: {
@@ -301,6 +317,7 @@ export const translations: Record<string, Translation> = {
   nl: {
     metadata: {
       title: 'Over mij',
+      aboutUs: 'Over ons',
     },
     navigation: {
       home: 'Home',
@@ -308,6 +325,7 @@ export const translations: Record<string, Translation> = {
       resume: 'CV',
       certifications: 'Certificeringen',
       skills: 'Vaardigheden',
+      education: 'Opleiding',
       blog: 'Blog',
     },
     hero: {
@@ -389,7 +407,7 @@ export const translations: Record<string, Translation> = {
       subtitle: 'Waar kennis op erkenning stuit',
       items: [
         {
-          name: 'Gecertificeerde Nexthink Professional',
+          name: 'Certified Nexthink Professional',
           issueDate: 'Datum van afgifte: 01-2025',
           description: 'Het behalen van de Nexthink Certified Application Experience Management-certificering bevestigt de expertise in het optimaliseren van applicatieprestaties, het zorgen voor een naadloze gebruikersacceptatie en het bevorderen van kostenefficiëntie.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
@@ -400,7 +418,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Gecertificeerde Nexthink-beheerder',
+          name: 'Certified Nexthink Administrator',
           issueDate: 'Datum van afgifte: 11-2024',
           description: 'Het behalen van de Nexthink Platform Administration-certificering toont aan dat men bekwaam is in het configureren en aanpassen van het Nexthink-platform om aan de behoeften van de organisatie te voldoen.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
@@ -411,7 +429,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Gecertificeerde Nexthink Associate',
+          name: 'Certified Nexthink Associate',
           issueDate: 'Datum van afgifte: 11-2024',
           description: 'Het behalen van de Nexthink Infinity Fundamentals-certificering bevestigt uw begrip van het Nexthink Infinity-platform en de rol ervan bij het verbeteren van de digitale werknemerservaring.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
@@ -422,7 +440,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Gecertificeerde beginnende Python-programmeur',
+          name: 'Python Programmer (PCEP)',
           issueDate: 'Datum van afgifte: 11-2023',
           description: 'Het behalen van de PCEP™-certificering toont aan dat men bedreven is in de fundamentele concepten van Python-programmering, waaronder datatypes, controleflow, gegevensverzamelingen, functies en foutafhandeling.',
           linkUrl: 'https://pythoninstitute.org/pcep',
@@ -433,7 +451,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Moderne Desktopbeheerder Associate',
+          name: 'Desktop Administrator Associate',
           issueDate: 'Datum van afgifte: 06-2023',
           description: 'Het behalen van de Modern Desktop Administrator Associate-certificering toont aan dat men bedreven is in het implementeren, configureren, beveiligen, beheren en monitoren van apparaten en clientapplicaties binnen een bedrijfsomgeving.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
@@ -444,7 +462,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Microsoft 365 Basisprincipes',
+          name: 'Microsoft 365 Fundamentals',
           issueDate: 'Datum van afgifte: 05-2023',
           description: 'Het behalen van de Microsoft 365 Certified: Fundamentals-certificering toont fundamentele kennis van cloudgebaseerde oplossingen, waaronder productiviteit, samenwerking, beveiliging, compliance en Microsoft 365-diensten.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
@@ -455,7 +473,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Teamsbeheerder Associate',
+          name: 'Teams Administrator Associate',
           issueDate: 'Datum van afgifte: 06-2021',
           description: 'Het behalen van de Teams Administrator Associate-certificering toont aan dat u in staat bent om Microsoft Teams te plannen, implementeren, configureren en beheren om efficiënte samenwerking en communicatie binnen een Microsoft 365-omgeving te faciliteren.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/m365-teams-administrator-associate/?practice-assessment-type=certification',
@@ -466,7 +484,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Azure Basisprincipes',
+          name: 'Azure Fundamentals',
           issueDate: 'Datum van afgifte: 01-2020',
           description: 'Het behalen van de Microsoft Certified: Azure Fundamentals-certificering toont fundamentele kennis van cloudconcepten, kern-Azure-diensten en Azure-beheer- en governancefuncties en -hulpmiddelen.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
@@ -503,7 +521,7 @@ export const translations: Record<string, Translation> = {
           description: 'Bedreven in het opzetten, beheren en optimaliseren van zowel SharePoint Online als on-premise implementaties, waarbij effectief documentbeheer, samenwerking en informatie-uitwisseling binnen organisaties wordt gewaarborgd.',
         },
         {
-          title: 'Nexthink Platform-beheer',
+          title: 'Nexthink-beheer',
           description: 'Bekwaam in het beheren van het Nexthink-platform, gebruikmakend van de mogelijkheden voor IT-infrastructuurmonitoring, het uitvoeren van externe acties en het ontwikkelen van workflows om IT-serviceverlening en gebruikerservaring te verbeteren.',
         },
         {
@@ -518,6 +536,18 @@ export const translations: Record<string, Translation> = {
           title: 'ITSM (TOPDesk)',
           description: 'Ervaren in het beheren van ITSM-processen met TOPdesk. Bekwaam in kernfunctionaliteiten zoals Incident Management en Asset Management, waarbij API-gebruik wordt benut voor naadloze integraties met andere systemen.',
         },
+        {
+          title: 'PowerShell',
+          description: 'Bekwaam in het gebruik van PowerShell voor automatisering, systeembeheer en configuratiebeheer in Microsoft-omgevingen. Ervaren in het maken van robuuste scripts voor taakautomatisering, systeemmonitoring en integratie met verschillende Microsoft-diensten.',
+        },
+        {
+          title: 'Intune Apparaatbeheer',
+          description: 'Bekwaam in het implementeren, configureren en beheren van Windows 10/11-apparaten via Microsoft Intune. Ervaren in het maken en implementeren van apparaatbeleid, applicatie-implementatie en beveiligingsconfiguraties voor bedrijfsomgevingen.',
+        },
+        {
+          title: '3e Lijns IT-ondersteuning',
+          description: 'Ervaren in het bieden van geavanceerde technische ondersteuning voor complexe IT-problemen die diepgaande kennis en gespecialiseerde expertise vereisen. Bekwaam in het oplossen, diagnosticeren en verhelpen van kritieke systeemproblemen op verschillende platforms en applicaties.',
+        },
       ],
     },
     blog: {
@@ -528,6 +558,7 @@ export const translations: Record<string, Translation> = {
   de: {
     metadata: {
       title: 'Über mich',
+      aboutUs: 'Über uns',
     },
     navigation: {
       home: 'Start',
@@ -535,6 +566,7 @@ export const translations: Record<string, Translation> = {
       resume: 'Lebenslauf',
       certifications: 'Zertifizierungen',
       skills: 'Fähigkeiten',
+      education: 'Ausbildung',
       blog: 'Blog',
     },
     hero: {
@@ -616,7 +648,7 @@ export const translations: Record<string, Translation> = {
       subtitle: 'Wo Wissen auf Anerkennung trifft',
       items: [
         {
-          name: 'Zertifizierter Nexthink Professional',
+          name: 'Certified Nexthink Professional',
           issueDate: 'Ausstellungsdatum: 01-2025',
           description: 'Der Erwerb der Nexthink Certified Application Experience Management-Zertifizierung bestätigt die Expertise in der Optimierung der Anwendungsleistung, der Gewährleistung einer nahtlosen Benutzerakzeptanz und der Förderung der Kosteneffizienz.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
@@ -627,7 +659,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Zertifizierter Nexthink Administrator',
+          name: 'Certified Nexthink Administrator',
           issueDate: 'Ausstellungsdatum: 11-2024',
           description: 'Der Erwerb der Nexthink Platform Administration-Zertifizierung zeigt Kompetenz in der Konfiguration und Anpassung der Nexthink-Plattform zur Erfüllung organisatorischer Anforderungen.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
@@ -638,7 +670,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Zertifizierter Nexthink Associate',
+          name: 'Certified Nexthink Associate',
           issueDate: 'Ausstellungsdatum: 11-2024',
           description: 'Der Erwerb der Nexthink Infinity Fundamentals-Zertifizierung bestätigt Ihr Verständnis der Nexthink Infinity-Plattform und ihrer Rolle bei der Verbesserung der digitalen Mitarbeitererfahrung.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
@@ -649,7 +681,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Zertifizierter Python-Programmierer (Einstiegsniveau)',
+          name: 'Python Programmer (PCEP)',
           issueDate: 'Ausstellungsdatum: 11-2023',
           description: 'Der Erwerb der PCEP™-Zertifizierung zeigt Kompetenz in grundlegenden Python-Programmierkonzepten, einschließlich Datentypen, Kontrollfluss, Datensammlungen, Funktionen und Fehlerbehandlung.',
           linkUrl: 'https://pythoninstitute.org/pcep',
@@ -660,7 +692,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Modern Desktop Administrator Associate',
+          name: 'Desktop Administrator Associate',
           issueDate: 'Ausstellungsdatum: 06-2023',
           description: 'Der Erwerb der Modern Desktop Administrator Associate-Zertifizierung zeigt Kompetenz in der Bereitstellung, Konfiguration, Sicherung, Verwaltung und Überwachung von Geräten und Client-Anwendungen in einer Unternehmensumgebung.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
@@ -671,7 +703,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Microsoft 365 Grundlagen',
+          name: 'Microsoft 365 Fundamentals',
           issueDate: 'Ausstellungsdatum: 05-2023',
           description: 'Der Erwerb der Microsoft 365 Certified: Fundamentals-Zertifizierung zeigt grundlegendes Wissen über Cloud-basierte Lösungen, einschließlich Produktivität, Zusammenarbeit, Sicherheit, Compliance und Microsoft 365-Dienste.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/microsoft-365-fundamentals/?practice-assessment-type=certification',
@@ -693,7 +725,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Azure Grundlagen',
+          name: 'Azure Fundamentals',
           issueDate: 'Ausstellungsdatum: 01-2020',
           description: 'Der Erwerb der Microsoft Certified: Azure Fundamentals-Zertifizierung zeigt grundlegendes Wissen über Cloud-Konzepte, zentrale Azure-Dienste und Azure-Verwaltungs- und Governance-Funktionen und -Tools.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/?practice-assessment-type=certification',
@@ -730,7 +762,7 @@ export const translations: Record<string, Translation> = {
           description: 'Versiert in der Einrichtung, Verwaltung und Optimierung sowohl von SharePoint Online als auch On-Premise-Implementierungen, zur Gewährleistung effektiven Dokumentenmanagements, Zusammenarbeit und Informationsaustausch innerhalb von Organisationen.',
         },
         {
-          title: 'Nexthink Platform Administration',
+          title: 'Nexthink Administration',
           description: 'Kompetent in der Verwaltung der Nexthink-Plattform, Nutzung ihrer Fähigkeiten für IT-Infrastrukturüberwachung, Ausführung von Remote-Aktionen und Entwicklung von Workflows zur Verbesserung von IT-Service-Bereitstellung und Benutzererfahrung.',
         },
         {
@@ -745,6 +777,18 @@ export const translations: Record<string, Translation> = {
           title: 'ITSM (TOPDesk)',
           description: 'Erfahren in der Verwaltung von ITSM-Prozessen mit TOPdesk. Kompetent in Kernfunktionalitäten wie Incident Management und Asset Management, bei gleichzeitiger Nutzung von API-Verwendung für nahtlose Integrationen mit anderen Systemen.',
         },
+        {
+          title: 'PowerShell',
+          description: 'Kompetent in der Nutzung von PowerShell für Automatisierung, Systemadministration und Konfigurationsmanagement in Microsoft-Umgebungen. Erfahren in der Erstellung robuster Skripte für Aufgabenautomatisierung, Systemüberwachung und Integration mit verschiedenen Microsoft-Diensten.',
+        },
+        {
+          title: 'Intune Geräteverwaltung',
+          description: 'Erfahren in der Bereitstellung, Konfiguration und Verwaltung von Windows 10/11-Geräten über Microsoft Intune. Kompetent in der Erstellung und Implementierung von Geräterichtlinien, Anwendungsbereitstellung und Sicherheitskonfigurationen für Unternehmensumgebungen.',
+        },
+        {
+          title: '3rd Line IT-Support',
+          description: 'Erfahren in der Bereitstellung fortgeschrittener technischer Unterstützung für komplexe IT-Probleme, die tiefgreifendes Wissen und spezialisierte Expertise erfordern. Kompetent in der Fehlersuche, Diagnose und Lösung kritischer Systemprobleme über verschiedene Plattformen und Anwendungen hinweg.',
+        },
       ],
     },
     blog: {
@@ -755,6 +799,7 @@ export const translations: Record<string, Translation> = {
   fr: {
     metadata: {
       title: 'À propos de moi',
+      aboutUs: 'À propos de nous',
     },
     navigation: {
       home: 'Accueil',
@@ -762,6 +807,7 @@ export const translations: Record<string, Translation> = {
       resume: 'CV',
       certifications: 'Certifications',
       skills: 'Compétences',
+      education: 'Formation',
       blog: 'Blog',
     },
     hero: {
@@ -843,7 +889,7 @@ export const translations: Record<string, Translation> = {
       subtitle: 'Où la connaissance rencontre la reconnaissance',
       items: [
         {
-          name: 'Professionnel Nexthink Certifié',
+          name: 'Certified Nexthink Professional',
           issueDate: 'Date de délivrance : 01-2025',
           description: 'L\'obtention de la certification Nexthink Certified Application Experience Management valide l\'expertise dans l\'optimisation des performances des applications, assurant une adoption transparente par les utilisateurs et favorisant l\'efficacité des coûts.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
@@ -854,7 +900,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Administrateur Nexthink Certifié',
+          name: 'Certified Nexthink Administrator',
           issueDate: 'Date de délivrance : 11-2024',
           description: 'L\'obtention de la certification Nexthink Platform Administration démontre la compétence dans la configuration et la personnalisation de la plateforme Nexthink pour répondre aux besoins organisationnels.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
@@ -865,7 +911,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Associate Nexthink Certifié',
+          name: 'Certified Nexthink Associate',
           issueDate: 'Date de délivrance : 11-2024',
           description: 'L\'obtention de la certification Nexthink Infinity Fundamentals valide votre compréhension de la plateforme Nexthink Infinity et de son rôle dans l\'amélioration de l\'expérience numérique des employés.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
@@ -876,7 +922,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Programmeur Python Certifié Niveau Débutant',
+          name: 'Python Programmer (PCEP)',
           issueDate: 'Date de délivrance : 11-2023',
           description: 'L\'obtention de la certification PCEP™ démontre la maîtrise des concepts fondamentaux de la programmation Python, y compris les types de données, le contrôle de flux, les collections de données, les fonctions et la gestion des erreurs.',
           linkUrl: 'https://pythoninstitute.org/pcep',
@@ -887,7 +933,7 @@ export const translations: Record<string, Translation> = {
           },
         },
         {
-          name: 'Modern Desktop Administrator Associate',
+          name: 'Desktop Administrator Associate',
           issueDate: 'Date de délivrance : 06-2023',
           description: 'L\'obtention de la certification Modern Desktop Administrator Associate démontre la compétence dans le déploiement, la configuration, la sécurisation, la gestion et la surveillance des appareils et des applications client dans un environnement d\'entreprise.',
           linkUrl: 'https://learn.microsoft.com/en-us/credentials/certifications/modern-desktop/?practice-assessment-type=certification',
@@ -957,7 +1003,7 @@ export const translations: Record<string, Translation> = {
           description: 'Compétent dans la configuration, la gestion et l\'optimisation des déploiements SharePoint Online et on-premise, assurant une gestion efficace des documents, la collaboration et le partage d\'informations au sein des organisations.',
         },
         {
-          title: 'Administration Plateforme Nexthink',
+          title: 'Administration Nexthink',
           description: 'Compétent dans l\'administration de la plateforme Nexthink, utilisant ses capacités pour la surveillance de l\'infrastructure IT, l\'exécution d\'actions à distance et le développement de workflows pour améliorer la prestation de services IT et l\'expérience utilisateur.',
         },
         {
@@ -971,6 +1017,18 @@ export const translations: Record<string, Translation> = {
         {
           title: 'ITSM (TOPDesk)',
           description: 'Expérimenté dans la gestion des processus ITSM avec TOPdesk. Compétent dans les fonctionnalités principales telles que la gestion des incidents et la gestion des actifs, tout en exploitant l\'utilisation des APIs pour des intégrations transparentes avec d\'autres systèmes.',
+        },
+        {
+          title: 'PowerShell',
+          description: 'Compétent dans l\'utilisation de PowerShell pour l\'automatisation, l\'administration système et la gestion de configuration dans les environnements Microsoft. Expérimenté dans la création de scripts robustes pour l\'automatisation des tâches, la surveillance des systèmes et l\'intégration avec divers services Microsoft.',
+        },
+        {
+          title: 'Gestion des Appareils Intune',
+          description: 'Compétent dans le déploiement, la configuration et la gestion des appareils Windows 10/11 via Microsoft Intune. Expérimenté dans la création et l\'implémentation de politiques d\'appareils, le déploiement d\'applications et les configurations de sécurité pour les environnements d\'entreprise.',
+        },
+        {
+          title: 'Support IT de 3ème Niveau',
+          description: 'Expérimenté dans la fourniture d\'un support technique avancé pour des problèmes IT complexes nécessitant une connaissance approfondie et une expertise spécialisée. Compétent dans le dépannage, le diagnostic et la résolution de problèmes système critiques sur diverses plateformes et applications.',
         },
       ],
     },

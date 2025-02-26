@@ -16,14 +16,14 @@ interface Links {
 }
 
 export interface Props {
-  links: Array<Links>;
+  links?: Array<Links>;
   secondaryLinks: Array<Link>;
   socialLinks: Array<Link>;
   footNote?: string;
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const { socialLinks = [], theme = 'light' } = Astro.props;
 ---
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
@@ -52,8 +52,8 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
       {
         socialLinks?.length && (
           <ul class="flex space-x-4">
-            {socialLinks.map(({ ariaLabel, href, icon }, index) => (
-              <li key={index}>
+            {socialLinks.map(({ ariaLabel, href, icon }) => (
+              <li>
                 <a
                   class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg p-2 inline-flex items-center"
                   aria-label={ariaLabel}

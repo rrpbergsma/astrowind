@@ -1,0 +1,57 @@
+---
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import { Icon } from 'astro-icon/components';
+import type { Features as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  items = [],
+  defaultIcon = 'tabler:point-filled',
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline 
+    title={title} 
+    subtitle={subtitle} 
+    tagline={tagline} 
+    classes={{
+      container: 'max-w-3xl',
+      title: 'text-3xl lg:text-4xl',
+    }}
+  />
+
+  <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {items.map(({ title, description, icon }) => (
+      <div class="group bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center mb-2">
+          <Icon name={icon || defaultIcon} class="w-5 h-5 mr-2 text-primary transition-transform duration-300 group-hover:scale-110" />
+          <h3 class="text-base font-semibold">{title}</h3>
+        </div>
+        <div class="text-muted overflow-hidden">
+          <p class="text-xs max-h-[8rem] hover:max-h-[300px] transition-all duration-500 ease-skills">{description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</WidgetWrapper>
+
+<style>
+  /* Custom easing function for skills expansion */
+  .ease-skills {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  /* Fade effect for the gradient overlay */
+  .hover\:opacity-0:hover {
+    opacity: 0;
+  }
+</style>

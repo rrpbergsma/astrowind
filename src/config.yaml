@@ -2,7 +2,7 @@ site:
   name: 365DevNet
   site: 'https://www.365devnet.eu'
   base: '/'
-  trailingSlash: false
+  trailingSlash: ignore
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
@@ -18,7 +18,7 @@ metadata:
   openGraph:
     site_name: 365DevNet
     images:
-      - url: '~/assets/images/default.png'
+      - url: '~/assets/images/richardbergsma.png'
         width: 1200
         height: 628
     type: website
@@ -38,7 +38,7 @@ apps:
 
     post:
       isEnabled: true
-      permalink: '/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      permalink: 'blog/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
       robots:
         index: true
 

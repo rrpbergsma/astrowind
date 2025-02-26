@@ -25,7 +25,7 @@ export default defineConfig({
   output: 'static',
 
   i18n: {
-    locales: ["en", "de", "nl"],
+    locales: ["en", "de", "nl", "fr"],
     defaultLocale: "en",
   },
 
@@ -67,7 +67,7 @@ export default defineConfig({
           removeAttributeQuotes: false,
         },
       },
-      Image: false,
+      Image: true,
       JavaScript: true,
       SVG: false,
       Logger: 1,

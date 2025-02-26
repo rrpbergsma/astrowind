@@ -1,0 +1,105 @@
+---
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Button from '~/components/ui/Button.astro';
+import ImageModal from '~/components/ui/ImageModal.astro';
+import type { Testimonials as Props } from '~/types';
+import DefaultImage from '~/assets/images/default.png';
+
+// Function to get the correct image path for a testimonial
+const getImagePath = (image: unknown) => {
+  if (typeof image === 'object' && image !== null && 'src' in image && typeof (image as { src: unknown }).src === 'string') {
+    // If the image has a src property, use it
+    return String((image as { src: string }).src);
+  }
+  // Otherwise, return the default image path
+  return DefaultImage.src;
+};
+
+// Function to get the alt text for an image
+const getImageAlt = (image: unknown, fallback: string = "Certification badge") => {
+  if (typeof image === 'object' && image !== null && 'alt' in image && typeof (image as { alt: unknown }).alt === 'string') {
+    return String((image as { alt: string }).alt);
+  }
+  return fallback;
+};
+
+const {
+  title = '',
+  subtitle = '',  
+  tagline = '',
+  testimonials = [],
+  callToAction,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={{
+    container: 'max-w-3xl',
+    title: 'text-3xl lg:text-4xl',
+  }} />
+
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+    {
+      testimonials &&
+        testimonials.map(({ linkUrl, name, issueDate, description, image }) => (
+          <div class="flex flex-col p-3 rounded-md shadow-md dark:shadow-none dark:border dark:border-slate-600 hover:shadow-lg transition-all duration-300 ease-in-out hover:bg-gray-50 dark:hover:bg-gray-800">
+            <div class="flex items-center mb-3">
+              <div
+                class="h-12 w-12 mr-3 flex-shrink-0 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center overflow-hidden cursor-pointer"
+                onclick={`window.openImageModal('${getImagePath(image)}', ${JSON.stringify(name || "Certification badge")})`}
+              >
+                <img
+                  src={getImagePath(image)}
+                  alt={getImageAlt(image, name || "Certification badge")}
+                  class="h-10 w-10 object-contain transition-transform duration-300 hover:scale-110"
+                />
+              </div>
+              <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="flex-1">
+                <div>
+                  {name && <p class="text-sm font-semibold line-clamp-2">{name}</p>}
+                  {issueDate && <p class="text-xs text-muted">{issueDate}</p>}
+                </div>
+              </a>
+            </div>
+            
+            <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="block">
+              <div class="text-xs text-muted overflow-hidden">
+                <div class="max-h-[8rem] hover:max-h-[300px] transition-all duration-500 ease-cert">
+                  {description}
+                </div>
+              </div>
+            </a>
+          </div>
+        ))
+    }
+  </div>
+
+  {/* Include the image modal component */}
+  <ImageModal />
+  
+  {
+    callToAction && (
+      <div class="flex justify-center mx-auto w-fit mt-8 font-medium">
+        <Button {...callToAction} />
+      </div>
+    )
+  }
+</WidgetWrapper>
+
+<style>
+  /* Custom easing function for certification description expansion */
+  .ease-cert {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  /* Fade effect for the gradient overlay */
+  .hover\:opacity-0:hover {
+    opacity: 0;
+  }
+</style>
