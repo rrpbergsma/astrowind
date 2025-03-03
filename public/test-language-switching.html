@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Switching Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .test-section {
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .test-button {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .test-button:hover {
+      background-color: #45a049;
+    }
+    .language-button {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 15px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .language-button:hover {
+      background-color: #0b7dda;
+    }
+    .result {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+    code {
+      background-color: #f1f1f1;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>Language Switching Test</h1>
+  
+  <div class="test-section">
+    <h2>Current URL Information</h2>
+    <div class="result" id="url-info">Loading...</div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Switch Language</h2>
+    <p>Click on a language to switch:</p>
+    <div>
+      <a href="#" class="language-button" data-lang="en">English</a>
+      <a href="#" class="language-button" data-lang="nl">Dutch</a>
+      <a href="#" class="language-button" data-lang="de">German</a>
+      <a href="#" class="language-button" data-lang="fr">French</a>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Test Hash Navigation</h2>
+    <p>Click on a section to navigate:</p>
+    <div>
+      <a href="#services" class="test-button">Services</a>
+      <a href="#contact" class="test-button">Contact</a>
+      <a href="#about" class="test-button">About</a>
+    </div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Test Page Navigation</h2>
+    <p>Navigate to different pages:</p>
+    <div>
+      <a href="/" class="test-button">Home</a>
+      <a href="/aboutme" class="test-button">About Me</a>
+    </div>
+  </div>
+
+  <script>
+    // Display current URL information
+    function updateUrlInfo() {
+      const url = new URL(window.location.href);
+      const pathSegments = url.pathname.split('/').filter(Boolean);
+      const currentLang = pathSegments[0] || 'none';
+      
+      const infoDiv = document.getElementById('url-info');
+      infoDiv.innerHTML = `
+        <p><strong>Full URL:</strong> ${url.href}</p>
+        <p><strong>Path:</strong> ${url.pathname}</p>
+        <p><strong>Hash:</strong> ${url.hash || 'none'}</p>
+        <p><strong>Current Language:</strong> ${currentLang}</p>
+        <p><strong>Path Segments:</strong> ${JSON.stringify(pathSegments)}</p>
+      `;
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUrlInfo();
+      
+      // Set up language buttons
+      document.querySelectorAll('.language-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = button.getAttribute('data-lang');
+          if (!lang) return;
+          
+          // Get current URL information
+          const currentUrl = new URL(window.location.href);
+          const currentPath = currentUrl.pathname.replace(/\/$/, '');
+          const currentHash = currentUrl.hash;
+          const pathSegments = currentPath.split('/').filter(Boolean);
+          
+          // Check if we're on a language-specific path
+          const supportedLanguages = ['en', 'nl', 'de', 'fr'];
+          const isLangPath = supportedLanguages.includes(pathSegments[0]);
+          
+          // Extract the page path without language
+          let pagePath = '';
+          if (isLangPath && pathSegments.length > 1) {
+            // If we're on a language-specific path, get everything after the language code
+            pagePath = `/${pathSegments.slice(1).join('/')}`;
+          } else if (!isLangPath && pathSegments.length > 0) {
+            // If we're not on a language-specific path, use the current path
+            pagePath = `/${pathSegments.join('/')}`;
+          }
+          
+          // Handle special case for root path
+          const isRootPath = pathSegments.length === 0 || (isLangPath && pathSegments.length === 1);
+          
+          // Construct the new URL
+          let newUrl = isRootPath ? `/${lang}` : `/${lang}${pagePath}`;
+          
+          // Append hash fragment if it exists
+          if (currentHash) {
+            newUrl += currentHash;
+          }
+          
+          // Navigate to the new URL
+          window.location.href = newUrl;
+        });
+      });
+      
+      // Update URL info when hash changes
+      window.addEventListener('hashchange', updateUrlInfo);
+    });
+  </script>
+</body>
+</html>

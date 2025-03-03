@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Persistence Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .language-status {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9f7ef;
+            border-radius: 4px;
+        }
+        .navigation-links {
+            margin-top: 20px;
+        }
+        .navigation-links a {
+            display: inline-block;
+            margin-right: 15px;
+            padding: 8px 16px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .navigation-links a:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <h1>Language Persistence Test</h1>
+    
+    <div class="test-section">
+        <h2>Current Language Status</h2>
+        <div class="language-status">
+            <p><strong>URL Language:</strong> <span id="url-language">Checking...</span></p>
+            <p><strong>LocalStorage Language:</strong> <span id="localstorage-language">Checking...</span></p>
+            <p><strong>Cookie Language:</strong> <span id="cookie-language">Checking...</span></p>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Language Selection</h2>
+        <p>Click on a language to test the language persistence:</p>
+        <div class="test-buttons">
+            <button onclick="changeLanguage('en')">English</button>
+            <button onclick="changeLanguage('nl')">Dutch</button>
+            <button onclick="changeLanguage('de')">German</button>
+            <button onclick="changeLanguage('fr')">French</button>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Navigation Test</h2>
+        <p>Use these links to test language persistence during navigation:</p>
+        <div class="navigation-links">
+            <a href="/" id="home-link">Home</a>
+            <a href="/aboutme" id="aboutme-link">About Me</a>
+        </div>
+    </div>
+    
+    <script>
+        // Function to get language from URL
+        function getLanguageFromURL() {
+            const pathSegments = window.location.pathname.split('/').filter(Boolean);
+            const supportedLanguages = ['en', 'nl', 'de', 'fr'];
+            if (pathSegments.length > 0 && supportedLanguages.includes(pathSegments[0])) {
+                return pathSegments[0];
+            }
+            return null;
+        }
+        
+        // Function to get language from localStorage
+        function getStoredLanguage() {
+            return localStorage.getItem('preferredLanguage');
+        }
+        
+        // Function to get language from cookie
+        function getLanguageFromCookie() {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith('preferredLanguage=')) {
+                    return cookie.substring('preferredLanguage='.length);
+                }
+            }
+            return null;
+        }
+        
+        // Function to update the language status display
+        function updateLanguageStatus() {
+            document.getElementById('url-language').textContent = getLanguageFromURL() || 'Not set';
+            document.getElementById('localstorage-language').textContent = getStoredLanguage() || 'Not set';
+            document.getElementById('cookie-language').textContent = getLanguageFromCookie() || 'Not set';
+        }
+        
+        // Function to change language
+        function changeLanguage(langCode) {
+            // Store language in localStorage
+            localStorage.setItem('preferredLanguage', langCode);
+            
+            // Store language in cookie
+            const expirationDate = new Date();
+            expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+            document.cookie = `preferredLanguage=${langCode}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Lax`;
+            
+            // Update the language status display
+            updateLanguageStatus();
+            
+            // Update navigation links with the selected language
+            updateNavigationLinks(langCode);
+            
+            // Dispatch a custom event for language change
+            const event = new CustomEvent('languageChanged', {
+                detail: {
+                    langCode,
+                    previousLangCode: getLanguageFromURL() || 'en',
+                    willReload: false
+                }
+            });
+            document.dispatchEvent(event);
+            
+            // Show a success message
+            alert(`Language changed to ${langCode}. Navigation links have been updated.`);
+        }
+        
+        // Function to update navigation links with the selected language
+        function updateNavigationLinks(langCode) {
+            const homeLink = document.getElementById('home-link');
+            const aboutmeLink = document.getElementById('aboutme-link');
+            
+            homeLink.href = `/${langCode}/`;
+            aboutmeLink.href = `/${langCode}/aboutme`;
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update the language status display
+            updateLanguageStatus();
+            
+            // Update navigation links with the current language
+            const currentLang = getStoredLanguage() || getLanguageFromCookie() || 'en';
+            updateNavigationLinks(currentLang);
+        });
+    </script>
+</body>
+</html>

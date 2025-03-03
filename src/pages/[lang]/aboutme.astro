@@ -1,0 +1,141 @@
+---
+export const prerender = false;
+import Layout from '~/layouts/PageLayout.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import CompactSteps from '~/components/widgets/CompactSteps.astro';
+import WorkExperience from '~/components/widgets/WorkExperience.astro';
+import CompactCertifications from '~/components/widgets/CompactCertifications.astro';
+import CompactSkills from '~/components/widgets/CompactSkills.astro';
+import HomePageImage from '~/assets/images/richardbergsma.png'
+
+import { getTranslation, supportedLanguages } from '~/i18n/translations';
+
+export async function getStaticPaths() {
+  return supportedLanguages.map(lang => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params;
+if (!supportedLanguages.includes(lang)) {
+  return Astro.redirect('/en/aboutme');
+}
+
+const t = getTranslation(lang);
+
+const metadata = {
+  title: 'About Me - ' + t.metadata.title,
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement"></Fragment>
+  
+  <!-- Person Structured Data for SEO -->
+  <StructuredData slot="structured-data" data={{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Richard Bergsma",
+    "jobTitle": "IT Systems and Automation Manager",
+    "description": t.hero.subtitle,
+    "image": Astro.url.origin + "/images/richardbergsma.png",
+    "url": Astro.url.origin,
+    "sameAs": [
+      "https://www.linkedin.com/in/rrpbergsma",
+      "https://github.com/rrpbergsma"
+    ],
+    "knowsAbout": t.skills.items.map(skill => skill.title),
+    "worksFor": {
+      "@type": "Organization",
+      "name": "COFRA Holding C.V.",
+      "location": "Amsterdam"
+    }
+  }} />
+
+  <!-- Hero Widget -->
+  <Hero
+    id="hero"
+    title="About Me"
+  >
+    <Fragment slot="subtitle">
+      <strong class="text-3xl md:text-4xl">{t.hero.greeting}</strong><br /><br />{t.hero.subtitle}
+    </Fragment>
+  </Hero>
+
+  <!-- Content Widget -->
+  <Content
+    id="about"
+    columns={2}
+    items={[]}
+    image={{
+      src: HomePageImage,
+      alt: 'Richard Bergsma smiling in the mountains of Switzerland holding Revella',
+      loading: 'lazy',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-2">{t.about.title}</h2>
+      {t.about.content.map((paragraph) => (
+        <p>{paragraph}</p>
+        <br />
+      ))}
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Work Experience - Modern Timeline Layout -->
+  <WorkExperience
+    id="resume"
+    title={t.resume.title}
+    compact={true}
+    items={t.resume.experience.map(exp => ({
+      title: exp.title,
+      company: exp.company,
+      date: exp.period,
+      location: exp.location,
+      description: exp.description,
+      icon: 'tabler:briefcase',
+    }))}
+  />
+
+  <!-- Certifications - Compact Layout -->
+  <CompactCertifications
+    id="certifications"
+    title={t.certifications.title}
+    subtitle={t.certifications.subtitle}
+    testimonials={t.certifications.items.map((cert) => ({
+      name: cert.name,
+      issueDate: cert.issueDate,
+      description: cert.description,
+      linkUrl: cert.linkUrl,
+      image: cert.image
+    }))}
+  />
+
+  <!-- Skills - Compact Layout -->
+  <CompactSkills
+    id="skills"
+    title={t.skills.title}
+    subtitle={t.skills.subtitle}
+    defaultIcon="tabler:point-filled"
+    items={t.skills.items.map(item => ({
+      title: item.title,
+      description: item.description,
+    }))}
+  />
+
+  <!-- Education - Compact Layout -->
+  <CompactSteps
+    id="education"
+    title={t.education.title}
+    items={t.education.items.map(item => ({
+      title: item.title,
+      icon: 'tabler:school'
+    }))}
+  />
+</Layout>

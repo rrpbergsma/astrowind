@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
+import { getFooterData } from '~/navigation';
 
 interface Link {
   text?: string;
@@ -17,13 +18,50 @@ interface Links {
 
 export interface Props {
   links?: Array<Links>;
-  secondaryLinks: Array<Link>;
-  socialLinks: Array<Link>;
+  secondaryLinks?: Array<Link>;
+  socialLinks?: Array<Link>;
   footNote?: string;
   theme?: string;
 }
 
-const { socialLinks = [], theme = 'light' } = Astro.props;
+import { supportedLanguages } from '~/i18n/translations';
+
+// Define the type for supported languages
+type SupportedLanguage = typeof supportedLanguages[number];
+
+// Get current language from URL
+const currentPath = `/${Astro.url.pathname.replace(/^\/+|\/+$/g, '')}`;
+const pathSegments = currentPath.split('/').filter(Boolean);
+
+// Check for language in URL path
+let currentLang = pathSegments[0] && supportedLanguages.includes(pathSegments[0] as SupportedLanguage)
+  ? pathSegments[0] as SupportedLanguage
+  : null;
+
+// If no language in URL, check cookies
+if (!currentLang) {
+  const cookies = Astro.request.headers.get('cookie') || '';
+  const cookieLanguage = cookies.split(';')
+    .map(cookie => cookie.trim())
+    .find(cookie => cookie.startsWith('preferredLanguage='))
+    ?.split('=')[1];
+  
+  if (cookieLanguage && supportedLanguages.includes(cookieLanguage as SupportedLanguage)) {
+    currentLang = cookieLanguage as SupportedLanguage;
+  } else {
+    // Default to English if no language is found
+    currentLang = 'en';
+  }
+}
+
+// Get translated footer data
+const footerData = getFooterData(currentLang);
+
+const {
+  secondaryLinks = footerData.secondaryLinks,
+  socialLinks = footerData.socialLinks,
+  theme = 'light'
+} = Astro.props;
 ---
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
@@ -38,13 +76,17 @@ const { socialLinks = [], theme = 'light' } = Astro.props;
       <!-- Site Title with Terms & Privacy Links -->
       <div class="flex flex-col items-start space-y-2">
         <!-- Site Title -->
-        <a class="inline-block font-bold text-xl" href={getHomePermalink()}>
+        <a class="inline-block font-bold text-xl" href={getHomePermalink(currentLang)}>
           {SITE?.name}
         </a>
 
         <!-- Terms & Privacy Policy Links -->
         <div class="flex items-center space-x-4 text-sm text-muted">
-          
+          {secondaryLinks.map(({ text, href }) => (
+            <a class="hover:text-gray-700 dark:hover:text-gray-200 transition duration-150 ease-in-out" href={href}>
+              {text}
+            </a>
+          ))}
         </div>
       </div>
 

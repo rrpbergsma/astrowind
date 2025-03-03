@@ -1,23 +1,13 @@
 ---
 export const prerender = false;
 import Layout from '~/layouts/PageLayout.astro';
-import Header from '~/components/widgets/Header.astro';
-import StructuredData from '~/components/common/StructuredData.astro';
-import Hero from '~/components/widgets/Hero.astro';
+import Hero from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
 import Content from '~/components/widgets/Content.astro';
-import CompactSteps from '~/components/widgets/CompactSteps.astro';
-import WorkExperience from '~/components/widgets/WorkExperience.astro';
-import CompactCertifications from '~/components/widgets/CompactCertifications.astro';
-import CompactSkills from '~/components/widgets/CompactSkills.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import HomePageImage from '~/assets/images/richardbergsma.png'
-
-import fetch from 'node-fetch';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Contact from '~/components/widgets/Contact.astro';
 import { getTranslation, supportedLanguages } from '~/i18n/translations';
-
-interface IpApiResponse {
-  countryCode: string;
-}
 
 export async function getStaticPaths() {
   return supportedLanguages.map(lang => ({
@@ -30,181 +20,212 @@ if (!supportedLanguages.includes(lang)) {
   return Astro.redirect('/en/');
 }
 
-// Geo-location based redirect
-if (Astro.request.headers.get('host') === '365devnet.nl') {
-  try {
-    const ip = Astro.clientAddress;
-    const response = await fetch(`http://ip-api.com/json/${ip}`);
-    const data = await response.json() as IpApiResponse;
-
-    if (data?.countryCode === 'NL') {
-      return Astro.redirect('/nl/');
-    }
-  } catch (error) {
-    console.error('Geo-location error:', error);
-    // Fallback: Redirect to default language (English)
-    return Astro.redirect('/en/');
-  }
-}
-
 const t = getTranslation(lang);
 
 const metadata = {
   title: t.metadata.title,
 };
-
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="announcement"></Fragment>
-  
-  <!-- Person Structured Data for SEO -->
-  <StructuredData slot="structured-data" data={{
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Richard Bergsma",
-    "jobTitle": "IT Systems and Automation Manager",
-    "description": t.hero.subtitle,
-    "image": Astro.url.origin + "/images/richardbergsma.png",
-    "url": Astro.url.origin,
-    "sameAs": [
-      "https://www.linkedin.com/in/rrpbergsma",
-      "https://github.com/rrpbergsma"
-    ],
-    "knowsAbout": t.skills.items.map(skill => skill.title),
-    "worksFor": {
-      "@type": "Organization",
-      "name": "COFRA Holding C.V.",
-      "location": "Amsterdam"
-    }
-  }} />
-  <Fragment slot="header">
-    <Header
-      links={[
-        { text: t.navigation.home, href: '#hero' },
-        { text: t.navigation.about, href: '#about' },
-        { text: t.navigation.resume, href: '#resume' },
-        { text: t.navigation.certifications, href: '#certifications' },
-        { text: t.navigation.skills, href: '#skills' },
-        { text: t.navigation.education, href: '#education' },
-        { text: t.navigation.blog, href: '#blog' },
-      ]}
-      isSticky
-      showToggleTheme
-    />
-  </Fragment>
-
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 50,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  </script>
-
   <!-- Hero Widget -->
   <Hero
-    id="hero"
+    tagline={t.navigation.home}
     title={t.hero.title}
-  >
-    <Fragment slot="subtitle">
-      <strong class="text-3xl md:text-4xl">{t.hero.greeting}</strong><br /><br />{t.hero.subtitle}
-    </Fragment>
-  </Hero>
+    subtitle={t.hero.subtitle}
+    actions={[
+      {
+        variant: 'primary',
+        text: t.homepage?.actions?.learnMore || 'Learn More',
+        href: '#services',
+        icon: 'tabler:arrow-down',
+      },
+      { text: t.homepage?.actions?.contactMe || 'Contact Me', href: '#contact' },
+    ]}
+    image={{
+      src: '~/assets/images/richardbergsma.png',
+      alt: 'Richard Bergsma - IT Systems and Automation Manager',
+    }}
+  />
+
+  <!-- Features Widget -->
+  <Features
+    id="services"
+    tagline={t.homepage?.services?.tagline || "Services"}
+    title={t.homepage?.services?.title || "How I Can Help Your Organization"}
+    subtitle={t.homepage?.services?.subtitle || "I offer a range of specialized IT services to help businesses optimize their operations and digital infrastructure."}
+    items={t.homepage?.services?.items || [
+      {
+        title: 'Workflow Automation',
+        description:
+          'Streamline your business processes with Power Automate solutions that reduce manual effort and increase operational efficiency.',
+        icon: 'tabler:settings-automation',
+      },
+      {
+        title: 'Intelligent Chatbots',
+        description:
+          'Develop smart chatbots in Copilot Studio that enhance user interactions through natural language processing and automated responses.',
+        icon: 'tabler:message-chatbot',
+      },
+      {
+        title: 'API Integrations',
+        description:
+          'Create seamless connections between your applications and services with custom API integrations for efficient data exchange.',
+        icon: 'tabler:api',
+      },
+      {
+        title: 'Microsoft 365 Management',
+        description:
+          'Optimize your Microsoft 365 environment with expert administration, security configurations, and service optimization.',
+        icon: 'tabler:brand-office',
+      },
+      {
+        title: 'SharePoint Solutions',
+        description:
+          'Set up, manage, and optimize SharePoint Online and on-premise deployments for effective document management and collaboration.',
+        icon: 'tabler:share',
+      },
+      {
+        title: 'IT Infrastructure Oversight',
+        description:
+          'Manage global IT infrastructures, including servers, networks, and end-user devices to ensure reliable operations.',
+        icon: 'tabler:server',
+      },
+    ].map(item => ({...item, icon: item.icon || 'tabler:check'}))}
+  />
 
   <!-- Content Widget -->
   <Content
-    id="about"
-    columns={2}
-    items={[]}
+    isReversed
+    tagline={t.homepage?.approach?.tagline || "About My Approach"}
+    title={t.homepage?.approach?.title || "Driving IT Excellence Through Innovation"}
+    items={t.homepage?.approach?.items || [
+      {
+        title: 'User-Centric Solutions',
+        description:
+          'I focus on creating solutions that enhance user experience and productivity, ensuring technology serves people effectively.',
+      },
+      {
+        title: 'Continuous Improvement',
+        description:
+          'I stay current with emerging technologies and best practices to deliver cutting-edge solutions that evolve with your needs.',
+      },
+      {
+        title: 'Strategic Implementation',
+        description:
+          'I approach each project strategically, aligning technical solutions with business objectives for maximum impact.',
+      },
+    ]}
     image={{
-      src: HomePageImage,
-      alt: 'Richard Bergsma smiling in the mountains of Switzerland holding Revella',
-      loading: 'lazy',
+      src: '~/assets/images/hero-image.png',
+      alt: 'Digital Transformation Image',
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-2">{t.about.title}</h2>
-      {t.about.content.map((paragraph) => (
-        <p>{paragraph}</p>
-        <br />
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        {t.homepage?.approach?.missionTitle || "Mission Statement"}
+      </h3>
+      {(t.homepage?.approach?.missionContent || [
+        'My mission is to drive IT excellence by optimizing cloud solutions, automating processes, and providing outstanding technical support. I believe in leveraging technology to solve real business challenges and create value through innovation.',
+        'With over 15 years of IT experience, I bring a wealth of knowledge in Microsoft technologies, automation tools, and system integration to help organizations transform their digital capabilities and achieve their strategic goals.'
+      ]).map((paragraph) => (
+        <>
+          <p>{paragraph}</p>
+          <br />
+        </>
       ))}
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </Content>
 
-  <!-- Work Experience - Modern Timeline Layout -->
-  <WorkExperience
-    id="resume"
-    title={t.resume.title}
-    compact={true}
-    items={t.resume.experience.map(exp => ({
-      title: exp.title,
-      company: exp.company,
-      date: exp.period,
-      location: exp.location,
-      description: exp.description,
-      icon: 'tabler:briefcase',
+  <!-- Testimonials Widget -->
+  <Testimonials
+    tagline={t.homepage?.testimonials?.tagline || "Testimonials"}
+    title={t.homepage?.testimonials?.title || "What Clients Say About My Work"}
+    testimonials={(t.homepage?.testimonials?.items || [
+      {
+        testimonial:
+          "Richard's expertise in Power Automate transformed our workflow processes, saving us countless hours and reducing errors significantly.",
+        name: 'Client Name',
+        description: 'Position, Company',
+      },
+      {
+        testimonial:
+          "The SharePoint implementation Richard delivered has revolutionized our document management and team collaboration capabilities.",
+        name: 'Client Name',
+        description: 'Position, Company',
+      },
+      {
+        testimonial:
+          "Richard's technical knowledge combined with his ability to understand our business needs resulted in solutions that truly addressed our challenges.",
+        name: 'Client Name',
+        description: 'Position, Company',
+      },
+    ]).map(item => ({
+      ...item,
+      image: {
+        src: '~/assets/images/default.png',
+        alt: item.name,
+      }
     }))}
   />
 
-  <!-- Certifications - Compact Layout -->
-  <CompactCertifications
-    id="certifications"
-    title={t.certifications.title}
-    subtitle={t.certifications.subtitle}
-    testimonials={t.certifications.items.map((cert) => ({
-      name: cert.name,
-      issueDate: cert.issueDate,
-      description: cert.description,
-      linkUrl: cert.linkUrl,
-      image: cert.image
-    }))}
-  />
-
-  <!-- Skills - Compact Layout -->
-  <CompactSkills
-    id="skills"
-    title={t.skills.title}
-    subtitle={t.skills.subtitle}
-    defaultIcon="tabler:point-filled"
-    items={t.skills.items.map(item => ({
-      title: item.title,
-      description: item.description,
-    }))}
-  />
-
-  <!-- Education - Compact Layout -->
-  <CompactSteps
-    id="education"
-    title={t.education.title}
-    items={t.education.items.map(item => ({
-      title: item.title,
-      icon: 'tabler:school'
-    }))}
-  />
-
-  <!-- BlogLatestPost Widget -->
-  <BlogLatestPosts
-    id="blog"
-    title={t.blog.title}
-    information={t.blog.information}
+  <!-- CallToAction Widget -->
+  <CallToAction
+    callToAction={{
+      text: t.homepage?.callToAction?.button || 'Contact Me',
+      href: '#contact',
+      icon: 'tabler:mail',
+    }}
   >
-    <Fragment slot="bg">
-      <div class="absolute inset-0"></div>
+    <Fragment slot="title">{t.homepage?.callToAction?.title || 'Ready to optimize your IT systems?'}</Fragment>
+    <Fragment slot="subtitle">
+      {t.homepage?.callToAction?.subtitle || 'Let\'s discuss how I can help your organization streamline processes, enhance collaboration, and drive digital transformation.'}
     </Fragment>
-  </BlogLatestPosts>
+  </CallToAction>
+
+  <!-- Contact Widget -->
+  <Contact
+    id="contact"
+    title={t.homepage?.contact?.title || "Get in Touch"}
+    subtitle={t.homepage?.contact?.subtitle || "Have a project in mind or questions about my services? Reach out and let's start a conversation."}
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: t.homepage?.contact?.nameLabel || 'Name',
+        placeholder: t.homepage?.contact?.namePlaceholder || 'Your name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: t.homepage?.contact?.emailLabel || 'Email',
+        placeholder: t.homepage?.contact?.emailPlaceholder || 'Your email address',
+      },
+    ]}
+    textarea={{
+      label: t.homepage?.contact?.messageLabel || 'Message',
+      placeholder: t.homepage?.contact?.messagePlaceholder || 'Your message',
+      rows: 8,
+    }}
+    disclaimer={{
+      label: t.homepage?.contact?.disclaimer ||
+        'By submitting this form, you agree to our privacy policy and allow us to use your information to contact you about our services.',
+    }}
+    description={t.homepage?.contact?.description || "I'll respond to your message as soon as possible. You can also connect with me on LinkedIn or GitHub."}
+  />
+
+  <div class="flex justify-center space-x-4 mt-8 mb-12">
+    <a href="https://www.linkedin.com/in/rrpbergsma" class="text-gray-500 hover:text-blue-600" target="_blank" rel="noopener noreferrer">
+      <span class="sr-only">LinkedIn</span>
+      <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.454C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+      </svg>
+    </a>
+    <a href="https://github.com/rrpbergsma" class="text-gray-500 hover:text-gray-900 dark:hover:text-white" target="_blank" rel="noopener noreferrer">
+      <span class="sr-only">GitHub</span>
+      <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+      </svg>
+    </a>
+  </div>
 </Layout>

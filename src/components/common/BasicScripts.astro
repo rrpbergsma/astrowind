@@ -159,6 +159,205 @@ import { UI } from 'astrowind:config';
     onLoad();
     onPageShow();
   });
+
+  // Handle smooth scrolling for anchor links across all pages
+  function setupSmoothScrolling() {
+    // Handle links that start with # (pure anchor links)
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 50, // Offset for header
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Handle links that contain # but don't start with it (page + anchor)
+    document.querySelectorAll('a[href*="#"]:not([href^="#"])').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        const isHashLink = this.getAttribute('data-hash-link') === 'true';
+        
+        // Check if this is a link to the current page
+        // First, extract the path part (before the hash)
+        const hrefPath = href.split('#')[0];
+        const currentPath = window.location.pathname;
+        
+        // Consider it's the current page if:
+        // 1. The path matches exactly
+        // 2. The href is just a hash (like '/#services')
+        // 3. The href path is '/' and we're on the homepage
+        const isCurrentPage =
+          currentPath === hrefPath ||
+          hrefPath === '' ||
+          (hrefPath === '/' && (currentPath === '/' || currentPath.endsWith('/index.html')));
+        
+        // For hash links, we want to update the URL and scroll to the element
+        if (isHashLink || isCurrentPage) {
+          e.preventDefault();
+          
+          const hashIndex = href.indexOf('#');
+          if (hashIndex !== -1) {
+            const targetId = href.substring(hashIndex + 1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              // Update the URL with the hash fragment
+              history.pushState(null, null, href);
+              
+              window.scrollTo({
+                top: targetElement.offsetTop - 50, // Offset for header
+                behavior: 'smooth'
+              });
+            } else {
+              // If the target element doesn't exist on the current page, navigate to the page
+              window.location.href = href;
+            }
+          } else {
+            // If there's no hash fragment, just navigate to the page
+            window.location.href = href;
+          }
+        }
+      });
+    });
+  }
+
+  // Handle language changes and hash navigation
+  function setupLanguageNavigation() {
+    // Initialize language preference from localStorage or default to 'en'
+    function getStoredLanguage() {
+      return localStorage.getItem('preferredLanguage') || 'en';
+    }
+
+    // Store language preference in localStorage
+    function storeLanguagePreference(langCode) {
+      localStorage.setItem('preferredLanguage', langCode);
+      console.log('Language preference stored:', langCode);
+    }
+
+    // Function to update URLs with the current language
+    function updateUrlsWithLanguage() {
+      const currentLang = getStoredLanguage();
+      const supportedLanguages = ['en', 'nl', 'de', 'fr'];
+      
+      // Update all internal links to include the language prefix
+      document.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        // Skip hash-only links (e.g., "#services")
+        if (href.startsWith('#')) {
+          return;
+        }
+        
+        // Extract hash fragment if present
+        let hashFragment = '';
+        let pathWithoutHash = href;
+        
+        if (href.includes('#')) {
+          const parts = href.split('#');
+          pathWithoutHash = parts[0];
+          hashFragment = '#' + parts[1];
+        }
+        
+        // Parse the URL path (without hash) to check for existing language code
+        const pathSegments = pathWithoutHash.split('/').filter(Boolean);
+        const hasLanguagePrefix = pathSegments.length > 0 && supportedLanguages.includes(pathSegments[0]);
+        
+        // If it already has a language prefix but it's different from the current language,
+        // update it to the current language
+        if (hasLanguagePrefix && pathSegments[0] !== currentLang) {
+          // Replace the existing language prefix with the current one
+          pathSegments[0] = currentLang;
+          const newPath = '/' + pathSegments.join('/');
+          
+          // Set the new href with the hash fragment (if any)
+          link.setAttribute('href', newPath + hashFragment);
+          return;
+        }
+        
+        // If it doesn't have a language prefix, add the current language
+        if (!hasLanguagePrefix) {
+          // Create the new path with the language prefix
+          const newPath = pathWithoutHash === '/' ?
+            `/${currentLang}` :
+            `/${currentLang}${pathWithoutHash}`;
+          
+          // Set the new href with the hash fragment (if any)
+          link.setAttribute('href', newPath + hashFragment);
+        }
+      });
+    }
+
+    // Listen for the custom languageChanged event
+    document.addEventListener('languageChanged', (event) => {
+      // Store the selected language in localStorage
+      if (event.detail && event.detail.langCode) {
+        storeLanguagePreference(event.detail.langCode);
+        console.log('Language changed:', event.detail);
+        
+        // Always update all internal links with the new language
+        // regardless of whether we're doing a full page reload
+        updateUrlsWithLanguage();
+      }
+    });
+    
+    // Process links when the page loads
+    updateUrlsWithLanguage();
+    
+    // Process links after client-side navigation
+    document.addEventListener('astro:page-load', () => {
+      // Short delay to ensure DOM is fully updated
+      setTimeout(updateUrlsWithLanguage, 0);
+    });
+    
+    // Also update links when the DOM content is loaded
+    document.addEventListener('DOMContentLoaded', updateUrlsWithLanguage);
+
+    // Check for hash in URL on page load and scroll to it
+    function scrollToHashOnLoad() {
+      if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          // Use setTimeout to ensure the page has fully loaded
+          setTimeout(() => {
+            window.scrollTo({
+              top: targetElement.offsetTop - 50, // Offset for header
+              behavior: 'smooth'
+            });
+          }, 100);
+        }
+      }
+    }
+    
+    scrollToHashOnLoad();
+
+    // Make language functions available globally
+    window.languageUtils = {
+      getStoredLanguage,
+      storeLanguagePreference
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setupSmoothScrolling();
+    setupLanguageNavigation();
+  });
+
+  // Re-attach event listeners after page transitions
+  document.addEventListener('astro:after-swap', () => {
+    setupSmoothScrolling();
+    setupLanguageNavigation();
+  });
 </script>
 
 <script is:inline>

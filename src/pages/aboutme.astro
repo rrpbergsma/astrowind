@@ -27,6 +27,6 @@ const preferredLanguage =
 const url = new URL(Astro.request.url);
 const hash = url.hash;
 
-// Redirect to the language-specific homepage
-return Astro.redirect(`/${preferredLanguage}/${hash}`);
+// Redirect to the language-specific about me page
+return Astro.redirect(`/${preferredLanguage}/aboutme${hash}`);
 ---

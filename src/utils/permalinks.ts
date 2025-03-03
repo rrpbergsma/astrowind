@@ -10,7 +10,7 @@ const createPath = (...params: string[]) => {
     .map((el) => trimSlash(el))
     .filter((el) => !!el)
     .join('/');
-  return '/' + paths + (SITE.trailingSlash && paths ? '/' : '');
+  return '/' + paths + (SITE.trailingSlash && paths && !paths.includes('#') ? '/' : '');
 };
 
 const BASE_PATHNAME = SITE.base || '/';
@@ -29,36 +29,50 @@ export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${
 
 /** */
 export const getCanonical = (path = ''): string | URL => {
-  const url = String(new URL(path, SITE.site));
+  let url = String(new URL(path, SITE.site));
   if (SITE.trailingSlash == false && path && url.endsWith('/')) {
-    return url.slice(0, -1);
+    url = url.slice(0, -1);
   } else if (SITE.trailingSlash == true && path && !url.endsWith('/')) {
-    return url + '/';
+    url = url + '/';
+  }
+  if (url.endsWith('/')) {
+    url = url.slice(0, -1);
   }
   return url;
 };
 
 /** */
-export const getPermalink = (slug = '', type = 'page'): string => {
+export const getPermalink = (slug = '', type = 'page', lang = ''): string => {
+  if (slug.startsWith('#')) {
+    return slug;
+  }
+
   let permalink: string;
 
   if (
     slug.startsWith('https://') ||
     slug.startsWith('http://') ||
     slug.startsWith('://') ||
-    slug.startsWith('#') ||
     slug.startsWith('javascript:')
   ) {
     return slug;
   }
+  
+  // Extract hash fragment if present
+  let hashFragment = '';
+  if (slug.includes('#')) {
+    const parts = slug.split('#');
+    slug = parts[0];
+    hashFragment = '#' + parts[1];
+  }
 
   switch (type) {
     case 'home':
-      permalink = getHomePermalink();
+      permalink = getHomePermalink(lang);
       break;
 
     case 'blog':
-      permalink = getBlogPermalink();
+      permalink = getBlogPermalink(lang);
       break;
 
     case 'asset':
@@ -83,14 +97,15 @@ export const getPermalink = (slug = '', type = 'page'): string => {
       break;
   }
 
-  return definitivePermalink(permalink);
+  // Append hash fragment after creating the permalink
+  return definitivePermalink(permalink, lang) + hashFragment;
 };
 
 /** */
-export const getHomePermalink = (): string => getPermalink('/');
+export const getHomePermalink = (lang = ''): string => getPermalink('/', 'page', lang);
 
 /** */
-export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
+export const getBlogPermalink = (lang = ''): string => getPermalink(BLOG_BASE, 'page', lang);
 
 /** */
 export const getAsset = (path: string): string =>
@@ -101,7 +116,22 @@ export const getAsset = (path: string): string =>
     .join('/');
 
 /** */
-const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
+const definitivePermalink = (permalink: string, lang = ''): string => {
+  // Don't add language prefix to hash-only links
+  if (permalink.startsWith('#')) {
+    return permalink;
+  }
+  
+  // Don't add language prefix to external links
+  if (permalink.startsWith('http://') || permalink.startsWith('https://') || permalink.startsWith('//')) {
+    return permalink;
+  }
+  
+  if (lang && ['en', 'nl', 'de', 'fr'].includes(lang)) {
+    return createPath(BASE_PATHNAME, lang, permalink);
+  }
+  return createPath(BASE_PATHNAME, permalink);
+};
 
 /** */
 export const applyGetPermalinks = (menu: object = {}) => {

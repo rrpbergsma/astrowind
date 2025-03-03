@@ -1,0 +1,112 @@
+---
+// This component handles the synchronization between localStorage and cookies
+// for language persistence across page loads and navigation
+
+// Extend Window interface to include languageUtils
+declare global {
+  interface Window {
+    languageUtils?: {
+      getStoredLanguage: () => string | null;
+      storeLanguagePreference: (langCode: string) => void;
+    };
+  }
+}
+---
+
+<script>
+  function setupLanguagePersistence() {
+    // Function to get language from localStorage
+    function getStoredLanguage() {
+      return localStorage.getItem('preferredLanguage');
+    }
+
+    // Function to set a cookie with the language preference
+    function setLanguageCookie(langCode) {
+      // Set cookie with a long expiration (1 year)
+      const expirationDate = new Date();
+      expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+      document.cookie = `preferredLanguage=${langCode}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Lax`;
+    }
+
+    // Function to get language from cookie
+    function getLanguageFromCookie() {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith('preferredLanguage=')) {
+          return cookie.substring('preferredLanguage='.length);
+        }
+      }
+      return null;
+    }
+
+    // Function to get language from URL
+    function getLanguageFromURL() {
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      const supportedLanguages = ['en', 'nl', 'de', 'fr'];
+      if (pathSegments.length > 0 && supportedLanguages.includes(pathSegments[0])) {
+        return pathSegments[0];
+      }
+      return null;
+    }
+
+    // On page load, sync language between URL, localStorage and cookie
+    const urlLanguage = getLanguageFromURL();
+    const storedLanguage = getStoredLanguage();
+    const cookieLanguage = getLanguageFromCookie();
+
+    // URL language takes precedence if it exists
+    if (urlLanguage) {
+      // If URL has a language, make sure localStorage and cookie match it
+      if (!storedLanguage || storedLanguage !== urlLanguage) {
+        localStorage.setItem('preferredLanguage', urlLanguage);
+      }
+      if (!cookieLanguage || cookieLanguage !== urlLanguage) {
+        setLanguageCookie(urlLanguage);
+      }
+    } else if (storedLanguage && !cookieLanguage) {
+      // If language is in localStorage but not in cookie, update cookie
+      setLanguageCookie(storedLanguage);
+    } else if (!storedLanguage && cookieLanguage) {
+      // If language is in cookie but not in localStorage, update localStorage
+      localStorage.setItem('preferredLanguage', cookieLanguage);
+    } else if (storedLanguage && cookieLanguage && storedLanguage !== cookieLanguage) {
+      // If both exist but are different, prefer localStorage
+      setLanguageCookie(storedLanguage);
+    }
+
+    // Listen for language changes and update the cookie
+    document.addEventListener('languageChanged', (event: CustomEvent) => {
+      if (event.detail && event.detail.langCode) {
+        setLanguageCookie(event.detail.langCode);
+        localStorage.setItem('preferredLanguage', event.detail.langCode);
+      }
+    });
+
+    // When localStorage changes (e.g., from another tab), update the cookie
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'preferredLanguage' && event.newValue) {
+        setLanguageCookie(event.newValue);
+      }
+    });
+
+    // Make language utility functions available globally
+    window.languageUtils = {
+      getStoredLanguage: getStoredLanguage,
+      storeLanguagePreference: (langCode) => {
+        localStorage.setItem('preferredLanguage', langCode);
+        setLanguageCookie(langCode);
+      }
+    };
+  }
+
+  // Run setup when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupLanguagePersistence);
+  } else {
+    setupLanguagePersistence();
+  }
+
+  // Re-run setup when the page content is updated (e.g., after navigation)
+  document.addEventListener('astro:page-load', setupLanguagePersistence);
+</script>

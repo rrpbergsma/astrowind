@@ -8,6 +8,7 @@ import LanguageDropdown from '~/components/LanguageDropdown.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
+import { getHeaderData } from '~/navigation';
 
 interface Link {
   text?: string;
@@ -18,6 +19,7 @@ interface Link {
 
 interface MenuLink extends Link {
   links?: Array<MenuLink>;
+  isHashLink?: boolean;
 }
 
 export interface Props {
@@ -31,9 +33,42 @@ export interface Props {
   position?: string;
 }
 
+import { supportedLanguages } from '~/i18n/translations';
+
+// Get current language from URL
+const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const pathSegments = currentPath.split('/').filter(Boolean);
+
+// Define the type for supported languages
+type SupportedLanguage = typeof supportedLanguages[number];
+
+// Check for language in URL path
+let currentLang = pathSegments[0] && supportedLanguages.includes(pathSegments[0] as SupportedLanguage)
+  ? pathSegments[0] as SupportedLanguage
+  : null;
+
+// If no language in URL, check cookies
+if (!currentLang) {
+  const cookies = Astro.request.headers.get('cookie') || '';
+  const cookieLanguage = cookies.split(';')
+    .map(cookie => cookie.trim())
+    .find(cookie => cookie.startsWith('preferredLanguage='))
+    ?.split('=')[1];
+  
+  if (cookieLanguage && supportedLanguages.includes(cookieLanguage as SupportedLanguage)) {
+    currentLang = cookieLanguage as SupportedLanguage;
+  } else {
+    // Default to English if no language is found
+    currentLang = 'en';
+  }
+}
+
+// Get translated header data
+const headerData = getHeaderData(currentLang);
+
 const {
   id = 'header',
-  links = [],
+  links = headerData.links,
   isSticky = false,
   isDark = false,
   isFullWidth = false,
@@ -41,8 +76,6 @@ const {
   showRssFeed = false,
   position = 'center',
 } = Astro.props;
-
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
 
 <header
@@ -107,7 +140,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                     <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
                   </button>
                   <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
-                    {links.map(({ text: text2, href: href2 }) => (
+                    {links.map(({ text: text2, href: href2, isHashLink }) => (
                       <li>
                         <a
                           class:list={[
@@ -115,6 +148,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                             { 'aw-link-active': href2 === currentPath },
                           ]}
                           href={href2}
+                          data-hash-link={isHashLink ? 'true' : undefined}
                         >
                           {text2}
                         </a>
@@ -129,6 +163,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                     { 'aw-link-active': href === currentPath },
                   ]}
                   href={href}
+                  data-hash-link={href?.includes('#') ? 'true' : undefined}
                 >
                   {text}
                 </a>

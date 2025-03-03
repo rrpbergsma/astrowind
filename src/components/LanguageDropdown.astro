@@ -1,13 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { supportedLanguages } from '~/i18n/translations';
 
 interface Props {
   currentLang: string;
 }
 
 const { currentLang } = Astro.props;
-
-import { supportedLanguages } from '~/i18n/translations';
 
 type SupportedLanguage = typeof supportedLanguages[number];
 
@@ -121,13 +120,13 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
   }
 </style>
 
-<script>
+<script define:vars={{ supportedLanguages }}>
   function setupLanguageDropdown() {
-    const button = document.querySelector<HTMLButtonElement>('#menu-button');
-    const menu = document.querySelector<HTMLDivElement>('#language-menu');
-    const chevronIcon = document.querySelector<HTMLElement>('#chevron-icon');
-    const selectedLanguageText = document.querySelector<HTMLElement>('#selected-language');
-    const languageButtons = document.querySelectorAll<HTMLButtonElement>('[data-lang-code]');
+    const button = document.querySelector('#menu-button');
+    const menu = document.querySelector('#language-menu');
+    const chevronIcon = document.querySelector('#chevron-icon');
+    const selectedLanguageText = document.querySelector('#selected-language');
+    const languageButtons = document.querySelectorAll('[data-lang-code]');
 
     if (!button || !menu || !chevronIcon || !selectedLanguageText) {
       return;
@@ -184,7 +183,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     closeMenu();
 
     // Toggle menu
-    button.addEventListener('click', (e: MouseEvent) => {
+    button.addEventListener('click', (e) => {
       e.stopPropagation();
       if (isOpen) {
         closeMenu();
@@ -193,7 +192,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         // Focus the first menu item for better keyboard navigation
         const firstMenuItem = menu.querySelector('button[role="menuitem"]');
         if (firstMenuItem) {
-          (firstMenuItem as HTMLElement).focus();
+          firstMenuItem.focus();
         }
       }
     });
@@ -205,7 +204,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         if (!langCode) return;
 
         // Update button text and icon
-        const langName = langButton.textContent?.trim();
+        const langName = langButton.textContent ? langButton.textContent.trim() : '';
         const flagIcon = langButton.querySelector('svg');
         if (langName && flagIcon) {
           selectedLanguageText.textContent = langName;
@@ -218,27 +217,84 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         // Close menu
         closeMenu();
 
-        // Get current path and redirect
-        const currentPath = window.location.pathname.replace(/\/$/, '');
+        // Get current URL information
+        const currentUrl = new URL(window.location.href);
+        const currentPath = currentUrl.pathname.replace(/\/$/, '');
+        const currentHash = currentUrl.hash;
         const pathSegments = currentPath.split('/').filter(Boolean);
-        const isBlogPost = pathSegments.length > 0 && !['en', 'nl', 'de'].includes(pathSegments[0]);
-        const pathWithoutLang = pathSegments.length > 1 ? `/${pathSegments.slice(1).join('/')}`.replace(/\/$/, '') : '';
         
-        // Redirect to new language path
-        window.location.href = isBlogPost ? `/${langCode}` : `/${langCode}${pathWithoutLang || ''}`;
+        // Check if we're on a language-specific path
+        const isLangPath = supportedLanguages.includes(pathSegments[0]);
+        
+        // Get the previous language code
+        const previousLangCode = isLangPath ? pathSegments[0] : 'en';
+        
+        // Extract the page path without language
+        let pagePath = '';
+        if (isLangPath && pathSegments.length > 1) {
+          // If we're on a language-specific path, get everything after the language code
+          pagePath = `/${pathSegments.slice(1).join('/')}`;
+        } else if (!isLangPath && pathSegments.length > 0) {
+          // If we're not on a language-specific path, use the current path
+          pagePath = `/${pathSegments.join('/')}`;
+        }
+        
+        // Handle special case for root path
+        const isRootPath = pathSegments.length === 0 || (isLangPath && pathSegments.length === 1);
+        
+        // Construct the new URL
+        let newUrl = isRootPath ? `/${langCode}` : `/${langCode}${pagePath}`;
+        
+        // Clean up any potential double slashes
+        newUrl = newUrl.replace(/\/+/g, '/');
+        
+        // Append hash fragment if it exists
+        if (currentHash) {
+          newUrl += currentHash;
+        }
+        
+        // Store the language preference in localStorage and cookies
+        if (window.languageUtils) {
+          window.languageUtils.storeLanguagePreference(langCode);
+        } else {
+          // Fallback if languageUtils is not available
+          localStorage.setItem('preferredLanguage', langCode);
+          
+          // Also set a cookie for server-side detection
+          const expirationDate = new Date();
+          expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+          document.cookie = `preferredLanguage=${langCode}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Lax`;
+        }
+        
+        // Dispatch the language changed event
+        const reloadEvent = new CustomEvent('languageChanged', {
+          detail: {
+            langCode,
+            previousLangCode,
+            path: newUrl,
+            willReload: true
+          }
+        });
+        document.dispatchEvent(reloadEvent);
+        
+        // Construct the full URL
+        const newFullUrl = `${window.location.origin}${newUrl}`;
+        
+        // Reload the page to ensure all content is updated to the new language
+        window.location.href = newFullUrl;
       });
     });
 
     // Close when clicking outside
-    document.addEventListener('click', (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+    document.addEventListener('click', (e) => {
+      const target = e.target;
       if (isOpen && !menu.contains(target) && !button.contains(target)) {
         closeMenu();
       }
     });
 
     // Handle keyboard navigation
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen) {
         closeMenu();
         button.focus();
@@ -257,7 +313,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
           newIndex = currentIndex > 0 ? currentIndex - 1 : menuItems.length - 1;
         }
         
-        (menuItems[newIndex] as HTMLElement).focus();
+        menuItems[newIndex].focus();
       }
     });
   }
@@ -271,4 +327,10 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
 
   // Re-run setup when the page content is updated (e.g., after navigation)
   document.addEventListener('astro:page-load', setupLanguageDropdown);
+  
+  // Listen for popstate events (browser back/forward buttons)
+  window.addEventListener('popstate', (_event) => {
+    // No need to manually update anything here as the browser will
+    // automatically load the correct URL, and Astro will handle the rendering
+  });
 </script>
