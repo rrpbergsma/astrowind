@@ -8,7 +8,7 @@ interface AdminNotificationProps {
 }
 
 export function getAdminNotificationSubject(): string {
-  return 'New Contact Form Submission from bergsma.it';
+  return `New Contact Form Submission from ${process.env.WEBSITE_NAME || '365devnet.eu'}`;
 }
 
 export function getAdminNotificationHtml(props: AdminNotificationProps): string {

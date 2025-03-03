@@ -7,17 +7,17 @@ interface UserConfirmationProps {
   contactEmail?: string;
 }
 
-export function getUserConfirmationSubject(websiteName: string = 'bergsma.it'): string {
+export function getUserConfirmationSubject(websiteName: string = process.env.WEBSITE_NAME || '365devnet.eu'): string {
   return `Thank you for contacting ${websiteName}`;
 }
 
 export function getUserConfirmationHtml(props: UserConfirmationProps): string {
-  const { 
-    name, 
-    message, 
-    submittedAt, 
-    websiteName = 'bergsma.it', 
-    contactEmail = 'richard@bergsma.it' 
+  const {
+    name,
+    message,
+    submittedAt,
+    websiteName = process.env.WEBSITE_NAME || '365devnet.eu',
+    contactEmail = process.env.ADMIN_EMAIL || 'richard@bergsma.it'
   } = props;
   
   return `
@@ -92,12 +92,12 @@ export function getUserConfirmationHtml(props: UserConfirmationProps): string {
 }
 
 export function getUserConfirmationText(props: UserConfirmationProps): string {
-  const { 
-    name, 
-    message, 
-    submittedAt, 
-    websiteName = 'bergsma.it', 
-    contactEmail = 'richard@bergsma.it' 
+  const {
+    name,
+    message,
+    submittedAt,
+    websiteName = process.env.WEBSITE_NAME || '365devnet.eu',
+    contactEmail = process.env.ADMIN_EMAIL || 'richard@bergsma.it'
   } = props;
   
   return `

@@ -5,6 +5,16 @@ import Button from '~/components/ui/Button.astro';
 const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
 ---
 
+<style>
+  /* Checkbox error styling */
+  .checkbox-error {
+    border: 2px solid #ef4444;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(239, 68, 68, 0.05);
+  }
+</style>
+
 <form id="contact-form" action="/api/contact" method="POST" class="needs-validation" novalidate>
   
   <!-- Form status messages -->
@@ -13,7 +23,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
   </div>
   
   <div id="form-error" class="hidden mb-6 p-4 bg-red-100 border border-red-200 text-red-700 rounded-lg">
-    There was an error sending your message. Please try again.
+    There was an error sending your message. Please check all fields and try again.
   </div>
   
   <!-- CSRF Token - Will be populated via JavaScript -->

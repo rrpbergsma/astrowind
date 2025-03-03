@@ -162,20 +162,26 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       errors.csrf = 'Invalid or expired security token. Please refresh the page and try again.';
     }
     
-    if (!name || name.length < 2) {
-      errors.name = 'Name is required and must be at least 2 characters';
+    if (!name) {
+      errors.name = 'Please enter your name';
+    } else if (name.length < 2) {
+      errors.name = 'Your name must be at least 2 characters long';
     }
     
-    if (!email || !isValidEmail(email)) {
-      errors.email = 'A valid email address is required';
+    if (!email) {
+      errors.email = 'Please enter your email address';
+    } else if (!isValidEmail(email)) {
+      errors.email = 'Please enter a valid email address (e.g., name@example.com)';
     }
     
-    if (!message || message.length < 10) {
-      errors.message = 'Message is required and must be at least 10 characters';
+    if (!message) {
+      errors.message = 'Please enter your message';
+    } else if (message.length < 10) {
+      errors.message = 'Your message must be at least 10 characters long';
     }
     
     if (!disclaimer) {
-      errors.disclaimer = 'You must agree to the disclaimer';
+      errors.disclaimer = 'Please check the required consent box before submitting';
     }
     
     // Check for spam

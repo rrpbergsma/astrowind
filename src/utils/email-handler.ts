@@ -13,11 +13,12 @@ const {
   SMTP_PASS = '',
   ADMIN_EMAIL = 'richard@bergsma.it',
   WEBSITE_NAME = 'bergsma.it',
-  NODE_ENV = 'development'
+  NODE_ENV = 'production'
 } = process.env;
 
 // Email configuration
-const isProduction = NODE_ENV === 'production';
+// Force production mode for testing
+const isProduction = true; // NODE_ENV === 'production';
 
 // Create a transporter for sending emails
 let transporter: nodemailer.Transporter;
@@ -30,6 +31,15 @@ function initializeTransporter() {
     // ProtonMail specific configuration
     // ProtonMail often requires using their Bridge application for SMTP
     const isProtonMail = SMTP_HOST.includes('protonmail');
+    
+    // Log the email configuration
+    console.log('Initializing email transporter with:');
+    console.log(`SMTP Host: ${SMTP_HOST}`);
+    console.log(`SMTP Port: ${SMTP_PORT}`);
+    console.log(`SMTP User: ${SMTP_USER}`);
+    console.log(`Admin Email: ${ADMIN_EMAIL}`);
+    console.log(`Website Name: ${WEBSITE_NAME}`);
+    console.log(`Environment: ${NODE_ENV}`);
     
     transporter = nodemailer.createTransport({
       host: SMTP_HOST,
@@ -179,8 +189,13 @@ export async function sendEmail(
   }
   
   try {
+    // Ensure from address matches SMTP_USER for ProtonMail
+    const fromAddress = isProduction ?
+      `"${WEBSITE_NAME}" <${SMTP_USER}>` :
+      `"${WEBSITE_NAME}" <${ADMIN_EMAIL}>`;
+    
     const mailOptions = {
-      from: `"${WEBSITE_NAME}" <${ADMIN_EMAIL}>`,
+      from: fromAddress,
       to,
       subject,
       html,
@@ -188,7 +203,7 @@ export async function sendEmail(
     };
     
     console.log('Mail options:', {
-      from: `"${WEBSITE_NAME}" <${ADMIN_EMAIL}>`,
+      from: fromAddress,
       to,
       subject,
       textLength: text.length,
@@ -198,6 +213,15 @@ export async function sendEmail(
     console.log('Sending email via transporter');
     const info = await transporter.sendMail(mailOptions);
     console.log('Email sent, info:', info.messageId);
+    
+    // Log additional information in production mode
+    if (isProduction) {
+      console.log('Email delivery details:', {
+        messageId: info.messageId,
+        response: info.response,
+        envelope: info.envelope
+      });
+    }
     
     if (!isProduction) {
       // In development, log the email content
