@@ -37,7 +37,7 @@ const metadata = {
       label:
         'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
     }}
-    description="Our support team typically responds within 24 business hours."
+    description={`Our support team typically responds within 24 business hours. Emails will be sent to: ${process.env.ADMIN_EMAIL || 'richard@bergsma.it'}`}
   />
 
   <!-- Features2 Widget ************** -->

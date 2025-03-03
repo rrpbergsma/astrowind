@@ -452,3 +452,211 @@ import { UI } from 'astrowind:config';
     Observer.start();
   });
 </script>
+
+<!-- Contact Form Handling -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    setupContactForm();
+  });
+
+  document.addEventListener('astro:after-swap', () => {
+    setupContactForm();
+  });
+
+  // Fetch CSRF token from the server
+  async function fetchCsrfToken() {
+    try {
+      const response = await fetch('/api/contact?csrf=true');
+      const data = await response.json();
+      return data.csrfToken;
+    } catch (error) {
+      console.error('Error fetching CSRF token:', error);
+      return '';
+    }
+  }
+
+  async function setupContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    // Get CSRF token and set it in the form
+    const csrfTokenInput = contactForm.querySelector('#csrf_token');
+    if (csrfTokenInput) {
+      const token = await fetchCsrfToken();
+      csrfTokenInput.value = token;
+    }
+
+    // Form validation and submission
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Reset previous error messages
+      resetFormErrors();
+      
+      // Client-side validation
+      if (!validateForm(contactForm)) {
+        return;
+      }
+      
+      // Show loading state
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.innerHTML;
+      submitButton.disabled = true;
+      submitButton.innerHTML = 'Sending...';
+      
+      try {
+        const formData = new FormData(contactForm);
+        
+        // Add timestamp to help prevent duplicate submissions
+        formData.append('timestamp', Date.now().toString());
+        
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Show success message
+          document.getElementById('form-success').classList.remove('hidden');
+          contactForm.reset();
+          
+          // Get a new CSRF token for next submission
+          const newToken = await fetchCsrfToken();
+          if (csrfTokenInput) {
+            csrfTokenInput.value = newToken;
+          }
+        } else {
+          // Show error messages
+          document.getElementById('form-error').classList.remove('hidden');
+          
+          if (result.errors) {
+            Object.keys(result.errors).forEach(field => {
+              const inputElement = contactForm.querySelector(`[name="${field}"]`);
+              if (inputElement) {
+                const feedbackElement = inputElement.closest('div').querySelector('.invalid-feedback');
+                if (feedbackElement) {
+                  feedbackElement.textContent = result.errors[field];
+                  feedbackElement.classList.remove('hidden');
+                  inputElement.classList.add('border-red-500');
+                }
+              }
+            });
+          }
+          
+          // If CSRF token is invalid, get a new one
+          if (result.errors && result.errors.csrf) {
+            const newToken = await fetchCsrfToken();
+            if (csrfTokenInput) {
+              csrfTokenInput.value = newToken;
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        document.getElementById('form-error').classList.remove('hidden');
+      } finally {
+        // Restore button state
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+      }
+    });
+    
+    // Add input validation on blur
+    contactForm.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('blur', function() {
+        validateInput(this);
+      });
+      
+      input.addEventListener('input', function() {
+        // Remove error styling when user starts typing
+        this.classList.remove('border-red-500');
+        const feedbackElement = this.closest('div').querySelector('.invalid-feedback');
+        if (feedbackElement) {
+          feedbackElement.classList.add('hidden');
+        }
+      });
+    });
+  }
+
+  function validateForm(form) {
+    let isValid = true;
+    
+    // Validate all inputs
+    form.querySelectorAll('input, textarea').forEach(input => {
+      if (!validateInput(input)) {
+        isValid = false;
+      }
+    });
+    
+    return isValid;
+  }
+
+  function validateInput(input) {
+    if (!input.required) return true;
+    
+    let isValid = true;
+    const feedbackElement = input.closest('div').querySelector('.invalid-feedback');
+    
+    // Reset previous error
+    if (feedbackElement) {
+      feedbackElement.classList.add('hidden');
+    }
+    input.classList.remove('border-red-500');
+    
+    // Check if empty
+    if (input.required && !input.value.trim()) {
+      isValid = false;
+      if (feedbackElement) {
+        feedbackElement.textContent = 'This field is required';
+        feedbackElement.classList.remove('hidden');
+      }
+      input.classList.add('border-red-500');
+    }
+    
+    // Email validation
+    if (input.type === 'email' && input.value.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(input.value.trim())) {
+        isValid = false;
+        if (feedbackElement) {
+          feedbackElement.textContent = 'Please enter a valid email address';
+          feedbackElement.classList.remove('hidden');
+        }
+        input.classList.add('border-red-500');
+      }
+    }
+    
+    // Textarea minimum length
+    if (input.tagName === 'TEXTAREA' && input.value.trim().length < 10) {
+      isValid = false;
+      if (feedbackElement) {
+        feedbackElement.textContent = 'Please enter at least 10 characters';
+        feedbackElement.classList.remove('hidden');
+      }
+      input.classList.add('border-red-500');
+    }
+    
+    return isValid;
+  }
+
+  function resetFormErrors() {
+    // Hide all error messages
+    document.querySelectorAll('.invalid-feedback').forEach(el => {
+      el.classList.add('hidden');
+    });
+    
+    // Remove error styling
+    document.querySelectorAll('input, textarea').forEach(input => {
+      input.classList.remove('border-red-500');
+    });
+    
+    // Hide form-level messages
+    document.getElementById('form-success')?.classList.add('hidden');
+    document.getElementById('form-error')?.classList.add('hidden');
+  }
+</script>
