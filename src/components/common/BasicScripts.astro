@@ -463,38 +463,11 @@ import { UI } from 'astrowind:config';
     setupContactForm();
   });
 
-  // Fetch CSRF token from the server
-  async function fetchCsrfToken() {
-    console.log('Fetching CSRF token');
-    try {
-      const response = await fetch('/api/contact?csrf=true');
-      console.log('CSRF response status:', response.status);
-      
-      if (!response.ok) {
-        console.error('CSRF request failed:', response.statusText);
-        return '';
-      }
-      
-      const data = await response.json();
-      console.log('CSRF token received:', data.csrfToken ? 'yes' : 'no');
-      return data.csrfToken;
-    } catch (error) {
-      console.error('Error fetching CSRF token:', error);
-      console.error('Error details:', error.message);
-      return '';
-    }
-  }
+  // Netlify form handling setup
 
   async function setupContactForm() {
     const contactForm = document.getElementById('contact-form');
     if (!contactForm) return;
-
-    // Get CSRF token and set it in the form
-    const csrfTokenInput = contactForm.querySelector('#csrf_token');
-    if (csrfTokenInput) {
-      const token = await fetchCsrfToken();
-      csrfTokenInput.value = token;
-    }
 
     // Form validation and submission
     contactForm.addEventListener('submit', async function(e) {
@@ -530,81 +503,24 @@ import { UI } from 'astrowind:config';
         // Add timestamp to help prevent duplicate submissions
         formData.append('timestamp', Date.now().toString());
         
-        console.log('Sending form data to /api/contact');
-        const response = await fetch('/api/contact', {
+        // Submit the form to Netlify
+        console.log('Submitting form to Netlify');
+        const response = await fetch('/', {
           method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
         });
         
         console.log('Response status:', response.status);
-        const result = await response.json();
-        console.log('Response data:', result);
         
-        if (result.success) {
+        if (response.ok) {
           console.log('Form submission successful');
           // Show success message
           document.getElementById('form-success').classList.remove('hidden');
           contactForm.reset();
-          
-          // Get a new CSRF token for next submission
-          console.log('Getting new CSRF token');
-          const newToken = await fetchCsrfToken();
-          console.log('New CSRF token:', newToken ? 'received' : 'not received');
-          if (csrfTokenInput) {
-            csrfTokenInput.value = newToken;
-          }
         } else {
-          console.log('Form submission failed:', result);
-          // Show specific error messages instead of generic form error
-          if (result.errors) {
-            console.log('Form errors:', result.errors);
-            
-            // Only show the generic error if there are no field-specific errors
-            // or if there's a server error not related to a specific field
-            const hasFieldErrors = Object.keys(result.errors).some(field =>
-              ['name', 'email', 'message', 'disclaimer', 'csrf'].includes(field)
-            );
-            
-            if (!hasFieldErrors) {
-              document.getElementById('form-error').classList.remove('hidden');
-            }
-            
-            // Display field-specific errors
-            Object.keys(result.errors).forEach(field => {
-              const inputElement = contactForm.querySelector(`[name="${field}"]`);
-              if (inputElement) {
-                const feedbackElement = inputElement.closest('div').querySelector('.invalid-feedback');
-                if (feedbackElement) {
-                  feedbackElement.textContent = result.errors[field];
-                  feedbackElement.classList.remove('hidden');
-                  inputElement.classList.add('border-red-500');
-                  
-                  // Special handling for checkbox
-                  if (field === 'disclaimer') {
-                    const checkboxContainer = inputElement.closest('.flex.items-start');
-                    if (checkboxContainer) {
-                      checkboxContainer.classList.add('checkbox-error');
-                    }
-                  }
-                }
-              }
-            });
-          } else {
-            // If no specific errors, show the generic error
-            document.getElementById('form-error').classList.remove('hidden');
-          }
-          
-          // If CSRF token is invalid, get a new one
-          if (result.errors && result.errors.csrf) {
-            console.log('CSRF token invalid, getting new token');
-            const newToken = await fetchCsrfToken();
-            if (csrfTokenInput) {
-              csrfTokenInput.value = newToken;
-            }
-          }
+          console.log('Form submission failed');
+          document.getElementById('form-error').classList.remove('hidden');
         }
       } catch (error) {
         console.error('Error submitting form:', error);
