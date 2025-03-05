@@ -38,11 +38,13 @@ interface BaseIconObject {
   size: string;
   opacity: string;
   rotate: string;
+  visibilityClass?: string; // Optional property for responsive visibility
 }
 
 interface IconWithColors extends BaseIconObject {
   lightColor: string;
   darkColor: string;
+  visibilityClass?: string; // Optional property for responsive visibility
 }
 
 // Function to get a random color from the palette
@@ -132,9 +134,25 @@ const createSpacedIcons = (): BaseIconObject[] => {
   // Create a base grid of positions
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      // Randomly skip positions (65% chance) for fewer icons overall
-      if (Math.random() < 0.65) {
+      // Randomly skip positions with different probabilities based on screen size
+      // For small screens: 88% chance to skip (showing ~1/3 of the icons)
+      // For larger screens: 65% chance to skip (original density)
+      const skipProbability = 0.65;
+      
+      // We'll add a data attribute to each icon to control visibility based on screen size
+      let visibilityClass = '';
+      
+      // Generate a random number to determine if we skip this position
+      const randomValue = Math.random();
+      
+      // Skip for all screen sizes if below the base threshold
+      if (randomValue < skipProbability) {
         continue;
+      }
+      
+      // For values between 0.65 and 0.88, create the icon but mark it to be hidden on small screens
+      if (randomValue < 0.88) {
+        visibilityClass = 'hidden sm:block'; // Hidden on small screens, visible on sm and up
       }
       
       // Base position in the grid with margins applied
@@ -183,12 +201,14 @@ const createSpacedIcons = (): BaseIconObject[] => {
         size: getRandomSize(),
         opacity: getRandomOpacity(),
         rotate: getRandomRotation(),
+        visibilityClass, // Add the visibility class to the icon object
       });
     }
   }
   
   return icons;
 };
+
 
 const icons: BaseIconObject[] = createSpacedIcons();
 
@@ -200,6 +220,7 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
   size: icon.size,
   opacity: icon.opacity,
   rotate: icon.rotate,
+  visibilityClass: icon.visibilityClass || '',
   lightColor: getRandomColor(lightModeColors),
   darkColor: getRandomColor(darkModeColors),
 }));
@@ -210,9 +231,9 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
   
   {/* Decorative background icons with parallax effect */}
   <div id="parallax-background" class="absolute inset-0 overflow-hidden">
-    {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor }, index) => (
+    {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor, visibilityClass }, index) => (
       <div
-        class={`absolute ${lightColor} ${darkColor} parallax-icon`}
+        class={`absolute ${lightColor} ${darkColor} parallax-icon ${visibilityClass}`}
         style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate}); will-change: transform; transition: transform 0.1s ease-out;`}
         data-depth={`${0.5 + (index % 3) * 0.2}`}
         data-initial-x={x}
