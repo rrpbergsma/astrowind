@@ -36,9 +36,7 @@ export type ImagesOptimizer = (
 
 /* ******* */
 const config = {
-  // FIXME: Use this when image.width is minor than deviceSizes
   imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-
   deviceSizes: [
     640, // older and lower-end phones
     750, // iPhone 6-8
@@ -199,12 +197,15 @@ const getBreakpoints = ({
     return [width, doubleWidth];
   }
   if (layout === 'constrained') {
+    // Use imageSizes when width is smaller than the smallest deviceSize
+    const sizesToUse = width < config.deviceSizes[0] ? config.imageSizes : config.deviceSizes;
+    
     return [
       // Always include the image at 1x and 2x the specified width
       width,
       doubleWidth,
       // Filter out any resolutions that are larger than the double-res image
-      ...(breakpoints || config.deviceSizes).filter((w) => w < doubleWidth),
+      ...(breakpoints || sizesToUse).filter((w) => w < doubleWidth),
     ];
   }
 

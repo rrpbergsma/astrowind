@@ -17,7 +17,7 @@ const {
   panel: panelClass = '',
   title: titleClass = '',
   description: descriptionClass = '',
-  icon: defaultIconClass = 'text-primary dark:text-slate-200 border-primary dark:border-blue-700',
+  icon: defaultIconClass = 'text-primary dark:text-blue-300 border-primary dark:border-blue-500 dark:shadow-blue-500/40 dark:shadow-sm',
   timeline: timelineClass = 'bg-primary/30 dark:bg-blue-700/30',
   timelineDot: timelineDotClass = 'bg-primary dark:bg-blue-700',
   year: yearClass = 'text-primary dark:text-blue-300',
@@ -28,7 +28,7 @@ const {
   items && items.length && (
     <div class={twMerge("relative mx-auto max-w-5xl", containerClass)}>
       {/* Main timeline line */}
-      <div class="absolute left-4 md:left-1/2 top-0 h-full w-1 transform -translate-x-1/2 z-0 transition-all duration-300 ease-in-out" class:list={[timelineClass]}></div>
+      <div class="absolute left-4 md:left-1/2 top-0 h-full w-1 transform -translate-x-1/2 z-0 transition-all duration-300 ease-in-out shadow-sm bg-primary/70 dark:bg-blue-700/30" class:list={[timelineClass]}></div>
       
       <div class="relative">
         {items.map((item, index) => {
@@ -69,7 +69,7 @@ const {
               >
                 <div
                   class={twMerge(
-                    `flex flex-col border border-gray-200 dark:border-gray-700 rounded-lg ${compact ? 'p-3' : 'p-4'} shadow-sm hover:shadow-md transition-all duration-300 ease-in-out bg-white dark:bg-gray-900 hover:translate-y-[-3px] group card-container`,
+                    `flex flex-col border border-gray-200 dark:border-gray-700 rounded-lg ${compact ? 'p-3' : 'p-4'} shadow-sm hover:shadow-md transition-all duration-300 ease-in-out backdrop-blur-sm bg-white/15 dark:bg-transparent hover:bg-white/30 hover:backdrop-blur-md dark:hover:backdrop-blur-md hover:translate-y-[-3px] group card-container`,
                     panelClass,
                     itemClasses?.panel
                   )}
@@ -95,12 +95,11 @@ const {
                     </div>
                   )}
                 </div>
-                
                 {/* Connector line to timeline (visible only on desktop) */}
                 <div class={twMerge(
                   'absolute top-5 hidden md:block h-0.5 w-6 z-0',
                   isEven ? 'right-0 bg-gradient-to-r' : 'left-0 bg-gradient-to-l',
-                  'from-transparent to-primary/70 dark:to-blue-700/70'
+                  'from-transparent to-primary/50 dark:to-blue-700'
                 )}></div>
               </div>
             </div>

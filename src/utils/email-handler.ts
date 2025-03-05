@@ -11,9 +11,8 @@ const {
   SMTP_PORT = '587',
   SMTP_USER = '',
   SMTP_PASS = '',
-  ADMIN_EMAIL = 'richard@bergsma.it',
-  WEBSITE_NAME = 'bergsma.it',
-  NODE_ENV = 'production'
+  ADMIN_EMAIL = '',
+  WEBSITE_NAME = 'bergsma.it'
 } = process.env;
 
 // Email configuration
@@ -32,15 +31,6 @@ function initializeTransporter() {
     // ProtonMail often requires using their Bridge application for SMTP
     const isProtonMail = SMTP_HOST.includes('protonmail');
     
-    // Log the email configuration
-    console.log('Initializing email transporter with:');
-    console.log(`SMTP Host: ${SMTP_HOST}`);
-    console.log(`SMTP Port: ${SMTP_PORT}`);
-    console.log(`SMTP User: ${SMTP_USER}`);
-    console.log(`Admin Email: ${ADMIN_EMAIL}`);
-    console.log(`Website Name: ${WEBSITE_NAME}`);
-    console.log(`Environment: ${NODE_ENV}`);
-    
     transporter = nodemailer.createTransport({
       host: SMTP_HOST,
       port: parseInt(SMTP_PORT, 10),
@@ -57,8 +47,7 @@ function initializeTransporter() {
           // Specific ciphers for ProtonMail
           ciphers: 'SSLv3'
         }
-      }),
-      debug: true, // Enable debug output for troubleshooting
+      })
     });
     
     // Verify SMTP connection configuration
@@ -179,12 +168,8 @@ export async function sendEmail(
   html: string,
   text: string
 ): Promise<boolean> {
-  console.log(`Attempting to send email to: ${to}`);
-  console.log(`Subject: ${subject}`);
-  
   // Initialize transporter if not already done
   if (!transporter) {
-    console.log('Initializing transporter');
     initializeTransporter();
   }
   
@@ -202,39 +187,8 @@ export async function sendEmail(
       text,
     };
     
-    console.log('Mail options:', {
-      from: fromAddress,
-      to,
-      subject,
-      textLength: text.length,
-      htmlLength: html.length
-    });
+    await transporter.sendMail(mailOptions);
     
-    console.log('Sending email via transporter');
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent, info:', info.messageId);
-    
-    // Log additional information in production mode
-    if (isProduction) {
-      console.log('Email delivery details:', {
-        messageId: info.messageId,
-        response: info.response,
-        envelope: info.envelope
-      });
-    }
-    
-    if (!isProduction) {
-      // In development, log the email content
-      console.log('Email sent (development mode):');
-      console.log('To:', to);
-      console.log('Subject:', subject);
-      console.log('Preview:', nodemailer.getTestMessageUrl(info));
-      
-      if (info.message) {
-        // For stream transport, we can get the message content
-        console.log('Message:', info.message.toString());
-      }
-    }
     
     logEmailAttempt(true, to, subject);
     return true;
@@ -273,8 +227,6 @@ export async function sendAdminNotification(
   ipAddress?: string,
   userAgent?: string
 ): Promise<boolean> {
-  console.log('sendAdminNotification called with:', { name, email, messageLength: message.length });
-  
   // Validate inputs
   if (!name || name.trim() === '') {
     console.error('Cannot send admin notification: name is empty');
@@ -313,21 +265,9 @@ export async function sendAdminNotification(
     userAgent,
   };
   
-  console.log('Generating admin notification email content');
   const subject = getAdminNotificationSubject();
   const html = getAdminNotificationHtml(props);
   const text = getAdminNotificationText(props);
-  
-  console.log(`Sending admin notification to: ${ADMIN_EMAIL}`);
-  console.log('Admin email environment variables:', {
-    SMTP_HOST,
-    SMTP_PORT,
-    SMTP_USER,
-    ADMIN_EMAIL,
-    WEBSITE_NAME,
-    NODE_ENV,
-    isProduction
-  });
   
   // Add a backup email address to ensure delivery
   const recipients = ADMIN_EMAIL;
@@ -343,8 +283,6 @@ export async function sendUserConfirmation(
   email: string,
   message: string
 ): Promise<boolean> {
-  console.log('sendUserConfirmation called with:', { name, email, messageLength: message.length });
-  
   if (!email || email.trim() === '') {
     console.error('Cannot send user confirmation: email is empty');
     return false;
@@ -367,24 +305,16 @@ export async function sendUserConfirmation(
     contactEmail: ADMIN_EMAIL,
   };
   
-  console.log('Generating user confirmation email content');
   const subject = getUserConfirmationSubject(WEBSITE_NAME);
   const html = getUserConfirmationHtml(props);
   const text = getUserConfirmationText(props);
   
-  console.log(`Sending user confirmation to: ${email}`);
   return sendEmail(email, subject, html, text);
 }
 
 // Initialize the email system
 export function initializeEmailSystem(): void {
   initializeTransporter();
-  
-  // Log initialization
-  console.log(`Email system initialized in ${isProduction ? 'production' : 'development'} mode`);
-  if (!isProduction) {
-    console.log('Emails will be logged to console instead of being sent');
-  }
 }
 
 // Initialize on import
@@ -393,7 +323,6 @@ initializeEmailSystem();
 // Test email function to verify configuration
 export async function testEmailConfiguration(): Promise<boolean> {
   if (!isProduction) {
-    console.log('Email testing skipped in development mode');
     return true;
   }
   
@@ -403,20 +332,12 @@ export async function testEmailConfiguration(): Promise<boolean> {
       initializeTransporter();
     }
     
-    console.log('Testing email configuration...');
-    console.log(`SMTP Host: ${SMTP_HOST}`);
-    console.log(`SMTP Port: ${SMTP_PORT}`);
-    console.log(`SMTP User: ${SMTP_USER}`);
-    console.log(`From Email: ${ADMIN_EMAIL}`);
-    
     // Verify connection to SMTP server
     const connectionResult = await new Promise<boolean>((resolve) => {
       transporter.verify(function(error, _success) {
         if (error) {
-          console.error('SMTP connection test failed:', error);
           resolve(false);
         } else {
-          console.log('SMTP connection successful');
           resolve(true);
         }
       });
@@ -426,25 +347,13 @@ export async function testEmailConfiguration(): Promise<boolean> {
       return false;
     }
     
-    console.log('Email configuration test completed successfully');
     return true;
-  } catch (error) {
-    console.error('Error testing email configuration:', error);
+  } catch {
     return false;
   }
 }
 
 // Run a test of the email configuration
 if (isProduction) {
-  testEmailConfiguration().then(success => {
-    if (success) {
-      console.log('Email system is properly configured');
-    } else {
-      console.error('Email system configuration test failed');
-      console.log('Note: If you continue to have issues with ProtonMail SMTP:');
-      console.log('1. Ensure ProtonMail Bridge is installed and running if sending from a desktop/server');
-      console.log('2. Verify you\'re using an app-specific password, not your main account password');
-      console.log('3. Check if your server allows outgoing connections on the SMTP port');
-    }
-  });
+  testEmailConfiguration();
 }

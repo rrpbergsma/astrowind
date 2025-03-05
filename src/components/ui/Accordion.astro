@@ -1,0 +1,85 @@
+---
+interface Props {
+  items: {
+    title: string;
+    description: string;
+  }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="accordion">
+  {items.map((item, index) => (
+    <div class="accordion-item">
+      <button class="accordion-header" data-accordion-target={`#accordion-body-${index}`}>
+        {item.title}
+        <svg class="w-4 h-4 ml-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+      </button>
+      <div id={`accordion-body-${index}`} class="accordion-body" aria-labelledby={`accordion-header-${index}`}>
+        <div class="p-5 border border-b-0 dark:border-gray-700 dark:bg-gray-900">
+          <p class="text-gray-500 dark:text-gray-400">{item.description}</p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const target = header.getAttribute('data-accordion-target');
+      const body = document.querySelector(target);
+
+      if (body) {
+        const expanded = (body as HTMLElement).classList.contains('expanded');
+
+        // Close all accordion items
+        document.querySelectorAll('.accordion-body.expanded').forEach(item => {
+          if (item && 'style' in item) {
+            (item as any).style.display = 'none';
+            item.classList.remove('expanded');
+          }
+        });
+
+        // Open the clicked accordion item if it was closed
+        if (!expanded) {
+          body.classList.add('expanded');
+          if (body && 'style' in body) {
+            (body as HTMLElement).style.display = 'block';
+          }
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+.accordion-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.accordion-header:hover {
+    background-color: #f9fafb;
+}
+
+.accordion-body {
+    display: none;
+}
+
+.accordion-body.expanded {
+    display: block;
+}
+</style>

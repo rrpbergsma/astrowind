@@ -16,7 +16,7 @@ const {
   SMTP_PORT = '587',
   SMTP_USER = '',
   SMTP_PASS = '',
-  ADMIN_EMAIL = 'richard@bergsma.it',
+  ADMIN_EMAIL = '',
   WEBSITE_NAME = 'bergsma.it',
   NODE_ENV = 'production'
 } = process.env;

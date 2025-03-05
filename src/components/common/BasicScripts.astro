@@ -42,7 +42,7 @@ import { UI } from 'astrowind:config';
 
   const onLoad = function () {
     let lastKnownScrollPosition = window.scrollY;
-    let ticking = true;
+    let ticking = false;
 
     attachEvent('#header nav', 'click', function () {
       document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
@@ -239,7 +239,6 @@ import { UI } from 'astrowind:config';
     // Store language preference in localStorage
     function storeLanguagePreference(langCode) {
       localStorage.setItem('preferredLanguage', langCode);
-      console.log('Language preference stored:', langCode);
     }
 
     // Function to update URLs with the current language
@@ -301,11 +300,16 @@ import { UI } from 'astrowind:config';
       // Store the selected language in localStorage
       if (event.detail && event.detail.langCode) {
         storeLanguagePreference(event.detail.langCode);
-        console.log('Language changed:', event.detail);
         
         // Always update all internal links with the new language
         // regardless of whether we're doing a full page reload
         updateUrlsWithLanguage();
+        
+        // If this event includes a path but doesn't indicate it will reload,
+        // force a full page reload to ensure all content is properly translated
+        if (event.detail.path && !event.detail.willReload) {
+          window.location.replace(event.detail.path);
+        }
       }
     });
     
@@ -313,10 +317,7 @@ import { UI } from 'astrowind:config';
     updateUrlsWithLanguage();
     
     // Process links after client-side navigation
-    document.addEventListener('astro:page-load', () => {
-      // Short delay to ensure DOM is fully updated
-      setTimeout(updateUrlsWithLanguage, 0);
-    });
+    document.addEventListener('astro:page-load', updateUrlsWithLanguage);
     
     // Also update links when the DOM content is loaded
     document.addEventListener('DOMContentLoaded', updateUrlsWithLanguage);
@@ -472,18 +473,14 @@ import { UI } from 'astrowind:config';
     // Form validation and submission
     contactForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      console.log('Form submitted');
       
       // Reset previous error messages
       resetFormErrors();
       
       // Client-side validation
       if (!validateForm(contactForm)) {
-        console.log('Form validation failed');
         return;
       }
-      
-      console.log('Form validation passed');
       
       // Show loading state
       const submitButton = contactForm.querySelector('button[type="submit"]');
@@ -494,37 +491,24 @@ import { UI } from 'astrowind:config';
       try {
         const formData = new FormData(contactForm);
         
-        // Log form data
-        console.log('Form data:');
-        for (const [key, value] of formData.entries()) {
-          console.log(`${key}: ${value}`);
-        }
-        
         // Add timestamp to help prevent duplicate submissions
         formData.append('timestamp', Date.now().toString());
         
         // Submit the form to Netlify
-        console.log('Submitting form to Netlify');
         const response = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(formData).toString()
         });
         
-        console.log('Response status:', response.status);
-        
         if (response.ok) {
-          console.log('Form submission successful');
           // Show success message
           document.getElementById('form-success').classList.remove('hidden');
           contactForm.reset();
         } else {
-          console.log('Form submission failed');
           document.getElementById('form-error').classList.remove('hidden');
         }
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        console.error('Error details:', error.message);
+      } catch {
         document.getElementById('form-error').classList.remove('hidden');
       } finally {
         // Restore button state

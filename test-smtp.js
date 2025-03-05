@@ -33,8 +33,7 @@ const transporter = nodemailer.createTransport({
   tls: {
     ciphers: 'SSLv3',
     rejectUnauthorized: false
-  },
-  debug: true, // Enable debug output
+  }
 });
 
 // Test the connection

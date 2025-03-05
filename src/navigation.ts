@@ -18,10 +18,10 @@ export const getHeaderData = (lang = 'en') => {
         href: getPermalink('/', 'page', lang),
       },
       {
-        text: t.homepage?.services?.tagline || 'Services',
+        text: t.navigation.services,
         href: homeHashLink('#services'),
       },
-      { text: t.homepage?.contact?.title || 'Contact', href: homeHashLink('#contact') },
+      { text: t.navigation.contact, href: homeHashLink('#contact') },
       {
         text: t.metadata?.aboutUs || 'About Me',
         links: [
@@ -37,14 +37,16 @@ export const getHeaderData = (lang = 'en') => {
   };
 };
 
-// For backward compatibility
-export const headerData = getHeaderData();
+ // For backward compatibility - but don't use this directly, always use getHeaderData(lang) to ensure translations
+ export const headerData = (lang = 'en') => getHeaderData(lang);
 
 export const getFooterData = (lang = 'en') => {
+  const t = getTranslation(lang);
+  
   return {
     secondaryLinks: [
-      { text: 'Terms', href: getPermalink('/terms', 'page', lang) },
-      { text: 'Privacy Policy', href: getPermalink('/privacy', 'page', lang) },
+      { text: t.footer.terms, href: getPermalink('/terms', 'page', lang) },
+      { text: t.footer.privacyPolicy, href: getPermalink('/privacy', 'page', lang) },
     ],
     socialLinks: [
       { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://www.linkedin.com/in/rrpbergsma' },

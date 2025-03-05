@@ -1,8 +1,13 @@
 ---
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
+import Background from '~/components/ui/Background.astro';
 
-import type { Hero as Props } from '~/types';
+import type { Hero } from '~/types';
+
+export interface Props extends Hero {
+  disableBackground?: boolean;
+}
 
 const {
   title = await Astro.slots.render('title'),
@@ -14,16 +19,20 @@ const {
   image = await Astro.slots.render('image'),
 
   id,
+  isDark = false,
   bg = await Astro.slots.render('bg'),
+  disableBackground = true,
 } = Astro.props;
 ---
 
-<section class="relative md:-mt-[76px] not-prose bg-hero" {...id ? { id } : {}}>
-  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <slot name="bg">
-      {bg ? <Fragment set:html={bg} /> : null}
-    </slot>
-  </div>
+<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
+  {!disableBackground && (
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <slot name="bg">
+        {bg ? <Fragment set:html={bg} /> : <Background isDark={isDark} disableParallax={true} />}
+      </slot>
+    </div>
+  )}
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
     <div class="py-12 md:py-20">
@@ -39,7 +48,7 @@ const {
         {
           title && (
             <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade content-backdrop p-2 inline-block rounded-md"
               set:html={title}
             />
           )
@@ -48,14 +57,14 @@ const {
           {
             subtitle && (
               <p
-                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade content-backdrop p-2 rounded-md"
                 set:html={subtitle}
               />
             )
           }
           {
             actions && (
-              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade content-backdrop p-2 rounded-md">
                 {Array.isArray(actions) ? (
                   actions.map((action) => (
                     <div class="flex w-full sm:w-auto">
@@ -76,7 +85,7 @@ const {
       >
         {
           image && (
-            <div class="relative m-auto max-w-5xl">
+            <div class="relative m-auto max-w-5xl z-10">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (

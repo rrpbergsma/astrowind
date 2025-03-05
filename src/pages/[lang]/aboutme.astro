@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 import Layout from '~/layouts/PageLayout.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import Hero from '~/components/widgets/Hero.astro';
@@ -58,6 +58,7 @@ const metadata = {
   <Hero
     id="hero"
     title="About Me"
+    isDark={false}
   >
     <Fragment slot="subtitle">
       <strong class="text-3xl md:text-4xl">{t.hero.greeting}</strong><br /><br />{t.hero.subtitle}
@@ -84,7 +85,7 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      <div class="absolute inset-0 backdrop-blur-sm bg-white/5 dark:bg-gray-900/10"></div>
     </Fragment>
   </Content>
 

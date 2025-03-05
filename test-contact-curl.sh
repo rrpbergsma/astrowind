@@ -4,7 +4,8 @@
 # This script simulates a form submission to the contact form API
 
 API_URL="http://localhost:4321/api/contact"
-ADMIN_EMAIL="richard@bergsma.it"
+# Get admin email from environment variable or use a placeholder for testing
+ADMIN_EMAIL="${ADMIN_EMAIL:-admin@example.com}"
 
 echo "Starting contact form test with curl..."
 echo "API URL: $API_URL"

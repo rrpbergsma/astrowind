@@ -26,7 +26,7 @@ const {
     {
       testimonials &&
         testimonials.map(({ title, linkUrl, name, issueDate, description, image }) => (
-          <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="flex flex-col justify-start items-center p-2 md:p-4 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600 w-[425px] mx-auto sm:mx-0">
+          <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="flex flex-col justify-start items-center p-2 md:p-4 rounded-md shadow-md backdrop-blur-sm bg-white/15 dark:bg-transparent border border-gray-200 dark:border-slate-600 hover:bg-white/30 hover:backdrop-blur-md dark:hover:backdrop-blur-md transition-all duration-300 ease-in-out hover:shadow-lg hover:translate-y-[-2px] w-[425px] mx-auto sm:mx-0">
             {title && <h2 class="text-lg font-medium leading-6 pb-4 text-center">{title}</h2>}
             {image && (
               <div class="h-[160px] w-[160px] border-slate-200 dark:border-slate-600 mx-auto">
@@ -36,11 +36,8 @@ const {
                   height={160}
                   widths={[400, 768]}
                   layout="fixed"
-                  // If image is a string, use it as the src; otherwise assume it's an object with a src property.
-                  src={typeof image === 'string' ? image : image.src}
-                  // Use a default alt text if image is a string; otherwise use the provided alt.
-                  alt={typeof image === 'string' ? 'Image' : image.alt}
-                  // Spread the rest of the properties if image is an object.
+                  src={typeof image === 'string' ? image : (image as { src: string }).src}
+                  alt={typeof image === 'string' ? 'Image' : (image as { alt?: string }).alt || 'Testimonial'}
                   {...(typeof image === 'string' ? {} : image)}
                 />
               </div>

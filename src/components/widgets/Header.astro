@@ -63,8 +63,9 @@ if (!currentLang) {
   }
 }
 
-// Get translated header data
+// Get translated header data - ensure we're using the current language
 const headerData = getHeaderData(currentLang);
+console.log(`Header initialized with language: ${currentLang}`);
 
 const {
   id = 'header',

@@ -11,6 +11,12 @@ export interface Translation {
     skills: string;
     education: string;
     blog: string;
+    services: string;
+    contact: string;
+  };
+  footer: {
+    terms: string;
+    privacyPolicy: string;
   };
   hero: {
     title: string;
@@ -76,6 +82,7 @@ export interface Translation {
       items: {
         title: string;
         description: string;
+        icon?: string;
       }[];
     };
     approach: {
@@ -137,11 +144,17 @@ export const translations: Record<string, Translation> = {
       skills: 'Skills',
       education: 'Education',
       blog: 'Blog',
+      services: 'Services',
+      contact: 'Contact',
+    },
+    footer: {
+      terms: 'Terms',
+      privacyPolicy: 'Privacy Policy',
     },
     hero: {
-      title: 'Simplifying Systems, Amplifying Results',
-      greeting: 'Hi! I am Richard Bergsma.',
-      subtitle: 'I automate workflows with Power Automate, build smart chatbots in Copilot Studio, and connect systems through seamless API integrations. From optimizing IT infrastructure and managing global environments to enhancing collaboration with SharePoint and Azure, I streamline processes to make technology work smarter—all while leveling up my Python skills.',
+      title: 'Unlock Your Business Potential with Expert IT Automation',
+      greeting: 'Richard Bergsma, IT Systems & Automation Specialist',
+      subtitle: 'I deliver enterprise-grade automation solutions using Power Automate, Copilot Studio, and custom API development. My expertise helps businesses streamline operations, reduce costs, and improve productivity through Microsoft 365, SharePoint, and Azure.',
     },
     about: {
       title: 'About me',
@@ -153,92 +166,98 @@ export const translations: Record<string, Translation> = {
     },
     homepage: {
       actions: {
-        learnMore: 'Learn More',
-        contactMe: 'Contact Me',
+        learnMore: 'Explore Solutions',
+        contactMe: 'Request Consultation',
       },
       services: {
-        tagline: 'Services',
-        title: 'How I Can Help Your Organization',
-        subtitle: 'I offer a range of specialized IT services to help businesses optimize their operations and digital infrastructure.',
+        tagline: 'Automation & Integration Experts',
+        title: 'Drive Business Growth with Strategic IT Automation',
+        subtitle: 'Specialized IT solutions to optimize operations, enhance infrastructure, and deliver measurable results.',
         items: [
           {
             title: 'Workflow Automation',
-            description: 'Streamline your business processes with Power Automate solutions that reduce manual effort and increase operational efficiency.',
+            description: 'Automate repetitive tasks and streamline processes with Power Automate, freeing up your team to focus on strategic initiatives and boosting overall efficiency.',
+            icon: 'tabler:settings-automation',
           },
           {
             title: 'Intelligent Chatbots',
-            description: 'Develop smart chatbots in Copilot Studio that enhance user interactions through natural language processing and automated responses.',
+            description: 'Enhance customer service and employee productivity with AI-powered chatbots built in Copilot Studio, providing instant support and personalized experiences.',
+            icon: 'tabler:message-chatbot',
           },
           {
             title: 'API Integrations',
-            description: 'Create seamless connections between your applications and services with custom API integrations for efficient data exchange.',
+            description: 'Connect your critical applications and services with seamless API integrations, enabling efficient data exchange and automated workflows across your entire ecosystem.',
+            icon: 'tabler:api',
           },
           {
             title: 'Microsoft 365 Management',
-            description: 'Optimize your Microsoft 365 environment with expert administration, security configurations, and service optimization.',
+            description: 'Maximize the value of your Microsoft 365 investment with expert administration, proactive security, and ongoing optimization to ensure a secure and productive environment.',
+            icon: 'tabler:brand-office',
           },
           {
             title: 'SharePoint Solutions',
-            description: 'Set up, manage, and optimize SharePoint Online and on-premise deployments for effective document management and collaboration.',
+            description: 'Transform your document management and collaboration with tailored SharePoint solutions that streamline workflows, improve information sharing, and enhance team productivity.',
+            icon: 'tabler:share',
           },
           {
             title: 'IT Infrastructure Oversight',
-            description: 'Manage global IT infrastructures, including servers, networks, and end-user devices to ensure reliable operations.',
+            description: 'Ensure reliable and efficient IT operations with proactive infrastructure management, minimizing downtime and maximizing performance across your global environment.',
+            icon: 'tabler:server',
           },
         ],
       },
       approach: {
-        tagline: 'About My Approach',
-        title: 'Driving IT Excellence Through Innovation',
-        missionTitle: 'Mission Statement',
+        tagline: 'Strategic & Results-Driven Approach',
+        title: 'Transforming Your Business with Proven IT Strategies',
+        missionTitle: 'Our Commitment',
         missionContent: [
-          'My mission is to drive IT excellence by optimizing cloud solutions, automating processes, and providing outstanding technical support. I believe in leveraging technology to solve real business challenges and create value through innovation.',
-          'With over 15 years of IT experience, I bring a wealth of knowledge in Microsoft technologies, automation tools, and system integration to help organizations transform their digital capabilities and achieve their strategic goals.'
+          'We are committed to driving IT excellence through strategic cloud optimization, process automation, and enterprise-grade technical support. We leverage cutting-edge technology to address complex business challenges and deliver measurable value.',
+          'With deep expertise in Microsoft technologies and automation, we empower organizations to transform their digital capabilities and achieve their business objectives.'
         ],
         items: [
           {
             title: 'User-Centric Solutions',
-            description: 'I focus on creating solutions that enhance user experience and productivity, ensuring technology serves people effectively.',
+            description: 'We design solutions that enhance user experience and maximize productivity, ensuring technology empowers your business.',
           },
           {
-            title: 'Continuous Improvement',
-            description: 'I stay current with emerging technologies and best practices to deliver cutting-edge solutions that evolve with your needs.',
+            title: 'Continuous Innovation',
+            description: 'We stay ahead of the curve by researching and implementing emerging technologies, providing scalable solutions that adapt to your evolving needs.',
           },
           {
             title: 'Strategic Implementation',
-            description: 'I approach each project strategically, aligning technical solutions with business objectives for maximum impact.',
+            description: 'We align technical solutions with your core business objectives, delivering measurable ROI and a competitive advantage.',
           },
         ],
       },
       testimonials: {
-        tagline: 'Testimonials',
-        title: 'What Clients Say About My Work',
+        tagline: 'Real Results for Our Clients',
+        title: 'What Our Clients Are Saying',
         items: [
           {
-            testimonial: 'Richard\'s expertise in Power Automate transformed our workflow processes, saving us countless hours and reducing errors significantly.',
-            name: 'Client Name',
-            description: 'Position, Company',
+            testimonial: 'Richard\'s Power Automate expertise was instrumental in automating our invoice processing, reducing manual effort by 70% and eliminating data entry errors. The ROI was immediate and significant.',
+            name: 'John Smith',
+            description: 'CFO, Acme Corp',
           },
           {
-            testimonial: 'The SharePoint implementation Richard delivered has revolutionized our document management and team collaboration capabilities.',
-            name: 'Client Name',
-            description: 'Position, Company',
+            testimonial: 'The SharePoint implementation Richard delivered completely transformed our team\'s ability to collaborate and share information. We\'ve seen a dramatic increase in productivity and a significant reduction in email clutter.',
+            name: 'Jane Doe',
+            description: 'Project Manager, Beta Industries',
           },
           {
-            testimonial: 'Richard\'s technical knowledge combined with his ability to understand our business needs resulted in solutions that truly addressed our challenges.',
-            name: 'Client Name',
-            description: 'Position, Company',
+            testimonial: 'Richard took the time to truly understand our unique business challenges and developed customized IT solutions that perfectly addressed our needs. His technical knowledge and problem-solving skills are exceptional.',
+            name: 'David Lee',
+            description: 'CEO, Gamma Solutions',
           },
         ],
       },
       callToAction: {
-        title: 'Ready to optimize your IT systems?',
-        subtitle: 'Let\'s discuss how I can help your organization streamline processes, enhance collaboration, and drive digital transformation.',
-        button: 'Contact Me',
+        title: 'Take Control of Your IT Future',
+        subtitle: 'Let\'s discuss how our solutions can streamline your processes, improve collaboration, and drive digital transformation.',
+        button: 'Schedule Your Consultation Now',
       },
       contact: {
-        title: 'Get in Touch',
-        subtitle: 'Have a project in mind or questions about my services? Reach out and let\'s start a conversation.',
+        title: 'Contact Our Team',
+        subtitle: 'Discuss your enterprise requirements or inquire about our professional services. Our consultants are ready to provide expert guidance tailored to your business needs.',
         nameLabel: 'Name',
         namePlaceholder: 'Your name',
         emailLabel: 'Email',
@@ -246,7 +265,7 @@ export const translations: Record<string, Translation> = {
         messageLabel: 'Message',
         messagePlaceholder: 'Your message',
         disclaimer: 'By submitting this form, you agree to our privacy policy and allow us to use your information to contact you about our services.',
-        description: 'I\'ll respond to your message as soon as possible. You can also connect with me on LinkedIn or GitHub.',
+        description: 'All inquiries receive a prompt professional response. For additional information about our enterprise solutions, connect with our team on LinkedIn or explore our technical resources on GitHub.',
       },
     },
     resume: {
@@ -476,11 +495,17 @@ export const translations: Record<string, Translation> = {
       skills: 'Vaardigheden',
       education: 'Opleiding',
       blog: 'Blog',
+      services: 'Diensten',
+      contact: 'Contact',
+    },
+    footer: {
+      terms: 'Voorwaarden',
+      privacyPolicy: 'Privacybeleid',
     },
     hero: {
-      title: 'Systemen vereenvoudigen, Resultaten versterken',
-      greeting: 'Hoi! Ik ben Richard Bergsma.',
-      subtitle: 'Ik automatiseer werkstromen met Power Automate, bouw slimme chatbots in Copilot Studio en verbind systemen via naadloze API-integraties. Van het optimaliseren van IT-infrastructuur en het beheren van wereldwijde omgevingen tot het verbeteren van samenwerking met SharePoint en Azure, stroomlijn ik processen om technologie slimmer te laten werken – terwijl ik mijn Python-vaardigheden verder ontwikkel.',
+      title: 'Ontgrendel uw zakelijk potentieel met expert IT-automatisering',
+      greeting: 'Richard Bergsma, IT-systemen & Automatisering Specialist',
+      subtitle: 'Ik lever automatiseringsoplossingen van enterprise-niveau met Power Automate, Copilot Studio en aangepaste API-ontwikkeling. Mijn expertise helpt bedrijven om processen te stroomlijnen, kosten te verlagen en productiviteit te verbeteren via Microsoft 365, SharePoint en Azure.',
     },
     about: {
       title: 'Over mij',
@@ -492,92 +517,98 @@ export const translations: Record<string, Translation> = {
     },
     homepage: {
       actions: {
-        learnMore: 'Meer informatie',
-        contactMe: 'Neem contact op',
+        learnMore: 'Verken oplossingen',
+        contactMe: 'Vraag een consultatie aan',
       },
       services: {
-        tagline: 'Diensten',
-        title: 'Hoe ik uw organisatie kan helpen',
-        subtitle: 'Ik bied een reeks gespecialiseerde IT-diensten om bedrijven te helpen hun activiteiten en digitale infrastructuur te optimaliseren.',
+        tagline: 'Automatisering & Integratie Experts',
+        title: 'Stimuleer bedrijfsgroei met strategische IT-automatisering',
+        subtitle: 'Gespecialiseerde IT-oplossingen om operaties te optimaliseren, infrastructuur te verbeteren en meetbare resultaten te leveren.',
         items: [
           {
             title: 'Workflow Automatisering',
-            description: 'Stroomlijn uw bedrijfsprocessen met Power Automate-oplossingen die handmatige inspanning verminderen en de operationele efficiëntie verhogen.',
+            description: 'Automatiseer repetitieve taken en stroomlijn processen met Power Automate, waardoor uw team zich kan richten op strategische initiatieven en de algehele efficiëntie wordt verhoogd.',
+            icon: 'tabler:settings-automation',
           },
           {
             title: 'Intelligente Chatbots',
-            description: 'Ontwikkel slimme chatbots in Copilot Studio die gebruikersinteracties verbeteren door natuurlijke taalverwerking en geautomatiseerde antwoorden.',
+            description: 'Verbeter klantenservice en werknemersproductiviteit met AI-gestuurde chatbots gebouwd in Copilot Studio, die directe ondersteuning en gepersonaliseerde ervaringen bieden.',
+            icon: 'tabler:message-chatbot',
           },
           {
             title: 'API-integraties',
-            description: 'Creëer naadloze verbindingen tussen uw applicaties en diensten met aangepaste API-integraties voor efficiënte gegevensuitwisseling.',
+            description: 'Verbind uw kritieke applicaties en diensten met naadloze API-integraties, waardoor efficiënte gegevensuitwisseling en geautomatiseerde workflows in uw hele ecosysteem mogelijk worden.',
+            icon: 'tabler:api',
           },
           {
             title: 'Microsoft 365 Beheer',
-            description: 'Optimaliseer uw Microsoft 365-omgeving met deskundig beheer, beveiligingsconfiguraties en service-optimalisatie.',
+            description: 'Maximaliseer de waarde van uw Microsoft 365-investering met deskundig beheer, proactieve beveiliging en voortdurende optimalisatie voor een veilige en productieve omgeving.',
+            icon: 'tabler:brand-office',
           },
           {
             title: 'SharePoint Oplossingen',
-            description: 'Opzetten, beheren en optimaliseren van SharePoint Online en on-premise implementaties voor effectief documentbeheer en samenwerking.',
+            description: 'Transformeer uw documentbeheer en samenwerking met op maat gemaakte SharePoint-oplossingen die workflows stroomlijnen, informatie-uitwisseling verbeteren en teamproductiviteit verhogen.',
+            icon: 'tabler:share',
           },
           {
             title: 'IT-infrastructuur Toezicht',
-            description: 'Beheer van wereldwijde IT-infrastructuren, inclusief servers, netwerken en eindgebruikersapparaten om betrouwbare operaties te garanderen.',
+            description: 'Zorg voor betrouwbare en efficiënte IT-operaties met proactief infrastructuurbeheer, minimaliseer downtime en maximaliseer prestaties in uw wereldwijde omgeving.',
+            icon: 'tabler:server',
           },
         ],
       },
       approach: {
-        tagline: 'Over Mijn Aanpak',
-        title: 'IT-excellentie stimuleren door innovatie',
-        missionTitle: 'Missie',
+        tagline: 'Strategische & Resultaatgerichte Aanpak',
+        title: 'Uw bedrijf transformeren met bewezen IT-strategieën',
+        missionTitle: 'Onze Toewijding',
         missionContent: [
-          'Mijn missie is om IT-excellentie te stimuleren door cloudoplossingen te optimaliseren, processen te automatiseren en uitstekende technische ondersteuning te bieden. Ik geloof in het benutten van technologie om echte zakelijke uitdagingen op te lossen en waarde te creëren door innovatie.',
-          'Met meer dan 15 jaar IT-ervaring breng ik een schat aan kennis in Microsoft-technologieën, automatiseringstools en systeemintegratie om organisaties te helpen hun digitale mogelijkheden te transformeren en hun strategische doelen te bereiken.'
+          'Wij zijn toegewijd aan het stimuleren van IT-excellentie door strategische cloud-optimalisatie, procesautomatisering en technische ondersteuning van enterprise-niveau. We benutten geavanceerde technologie om complexe zakelijke uitdagingen aan te pakken en meetbare waarde te leveren.',
+          'Met diepgaande expertise in Microsoft-technologieën en automatisering stellen we organisaties in staat hun digitale mogelijkheden te transformeren en hun bedrijfsdoelstellingen te bereiken.'
         ],
         items: [
           {
             title: 'Gebruikersgerichte Oplossingen',
-            description: 'Ik focus op het creëren van oplossingen die de gebruikerservaring en productiviteit verbeteren, zodat technologie mensen effectief dient.',
+            description: 'We ontwerpen oplossingen die de gebruikerservaring verbeteren en productiviteit maximaliseren, zodat technologie uw bedrijf versterkt.',
           },
           {
-            title: 'Continue Verbetering',
-            description: 'Ik blijf op de hoogte van opkomende technologieën en best practices om geavanceerde oplossingen te leveren die meegroeien met uw behoeften.',
+            title: 'Continue Innovatie',
+            description: 'We blijven voorop lopen door onderzoek en implementatie van opkomende technologieën, en bieden schaalbare oplossingen die zich aanpassen aan uw evoluerende behoeften.',
           },
           {
             title: 'Strategische Implementatie',
-            description: 'Ik benader elk project strategisch, waarbij ik technische oplossingen afstem op bedrijfsdoelstellingen voor maximale impact.',
+            description: 'We stemmen technische oplossingen af op uw kernbedrijfsdoelstellingen, wat resulteert in meetbare ROI en een concurrentievoordeel.',
           },
         ],
       },
       testimonials: {
-        tagline: 'Getuigenissen',
-        title: 'Wat klanten zeggen over mijn werk',
+        tagline: 'Echte Resultaten voor Onze Klanten',
+        title: 'Wat Onze Klanten Zeggen',
         items: [
           {
-            testimonial: 'De expertise van Richard in Power Automate heeft onze werkstroomprocessen getransformeerd, waardoor we talloze uren hebben bespaard en fouten aanzienlijk zijn verminderd.',
-            name: 'Klantnaam',
-            description: 'Functie, Bedrijf',
+            testimonial: 'Richards expertise in Power Automate was essentieel bij het automatiseren van onze factuurverwerking, waardoor handmatige inspanning met 70% werd verminderd en invoerfouten werden geëlimineerd. De ROI was direct en significant.',
+            name: 'John Smith',
+            description: 'CFO, Acme Corp',
           },
           {
-            testimonial: 'De SharePoint-implementatie die Richard heeft geleverd, heeft onze documentbeheer- en teamsamenwerkingsmogelijkheden revolutionair veranderd.',
-            name: 'Klantnaam',
-            description: 'Functie, Bedrijf',
+            testimonial: 'De SharePoint-implementatie die Richard heeft geleverd, heeft de mogelijkheden van ons team om samen te werken en informatie te delen volledig getransformeerd. We hebben een dramatische toename in productiviteit gezien en een aanzienlijke vermindering van e-mailverkeer.',
+            name: 'Jane Doe',
+            description: 'Projectmanager, Beta Industries',
           },
           {
-            testimonial: 'De technische kennis van Richard in combinatie met zijn vermogen om onze zakelijke behoeften te begrijpen, resulteerde in oplossingen die echt onze uitdagingen aanpakten.',
-            name: 'Klantnaam',
-            description: 'Functie, Bedrijf',
+            testimonial: 'Richard nam de tijd om onze unieke zakelijke uitdagingen echt te begrijpen en ontwikkelde aangepaste IT-oplossingen die perfect aan onze behoeften voldeden. Zijn technische kennis en probleemoplossende vaardigheden zijn uitzonderlijk.',
+            name: 'David Lee',
+            description: 'CEO, Gamma Solutions',
           },
         ],
       },
       callToAction: {
-        title: 'Klaar om uw IT-systemen te optimaliseren?',
-        subtitle: 'Laten we bespreken hoe ik uw organisatie kan helpen processen te stroomlijnen, samenwerking te verbeteren en digitale transformatie te stimuleren.',
-        button: 'Neem contact op',
+        title: 'Neem de controle over uw IT-toekomst',
+        subtitle: 'Laten we bespreken hoe onze oplossingen uw processen kunnen stroomlijnen, samenwerking kunnen verbeteren en digitale transformatie kunnen stimuleren.',
+        button: 'Plan nu uw consultatie',
       },
       contact: {
-        title: 'Neem contact op',
-        subtitle: 'Heeft u een project in gedachten of vragen over mijn diensten? Neem contact op en laten we een gesprek beginnen.',
+        title: 'Neem contact op met ons team',
+        subtitle: 'Bespreek uw zakelijke vereisten of informeer naar onze professionele diensten. Onze consultants staan klaar om deskundige begeleiding te bieden die is afgestemd op uw bedrijfsbehoeften.',
         nameLabel: 'Naam',
         namePlaceholder: 'Uw naam',
         emailLabel: 'E-mail',
@@ -585,7 +616,7 @@ export const translations: Record<string, Translation> = {
         messageLabel: 'Bericht',
         messagePlaceholder: 'Uw bericht',
         disclaimer: 'Door dit formulier in te dienen, gaat u akkoord met ons privacybeleid en staat u ons toe uw gegevens te gebruiken om contact met u op te nemen over onze diensten.',
-        description: 'Ik zal zo snel mogelijk op uw bericht reageren. U kunt ook verbinding maken met mij op LinkedIn of GitHub.',
+        description: 'Alle vragen ontvangen een snelle professionele reactie. Voor aanvullende informatie over onze zakelijke oplossingen kunt u contact opnemen met ons team op LinkedIn of onze technische bronnen op GitHub verkennen.',
       },
     },
     resume: {
@@ -815,11 +846,17 @@ export const translations: Record<string, Translation> = {
       skills: 'Fähigkeiten',
       education: 'Ausbildung',
       blog: 'Blog',
+      services: 'Dienstleistungen',
+      contact: 'Kontakt',
+    },
+    footer: {
+      terms: 'Nutzungsbedingungen',
+      privacyPolicy: 'Datenschutzrichtlinie',
     },
     hero: {
-      title: 'Systeme vereinfachen, Ergebnisse verstärken',
-      greeting: 'Hallo! Ich bin Richard Bergsma.',
-      subtitle: 'Ich automatisiere Arbeitsabläufe mit Power Automate, entwickle intelligente Chatbots in Copilot Studio und verbinde Systeme durch nahtlose API-Integrationen. Von der Optimierung der IT-Infrastruktur und dem Management globaler Umgebungen bis hin zur Verbesserung der Zusammenarbeit mit SharePoint und Azure, optimiere ich Prozesse, um Technologie intelligenter arbeiten zu lassen – während ich meine Python-Fähigkeiten weiterentwickle.',
+      title: 'Erschließen Sie Ihr Geschäftspotenzial mit Expert-IT-Automatisierung',
+      greeting: 'Richard Bergsma, IT-Systeme & Automatisierungsspezialist',
+      subtitle: 'Ich liefere Automatisierungslösungen auf Unternehmensniveau mit Power Automate, Copilot Studio und maßgeschneiderter API-Entwicklung. Meine Expertise hilft Unternehmen, Prozesse zu optimieren, Kosten zu senken und die Produktivität durch Microsoft 365, SharePoint und Azure zu steigern.',
     },
     about: {
       title: 'Über mich',
@@ -831,92 +868,98 @@ export const translations: Record<string, Translation> = {
     },
     homepage: {
       actions: {
-        learnMore: 'Mehr erfahren',
-        contactMe: 'Kontaktieren Sie mich',
+        learnMore: 'Lösungen erkunden',
+        contactMe: 'Beratung anfragen',
       },
       services: {
-        tagline: 'Dienstleistungen',
-        title: 'Wie ich Ihrer Organisation helfen kann',
-        subtitle: 'Ich biete eine Reihe spezialisierter IT-Dienstleistungen an, um Unternehmen bei der Optimierung ihrer Abläufe und digitalen Infrastruktur zu unterstützen.',
+        tagline: 'Automatisierungs- & Integrations-Experten',
+        title: 'Fördern Sie Unternehmenswachstum mit strategischer IT-Automatisierung',
+        subtitle: 'Spezialisierte IT-Lösungen zur Optimierung von Abläufen, Verbesserung der Infrastruktur und Lieferung messbarer Ergebnisse.',
         items: [
           {
             title: 'Workflow-Automatisierung',
-            description: 'Optimieren Sie Ihre Geschäftsprozesse mit Power Automate-Lösungen, die den manuellen Aufwand reduzieren und die betriebliche Effizienz steigern.',
+            description: 'Automatisieren Sie wiederkehrende Aufgaben und optimieren Sie Prozesse mit Power Automate, damit sich Ihr Team auf strategische Initiativen konzentrieren kann und die Gesamteffizienz gesteigert wird.',
+            icon: 'tabler:settings-automation',
           },
           {
             title: 'Intelligente Chatbots',
-            description: 'Entwickeln Sie smarte Chatbots in Copilot Studio, die Benutzerinteraktionen durch natürliche Sprachverarbeitung und automatisierte Antworten verbessern.',
+            description: 'Verbessern Sie Kundenservice und Mitarbeiterproduktivität mit KI-gestützten Chatbots, die in Copilot Studio erstellt wurden und sofortige Unterstützung sowie personalisierte Erfahrungen bieten.',
+            icon: 'tabler:message-chatbot',
           },
           {
             title: 'API-Integrationen',
-            description: 'Schaffen Sie nahtlose Verbindungen zwischen Ihren Anwendungen und Diensten mit benutzerdefinierten API-Integrationen für effizienten Datenaustausch.',
+            description: 'Verbinden Sie Ihre kritischen Anwendungen und Dienste mit nahtlosen API-Integrationen, die effizienten Datenaustausch und automatisierte Workflows in Ihrem gesamten Ökosystem ermöglichen.',
+            icon: 'tabler:api',
           },
           {
             title: 'Microsoft 365 Management',
-            description: 'Optimieren Sie Ihre Microsoft 365-Umgebung mit fachkundiger Administration, Sicherheitskonfigurationen und Service-Optimierung.',
+            description: 'Maximieren Sie den Wert Ihrer Microsoft 365-Investition mit fachkundiger Administration, proaktiver Sicherheit und kontinuierlicher Optimierung für eine sichere und produktive Umgebung.',
+            icon: 'tabler:brand-office',
           },
           {
             title: 'SharePoint-Lösungen',
-            description: 'Einrichten, Verwalten und Optimieren von SharePoint Online und On-Premise-Implementierungen für effektives Dokumentenmanagement und Zusammenarbeit.',
+            description: 'Transformieren Sie Ihr Dokumentenmanagement und Ihre Zusammenarbeit mit maßgeschneiderten SharePoint-Lösungen, die Workflows optimieren, Informationsaustausch verbessern und Teamproduktivität steigern.',
+            icon: 'tabler:share',
           },
           {
             title: 'IT-Infrastrukturüberwachung',
-            description: 'Verwaltung globaler IT-Infrastrukturen, einschließlich Server, Netzwerke und Endbenutzergeräte, um zuverlässige Betriebsabläufe zu gewährleisten.',
+            description: 'Sorgen Sie für zuverlässige und effiziente IT-Abläufe mit proaktivem Infrastrukturmanagement, minimieren Sie Ausfallzeiten und maximieren Sie die Leistung in Ihrer globalen Umgebung.',
+            icon: 'tabler:server',
           },
         ],
       },
       approach: {
-        tagline: 'Über meinen Ansatz',
-        title: 'IT-Exzellenz durch Innovation vorantreiben',
-        missionTitle: 'Leitbild',
+        tagline: 'Strategischer & Ergebnisorientierter Ansatz',
+        title: 'Transformation Ihres Unternehmens mit bewährten IT-Strategien',
+        missionTitle: 'Unser Engagement',
         missionContent: [
-          'Meine Mission ist es, IT-Exzellenz durch die Optimierung von Cloud-Lösungen, die Automatisierung von Prozessen und die Bereitstellung hervorragender technischer Unterstützung voranzutreiben. Ich glaube daran, Technologie zu nutzen, um echte geschäftliche Herausforderungen zu lösen und durch Innovation Mehrwert zu schaffen.',
-          'Mit über 15 Jahren IT-Erfahrung bringe ich einen reichen Schatz an Wissen in Microsoft-Technologien, Automatisierungstools und Systemintegration mit, um Organisationen dabei zu helfen, ihre digitalen Fähigkeiten zu transformieren und ihre strategischen Ziele zu erreichen.'
+          'Wir sind bestrebt, IT-Exzellenz durch strategische Cloud-Optimierung, Prozessautomatisierung und technischen Support auf Unternehmensebene voranzutreiben. Wir nutzen modernste Technologie, um komplexe geschäftliche Herausforderungen zu bewältigen und messbaren Mehrwert zu liefern.',
+          'Mit tiefgreifender Expertise in Microsoft-Technologien und Automatisierung befähigen wir Organisationen, ihre digitalen Fähigkeiten zu transformieren und ihre Geschäftsziele zu erreichen.'
         ],
         items: [
           {
             title: 'Nutzerzentrierte Lösungen',
-            description: 'Ich konzentriere mich auf die Entwicklung von Lösungen, die die Benutzererfahrung und Produktivität verbessern und sicherstellen, dass Technologie den Menschen effektiv dient.',
+            description: 'Wir entwickeln Lösungen, die die Benutzererfahrung verbessern und die Produktivität maximieren, damit Technologie Ihr Unternehmen stärkt.',
           },
           {
-            title: 'Kontinuierliche Verbesserung',
-            description: 'Ich bleibe auf dem Laufenden mit aufkommenden Technologien und Best Practices, um innovative Lösungen zu liefern, die mit Ihren Bedürfnissen wachsen.',
+            title: 'Kontinuierliche Innovation',
+            description: 'Wir bleiben an der Spitze durch Erforschung und Implementierung aufkommender Technologien und bieten skalierbare Lösungen, die sich an Ihre sich entwickelnden Anforderungen anpassen.',
           },
           {
-            title: 'Strategische Implementierung',
-            description: 'Ich gehe strategisch an jedes Projekt heran und stimme technische Lösungen mit Geschäftszielen ab, um maximale Wirkung zu erzielen.',
+            title: 'Strategische Umsetzung',
+            description: 'Wir stimmen technische Lösungen auf Ihre Kerngeschäftsziele ab und liefern messbaren ROI und Wettbewerbsvorteile.',
           },
         ],
       },
       testimonials: {
-        tagline: 'Referenzen',
-        title: 'Was Kunden über meine Arbeit sagen',
+        tagline: 'Echte Ergebnisse für unsere Kunden',
+        title: 'Was unsere Kunden sagen',
         items: [
           {
-            testimonial: 'Richards Expertise in Power Automate hat unsere Workflow-Prozesse transformiert, uns unzählige Stunden gespart und Fehler erheblich reduziert.',
-            name: 'Kundenname',
-            description: 'Position, Unternehmen',
+            testimonial: 'Richards Expertise in Power Automate war entscheidend bei der Automatisierung unserer Rechnungsverarbeitung, wodurch der manuelle Aufwand um 70% reduziert und Dateneingabefehler eliminiert wurden. Der ROI war sofort und signifikant.',
+            name: 'John Smith',
+            description: 'CFO, Acme Corp',
           },
           {
-            testimonial: 'Die von Richard gelieferte SharePoint-Implementierung hat unsere Dokumentenmanagement- und Teamkollaborationsfähigkeiten revolutioniert.',
-            name: 'Kundenname',
-            description: 'Position, Unternehmen',
+            testimonial: 'Die von Richard gelieferte SharePoint-Implementierung hat die Fähigkeit unseres Teams zur Zusammenarbeit und zum Informationsaustausch komplett transformiert. Wir haben einen dramatischen Anstieg der Produktivität und eine erhebliche Reduzierung von E-Mail-Überflutung erlebt.',
+            name: 'Jane Doe',
+            description: 'Projektmanager, Beta Industries',
           },
           {
-            testimonial: 'Richards technisches Wissen in Kombination mit seiner Fähigkeit, unsere Geschäftsanforderungen zu verstehen, führte zu Lösungen, die unsere Herausforderungen wirklich adressierten.',
-            name: 'Kundenname',
-            description: 'Position, Unternehmen',
+            testimonial: 'Richard nahm sich die Zeit, unsere einzigartigen geschäftlichen Herausforderungen wirklich zu verstehen und entwickelte maßgeschneiderte IT-Lösungen, die unsere Bedürfnisse perfekt adressierten. Seine technischen Kenntnisse und Problemlösungsfähigkeiten sind außergewöhnlich.',
+            name: 'David Lee',
+            description: 'CEO, Gamma Solutions',
           },
         ],
       },
       callToAction: {
-        title: 'Bereit, Ihre IT-Systeme zu optimieren?',
-        subtitle: 'Lassen Sie uns besprechen, wie ich Ihrer Organisation helfen kann, Prozesse zu optimieren, die Zusammenarbeit zu verbessern und die digitale Transformation voranzutreiben.',
-        button: 'Kontaktieren Sie mich',
+        title: 'Übernehmen Sie die Kontrolle über Ihre IT-Zukunft',
+        subtitle: 'Lassen Sie uns besprechen, wie unsere Lösungen Ihre Prozesse optimieren, die Zusammenarbeit verbessern und die digitale Transformation vorantreiben können.',
+        button: 'Planen Sie jetzt Ihre Beratung',
       },
       contact: {
-        title: 'Kontakt aufnehmen',
-        subtitle: 'Haben Sie ein Projekt im Sinn oder Fragen zu meinen Dienstleistungen? Nehmen Sie Kontakt auf und lassen Sie uns ein Gespräch beginnen.',
+        title: 'Kontaktieren Sie unser Team',
+        subtitle: 'Besprechen Sie Ihre Unternehmensanforderungen oder erkundigen Sie sich nach unseren professionellen Dienstleistungen. Unsere Berater stehen bereit, um fachkundige Beratung zu bieten, die auf Ihre geschäftlichen Bedürfnisse zugeschnitten ist.',
         nameLabel: 'Name',
         namePlaceholder: 'Ihr Name',
         emailLabel: 'E-Mail',
@@ -924,7 +967,7 @@ export const translations: Record<string, Translation> = {
         messageLabel: 'Nachricht',
         messagePlaceholder: 'Ihre Nachricht',
         disclaimer: 'Durch das Absenden dieses Formulars stimmen Sie unserer Datenschutzrichtlinie zu und erlauben uns, Ihre Informationen zu verwenden, um Sie über unsere Dienstleistungen zu kontaktieren.',
-        description: 'Ich werde so schnell wie möglich auf Ihre Nachricht antworten. Sie können sich auch über LinkedIn oder GitHub mit mir verbinden.',
+        description: 'Alle Anfragen erhalten eine schnelle professionelle Antwort. Für weitere Informationen über unsere Unternehmenslösungen können Sie sich mit unserem Team auf LinkedIn verbinden oder unsere technischen Ressourcen auf GitHub erkunden.',
       },
     },
     resume: {
@@ -1154,11 +1197,17 @@ export const translations: Record<string, Translation> = {
       skills: 'Compétences',
       education: 'Formation',
       blog: 'Blog',
+      services: 'Services',
+      contact: 'Contact',
+    },
+    footer: {
+      terms: 'Conditions d\'utilisation',
+      privacyPolicy: 'Politique de confidentialité',
     },
     hero: {
-      title: 'Simplifier les Systèmes, Amplifier les Résultats',
-      greeting: 'Bonjour ! Je suis Richard Bergsma.',
-      subtitle: 'J\'automatise les flux de travail avec Power Automate, développe des chatbots intelligents dans Copilot Studio et connecte les systèmes via des intégrations API transparentes. De l\'optimisation de l\'infrastructure IT et la gestion des environnements globaux à l\'amélioration de la collaboration avec SharePoint et Azure, je rationalise les processus pour rendre la technologie plus intelligente, tout en perfectionnant mes compétences en Python.',
+      title: 'Libérez votre potentiel d\'entreprise avec l\'automatisation IT experte',
+      greeting: 'Richard Bergsma, spécialiste des systèmes IT et de l\'automatisation',
+      subtitle: 'Je propose des solutions d\'automatisation de niveau entreprise utilisant Power Automate, Copilot Studio et le développement d\'API personnalisées. Mon expertise aide les entreprises à rationaliser leurs opérations, réduire les coûts et améliorer la productivité grâce à Microsoft 365, SharePoint et Azure.',
     },
     about: {
       title: 'À propos de moi',
@@ -1170,92 +1219,98 @@ export const translations: Record<string, Translation> = {
     },
     homepage: {
       actions: {
-        learnMore: 'En savoir plus',
-        contactMe: 'Me contacter',
+        learnMore: 'Explorer les solutions',
+        contactMe: 'Demander une consultation',
       },
       services: {
-        tagline: 'Services',
-        title: 'Comment je peux aider votre organisation',
-        subtitle: 'Je propose une gamme de services IT spécialisés pour aider les entreprises à optimiser leurs opérations et leur infrastructure numérique.',
+        tagline: 'Experts en automatisation et intégration',
+        title: 'Stimulez la croissance de votre entreprise grâce à l\'automatisation IT stratégique',
+        subtitle: 'Solutions IT spécialisées pour optimiser les opérations, améliorer l\'infrastructure et fournir des résultats mesurables.',
         items: [
           {
             title: 'Automatisation des flux de travail',
-            description: 'Rationalisez vos processus métier avec des solutions Power Automate qui réduisent l\'effort manuel et augmentent l\'efficacité opérationnelle.',
+            description: 'Automatisez les tâches répétitives et rationalisez les processus avec Power Automate, libérant votre équipe pour se concentrer sur les initiatives stratégiques et augmentant l\'efficacité globale.',
+            icon: 'tabler:settings-automation',
           },
           {
             title: 'Chatbots intelligents',
-            description: 'Développez des chatbots intelligents dans Copilot Studio qui améliorent les interactions utilisateur grâce au traitement du langage naturel et aux réponses automatisées.',
+            description: 'Améliorez le service client et la productivité des employés avec des chatbots alimentés par l\'IA construits dans Copilot Studio, offrant un support instantané et des expériences personnalisées.',
+            icon: 'tabler:message-chatbot',
           },
           {
             title: 'Intégrations API',
-            description: 'Créez des connexions transparentes entre vos applications et services avec des intégrations API personnalisées pour un échange de données efficace.',
+            description: 'Connectez vos applications et services critiques avec des intégrations API transparentes, permettant un échange de données efficace et des flux de travail automatisés dans tout votre écosystème.',
+            icon: 'tabler:api',
           },
           {
             title: 'Gestion Microsoft 365',
-            description: 'Optimisez votre environnement Microsoft 365 avec une administration experte, des configurations de sécurité et une optimisation des services.',
+            description: 'Maximisez la valeur de votre investissement Microsoft 365 avec une administration experte, une sécurité proactive et une optimisation continue pour assurer un environnement sécurisé et productif.',
+            icon: 'tabler:brand-office',
           },
           {
             title: 'Solutions SharePoint',
-            description: 'Configurez, gérez et optimisez les déploiements SharePoint Online et on-premise pour une gestion efficace des documents et une collaboration optimale.',
+            description: 'Transformez votre gestion documentaire et votre collaboration avec des solutions SharePoint sur mesure qui rationalisent les flux de travail, améliorent le partage d\'informations et renforcent la productivité des équipes.',
+            icon: 'tabler:share',
           },
           {
             title: 'Supervision de l\'infrastructure IT',
-            description: 'Gérez les infrastructures IT mondiales, y compris les serveurs, les réseaux et les appareils des utilisateurs finaux pour assurer des opérations fiables.',
+            description: 'Assurez des opérations IT fiables et efficaces avec une gestion proactive de l\'infrastructure, minimisant les temps d\'arrêt et maximisant les performances dans votre environnement mondial.',
+            icon: 'tabler:server',
           },
         ],
       },
       approach: {
-        tagline: 'À propos de mon approche',
-        title: 'Favoriser l\'excellence IT par l\'innovation',
-        missionTitle: 'Énoncé de mission',
+        tagline: 'Approche stratégique et axée sur les résultats',
+        title: 'Transformer votre entreprise avec des stratégies IT éprouvées',
+        missionTitle: 'Notre engagement',
         missionContent: [
-          'Ma mission est de favoriser l\'excellence IT en optimisant les solutions cloud, en automatisant les processus et en fournissant un support technique exceptionnel. Je crois en l\'utilisation de la technologie pour résoudre de véritables défis commerciaux et créer de la valeur grâce à l\'innovation.',
-          'Avec plus de 15 ans d\'expérience en IT, j\'apporte une richesse de connaissances en technologies Microsoft, outils d\'automatisation et intégration de systèmes pour aider les organisations à transformer leurs capacités numériques et à atteindre leurs objectifs stratégiques.'
+          'Nous nous engageons à favoriser l\'excellence IT grâce à l\'optimisation stratégique du cloud, l\'automatisation des processus et le support technique de niveau entreprise. Nous exploitons les technologies de pointe pour relever les défis commerciaux complexes et fournir une valeur mesurable.',
+          'Avec une expertise approfondie dans les technologies Microsoft et l\'automatisation, nous permettons aux organisations de transformer leurs capacités numériques et d\'atteindre leurs objectifs commerciaux.'
         ],
         items: [
           {
             title: 'Solutions centrées sur l\'utilisateur',
-            description: 'Je me concentre sur la création de solutions qui améliorent l\'expérience utilisateur et la productivité, en veillant à ce que la technologie serve efficacement les personnes.',
+            description: 'Nous concevons des solutions qui améliorent l\'expérience utilisateur et maximisent la productivité, garantissant que la technologie renforce votre entreprise.',
           },
           {
-            title: 'Amélioration continue',
-            description: 'Je reste à jour avec les technologies émergentes et les meilleures pratiques pour fournir des solutions de pointe qui évoluent avec vos besoins.',
+            title: 'Innovation continue',
+            description: 'Nous restons à la pointe en recherchant et en implémentant des technologies émergentes, fournissant des solutions évolutives qui s\'adaptent à vos besoins en constante évolution.',
           },
           {
-            title: 'Implémentation stratégique',
-            description: 'J\'aborde chaque projet de manière stratégique, en alignant les solutions techniques sur les objectifs commerciaux pour un impact maximal.',
+            title: 'Mise en œuvre stratégique',
+            description: 'Nous alignons les solutions techniques sur vos objectifs commerciaux fondamentaux, offrant un ROI mesurable et un avantage concurrentiel.',
           },
         ],
       },
       testimonials: {
-        tagline: 'Témoignages',
-        title: 'Ce que les clients disent de mon travail',
+        tagline: 'Résultats concrets pour nos clients',
+        title: 'Ce que disent nos clients',
         items: [
           {
-            testimonial: 'L\'expertise de Richard en Power Automate a transformé nos processus de flux de travail, nous faisant gagner d\'innombrables heures et réduisant considérablement les erreurs.',
-            name: 'Nom du client',
-            description: 'Poste, Entreprise',
+            testimonial: 'L\'expertise de Richard en Power Automate a été déterminante dans l\'automatisation de notre traitement des factures, réduisant l\'effort manuel de 70% et éliminant les erreurs de saisie. Le ROI a été immédiat et significatif.',
+            name: 'John Smith',
+            description: 'Directeur financier, Acme Corp',
           },
           {
-            testimonial: 'L\'implémentation SharePoint livrée par Richard a révolutionné nos capacités de gestion documentaire et de collaboration d\'équipe.',
-            name: 'Nom du client',
-            description: 'Poste, Entreprise',
+            testimonial: 'L\'implémentation SharePoint livrée par Richard a complètement transformé la capacité de notre équipe à collaborer et partager des informations. Nous avons constaté une augmentation spectaculaire de la productivité et une réduction significative de l\'encombrement des emails.',
+            name: 'Jane Doe',
+            description: 'Chef de projet, Beta Industries',
           },
           {
-            testimonial: 'Les connaissances techniques de Richard combinées à sa capacité à comprendre nos besoins commerciaux ont abouti à des solutions qui ont véritablement répondu à nos défis.',
-            name: 'Nom du client',
-            description: 'Poste, Entreprise',
+            testimonial: 'Richard a pris le temps de vraiment comprendre nos défis commerciaux uniques et a développé des solutions IT personnalisées qui répondaient parfaitement à nos besoins. Ses connaissances techniques et ses compétences en résolution de problèmes sont exceptionnelles.',
+            name: 'David Lee',
+            description: 'PDG, Gamma Solutions',
           },
         ],
       },
       callToAction: {
-        title: 'Prêt à optimiser vos systèmes IT ?',
-        subtitle: 'Discutons de la façon dont je peux aider votre organisation à rationaliser les processus, améliorer la collaboration et favoriser la transformation numérique.',
-        button: 'Me contacter',
+        title: 'Prenez le contrôle de votre avenir IT',
+        subtitle: 'Discutons de la façon dont nos solutions peuvent rationaliser vos processus, améliorer la collaboration et stimuler la transformation numérique.',
+        button: 'Planifiez votre consultation maintenant',
       },
       contact: {
-        title: 'Prendre contact',
-        subtitle: 'Vous avez un projet en tête ou des questions sur mes services ? Contactez-moi et commençons une conversation.',
+        title: 'Contactez notre équipe',
+        subtitle: 'Discutez de vos besoins d\'entreprise ou renseignez-vous sur nos services professionnels. Nos consultants sont prêts à vous fournir des conseils d\'experts adaptés à vos besoins commerciaux.',
         nameLabel: 'Nom',
         namePlaceholder: 'Votre nom',
         emailLabel: 'Email',
@@ -1263,7 +1318,7 @@ export const translations: Record<string, Translation> = {
         messageLabel: 'Message',
         messagePlaceholder: 'Votre message',
         disclaimer: 'En soumettant ce formulaire, vous acceptez notre politique de confidentialité et nous autorisez à utiliser vos informations pour vous contacter au sujet de nos services.',
-        description: 'Je répondrai à votre message dès que possible. Vous pouvez également me contacter sur LinkedIn ou GitHub.',
+        description: 'Toutes les demandes reçoivent une réponse professionnelle rapide. Pour plus d\'informations sur nos solutions d\'entreprise, connectez-vous avec notre équipe sur LinkedIn ou explorez nos ressources techniques sur GitHub.',
       },
     },
     resume: {
