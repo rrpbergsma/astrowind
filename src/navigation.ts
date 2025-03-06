@@ -7,8 +7,8 @@ export const getHeaderData = (lang = 'en') => {
   // For hash links on the homepage, we need special handling
   const homeHashLink = (hash) => {
     // Create an absolute path to the homepage with the language prefix
-    // and then append the hash
-    return getPermalink('/', 'page', lang) + hash;
+    // and include the hash in the permalink generation
+    return getPermalink('/' + hash, 'page', lang);
   };
   
   return {

@@ -7,7 +7,7 @@ export interface Props {
   disableParallax?: boolean;
 }
 
-const { isDark = false, showIcons = true, disableParallax = false } = Astro.props;
+const { isDark = false, showIcons = true, disableParallax = true } = Astro.props;
 
 // Define color palettes for light and dark modes with higher contrast
 const lightModeColors = [
@@ -22,14 +22,14 @@ const lightModeColors = [
 ];
 
 const darkModeColors = [
-  'dark:text-blue-400/45',
-  'dark:text-indigo-400/45',
-  'dark:text-purple-400/45',
-  'dark:text-cyan-400/45',
-  'dark:text-teal-400/45',
-  'dark:text-emerald-400/45',
-  'dark:text-sky-400/45',
-  'dark:text-violet-400/45',
+  'dark:text-blue-500/65',
+  'dark:text-indigo-500/65',
+  'dark:text-purple-500/65',
+  'dark:text-cyan-500/65',
+  'dark:text-teal-500/65',
+  'dark:text-emerald-500/65',
+  'dark:text-sky-500/65',
+  'dark:text-violet-500/65',
 ];
 
 // Define interfaces for our icon objects
@@ -98,14 +98,20 @@ const getRandomRotation = (): string => {
   return `${getRandomInRange(-30, 30)}deg`;
 };
 
-// Function to get a random size (restored to original dimensions)
-const getRandomSize = (): string => {
-  return `${getRandomInRange(140, 180)}px`;
+// Function to get a random size
+const getRandomSize = (isDarkMode: boolean = false): string => {
+  // Slightly larger size range for dark mode for better visibility
+  return isDarkMode
+    ? `${getRandomInRange(160, 200)}px`
+    : `${getRandomInRange(140, 180)}px`;
 };
 
 // Function to get a random opacity
-const getRandomOpacity = (): string => {
-  return getRandomInRange(0.32, 0.38).toFixed(2);
+const getRandomOpacity = (isDarkMode: boolean = false): string => {
+  // Higher opacity range for dark mode for better visibility
+  return isDarkMode
+    ? getRandomInRange(0.45, 0.55).toFixed(2)
+    : getRandomInRange(0.32, 0.38).toFixed(2);
 };
 
 // Create a spacious layout with well-separated icons
@@ -172,8 +178,8 @@ const createSpacedIcons = (): BaseIconObject[] => {
         icon: iconNames[iconIndex],
         x: `${x}%`,
         y: `${y}%`,
-        size: getRandomSize(),
-        opacity: getRandomOpacity(),
+        size: getRandomSize(isDark),
+        opacity: getRandomOpacity(isDark),
         rotate: getRandomRotation(),
       });
     }
@@ -200,15 +206,12 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
   <slot />
   
   {showIcons && (
-    /* Decorative background icons with parallax effect */
-    <div id="parallax-background" class="absolute inset-0 overflow-hidden pointer-events-none z-[-5]">
-      {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor }, index) => (
+    /* Decorative background icons with random placement */
+    <div id="background-icons" class="absolute inset-0 overflow-hidden pointer-events-none z-[-5]">
+      {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor }) => (
         <div
-          class={`absolute ${lightColor} ${darkColor} parallax-icon`}
-          style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate}); will-change: transform; transition: transform 0.1s ease-out;`}
-          data-depth={`${0.5 + (index % 3) * 0.2}`}
-          data-initial-x={x}
-          data-initial-y={y}
+          class={`absolute ${lightColor} ${darkColor} background-icon`}
+          style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate});`}
         >
           <Icon name={icon} style={`width: ${size}; height: ${size};`} />
         </div>

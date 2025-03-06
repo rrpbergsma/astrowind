@@ -76,8 +76,13 @@ const {
       <!-- Left Section: Company Name and Business Details -->
       <div class="flex flex-col items-start space-y-2">
         <!-- Site Title -->
-        <a class="inline-block font-bold text-xl" href={getHomePermalink(currentLang)}>
+        <a class="inline-block font-bold text-2xl" href={getHomePermalink(currentLang)}>
           {SITE?.name}
+          <span class="inline-flex items-center ml-2">
+            <Icon name="circle-flags:nl" class="h-5 w-auto flag-square" />
+            <span class="mx-1 text-gray-600 text-xl">🤝</span>
+            <Icon name="circle-flags:eu" class="h-5 w-auto flag-square" />
+          </span>
         </a>
 
         <!-- Business Information (Dutch Law Requirements) -->
@@ -121,3 +126,10 @@ const {
     </div>
   </div>
 </footer>
+
+<style>
+  .flag-square {
+    border-radius: 0 !important;
+    overflow: hidden;
+  }
+</style>

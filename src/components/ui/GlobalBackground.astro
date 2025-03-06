@@ -20,14 +20,14 @@ const lightModeColors = [
 ];
 
 const darkModeColors = [
-  'dark:text-blue-400/45',
-  'dark:text-indigo-400/45',
-  'dark:text-purple-400/45',
-  'dark:text-cyan-400/45',
-  'dark:text-teal-400/45',
-  'dark:text-emerald-400/45',
-  'dark:text-sky-400/45',
-  'dark:text-violet-400/45',
+  'dark:text-blue-500/65',
+  'dark:text-indigo-500/65',
+  'dark:text-purple-500/65',
+  'dark:text-cyan-500/65',
+  'dark:text-teal-500/65',
+  'dark:text-emerald-500/65',
+  'dark:text-sky-500/65',
+  'dark:text-violet-500/65',
 ];
 
 // Define interfaces for our icon objects
@@ -99,13 +99,19 @@ const getRandomRotation = (): string => {
 };
 
 // Function to get a random size
-const getRandomSize = (): string => {
-  return `${getRandomInRange(140, 180)}px`;
+const getRandomSize = (isDarkMode: boolean = false): string => {
+  // Slightly larger size range for dark mode for better visibility
+  return isDarkMode
+    ? `${getRandomInRange(160, 200)}px`
+    : `${getRandomInRange(140, 180)}px`;
 };
 
 // Function to get a random opacity
-const getRandomOpacity = (): string => {
-  return getRandomInRange(0.32, 0.38).toFixed(2);
+const getRandomOpacity = (isDarkMode: boolean = false): string => {
+  // Higher opacity range for dark mode for better visibility
+  return isDarkMode
+    ? getRandomInRange(0.45, 0.55).toFixed(2)
+    : getRandomInRange(0.32, 0.38).toFixed(2);
 };
 
 // Create a spacious layout with well-separated icons
@@ -188,8 +194,8 @@ const createSpacedIcons = (): BaseIconObject[] => {
         icon: iconNames[iconIndex],
         x: `${x}%`,
         y: `${y}%`,
-        size: getRandomSize(),
-        opacity: getRandomOpacity(),
+        size: getRandomSize(isDark),
+        opacity: getRandomOpacity(isDark),
         rotate: getRandomRotation(),
         visibilityClass, // Add the visibility class to the icon object
       });
@@ -219,15 +225,12 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
 <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-5]" aria-hidden="true">
   <div class:list={['absolute inset-0', { 'backdrop-blur-sm bg-white/5 dark:bg-gray-900/10': isDark }]}></div>
   
-  {/* Decorative background icons with parallax effect */}
-  <div id="parallax-background" class="absolute inset-0 overflow-hidden">
-    {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor, visibilityClass }, index) => (
+  {/* Decorative background icons with random placement */}
+  <div id="background-icons" class="absolute inset-0 overflow-hidden">
+    {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor, visibilityClass }) => (
       <div
-        class={`absolute ${lightColor} ${darkColor} parallax-icon ${visibilityClass}`}
-        style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate}); will-change: transform; transition: transform 0.1s ease-out;`}
-        data-depth={`${0.5 + (index % 3) * 0.2}`}
-        data-initial-x={x}
-        data-initial-y={y}
+        class={`absolute ${lightColor} ${darkColor} ${visibilityClass}`}
+        style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate});`}
       >
         <Icon name={icon} style={`width: ${size}; height: ${size};`} />
       </div>
@@ -235,82 +238,4 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
   </div>
 </div>
 
-<script>
-  // Parallax scrolling effect for background icons
-  document.addEventListener('DOMContentLoaded', () => {
-    // Get all parallax icons
-    const parallaxIcons = document.querySelectorAll<HTMLElement>('.parallax-icon');
-    
-    // Skip parallax on mobile devices for better performance
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) return;
-    
-    // Variables to track scroll position
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    
-    // Function to update icon positions based on scroll
-    const updateParallax = () => {
-      parallaxIcons.forEach((icon) => {
-        const depth = parseFloat(icon.getAttribute('data-depth') || '0.5');
-        
-        // Calculate parallax offset based on scroll position and depth
-        // Lower depth value means the icon moves slower (appears further away)
-        const yOffset = (lastScrollY * depth * 0.15);
-        
-        // Get the original rotation
-        const transformValue = icon.style.transform;
-        const rotateMatch = transformValue.match(/rotate\([^)]+\)/);
-        const rotateValue = rotateMatch ? rotateMatch[0] : 'rotate(0deg)';
-        
-        // Apply transform with the original rotation plus the parallax offset
-        icon.style.transform = `${rotateValue} translate3d(0, ${yOffset}px, 0)`;
-      });
-      
-      ticking = false;
-    };
-    
-    // Throttle scroll events for better performance
-    const onScroll = () => {
-      lastScrollY = window.scrollY;
-      
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateParallax();
-          ticking = false;
-        });
-        
-        ticking = true;
-      }
-    };
-    
-    // Add scroll event listener
-    window.addEventListener('scroll', onScroll, { passive: true });
-    
-    // Update on resize (debounced)
-    let resizeTimer: number;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        // Check if device is now mobile and disable parallax if needed
-        const isMobileNow = window.matchMedia('(max-width: 768px)').matches;
-        
-        if (isMobileNow) {
-          // Reset positions on mobile
-          parallaxIcons.forEach((icon) => {
-            const transformValue = icon.style.transform;
-            const rotateMatch = transformValue.match(/rotate\([^)]+\)/);
-            const rotateValue = rotateMatch ? rotateMatch[0] : 'rotate(0deg)';
-            icon.style.transform = rotateValue;
-          });
-        } else {
-          // Update parallax on desktop
-          updateParallax();
-        }
-      }, 200) as unknown as number;
-    }, { passive: true });
-    
-    // Initial update
-    updateParallax();
-  });
-</script>
+<!-- Parallax effect removed while maintaining random icon placement -->
