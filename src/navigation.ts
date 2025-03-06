@@ -32,7 +32,6 @@ export const getHeaderData = (lang = 'en') => {
           { text: t.navigation.education, href: getPermalink('/aboutme', 'page', lang) + '#education', isHashLink: true },
         ]
       },
-      { text: t.navigation.blog, href: getPermalink('/blog', 'page', lang)  },
     ]
   };
 };

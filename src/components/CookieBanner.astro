@@ -1,0 +1,104 @@
+---
+import { getTranslation } from '~/i18n/translations';
+
+const { lang = 'en' } = Astro.params;
+const t = getTranslation(lang);
+---
+
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 p-4 content-backdrop shadow-lg transform transition-transform duration-300 translate-y-full" style="display: none;">
+  <div class="container mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="text-sm text-gray-800 dark:text-gray-200 font-medium">
+      <p>
+        {t.cookies.message} 
+        <a href={`/${lang}/privacy#cookie-usage`} class="text-blue-600 dark:text-blue-400 hover:underline">{t.cookies.learnMore}</a>
+      </p>
+    </div>
+    <div class="flex-shrink-0">
+      <button id="accept-cookies" class="btn-primary px-4 py-2 rounded-md">
+        {t.cookies.accept}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    setupCookieBanner();
+  });
+
+  document.addEventListener('astro:after-swap', () => {
+    setupCookieBanner();
+  });
+
+  // Helper function to get cookie value
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
+  // Helper function to set cookie with expiration
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value}; ${expires}; path=/; SameSite=Lax`;
+  }
+
+  function setupCookieBanner() {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptButton = document.getElementById('accept-cookies');
+    
+    if (!cookieBanner || !acceptButton) return;
+
+    // Check if user has already accepted cookies
+    if (getCookie('cookieConsentAccepted') === 'true') {
+      cookieBanner.style.display = 'none';
+      return;
+    }
+
+    // Also check localStorage as a fallback
+    try {
+      if (localStorage && localStorage.getItem('cookieConsentAccepted') === 'true') {
+        cookieBanner.style.display = 'none';
+        // Also set the cookie for future visits
+        setCookie('cookieConsentAccepted', 'true', 365);
+        return;
+      }
+    } catch (e) {
+      console.error('Error accessing localStorage:', e);
+      // Continue checking cookies
+    }
+
+    // Show the banner
+    cookieBanner.style.display = 'block';
+
+    // Show the banner with a slight delay for better UX
+    setTimeout(() => {
+      cookieBanner.classList.remove('translate-y-full');
+    }, 500);
+
+    // Handle accept button click
+    acceptButton.addEventListener('click', () => {
+      // Store consent in cookie (primary storage)
+      setCookie('cookieConsentAccepted', 'true', 365);
+      
+      // Also store in localStorage as backup
+      try {
+        localStorage.setItem('cookieConsentAccepted', 'true');
+      } catch (e) {
+        console.error('Error setting localStorage:', e);
+        // Continue with cookie storage
+      }
+      
+      // Hide the banner with animation
+      cookieBanner.classList.add('translate-y-full');
+      
+      // Remove from DOM after animation completes
+      setTimeout(() => {
+        cookieBanner.style.display = 'none';
+      }, 300);
+    });
+  }
+</script>

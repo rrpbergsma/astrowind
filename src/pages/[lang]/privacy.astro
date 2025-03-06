@@ -1,0 +1,268 @@
+---
+export const prerender = true;
+import Layout from '~/layouts/PageLayout.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Hero from '~/components/widgets/Hero.astro';
+
+import { getTranslation, supportedLanguages } from '~/i18n/translations';
+
+export async function getStaticPaths() {
+  return supportedLanguages.map(lang => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params;
+if (!supportedLanguages.includes(lang)) {
+  return Astro.redirect('/en/privacy');
+}
+
+const t = getTranslation(lang);
+
+const metadata = {
+  title: t.footer.privacyPolicy,
+  description: 'Privacy Policy outlining our data collection practices, cookie usage, and your rights under GDPR.',
+};
+
+// Table of Contents items
+const tocItems = [
+  { id: 'introduction', title: 'Introduction' },
+  { id: 'data-collection', title: 'Data Collection Policy' },
+  { id: 'cookie-usage', title: 'Cookie & Storage Usage' },
+  { id: 'localstorage', title: 'LocalStorage Usage' },
+  { id: 'clear-preferences', title: 'How to Clear Your Preferences' },
+  { id: 'user-rights', title: 'Your Rights (GDPR Compliance)' },
+  { id: 'data-security', title: 'Data Security' },
+  { id: 'third-party', title: 'Third-Party Websites' },
+  { id: 'changes', title: 'Changes to Privacy Policy' },
+  { id: 'contact', title: 'Contact Information' },
+];
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement"></Fragment>
+  
+  <!-- Legal Document Structured Data for SEO -->
+  <StructuredData slot="structured-data" data={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy Policy",
+    "description": "Privacy Policy outlining our data collection practices, cookie usage, and your rights under GDPR.",
+    "url": Astro.url.origin + "/" + lang + "/privacy",
+    "mainEntity": {
+      "@type": "Article",
+      "headline": "Privacy Policy",
+      "datePublished": "2025-03-06",
+      "dateModified": "2025-03-06"
+    }
+  }} />
+
+  <!-- Hero Widget -->
+  <Hero
+    id="hero"
+    title={t.footer.privacyPolicy}
+    isDark={false}
+  >
+    <Fragment slot="subtitle">
+      Last updated: March 6, 2025 (Added cookie consent banner)
+    </Fragment>
+  </Hero>
+
+  <!-- Content Widget -->
+  <div class="mx-auto px-4 sm:px-6 py-4 max-w-4xl">
+    <!-- Table of Contents -->
+    <div class="bg-gray-50 dark:bg-slate-800 p-5 rounded-lg mb-10">
+      <h2 class="text-xl font-bold mb-3">Table of Contents</h2>
+      <ul class="space-y-2">
+        {tocItems.map(item => (
+          <li>
+            <a href={`#${item.id}`} class="text-blue-600 dark:text-blue-400 hover:underline">
+              {item.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Privacy Policy Content -->
+    <div class="prose prose-lg max-w-4xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg">
+      <h2 id="introduction" class="text-2xl font-bold mt-8 mb-4">1. Introduction</h2>
+      <p>
+        This Privacy Policy explains how we handle information when you visit our website. We are committed to protecting your privacy and complying with applicable data protection laws, including the General Data Protection Regulation (GDPR).
+      </p>
+      <p>
+        We value transparency and want you to understand what information we collect, why we collect it, and how we use it. This policy applies to all visitors to our website.
+      </p>
+
+      <h2 id="data-collection" class="text-2xl font-bold mt-8 mb-4">2. Data Collection Policy</h2>
+      <p>
+        <strong>We do not collect or store any personal user data.</strong> Our website is designed to provide information without requiring you to submit any personal information.
+      </p>
+      <p>
+        The only data stored is your preferences for language and theme settings, which are stored locally on your device using browser technologies (cookies and LocalStorage) and are never transmitted to our servers. More details about this are provided in the sections below.
+      </p>
+      <p>
+        We do not:
+      </p>
+      <ul>
+        <li>Collect your name, email address, or other contact information unless you voluntarily provide it through our contact form</li>
+        <li>Track your browsing behavior</li>
+        <li>Use analytics services that collect personal data</li>
+        <li>Use advertising or marketing tracking technologies</li>
+        <li>Share any information with third parties</li>
+        <li>Store your preferences on our servers</li>
+      </ul>
+      <p>
+        If you choose to contact us using our contact form, the information you provide (such as your name and email address) will only be used to respond to your inquiry and will not be stored longer than necessary for that purpose.
+      </p>
+
+      <h2 id="cookie-usage" class="text-2xl font-bold mt-8 mb-4">3. Cookie & Storage Usage</h2>
+      <p>
+        <strong>Our website uses cookies strictly for essential functionality.</strong> These cookies are necessary for the proper functioning of our website and do not collect any personal information.
+      </p>
+      <p>
+        Details about the cookies we use:
+      </p>
+      <ul>
+        <li>
+          <strong>Name:</strong> preferredLanguage
+          <ul>
+            <li><strong>Purpose:</strong> Remembers your language preference (e.g., English, Dutch, German, French)</li>
+            <li><strong>Data stored:</strong> Only the language code (e.g., "en", "nl", "de", "fr")</li>
+            <li><strong>Duration:</strong> 30 days</li>
+            <li><strong>Type:</strong> First-party cookie (not shared with any third parties)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Name:</strong> cookieConsentAccepted
+          <ul>
+            <li><strong>Purpose:</strong> Remembers that you have acknowledged our cookie notice</li>
+            <li><strong>Data stored:</strong> A simple "true" value</li>
+            <li><strong>Duration:</strong> 365 days</li>
+            <li><strong>Type:</strong> First-party cookie and LocalStorage item (not shared with any third parties)</li>
+          </ul>
+        </li>
+      </ul>
+      <p>
+        In addition to cookies, we also use LocalStorage to store certain preferences. Details about this are provided in the next section.
+      </p>
+      <p>
+        We do not use any tracking, analytics, or third-party cookies. No personal information is collected through our cookies or LocalStorage.
+      </p>
+
+      <h2 id="localstorage" class="text-2xl font-bold mt-8 mb-4">4. LocalStorage Usage</h2>
+      <p>
+        <strong>Our website uses LocalStorage to enhance your experience by remembering your preferences and consent choices.</strong>
+      </p>
+      <p>
+        Details about our LocalStorage usage:
+      </p>
+      <ul>
+        <li><strong>Data stored:</strong>
+          <ul>
+            <li>Theme preference (light/dark mode)</li>
+            <li>Cookie consent acceptance status</li>
+          </ul>
+        </li>
+        <li><strong>Purpose:</strong> To remember your preferences and consent choices between visits</li>
+        <li><strong>Location:</strong> Stored only on your device and never sent to our servers</li>
+        <li><strong>Duration:</strong> Persists until you clear your browser's LocalStorage</li>
+      </ul>
+      <p>
+        LocalStorage is a technology that allows websites to store data directly in your browser. Unlike cookies, LocalStorage data is not sent with every request to the server, which makes it more efficient for storing user preferences that only need to be accessed by your browser.
+      </p>
+      <p>
+        No personal information is collected or stored in LocalStorage. The data is used solely to enhance your browsing experience by maintaining your preferred settings.
+      </p>
+
+      <h2 id="clear-preferences" class="text-2xl font-bold mt-8 mb-4">5. How to Clear Your Preferences</h2>
+      <p>
+        If you wish to reset your language or theme settings, you can clear your browser's cookies and LocalStorage data. Here's how to do it in common browsers:
+      </p>
+      <p>
+        <strong>Chrome:</strong>
+      </p>
+      <ol>
+        <li>Click the three dots in the top-right corner</li>
+        <li>Select "Settings"</li>
+        <li>Go to "Privacy and security"</li>
+        <li>Click "Clear browsing data"</li>
+        <li>Select "Cookies and other site data" and "Cached images and files"</li>
+        <li>Click "Clear data"</li>
+      </ol>
+      <p>
+        <strong>Firefox:</strong>
+      </p>
+      <ol>
+        <li>Click the three lines in the top-right corner</li>
+        <li>Select "Settings"</li>
+        <li>Go to "Privacy & Security"</li>
+        <li>Under "Cookies and Site Data," click "Clear Data"</li>
+        <li>Ensure "Cookies and Site Data" is checked</li>
+        <li>Click "Clear"</li>
+      </ol>
+      <p>
+        <strong>Safari:</strong>
+      </p>
+      <ol>
+        <li>Click "Safari" in the top menu</li>
+        <li>Select "Preferences"</li>
+        <li>Go to the "Privacy" tab</li>
+        <li>Click "Manage Website Data"</li>
+        <li>Find our website and click "Remove" or "Remove All"</li>
+      </ol>
+      <p>
+        After clearing your browser data, your language will reset to the default (English) and your theme will reset to the system default.
+      </p>
+
+      <h2 id="user-rights" class="text-2xl font-bold mt-8 mb-4">6. Your Rights (GDPR Compliance)</h2>
+      <p>
+        Under the General Data Protection Regulation (GDPR), you have various rights regarding your personal data. However, since we do not collect or store personal data (except for the language preference cookie which does not contain personal information), most of these rights are not applicable in practice.
+      </p>
+      <p>
+        Nevertheless, you have the right to:
+      </p>
+      <ul>
+        <li><strong>Delete your cookie and LocalStorage data:</strong> You can delete the language preference cookie and theme preference LocalStorage data at any time through your browser settings (see section 5 for instructions)</li>
+        <li><strong>Be informed:</strong> This privacy policy provides transparent information about our data practices</li>
+        <li><strong>Object:</strong> You can choose to disable cookies and LocalStorage in your browser settings</li>
+      </ul>
+      <p>
+        If you have any questions about your rights or wish to exercise any of them, please contact us using the information provided at the end of this policy.
+      </p>
+
+      <h2 id="data-security" class="text-2xl font-bold mt-8 mb-4">7. Data Security</h2>
+      <p>
+        We take appropriate technical and organizational measures to ensure the security of any information transmitted to us. However, please be aware that no method of transmission over the internet or method of electronic storage is 100% secure.
+      </p>
+      <p>
+        Our website uses HTTPS encryption to ensure that any communication between your browser and our website is secure.
+      </p>
+
+      <h2 id="third-party" class="text-2xl font-bold mt-8 mb-4">8. Third-Party Websites</h2>
+      <p>
+        Our website may contain links to other websites that are not operated by us. If you click on a third-party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.
+      </p>
+      <p>
+        We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+      </p>
+
+      <h2 id="changes" class="text-2xl font-bold mt-8 mb-4">9. Changes to Privacy Policy</h2>
+      <p>
+        We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date at the top of this page.
+      </p>
+      <p>
+        You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+      </p>
+
+      <h2 id="contact" class="text-2xl font-bold mt-8 mb-4">10. Contact Information</h2>
+      <p>
+        If you have any questions about this Privacy Policy or our data practices, please contact us at:
+      </p>
+      <p>
+        Email: contact@example.com<br>
+        Postal Address: Postbus 12345, 1000 AB Amsterdam, Nederland
+      </p>
+    </div>
+  </div>
+</Layout>

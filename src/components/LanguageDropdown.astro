@@ -55,7 +55,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         <button
           type="button"
           data-lang-code={lang.code}
-          class="text-gray-700 dark:text-gray-300 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white focus:bg-gray-100 dark:focus:bg-gray-700 focus:text-gray-900 dark:focus:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-colors duration-200"
+          class="text-gray-700 dark:text-gray-300 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
           role="menuitem"
           tabindex="-1"
           aria-label={`Switch to ${lang.name} language`}
@@ -208,11 +208,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         closeMenu();
       } else {
         openMenu();
-        // Focus the first menu item for better keyboard navigation
-        const firstMenuItem = menu.querySelector('button[role="menuitem"]');
-        if (firstMenuItem) {
-          firstMenuItem.focus();
-        }
+        // Don't automatically focus any menu item to avoid default highlighting
       }
     });
 

@@ -18,6 +18,11 @@ export interface Translation {
     terms: string;
     privacyPolicy: string;
   };
+  cookies: {
+    message: string;
+    learnMore: string;
+    accept: string;
+  };
   hero: {
     title: string;
     greeting: string;
@@ -135,6 +140,11 @@ export const translations: Record<string, Translation> = {
     metadata: {
       title: 'About me',
       aboutUs: 'About me',
+    },
+    cookies: {
+      message: 'This website uses cookies to store your language preference and remember your cookie consent. No personal data is collected.',
+      learnMore: 'Learn more in our Privacy Policy',
+      accept: 'OK',
     },
     navigation: {
       home: 'Home',
@@ -487,6 +497,11 @@ export const translations: Record<string, Translation> = {
       title: 'Over mij',
       aboutUs: 'Over mij',
     },
+    cookies: {
+      message: 'Deze website gebruikt cookies om uw taalvoorkeur op te slaan en uw cookie-toestemming te onthouden. Er worden geen persoonlijke gegevens verzameld.',
+      learnMore: 'Lees meer in ons Privacybeleid',
+      accept: 'OK',
+    },
     navigation: {
       home: 'Home',
       about: 'Over',
@@ -838,6 +853,11 @@ export const translations: Record<string, Translation> = {
       title: 'Über mich',
       aboutUs: 'Über mich',
     },
+    cookies: {
+      message: 'Diese Website verwendet Cookies, um Ihre Spracheinstellung zu speichern und Ihre Cookie-Zustimmung zu merken. Es werden keine persönlichen Daten gesammelt.',
+      learnMore: 'Erfahren Sie mehr in unserer Datenschutzrichtlinie',
+      accept: 'OK',
+    },
     navigation: {
       home: 'Start',
       about: 'Über',
@@ -1188,6 +1208,11 @@ export const translations: Record<string, Translation> = {
     metadata: {
       title: 'À propos de moi',
       aboutUs: 'À propos de moi',
+    },
+    cookies: {
+      message: 'Ce site utilise des cookies pour enregistrer votre préférence de langue et mémoriser votre consentement aux cookies. Aucune donnée personnelle n\'est collectée.',
+      learnMore: 'En savoir plus dans notre Politique de confidentialité',
+      accept: 'OK',
     },
     navigation: {
       home: 'Accueil',
