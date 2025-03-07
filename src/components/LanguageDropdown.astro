@@ -87,11 +87,12 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
 
   @media (max-width: 767px) {
     .language-dropdown {
-      display: none;
+      display: inline-block;
     }
-
+  
+    /* Keep the native select hidden even on mobile */
     .language-select {
-      display: block;
+      display: none;
     }
   }
 
