@@ -344,6 +344,17 @@ export const translations: Record<string, Translation> = {
       subtitle: 'Where Knowledge Meets Recognition',
       items: [
         {
+          name: 'Stakeholder Management',
+          issueDate: 'Date Issued: 03-2025',
+          description: 'Earning the Stakeholder Management certification demonstrates expertise in navigating complex political dynamics around projects and effectively managing diverse stakeholder interests. This certification validates skills in analyzing power relationships, negotiating effectively, and developing strategic approaches to transform resistance into productive collaboration for better project outcomes.',
+          linkUrl: 'https://www.sn.nl/opleidingen/trainingen/projectmanagement-het-managen-van-stakeholders/',
+          image: {
+            src: '/images/certificates/SN_Logo2.webp',
+            alt: 'Stakeholder Management certification badge',
+            loading: 'lazy',
+          },
+        },
+        {
           name: 'Certified Nexthink Professional',
           issueDate: 'Date Issued: 01-2025',
           description: 'Earning the Nexthink Certified Application Experience Management certification validates the expertise in optimizing application performance, ensuring seamless user adoption, and driving cost efficiency. This certification demonstrates advanced knowledge in measuring and improving digital employee experience across enterprise environments.',
@@ -710,6 +721,17 @@ export const translations: Record<string, Translation> = {
       title: 'Certificeringen',
       subtitle: 'Waar kennis op erkenning stuit',
       items: [
+        {
+          name: 'Stakeholder Management',
+          issueDate: 'Datum van afgifte: 03-2025',
+          description: 'Het behalen van de Stakeholder Management-certificering toont expertise aan in het navigeren van complexe politieke dynamiek rondom projecten en het effectief managen van diverse belanghebbenden. Deze certificering valideert vaardigheden in het analyseren van machtsverhoudingen, effectief onderhandelen en het ontwikkelen van strategische benaderingen om weerstand om te zetten in productieve samenwerking voor betere projectresultaten.',
+          linkUrl: 'https://www.sn.nl/opleidingen/trainingen/projectmanagement-het-managen-van-stakeholders/',
+          image: {
+            src: '/images/certificates/SN_Logo2.webp',
+            alt: 'Stakeholder Management certificeringsbadge',
+            loading: 'lazy',
+          },
+        },
         {
           name: 'Certified Nexthink Professional',
           issueDate: 'Datum van afgifte: 01-2025',
@@ -1078,6 +1100,17 @@ export const translations: Record<string, Translation> = {
       subtitle: 'Wo Wissen auf Anerkennung trifft',
       items: [
         {
+          name: 'Stakeholder Management',
+          issueDate: 'Ausstellungsdatum: 03-2025',
+          description: 'Der Erwerb der Stakeholder Management-Zertifizierung demonstriert Expertise im Navigieren komplexer politischer Dynamiken rund um Projekte und im effektiven Management verschiedener Stakeholder-Interessen. Diese Zertifizierung validiert Fähigkeiten in der Analyse von Machtbeziehungen, effektivem Verhandeln und der Entwicklung strategischer Ansätze, um Widerstand in produktive Zusammenarbeit für bessere Projektergebnisse zu transformieren.',
+          linkUrl: 'https://www.sn.nl/opleidingen/trainingen/projectmanagement-het-managen-van-stakeholders/',
+          image: {
+            src: '/images/certificates/SN_Logo2.webp',
+            alt: 'Stakeholder Management Zertifizierungsabzeichen',
+            loading: 'lazy',
+          },
+        },
+        {
           name: 'Certified Nexthink Professional',
           issueDate: 'Ausstellungsdatum: 01-2025',
           description: 'Der Erwerb der Nexthink Certified Application Experience Management-Zertifizierung bestätigt die Expertise in der Optimierung der Anwendungsleistung, der Gewährleistung einer nahtlosen Benutzerakzeptanz und der Förderung der Kosteneffizienz. Diese Zertifizierung demonstriert fortgeschrittenes Wissen im Messen und Verbessern der digitalen Mitarbeitererfahrung in Unternehmensumgebungen.',
@@ -1444,6 +1477,17 @@ export const translations: Record<string, Translation> = {
       title: 'Certifications',
       subtitle: 'Où la connaissance rencontre la reconnaissance',
       items: [
+        {
+          name: 'Stakeholder Management',
+          issueDate: 'Date de délivrance : 03-2025',
+          description: 'L\'obtention de la certification Stakeholder Management démontre une expertise dans la navigation des dynamiques politiques complexes autour des projets et dans la gestion efficace des intérêts des diverses parties prenantes. Cette certification valide les compétences en analyse des relations de pouvoir, en négociation efficace et en développement d\'approches stratégiques pour transformer la résistance en collaboration productive pour de meilleurs résultats de projet.',
+          linkUrl: 'https://www.sn.nl/opleidingen/trainingen/projectmanagement-het-managen-van-stakeholders/',
+          image: {
+            src: '/images/certificates/SN_Logo2.webp',
+            alt: 'Badge de certification Stakeholder Management',
+            loading: 'lazy',
+          },
+        },
         {
           name: 'Certified Nexthink Professional',
           issueDate: 'Date de délivrance : 01-2025',

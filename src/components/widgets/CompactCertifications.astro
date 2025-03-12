@@ -70,8 +70,11 @@ const {
             
             <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="block">
               <div class="text-sm text-muted overflow-hidden">
-                <div class="max-h-[12rem] hover:max-h-[300px] transition-all duration-500 ease-cert">
-                  {description}
+                <div class="relative">
+                  <div class="max-h-[7.5rem] hover:max-h-[400px] transition-all duration-500 ease-cert overflow-hidden">
+                    {description}
+                  </div>
+                  <div class="absolute bottom-0 left-0 right-0 h-6 pointer-events-none hover:opacity-0 transition-opacity duration-500" style="transform: translateY(6px);"></div>
                 </div>
               </div>
             </a>
