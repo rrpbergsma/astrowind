@@ -65,7 +65,7 @@ const {
 ---
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
-  <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <div class="backdrop-blur-sm absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   <div
     class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300 intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
   >
@@ -86,7 +86,7 @@ const {
         </a>
 
         <!-- Business Information (Dutch Law Requirements) -->
-        <div class="text-sm text-gray-500 space-y-1">
+        <div class="text-sm text-white-500 space-y-1">
           <p>KVK: 87654321 | BTW: NL123456789B01</p>
           <p>info@365devnet.eu | +31617441106</p>
         </div>
@@ -101,7 +101,7 @@ const {
               {socialLinks.map(({ ariaLabel, href, icon }) => (
                 <li>
                   <a
-                    class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg p-2 inline-flex items-center"
+                    class="text-muted dark:text-white-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg p-2 inline-flex items-center"
                     aria-label={ariaLabel}
                     href={href}
                   >
@@ -114,7 +114,7 @@ const {
         }
 
         <!-- Terms & Privacy Policy Links -->
-        <div class="flex items-center space-x-4 text-sm text-gray-500">
+        <div class="flex items-center space-x-4 text-sm text-white-500">
           {secondaryLinks.map(({ text, href }) => (
             <a class="hover:text-gray-700 hover:underline dark:hover:text-gray-200 transition duration-150 ease-in-out" href={href}>
               {text}
