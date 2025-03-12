@@ -346,7 +346,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Professional',
           issueDate: 'Date Issued: 01-2025',
-          description: 'Earning the Nexthink Certified Application Experience Management certification validates the expertise in optimizing application performance, ensuring seamless user adoption, and driving cost efficiency.',
+          description: 'Earning the Nexthink Certified Application Experience Management certification validates the expertise in optimizing application performance, ensuring seamless user adoption, and driving cost efficiency. This certification demonstrates advanced knowledge in measuring and improving digital employee experience across enterprise environments.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
             src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
@@ -357,7 +357,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Administrator',
           issueDate: 'Date Issued: 11-2024',
-          description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs.',
+          description: 'Earning the Nexthink Platform Administration certification demonstrates proficiency in configuring and customizing the Nexthink Platform to meet organizational needs. This certification validates skills in deploying, managing, and maintaining Nexthink environments to support IT operations and enhance end-user experience.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
             src: '/images/certificates/NexthinkAdministrator.webp',
@@ -368,11 +368,22 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Associate',
           issueDate: 'Date Issued: 11-2024',
-          description: 'Earning the Nexthink Infinity Fundamentals certification validates your understanding of the Nexthink Infinity platform and its role in enhancing digital employee experience.',
+          description: 'Earning the Nexthink Infinity Fundamentals certification validates your understanding of the Nexthink Infinity platform and its role in enhancing digital employee experience. This certification confirms knowledge of key platform components, data collection methods, and analytics capabilities for monitoring and improving workplace technology environments.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
             src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Nexthink Associate badge',
+            loading: 'lazy',
+          },
+        },
+        {
+          name: 'Crucial Conversations',
+          issueDate: 'Date Issued: 03-2024',
+          description: 'Earning the Crucial Conversations certification demonstrates proficiency in effective dialogue techniques for high-stakes situations where opinions vary and emotions run strong, enabling transformation of disagreements into productive conversations that achieve better outcomes.',
+          linkUrl: 'https://cruciallearning.com/courses/crucial-conversations-for-dialogue/',
+          image: {
+            src: '/images/certificates/CrucialConversations_FMD-logo.webp',
+            alt: 'Crucial Conversations certification badge',
             loading: 'lazy',
           },
         },
@@ -702,7 +713,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Professional',
           issueDate: 'Datum van afgifte: 01-2025',
-          description: 'Het behalen van de Nexthink Certified Application Experience Management-certificering bevestigt de expertise in het optimaliseren van applicatieprestaties, het zorgen voor een naadloze gebruikersacceptatie en het bevorderen van kostenefficiëntie.',
+          description: 'Het behalen van de Nexthink Certified Application Experience Management-certificering bevestigt de expertise in het optimaliseren van applicatieprestaties, het zorgen voor een naadloze gebruikersacceptatie en het bevorderen van kostenefficiëntie. Deze certificering toont geavanceerde kennis aan in het meten en verbeteren van de digitale werknemerservaring in bedrijfsomgevingen.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
             src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
@@ -713,7 +724,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Administrator',
           issueDate: 'Datum van afgifte: 11-2024',
-          description: 'Het behalen van de Nexthink Platform Administration-certificering toont aan dat men bekwaam is in het configureren en aanpassen van het Nexthink-platform om aan de behoeften van de organisatie te voldoen.',
+          description: 'Het behalen van de Nexthink Platform Administration-certificering toont aan dat men bekwaam is in het configureren en aanpassen van het Nexthink-platform om aan de behoeften van de organisatie te voldoen. Deze certificering valideert vaardigheden in het implementeren, beheren en onderhouden van Nexthink-omgevingen ter ondersteuning van IT-operaties en het verbeteren van de eindgebruikerservaring.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
             src: '/images/certificates/NexthinkAdministrator.webp',
@@ -724,11 +735,22 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Associate',
           issueDate: 'Datum van afgifte: 11-2024',
-          description: 'Het behalen van de Nexthink Infinity Fundamentals-certificering bevestigt uw begrip van het Nexthink Infinity-platform en de rol ervan bij het verbeteren van de digitale werknemerservaring.',
+          description: 'Het behalen van de Nexthink Infinity Fundamentals-certificering bevestigt uw begrip van het Nexthink Infinity-platform en de rol ervan bij het verbeteren van de digitale werknemerservaring. Deze certificering bevestigt kennis van belangrijke platformcomponenten, gegevensverzamelingsmethoden en analysemogelijkheden voor het monitoren en verbeteren van technologische werkomgevingen.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
             src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Nexthink Associate badge',
+            loading: 'lazy',
+          },
+        },
+        {
+          name: 'Crucial Conversations',
+          issueDate: 'Datum van afgifte: 03-2024',
+          description: 'Het behalen van de Crucial Conversations-certificering toont vaardigheid aan in effectieve dialoogtechnieken voor situaties met hoge inzet waar meningen verschillen en emoties hoog oplopen, waardoor meningsverschillen kunnen worden omgezet in productieve gesprekken die betere resultaten opleveren.',
+          linkUrl: 'https://cruciallearning.com/courses/crucial-conversations-for-dialogue/',
+          image: {
+            src: '/images/certificates/CrucialConversations_FMD-logo.webp',
+            alt: 'Crucial Conversations certificeringsbadge',
             loading: 'lazy',
           },
         },
@@ -1058,7 +1080,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Professional',
           issueDate: 'Ausstellungsdatum: 01-2025',
-          description: 'Der Erwerb der Nexthink Certified Application Experience Management-Zertifizierung bestätigt die Expertise in der Optimierung der Anwendungsleistung, der Gewährleistung einer nahtlosen Benutzerakzeptanz und der Förderung der Kosteneffizienz.',
+          description: 'Der Erwerb der Nexthink Certified Application Experience Management-Zertifizierung bestätigt die Expertise in der Optimierung der Anwendungsleistung, der Gewährleistung einer nahtlosen Benutzerakzeptanz und der Förderung der Kosteneffizienz. Diese Zertifizierung demonstriert fortgeschrittenes Wissen im Messen und Verbessern der digitalen Mitarbeitererfahrung in Unternehmensumgebungen.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
             src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
@@ -1069,7 +1091,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Administrator',
           issueDate: 'Ausstellungsdatum: 11-2024',
-          description: 'Der Erwerb der Nexthink Platform Administration-Zertifizierung zeigt Kompetenz in der Konfiguration und Anpassung der Nexthink-Plattform zur Erfüllung organisatorischer Anforderungen.',
+          description: 'Der Erwerb der Nexthink Platform Administration-Zertifizierung zeigt Kompetenz in der Konfiguration und Anpassung der Nexthink-Plattform zur Erfüllung organisatorischer Anforderungen. Diese Zertifizierung validiert Fähigkeiten bei der Bereitstellung, Verwaltung und Wartung von Nexthink-Umgebungen zur Unterstützung von IT-Betriebsabläufen und zur Verbesserung der Endbenutzererfahrung.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
             src: '/images/certificates/NexthinkAdministrator.webp',
@@ -1080,11 +1102,22 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Associate',
           issueDate: 'Ausstellungsdatum: 11-2024',
-          description: 'Der Erwerb der Nexthink Infinity Fundamentals-Zertifizierung bestätigt Ihr Verständnis der Nexthink Infinity-Plattform und ihrer Rolle bei der Verbesserung der digitalen Mitarbeitererfahrung.',
+          description: 'Der Erwerb der Nexthink Infinity Fundamentals-Zertifizierung bestätigt Ihr Verständnis der Nexthink Infinity-Plattform und ihrer Rolle bei der Verbesserung der digitalen Mitarbeitererfahrung. Diese Zertifizierung bestätigt Kenntnisse über wichtige Plattformkomponenten, Datenerfassungsmethoden und Analysefunktionen zur Überwachung und Verbesserung von Technologieumgebungen am Arbeitsplatz.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
             src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Nexthink Associate Abzeichen',
+            loading: 'lazy',
+          },
+        },
+        {
+          name: 'Crucial Conversations',
+          issueDate: 'Ausstellungsdatum: 03-2024',
+          description: 'Der Erwerb der Crucial Conversations-Zertifizierung demonstriert Kompetenz in effektiven Dialogtechniken für Situationen mit hohem Einsatz, in denen Meinungen variieren und Emotionen stark sind, wodurch Meinungsverschiedenheiten in produktive Gespräche umgewandelt werden können, die bessere Ergebnisse erzielen.',
+          linkUrl: 'https://cruciallearning.com/courses/crucial-conversations-for-dialogue/',
+          image: {
+            src: '/images/certificates/CrucialConversations_FMD-logo.webp',
+            alt: 'Crucial Conversations Zertifizierungsabzeichen',
             loading: 'lazy',
           },
         },
@@ -1414,7 +1447,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Professional',
           issueDate: 'Date de délivrance : 01-2025',
-          description: 'L\'obtention de la certification Nexthink Certified Application Experience Management valide l\'expertise dans l\'optimisation des performances des applications, assurant une adoption transparente par les utilisateurs et favorisant l\'efficacité des coûts.',
+          description: 'L\'obtention de la certification Nexthink Certified Application Experience Management valide l\'expertise dans l\'optimisation des performances des applications, assurant une adoption transparente par les utilisateurs et favorisant l\'efficacité des coûts. Cette certification démontre une connaissance avancée dans la mesure et l\'amélioration de l\'expérience numérique des employés dans les environnements d\'entreprise.',
           linkUrl: 'https://certified.nexthink.com/babd1e3a-c593-4a81-90a2-6a002f43e692#acc.fUOog9dj',
           image: {
             src: '/images/certificates/CertifiedNexthinkProfessionalinApplicationExperienceManagement.webp',
@@ -1425,7 +1458,7 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Administrator',
           issueDate: 'Date de délivrance : 11-2024',
-          description: 'L\'obtention de la certification Nexthink Platform Administration démontre la compétence dans la configuration et la personnalisation de la plateforme Nexthink pour répondre aux besoins organisationnels.',
+          description: 'L\'obtention de la certification Nexthink Platform Administration démontre la compétence dans la configuration et la personnalisation de la plateforme Nexthink pour répondre aux besoins organisationnels. Cette certification valide les compétences dans le déploiement, la gestion et la maintenance des environnements Nexthink pour soutenir les opérations IT et améliorer l\'expérience des utilisateurs finaux.',
           linkUrl: 'https://certified.nexthink.com/8bfc61f2-31b8-45d8-82e7-e4a1df2b915d#acc.7eo6pFxb',
           image: {
             src: '/images/certificates/NexthinkAdministrator.webp',
@@ -1436,11 +1469,22 @@ export const translations: Record<string, Translation> = {
         {
           name: 'Certified Nexthink Associate',
           issueDate: 'Date de délivrance : 11-2024',
-          description: 'L\'obtention de la certification Nexthink Infinity Fundamentals valide votre compréhension de la plateforme Nexthink Infinity et de son rôle dans l\'amélioration de l\'expérience numérique des employés.',
+          description: 'L\'obtention de la certification Nexthink Infinity Fundamentals valide votre compréhension de la plateforme Nexthink Infinity et de son rôle dans l\'amélioration de l\'expérience numérique des employés. Cette certification confirme la connaissance des composants clés de la plateforme, des méthodes de collecte de données et des capacités d\'analyse pour surveiller et améliorer les environnements technologiques en milieu de travail.',
           linkUrl: 'https://certified.nexthink.com/cf5e9e43-9d95-4dc6-bb95-0f7e0bada9b3#acc.YWDnxiaU',
           image: {
             src: '/images/certificates/NexthinkAssociate.webp',
             alt: 'Badge Associate Nexthink',
+            loading: 'lazy',
+          },
+        },
+        {
+          name: 'Crucial Conversations',
+          issueDate: 'Date de délivrance : 03-2024',
+          description: 'L\'obtention de la certification Crucial Conversations démontre la maîtrise des techniques de dialogue efficaces pour les situations à enjeux élevés où les opinions divergent et les émotions sont fortes, permettant de transformer les désaccords en conversations productives qui aboutissent à de meilleurs résultats.',
+          linkUrl: 'https://cruciallearning.com/courses/crucial-conversations-for-dialogue/',
+          image: {
+            src: '/images/certificates/CrucialConversations_FMD-logo.webp',
+            alt: 'Badge de certification Crucial Conversations',
             loading: 'lazy',
           },
         },
