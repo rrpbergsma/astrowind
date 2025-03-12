@@ -8,6 +8,7 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Contact from '~/components/widgets/Contact.astro';
 import { getTranslation, supportedLanguages } from '~/i18n/translations';
+import OurCommitmentImage from '~/assets/images/OurCommitment.webp';
 
 export async function getStaticPaths() {
   return supportedLanguages.map(lang => ({
@@ -99,42 +100,26 @@ const metadata = {
   <Content
     isReversed
     tagline={t.homepage?.approach?.tagline || "About My Approach"}
-    title={t.homepage?.approach?.title || "Driving IT Excellence Through Innovation"}
-    items={t.homepage?.approach?.items || [
-      {
-        title: 'User-Centric Solutions',
-        description:
-          'I focus on creating solutions that enhance user experience and productivity, ensuring technology serves people effectively.',
-      },
-      {
-        title: 'Continuous Improvement',
-        description:
-          'I stay current with emerging technologies and best practices to deliver cutting-edge solutions that evolve with your needs.',
-      },
-      {
-        title: 'Strategic Implementation',
-        description:
-          'I approach each project strategically, aligning technical solutions with business objectives for maximum impact.',
-      },
-    ]}
+    title={t.homepage?.approach?.title || "Our Commitment"}
+    items={[]}
     image={{
-      src: '~/assets/images/hero-image.png',
-      alt: 'Digital Transformation Image',
+      src: OurCommitmentImage,
+      alt: 'IT Excellence and Innovation'
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        {t.homepage?.approach?.missionTitle || "Mission Statement"}
-      </h3>
-      {(t.homepage?.approach?.missionContent || [
-        'My mission is to drive IT excellence by optimizing cloud solutions, automating processes, and providing outstanding technical support. I believe in leveraging technology to solve real business challenges and create value through innovation.',
-        'With over 15 years of IT experience, I bring a wealth of knowledge in Microsoft technologies, automation tools, and system integration to help organizations transform their digital capabilities and achieve their strategic goals.'
-      ]).map((paragraph) => (
-        <>
-          <p>{paragraph}</p>
-          <br />
-        </>
-      ))}
+      <div class="text-lg dark:text-slate-400">
+        {(t.homepage?.approach?.missionContent || [
+          'We are committed to driving IT excellence through strategic cloud optimization, process automation, and enterprise-grade technical support. We leverage cutting-edge technology to address complex business challenges and deliver measurable value.',
+          'With deep expertise in Microsoft technologies and automation, we empower organizations to transform their digital capabilities and achieve their business objectives. We design solutions that enhance user experience and maximize productivity, ensuring technology empowers your business.',
+          'We stay ahead of the curve by researching and implementing emerging technologies, providing scalable solutions that adapt to your evolving needs. Our approach aligns technical solutions with your core business objectives, delivering measurable ROI and a competitive advantage.',
+          'Our mission is to leverage technology to solve real business challenges and create value through innovation. With over 15 years of IT experience, we bring a wealth of knowledge in Microsoft technologies, automation tools, and system integration to help organizations transform their digital capabilities and achieve their strategic goals.'
+        ]).map((paragraph, index, array) => (
+          <p class={index === array.length - 1 ? '' : 'mb-4'}>
+            {paragraph}
+          </p>
+        ))}
+      </div>
     </Fragment>
   </Content>
 

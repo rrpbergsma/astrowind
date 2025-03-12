@@ -222,7 +222,9 @@ export const translations: Record<string, Translation> = {
         missionTitle: 'Our Commitment',
         missionContent: [
           'We are committed to driving IT excellence through strategic cloud optimization, process automation, and enterprise-grade technical support. We leverage cutting-edge technology to address complex business challenges and deliver measurable value.',
-          'With deep expertise in Microsoft technologies and automation, we empower organizations to transform their digital capabilities and achieve their business objectives.'
+          'With deep expertise in Microsoft technologies and automation, we empower organizations to transform their digital capabilities and achieve their business objectives. We design solutions that enhance user experience and maximize productivity, ensuring technology empowers your business.',
+          'We stay ahead of the curve by researching and implementing emerging technologies, providing scalable solutions that adapt to your evolving needs. Our approach aligns technical solutions with your core business objectives, delivering measurable ROI and a competitive advantage.',
+          'Our mission is to leverage technology to solve real business challenges and create value through innovation. With over 15 years of IT experience, we bring a wealth of knowledge in Microsoft technologies, automation tools, and system integration to help organizations transform their digital capabilities and achieve their strategic goals.'
         ],
         items: [
           {
@@ -600,7 +602,9 @@ export const translations: Record<string, Translation> = {
         missionTitle: 'Onze Toewijding',
         missionContent: [
           'Wij zijn toegewijd aan het stimuleren van IT-excellentie door strategische cloud-optimalisatie, procesautomatisering en technische ondersteuning van enterprise-niveau. We benutten geavanceerde technologie om complexe zakelijke uitdagingen aan te pakken en meetbare waarde te leveren.',
-          'Met diepgaande expertise in Microsoft-technologieën en automatisering stellen we organisaties in staat hun digitale mogelijkheden te transformeren en hun bedrijfsdoelstellingen te bereiken.'
+          'Met diepgaande expertise in Microsoft-technologieën en automatisering stellen we organisaties in staat hun digitale mogelijkheden te transformeren en hun bedrijfsdoelstellingen te bereiken. We ontwerpen oplossingen die de gebruikerservaring verbeteren en productiviteit maximaliseren, zodat technologie uw bedrijf versterkt.',
+          'We blijven voorop lopen door onderzoek en implementatie van opkomende technologieën, en bieden schaalbare oplossingen die zich aanpassen aan uw evoluerende behoeften. We stemmen technische oplossingen af op uw kernbedrijfsdoelstellingen, wat resulteert in meetbare ROI en een concurrentievoordeel.',
+          'Onze missie is om technologie te benutten om echte zakelijke uitdagingen op te lossen en waarde te creëren door innovatie. Met meer dan 15 jaar IT-ervaring brengen we een schat aan kennis in Microsoft-technologieën, automatiseringstools en systeemintegratie om organisaties te helpen hun digitale mogelijkheden te transformeren en hun strategische doelen te bereiken.'
         ],
         items: [
           {
@@ -978,7 +982,9 @@ export const translations: Record<string, Translation> = {
         missionTitle: 'Unser Engagement',
         missionContent: [
           'Wir sind bestrebt, IT-Exzellenz durch strategische Cloud-Optimierung, Prozessautomatisierung und technischen Support auf Unternehmensebene voranzutreiben. Wir nutzen modernste Technologie, um komplexe geschäftliche Herausforderungen zu bewältigen und messbaren Mehrwert zu liefern.',
-          'Mit tiefgreifender Expertise in Microsoft-Technologien und Automatisierung befähigen wir Organisationen, ihre digitalen Fähigkeiten zu transformieren und ihre Geschäftsziele zu erreichen.'
+          'Mit tiefgreifender Expertise in Microsoft-Technologien und Automatisierung befähigen wir Organisationen, ihre digitalen Fähigkeiten zu transformieren und ihre Geschäftsziele zu erreichen. Wir entwickeln Lösungen, die die Benutzererfahrung verbessern und die Produktivität maximieren, damit Technologie Ihr Unternehmen stärkt.',
+          'Wir bleiben an der Spitze durch Erforschung und Implementierung aufkommender Technologien und bieten skalierbare Lösungen, die sich an Ihre sich entwickelnden Anforderungen anpassen. Wir stimmen technische Lösungen auf Ihre Kerngeschäftsziele ab und liefern messbaren ROI und Wettbewerbsvorteile.',
+          'Unsere Mission ist es, Technologie zu nutzen, um echte geschäftliche Herausforderungen zu lösen und durch Innovation Wert zu schaffen. Mit über 15 Jahren IT-Erfahrung bringen wir einen reichen Schatz an Wissen in Microsoft-Technologien, Automatisierungstools und Systemintegration mit, um Organisationen dabei zu helfen, ihre digitalen Fähigkeiten zu transformieren und ihre strategischen Ziele zu erreichen.'
         ],
         items: [
           {
@@ -1356,7 +1362,9 @@ export const translations: Record<string, Translation> = {
         missionTitle: 'Notre engagement',
         missionContent: [
           'Nous nous engageons à favoriser l\'excellence IT grâce à l\'optimisation stratégique du cloud, l\'automatisation des processus et le support technique de niveau entreprise. Nous exploitons les technologies de pointe pour relever les défis commerciaux complexes et fournir une valeur mesurable.',
-          'Avec une expertise approfondie dans les technologies Microsoft et l\'automatisation, nous permettons aux organisations de transformer leurs capacités numériques et d\'atteindre leurs objectifs commerciaux.'
+          'Avec une expertise approfondie dans les technologies Microsoft et l\'automatisation, nous permettons aux organisations de transformer leurs capacités numériques et d\'atteindre leurs objectifs commerciaux. Nous concevons des solutions qui améliorent l\'expérience utilisateur et maximisent la productivité, garantissant que la technologie renforce votre entreprise.',
+          'Nous restons à la pointe en recherchant et en implémentant des technologies émergentes, fournissant des solutions évolutives qui s\'adaptent à vos besoins en constante évolution. Nous alignons les solutions techniques sur vos objectifs commerciaux fondamentaux, offrant un ROI mesurable et un avantage concurrentiel.',
+          'Notre mission est d\'exploiter la technologie pour résoudre de véritables défis commerciaux et créer de la valeur par l\'innovation. Avec plus de 15 ans d\'expérience en IT, nous apportons une richesse de connaissances en technologies Microsoft, outils d\'automatisation et intégration de systèmes pour aider les organisations à transformer leurs capacités numériques et atteindre leurs objectifs stratégiques.'
         ],
         items: [
           {
