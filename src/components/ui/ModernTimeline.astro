@@ -28,7 +28,7 @@ const {
   items && items.length && (
     <div class={twMerge("relative mx-auto max-w-5xl", containerClass)}>
       {/* Main timeline line */}
-      <div class="absolute left-4 md:left-1/2 top-0 h-full w-1 transform -translate-x-1/2 z-0 transition-all duration-300 ease-in-out shadow-sm bg-primary/70 dark:bg-blue-700/30" class:list={[timelineClass]}></div>
+      <div class="absolute left-4 md:left-1/2 top-0 h-full w-1 transform -translate-x-1/2 z-0 transition-all duration-300 ease-in-out shadow-sm bg-blue-700/15 dark:bg-blue-700/30" class:list={[timelineClass]}></div>
       
       <div class="relative">
         {items.map((item, index) => {
@@ -52,7 +52,10 @@ const {
               {/* Year marker (if available) */}
               {year && (
                 <div class={twMerge("absolute left-4 md:left-1/2 transform -translate-x-1/2 -top-4 font-bold text-sm z-10", yearClass)}>
-                  {year}
+                  <span class="relative">
+                    <span class="absolute inset-0 bg-white/20 backdrop-blur-sm rounded-md -z-10"></span>
+                    {year}
+                  </span>
                 </div>
               )}
               
@@ -97,9 +100,9 @@ const {
                 </div>
                 {/* Connector line to timeline (visible only on desktop) */}
                 <div class={twMerge(
-                  'absolute top-5 hidden md:block h-0.5 w-6 z-0',
+                  'absolute top-5 hidden md:block h-0.5 w-10 z-0',
                   isEven ? 'right-0 bg-gradient-to-r' : 'left-0 bg-gradient-to-l',
-                  'from-transparent to-primary/50 dark:to-blue-700'
+                  'from-transparent to-blue-700 dark:to-blue-700'
                 )}></div>
               </div>
             </div>
