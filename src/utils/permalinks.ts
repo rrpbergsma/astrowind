@@ -57,7 +57,7 @@ export const getPermalink = (slug = '', type = 'page', lang = ''): string => {
   ) {
     return slug;
   }
-  
+
   // Extract hash fragment if present
   let hashFragment = '';
   if (slug.includes('#')) {
@@ -121,12 +121,12 @@ const definitivePermalink = (permalink: string, lang = ''): string => {
   if (permalink.startsWith('#')) {
     return permalink;
   }
-  
+
   // Don't add language prefix to external links
   if (permalink.startsWith('http://') || permalink.startsWith('https://') || permalink.startsWith('//')) {
     return permalink;
   }
-  
+
   if (lang && ['en', 'nl', 'de', 'fr'].includes(lang)) {
     return createPath(BASE_PATHNAME, lang, permalink);
   }

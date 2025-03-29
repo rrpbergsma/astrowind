@@ -41,18 +41,11 @@ export default function LanguageSelectorComponent({ defaultLang }: LanguageSelec
           className={`
             inline-flex items-center px-3 py-2 text-sm font-medium rounded-md
             transition-colors duration-200 hover:bg-gray-100
-            ${language.code === currentLang 
-              ? 'text-blue-600 bg-blue-50' 
-              : 'text-gray-600 hover:text-gray-900'
-            }
+            ${language.code === currentLang ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900'}
           `}
           aria-current={language.code === currentLang ? 'page' : undefined}
         >
-          <Icon 
-            name={`circle-flags:${language.flag}`} 
-            className="w-5 h-5 mr-2" 
-            aria-hidden="true" 
-          />
+          <Icon name={`circle-flags:${language.flag}`} className="w-5 h-5 mr-2" aria-hidden="true" />
           <span>{language.name}</span>
         </button>
       ))}

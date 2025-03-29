@@ -1,12 +1,8 @@
 ---
+
 ---
 
-<button
-  id="back-to-top"
-  class="back-to-top"
-  aria-label="Back to top"
-  title="Return to Top"
->
+<button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Return to Top">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -81,7 +77,7 @@
   // Function to initialize the back to top button
   function initBackToTop() {
     const backToTopButton = document.getElementById('back-to-top');
-    
+
     if (!backToTopButton) return;
 
     // Show button when scrolling down
@@ -98,7 +94,7 @@
       e.preventDefault();
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     };
 

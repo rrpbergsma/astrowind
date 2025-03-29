@@ -8,16 +8,16 @@ interface Props {
 
 const { currentLang } = Astro.props;
 
-type SupportedLanguage = typeof supportedLanguages[number];
+type SupportedLanguage = (typeof supportedLanguages)[number];
 
 const languages = [
   { code: 'en' as SupportedLanguage, name: 'English', flag: 'gb' },
   { code: 'nl' as SupportedLanguage, name: 'Dutch', flag: 'nl' },
   { code: 'de' as SupportedLanguage, name: 'German', flag: 'de' },
   { code: 'fr' as SupportedLanguage, name: 'French', flag: 'fr' },
-].filter(lang => supportedLanguages.includes(lang.code));
+].filter((lang) => supportedLanguages.includes(lang.code));
 
-const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
+const currentLanguage = languages.find((lang) => lang.code === currentLang) || languages[0];
 ---
 
 <div class="relative inline-block text-left language-dropdown">
@@ -32,9 +32,9 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     >
       <Icon name={`circle-flags:${currentLanguage.flag}`} class="inline-block w-5 h-5 mr-2" />
       <span id="selected-language">{currentLanguage.name}</span>
-      <Icon 
-        name="tabler:chevron-down" 
-        class="ml-2 -mr-1 h-5 w-5 transition-transform duration-200" 
+      <Icon
+        name="tabler:chevron-down"
+        class="ml-2 -mr-1 h-5 w-5 transition-transform duration-200"
         aria-hidden="true"
         id="chevron-icon"
       />
@@ -51,28 +51,35 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     style="max-height: min(300px, 70vh);"
   >
     <div class="py-1" role="none">
-      {languages.map(lang => (
-        <button
-          type="button"
-          data-lang-code={lang.code}
-          class="text-gray-700 dark:text-gray-300 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
-          role="menuitem"
-          tabindex="-1"
-          aria-label={`Switch to ${lang.name} language`}
-        >
-          <Icon name={`circle-flags:${lang.flag}`} class="inline-block w-5 h-5 mr-2" />
-          {lang.name}
-        </button>
-      ))}
+      {
+        languages.map((lang) => (
+          <button
+            type="button"
+            data-lang-code={lang.code}
+            class="text-gray-700 dark:text-gray-300 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            role="menuitem"
+            tabindex="-1"
+            aria-label={`Switch to ${lang.name} language`}
+          >
+            <Icon name={`circle-flags:${lang.flag}`} class="inline-block w-5 h-5 mr-2" />
+            {lang.name}
+          </button>
+        ))
+      }
     </div>
   </div>
-  
-  <select id="language-select" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white focus:bg-gray-100 dark:focus:bg-gray-700 focus:text-gray-900 dark:focus:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-colors duration-200 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 language-select">
-    {languages.map(lang => (
-      <option value={lang.code} selected={lang.code === currentLang}>
-        {lang.name}
-      </option>
-    ))}
+
+  <select
+    id="language-select"
+    class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white focus:bg-gray-100 dark:focus:bg-gray-700 focus:text-gray-900 dark:focus:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-colors duration-200 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 language-select"
+  >
+    {
+      languages.map((lang) => (
+        <option value={lang.code} selected={lang.code === currentLang}>
+          {lang.name}
+        </option>
+      ))
+    }
   </select>
 </div>
 
@@ -89,7 +96,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     .language-dropdown {
       display: inline-block;
     }
-  
+
     /* Keep the native select hidden even on mobile */
     .language-select {
       display: none;
@@ -168,7 +175,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         // First show the menu to calculate its height
         menu.classList.remove('hidden');
         menu.classList.remove('open-upward', 'open-downward');
-        
+
         // Calculate available space
         const buttonRect = button.getBoundingClientRect();
         const menuRect = menu.getBoundingClientRect();
@@ -176,15 +183,12 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         const spaceBelow = viewportHeight - buttonRect.bottom;
         const spaceAbove = buttonRect.top;
         const menuHeight = Math.min(menuRect.height, 300); // Cap at 300px
-        
+
         // Determine if menu should open upward
         const shouldOpenUpward = spaceBelow < menuHeight && spaceAbove > spaceBelow;
 
         // Position menu
-        menu.style.maxHeight = `${Math.min(
-          shouldOpenUpward ? spaceAbove - 8 : spaceBelow - 8,
-          300
-        )}px`;
+        menu.style.maxHeight = `${Math.min(shouldOpenUpward ? spaceAbove - 8 : spaceBelow - 8, 300)}px`;
 
         if (shouldOpenUpward) {
           menu.classList.add('open-upward');
@@ -214,7 +218,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
     });
 
     // Handle language selection
-    languageButtons.forEach(langButton => {
+    languageButtons.forEach((langButton) => {
       langButton.addEventListener('click', () => {
         const langCode = langButton.dataset.langCode;
         if (!langCode) return;
@@ -238,13 +242,13 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         const currentPath = currentUrl.pathname.replace(/\/$/, '');
         const currentHash = currentUrl.hash;
         const pathSegments = currentPath.split('/').filter(Boolean);
-        
+
         // Check if we're on a language-specific path
         const isLangPath = supportedLanguages.includes(pathSegments[0]);
-        
+
         // Get the previous language code
         const previousLangCode = isLangPath ? pathSegments[0] : 'en';
-        
+
         // Extract the page path without language
         let pagePath = '';
         if (isLangPath && pathSegments.length > 1) {
@@ -254,48 +258,48 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
           // If we're not on a language-specific path, use the current path
           pagePath = `/${pathSegments.join('/')}`;
         }
-        
+
         // Handle special case for root path
         const isRootPath = pathSegments.length === 0 || (isLangPath && pathSegments.length === 1);
-        
+
         // Construct the new URL
         let newUrl = isRootPath ? `/${langCode}` : `/${langCode}${pagePath}`;
-        
+
         // Clean up any potential double slashes
         newUrl = newUrl.replace(/\/+/g, '/');
-        
+
         // Append hash fragment if it exists
         if (currentHash) {
           newUrl += currentHash;
         }
-        
+
         // Store the language preference in localStorage and cookies
         if (window.languageUtils) {
           window.languageUtils.storeLanguagePreference(langCode);
         } else {
           // Fallback if languageUtils is not available
           localStorage.setItem('preferredLanguage', langCode);
-          
+
           // Also set a cookie for server-side detection
           const expirationDate = new Date();
           expirationDate.setFullYear(expirationDate.getFullYear() + 1);
           document.cookie = `preferredLanguage=${langCode}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Lax`;
         }
-        
+
         // Dispatch the language changed event
         const reloadEvent = new CustomEvent('languageChanged', {
           detail: {
             langCode,
             previousLangCode,
             path: newUrl,
-            willReload: true
-          }
+            willReload: true,
+          },
         });
         document.dispatchEvent(reloadEvent);
-        
+
         // Construct the full URL
         const newFullUrl = `${window.location.origin}${newUrl}`;
-        
+
         // Force a complete page reload to ensure all content is updated to the new language
         // This bypasses any client-side caching and ensures a fresh server render
         window.location.href = newFullUrl + '?t=' + Date.now();
@@ -312,13 +316,13 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
       const currentPath = currentUrl.pathname.replace(/\/$/, '');
       const currentHash = currentUrl.hash;
       const pathSegments = currentPath.split('/').filter(Boolean);
-      
+
       // Check if we're on a language-specific path
       const isLangPath = supportedLanguages.includes(pathSegments[0]);
-      
+
       // Get the previous language code
       const previousLangCode = isLangPath ? pathSegments[0] : 'en';
-      
+
       // Extract the page path without language
       let pagePath = '';
       if (isLangPath && pathSegments.length > 1) {
@@ -328,48 +332,48 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
         // If we're not on a language-specific path, use the current path
         pagePath = `/${pathSegments.join('/')}`;
       }
-      
+
       // Handle special case for root path
       const isRootPath = pathSegments.length === 0 || (isLangPath && pathSegments.length === 1);
-      
+
       // Construct the new URL
       let newUrl = isRootPath ? `/${langCode}` : `/${langCode}${pagePath}`;
-      
+
       // Clean up any potential double slashes
       newUrl = newUrl.replace(/\/+/g, '/');
-      
+
       // Append hash fragment if it exists
       if (currentHash) {
         newUrl += currentHash;
       }
-      
+
       // Store the language preference in localStorage and cookies
       if (window.languageUtils) {
         window.languageUtils.storeLanguagePreference(langCode);
       } else {
         // Fallback if languageUtils is not available
         localStorage.setItem('preferredLanguage', langCode);
-        
+
         // Also set a cookie for server-side detection
         const expirationDate = new Date();
         expirationDate.setFullYear(expirationDate.getFullYear() + 1);
         document.cookie = `preferredLanguage=${langCode}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Lax`;
       }
-      
+
       // Dispatch the language changed event
       const reloadEvent = new CustomEvent('languageChanged', {
         detail: {
           langCode,
           previousLangCode,
           path: newUrl,
-          willReload: true
-        }
+          willReload: true,
+        },
       });
       document.dispatchEvent(reloadEvent);
-      
+
       // Construct the full URL
       const newFullUrl = `${window.location.origin}${newUrl}`;
-      
+
       // Force a complete page reload to ensure all content is updated to the new language
       // This bypasses any client-side caching and ensures a fresh server render
       window.location.href = newFullUrl + '?t=' + Date.now();
@@ -385,7 +389,7 @@ const currentLanguage = languages.find(lang => lang.code === currentLang) || lan
 
   // Re-run setup when the page content is updated (e.g., after navigation)
   document.addEventListener('astro:page-load', setupLanguageDropdown);
-  
+
   // Listen for popstate events (browser back/forward buttons)
   window.addEventListener('popstate', (_event) => {
     // No need to manually update anything here as the browser will

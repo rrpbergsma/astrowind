@@ -100,27 +100,21 @@ const {
       
       {/* Responsive styles for small screens */}
       <style>
+        .ease-staggered {
+          transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hover\:opacity-0:hover {
+          opacity: 0;
+        }
+
         @media (max-width: 768px) {
-          #timeline-item-0,
-          #timeline-item-1,
-          #timeline-item-2,
-          #timeline-item-3,
-          #timeline-item-4 {
+          [id^="timeline-item-"] {
             margin-top: 0 !important;
             margin-left: 2rem !important;
             margin-right: 0 !important;
             width: calc(100% - 2rem) !important;
           }
-        }
-        
-        /* Custom easing function for staggered timeline */
-        .ease-staggered {
-          transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        /* Fade effect for the gradient overlay */
-        .hover\:opacity-0:hover {
-          opacity: 0;
         }
       </style>
     </div>

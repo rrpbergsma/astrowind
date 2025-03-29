@@ -70,7 +70,7 @@ const iconNames: string[] = [
   'tabler:brand-github',
   'tabler:device-desktop',
   'tabler:brand-azure',
-  
+
   // Additional tech-related icons
   'tabler:cpu',
   'tabler:device-mobile',
@@ -79,7 +79,7 @@ const iconNames: string[] = [
   'tabler:shield',
   'tabler:lock',
   'tabler:key',
-  
+
   // Tangentially related icons for visual diversity
   'tabler:bulb',
   'tabler:compass',
@@ -101,17 +101,13 @@ const getRandomRotation = (): string => {
 // Function to get a random size
 const getRandomSize = (isDarkMode: boolean = false): string => {
   // Slightly larger size range for dark mode for better visibility
-  return isDarkMode
-    ? `${getRandomInRange(160, 200)}px`
-    : `${getRandomInRange(140, 180)}px`;
+  return isDarkMode ? `${getRandomInRange(160, 200)}px` : `${getRandomInRange(140, 180)}px`;
 };
 
 // Function to get a random opacity
 const getRandomOpacity = (isDarkMode: boolean = false): string => {
   // Higher opacity range for dark mode for better visibility
-  return isDarkMode
-    ? getRandomInRange(0.45, 0.55).toFixed(2)
-    : getRandomInRange(0.32, 0.38).toFixed(2);
+  return isDarkMode ? getRandomInRange(0.45, 0.55).toFixed(2) : getRandomInRange(0.32, 0.38).toFixed(2);
 };
 
 // Create a spacious layout with well-separated icons
@@ -119,14 +115,14 @@ const createSpacedIcons = (): BaseIconObject[] => {
   const icons: BaseIconObject[] = [];
   const rows = 6; // Reduced from 8 to 6 for fewer potential positions
   const cols = 6; // Reduced from 8 to 6 for fewer potential positions
-  
+
   // Define larger margins to keep icons away from edges (in percentage)
   const marginX = 10; // 10% margin from left and right edges (increased from 5%)
   const marginY = 10; // 10% margin from top and bottom edges (increased from 5%)
-  
+
   // Minimum distance between icons (in percentage points)
   const minDistance = 20; // Ensure at least 20% distance between any two icons
-  
+
   // Create a base grid of positions
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
@@ -134,46 +130,43 @@ const createSpacedIcons = (): BaseIconObject[] => {
       if (Math.random() < 0.75) {
         continue;
       }
-      
+
       // Base position in the grid with margins applied
-      const baseX = marginX + ((col / cols) * (100 - 2 * marginX));
-      const baseY = marginY + ((row / rows) * (100 - 2 * marginY));
-      
+      const baseX = marginX + (col / cols) * (100 - 2 * marginX);
+      const baseY = marginY + (row / rows) * (100 - 2 * marginY);
+
       // Add limited randomness to the position (±5%) to maintain spacing
       const randomOffsetX = getRandomInRange(-5, 5);
       const randomOffsetY = getRandomInRange(-5, 5);
-      
+
       // Ensure positions stay within margins
       const x = Math.max(marginX, Math.min(100 - marginX, baseX + randomOffsetX));
       const y = Math.max(marginY, Math.min(100 - marginY, baseY + randomOffsetY));
-      
+
       // Check if this position is too close to any existing icon
       let tooClose = false;
       for (const existingIcon of icons) {
         // Extract numeric values from percentage strings
         const existingX = parseFloat(existingIcon.x);
         const existingY = parseFloat(existingIcon.y);
-        
+
         // Calculate distance between points
-        const distance = Math.sqrt(
-          Math.pow(x - existingX, 2) +
-          Math.pow(y - existingY, 2)
-        );
-        
+        const distance = Math.sqrt(Math.pow(x - existingX, 2) + Math.pow(y - existingY, 2));
+
         // If too close to an existing icon, skip this position
         if (distance < minDistance) {
           tooClose = true;
           break;
         }
       }
-      
+
       if (tooClose) {
         continue;
       }
-      
+
       // Randomly select an icon from the expanded set
       const iconIndex = Math.floor(Math.random() * iconNames.length);
-      
+
       icons.push({
         icon: iconNames[iconIndex],
         x: `${x}%`,
@@ -184,14 +177,14 @@ const createSpacedIcons = (): BaseIconObject[] => {
       });
     }
   }
-  
+
   return icons;
 };
 
 const icons: BaseIconObject[] = createSpacedIcons();
 
 // Assign random colors to each icon
-const iconsWithColors: IconWithColors[] = icons.map(icon => ({
+const iconsWithColors: IconWithColors[] = icons.map((icon) => ({
   icon: icon.icon,
   x: icon.x,
   y: icon.y,
@@ -202,85 +195,89 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
   darkColor: getRandomColor(darkModeColors),
 }));
 ---
+
 <div class:list={['absolute inset-0', { 'backdrop-blur-sm bg-white/5 dark:bg-gray-900/10': isDark }]}>
   <slot />
-  
-  {showIcons && (
-    /* Decorative background icons with random placement */
-    <div id="background-icons" class="absolute inset-0 overflow-hidden pointer-events-none z-[-5]">
-      {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor }) => (
-        <div
-          class={`absolute ${lightColor} ${darkColor} background-icon`}
-          style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate});`}
-        >
-          <Icon name={icon} style={`width: ${size}; height: ${size};`} />
-        </div>
-      ))}
-    </div>
-  )}
+
+  {
+    showIcons && (
+      /* Decorative background icons with random placement */
+      <div id="background-icons" class="absolute inset-0 overflow-hidden pointer-events-none z-[-5]">
+        {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor }) => (
+          <div
+            class={`absolute ${lightColor} ${darkColor} background-icon`}
+            style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate});`}
+          >
+            <Icon name={icon} style={`width: ${size}; height: ${size};`} />
+          </div>
+        ))}
+      </div>
+    )
+  }
 </div>
 
-{showIcons && (
-  <script define:vars={{ disableParallax }}>
-    // Parallax scrolling effect for background icons
-    document.addEventListener('DOMContentLoaded', () => {
-      // Get all parallax icons
-      const parallaxIcons = document.querySelectorAll('.parallax-icon');
-      
-      // Skip parallax on mobile devices for better performance or if parallax is disabled
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (isMobile || disableParallax) return;
-      
-      // Variables to track scroll position
-      let lastScrollY = window.scrollY;
-      let ticking = false;
-      
-      // Function to update icon positions based on scroll
-      const updateParallax = () => {
-        parallaxIcons.forEach((icon) => {
-          const depth = parseFloat(icon.getAttribute('data-depth') || '0.5');
-          
-          // Calculate parallax offset based on scroll position and depth
-          // Lower depth value means the icon moves slower (appears further away)
-          const yOffset = (lastScrollY * depth * 0.15);
-          
-          // Get the original rotation
-          const transformValue = icon.style.transform;
-          const rotateMatch = transformValue.match(/rotate\([^)]+\)/);
-          const rotateValue = rotateMatch ? rotateMatch[0] : 'rotate(0deg)';
-          
-          // Apply transform with the original rotation plus the parallax offset
-          icon.style.transform = `${rotateValue} translate3d(0, ${yOffset}px, 0)`;
+<script define:vars={{ disableParallax }}>
+  // Parallax scrolling effect for background icons
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all parallax icons
+    const parallaxIcons = document.querySelectorAll('.parallax-icon');
+
+    // Skip parallax on mobile devices for better performance or if parallax is disabled
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile || disableParallax) return;
+
+    // Variables to track scroll position
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    // Function to update icon positions based on scroll
+    const updateParallax = () => {
+      parallaxIcons.forEach((icon) => {
+        const depth = parseFloat(icon.getAttribute('data-depth') || '0.5');
+
+        // Calculate parallax offset based on scroll position and depth
+        // Lower depth value means the icon moves slower (appears further away)
+        const yOffset = lastScrollY * depth * 0.15;
+
+        // Get the original rotation
+        const transformValue = icon.style.transform;
+        const rotateMatch = transformValue.match(/rotate\([^)]+\)/);
+        const rotateValue = rotateMatch ? rotateMatch[0] : 'rotate(0deg)';
+
+        // Apply transform with the original rotation plus the parallax offset
+        icon.style.transform = `${rotateValue} translate3d(0, ${yOffset}px, 0)`;
+      });
+
+      ticking = false;
+    };
+
+    // Throttle scroll events for better performance
+    const onScroll = () => {
+      lastScrollY = window.scrollY;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateParallax();
+          ticking = false;
         });
-        
-        ticking = false;
-      };
-      
-      // Throttle scroll events for better performance
-      const onScroll = () => {
-        lastScrollY = window.scrollY;
-        
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            updateParallax();
-            ticking = false;
-          });
-          
-          ticking = true;
-        }
-      };
-      
-      // Add scroll event listener
-      window.addEventListener('scroll', onScroll, { passive: true });
-      
-      // Update on resize (debounced)
-      let resizeTimer;
-      window.addEventListener('resize', () => {
+
+        ticking = true;
+      }
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Update on resize (debounced)
+    let resizeTimer;
+    window.addEventListener(
+      'resize',
+      () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           // Check if device is now mobile and disable parallax if needed
           const isMobileNow = window.matchMedia('(max-width: 768px)').matches;
-          
+
           if (isMobileNow) {
             // Reset positions on mobile
             parallaxIcons.forEach((icon) => {
@@ -294,10 +291,11 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
             updateParallax();
           }
         }, 200);
-      }, { passive: true });
-      
-      // Initial update
-      updateParallax();
-    });
-  </script>
-)}
+      },
+      { passive: true }
+    );
+
+    // Initial update
+    updateParallax();
+  });
+</script>

@@ -1,11 +1,11 @@
 ---
-title: "Custom Connectors in Power Automate – Extending Your Automation Capabilities"
-excerpt: "Learn how to build custom connectors in Power Automate to integrate with any API and extend your automation capabilities. This comprehensive guide covers implementation steps, real-world use cases, and best practices for creating reliable connectors."
+title: 'Custom Connectors in Power Automate – Extending Your Automation Capabilities'
+excerpt: 'Learn how to build custom connectors in Power Automate to integrate with any API and extend your automation capabilities. This comprehensive guide covers implementation steps, real-world use cases, and best practices for creating reliable connectors.'
 publishDate: 2025-02-26T02:30:00Z
-author: "Richard Bergsma"
+author: 'Richard Bergsma'
 category: Automation
 image: https://res.cloudinary.com/dmgi9movl/image/upload/v1708908828/PowerAutomate_CustomConnectors.png
-tags: ["Power Automate", "Custom Connectors", "API Integration", "Microsoft Power Platform", "Low-Code Development"]
+tags: ['Power Automate', 'Custom Connectors', 'API Integration', 'Microsoft Power Platform', 'Low-Code Development']
 ---
 
 # 🚀 Custom Connectors in Power Automate – Extending Your Automation Capabilities
@@ -97,6 +97,7 @@ Select and configure the appropriate authentication type:
 - **Windows authentication** – For internal corporate resources
 
 For OAuth 2.0, you'll need to provide:
+
 - Client ID and secret
 - Authorization and token URLs
 - Scope information
@@ -109,6 +110,7 @@ Operations represent the API endpoints your connector will expose:
 
 1. Click **New action** to add an endpoint
 2. Configure:
+
    - **Summary** – Short description of what the operation does
    - **Description** – Detailed explanation
    - **Operation ID** – Unique identifier (no spaces)
@@ -129,6 +131,7 @@ For each operation, define:
 - **Body parameters** – Data sent in the request body
 
 For each parameter, specify:
+
 - Name and description
 - Whether it's required
 - Data type and format
@@ -205,6 +208,7 @@ A manufacturing company needed to connect their modern Power Apps solution with 
 ![Legacy System Integration](https://via.placeholder.com/800x400?text=Legacy+System+Integration)
 
 **Results:**
+
 - Avoided costly system replacement
 - Enabled mobile inventory management
 - Reduced manual data entry by 85%
@@ -216,6 +220,7 @@ A healthcare provider needed to integrate with a specialized medical records sys
 **Solution:** They developed a custom connector that implemented the required authentication and data transformation, while ensuring HIPAA compliance.
 
 **Results:**
+
 - Automated patient record updates
 - Reduced administrative workload
 - Improved data accuracy and compliance
@@ -229,6 +234,7 @@ A financial services firm with a microservices architecture needed to orchestrat
 ![Microservices Architecture](https://via.placeholder.com/800x400?text=Microservices+Architecture)
 
 **Results:**
+
 - Simplified complex cross-service workflows
 - Enabled business users to create automations
 - Reduced development time for new integrations
@@ -359,6 +365,7 @@ Even with careful planning, you may encounter issues when implementing custom co
 **Problem:** Connector fails to authenticate with the API.
 
 **Solutions:**
+
 - Verify credentials and client IDs/secrets
 - Check for expired tokens or certificates
 - Ensure redirect URLs are correctly configured
@@ -369,6 +376,7 @@ Even with careful planning, you may encounter issues when implementing custom co
 **Problem:** API rejects requests due to schema validation failures.
 
 **Solutions:**
+
 - Compare your request schema with the API documentation
 - Use the API's test endpoints to validate request formats
 - Check for required fields that might be missing
@@ -381,6 +389,7 @@ Even with careful planning, you may encounter issues when implementing custom co
 **Problem:** Connector operations are slow or time out.
 
 **Solutions:**
+
 - Implement pagination for large data sets
 - Add appropriate timeouts in your connector definition
 - Consider caching strategies for frequently accessed data
@@ -391,6 +400,7 @@ Even with careful planning, you may encounter issues when implementing custom co
 **Problem:** Connector works in development but fails in production.
 
 **Solutions:**
+
 - Check environment-specific configurations
 - Verify network connectivity and firewall rules
 - Ensure service accounts have appropriate permissions
@@ -425,7 +435,7 @@ Whether you're connecting to legacy applications, specialized industry solutions
 ✅ **Extend your integration capabilities.**  
 ✅ **Simplify complex API interactions.**  
 ✅ **Create reusable components across the Power Platform.**  
-✅ **Empower citizen developers with secure, managed API access.**  
+✅ **Empower citizen developers with secure, managed API access.**
 
 ---
 
@@ -434,7 +444,7 @@ Whether you're connecting to legacy applications, specialized industry solutions
 📌 **[Microsoft's Official Documentation on Custom Connectors](https://docs.microsoft.com/en-us/connectors/custom-connectors/)**  
 📌 **[Power Automate Community](https://powerusers.microsoft.com/t5/Power-Automate-Community/ct-p/MPACommunity)**  
 📌 **[OpenAPI Specification](https://swagger.io/specification/)**  
-📌 **[Power CAT Custom Connector DevKit](https://github.com/microsoft/PowerCAT.PowerShell.CustomConnector)**  
+📌 **[Power CAT Custom Connector DevKit](https://github.com/microsoft/PowerCAT.PowerShell.CustomConnector)**
 
 ---
 

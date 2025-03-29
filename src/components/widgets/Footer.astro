@@ -27,25 +27,27 @@ export interface Props {
 import { supportedLanguages } from '~/i18n/translations';
 
 // Define the type for supported languages
-type SupportedLanguage = typeof supportedLanguages[number];
+type SupportedLanguage = (typeof supportedLanguages)[number];
 
 // Get current language from URL
 const currentPath = `/${Astro.url.pathname.replace(/^\/+|\/+$/g, '')}`;
 const pathSegments = currentPath.split('/').filter(Boolean);
 
 // Check for language in URL path
-let currentLang = pathSegments[0] && supportedLanguages.includes(pathSegments[0] as SupportedLanguage)
-  ? pathSegments[0] as SupportedLanguage
-  : null;
+let currentLang =
+  pathSegments[0] && supportedLanguages.includes(pathSegments[0] as SupportedLanguage)
+    ? (pathSegments[0] as SupportedLanguage)
+    : null;
 
 // If no language in URL, check cookies
 if (!currentLang) {
   const cookies = Astro.request.headers.get('cookie') || '';
-  const cookieLanguage = cookies.split(';')
-    .map(cookie => cookie.trim())
-    .find(cookie => cookie.startsWith('preferredLanguage='))
+  const cookieLanguage = cookies
+    .split(';')
+    .map((cookie) => cookie.trim())
+    .find((cookie) => cookie.startsWith('preferredLanguage='))
     ?.split('=')[1];
-  
+
   if (cookieLanguage && supportedLanguages.includes(cookieLanguage as SupportedLanguage)) {
     currentLang = cookieLanguage as SupportedLanguage;
   } else {
@@ -60,7 +62,7 @@ const footerData = getFooterData(currentLang);
 const {
   secondaryLinks = footerData.secondaryLinks,
   socialLinks = footerData.socialLinks,
-  theme = 'light'
+  theme = 'light',
 } = Astro.props;
 ---
 
@@ -69,10 +71,8 @@ const {
   <div
     class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300 intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
   >
-    
     <!-- ✅ Combined Footer Section -->
     <div class="flex flex-col md:flex-row md:justify-between py-6 md:py-8 space-y-6 md:space-y-0">
-      
       <!-- Left Section: Company Name and Business Details -->
       <div class="flex flex-col items-start space-y-2">
         <!-- Site Title -->
@@ -86,39 +86,28 @@ const {
         </a>
         <!-- Business Information (Dutch Law Requirements) -->
         <div class="text-sm text-white-500 space-y-1">
-          <p>KVK: 87654321 | BTW: NL123456789B01</p>
           <p>info@365devnet.eu</p>
         </div>
       </div>
 
       <!-- Right Section: Social Icons and Terms/Privacy Links -->
       <div class="flex flex-col items-start md:items-end space-y-4">
-        <!-- Social Icons -->
-        {
-          socialLinks?.length && (
-            <ul class="flex space-x-4">
-              {socialLinks.map(({ ariaLabel, href, icon }) => (
-                <li>
-                  <a
-                    class="text-muted dark:text-white-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg p-2 inline-flex items-center"
-                    aria-label={ariaLabel}
-                    href={href}
-                  >
-                    {icon && <Icon name={icon} class="w-5 h-5" />}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )
-        }
+        <div class="text-sm text-white-500 space-y-1">
+          <p>KVK: 87654321 | BTW: NL123456789B01</p>
+        </div>
 
         <!-- Terms & Privacy Policy Links -->
         <div class="flex items-center space-x-4 text-sm text-white-500">
-          {secondaryLinks.map(({ text, href }) => (
-            <a class="hover:text-gray-700 hover:underline dark:hover:text-gray-200 transition duration-150 ease-in-out" href={href}>
-              {text}
-            </a>
-          ))}
+          {
+            secondaryLinks.map(({ text, href }) => (
+              <a
+                class="hover:text-gray-700 hover:underline dark:hover:text-gray-200 transition duration-150 ease-in-out"
+                href={href}
+              >
+                {text}
+              </a>
+            ))
+          }
         </div>
       </div>
     </div>

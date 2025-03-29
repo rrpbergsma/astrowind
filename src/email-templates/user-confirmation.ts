@@ -17,9 +17,9 @@ export function getUserConfirmationHtml(props: UserConfirmationProps): string {
     message,
     submittedAt,
     websiteName = process.env.WEBSITE_NAME || '365devnet.eu',
-    contactEmail = process.env.ADMIN_EMAIL || 'richard@bergsma.it'
+    contactEmail = process.env.ADMIN_EMAIL || 'richard@bergsma.it',
   } = props;
-  
+
   return `
 <!DOCTYPE html>
 <html>
@@ -97,9 +97,9 @@ export function getUserConfirmationText(props: UserConfirmationProps): string {
     message,
     submittedAt,
     websiteName = process.env.WEBSITE_NAME || '365devnet.eu',
-    contactEmail = process.env.ADMIN_EMAIL || 'richard@bergsma.it'
+    contactEmail = process.env.ADMIN_EMAIL || 'richard@bergsma.it',
   } = props;
-  
+
   return `
 Thank you for contacting ${websiteName}
 

@@ -8,12 +8,12 @@ import CompactSteps from '~/components/widgets/CompactSteps.astro';
 import WorkExperience from '~/components/widgets/WorkExperience.astro';
 import CompactCertifications from '~/components/widgets/CompactCertifications.astro';
 import CompactSkills from '~/components/widgets/CompactSkills.astro';
-import HomePageImage from '~/assets/images/richardbergsma.png'
+import HomePageImage from '~/assets/images/richardbergsma.png';
 
 import { getTranslation, supportedLanguages } from '~/i18n/translations';
 
 export async function getStaticPaths() {
-  return supportedLanguages.map(lang => ({
+  return supportedLanguages.map((lang) => ({
     params: { lang },
   }));
 }
@@ -26,39 +26,37 @@ if (!supportedLanguages.includes(lang)) {
 const t = getTranslation(lang);
 
 const metadata = {
-  title: 'About Me - ' + t.metadata.title,
+  title: `About Me - Richard Bergsma - IT Systems and Automation Manager - ${t.metadata.title}`,
+  description: t.hero.subtitle + ' - IT professional with experience in systems and automation, working at COFRA Holding in Amsterdam.',
 };
 ---
 
 <Layout metadata={metadata}>
   <Fragment slot="announcement"></Fragment>
-  
+
   <!-- Person Structured Data for SEO -->
-  <StructuredData slot="structured-data" data={{
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Richard Bergsma",
-    "jobTitle": "IT Systems and Automation Manager",
-    "description": t.hero.subtitle,
-    "image": Astro.url.origin + "/images/richardbergsma.png",
-    "url": Astro.url.origin,
-    "sameAs": [
-      "https://www.linkedin.com/in/rrpbergsma",
-      "https://github.com/rrpbergsma"
-    ],
-    "knowsAbout": t.skills.items.map(skill => skill.title),
-    "worksFor": {
-      "@type": "Organization",
-      "name": "COFRA Holding C.V.",
-      "location": "Amsterdam"
-    }
-  }} />
+  <StructuredData
+    slot="structured-data"
+    data={{
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Richard Bergsma',
+      jobTitle: 'IT Systems and Automation Manager',
+      description: t.hero.subtitle,
+      image: Astro.url.origin + '/images/richardbergsma.png',
+      url: Astro.url.origin,
+      sameAs: ['https://www.linkedin.com/in/rrpbergsma', 'https://github.com/rrpbergsma'],
+      knowsAbout: t.skills.items.map((skill) => skill.title),
+      worksFor: {
+        '@type': 'Organization',
+        name: 'COFRA Holding C.V.',
+        location: 'Amsterdam',
+      },
+    }}
+  />
 
   <!-- Hero Widget -->
-  <Hero
-    id="hero"
-    isDark={false}
-  >
+  <Hero id="hero" isDark={false}>
     <Fragment slot="subtitle">
       <strong class="text-3xl md:text-4xl">{t.hero.greeting}</strong><br /><br />{t.hero.subtitle}
     </Fragment>
@@ -77,10 +75,14 @@ const metadata = {
   >
     <Fragment slot="content">
       <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-2">{t.about.title}</h2>
-      {t.about.content.map((paragraph) => (
-        <p>{paragraph}</p>
-        <br />
-      ))}
+      {
+        t.about.content.map((paragraph) => (
+          <>
+            <p>{paragraph}</p>
+            <br />
+          </>
+        ))
+      }
     </Fragment>
 
     <Fragment slot="bg">
@@ -93,7 +95,7 @@ const metadata = {
     id="resume"
     title={t.resume.title}
     compact={true}
-    items={t.resume.experience.map(exp => ({
+    items={t.resume.experience.map((exp) => ({
       title: exp.title,
       company: exp.company,
       date: exp.period,
@@ -113,7 +115,7 @@ const metadata = {
       issueDate: cert.issueDate,
       description: cert.description,
       linkUrl: cert.linkUrl,
-      image: cert.image
+      image: cert.image,
     }))}
   />
 
@@ -123,7 +125,7 @@ const metadata = {
     title={t.skills.title}
     subtitle={t.skills.subtitle}
     defaultIcon="tabler:point-filled"
-    items={t.skills.items.map(item => ({
+    items={t.skills.items.map((item) => ({
       title: item.title,
       description: item.description,
     }))}
@@ -133,9 +135,9 @@ const metadata = {
   <CompactSteps
     id="education"
     title={t.education.title}
-    items={t.education.items.map(item => ({
+    items={t.education.items.map((item) => ({
       title: item.title,
-      icon: 'tabler:school'
+      icon: 'tabler:school',
     }))}
   />
 </Layout>

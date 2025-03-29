@@ -4,24 +4,25 @@ import { supportedLanguages } from '~/i18n/translations';
 
 // Check for language preference in cookies (set by client-side JS)
 const cookies = Astro.request.headers.get('cookie') || '';
-const cookieLanguage = cookies.split(';')
-  .map(cookie => cookie.trim())
-  .find(cookie => cookie.startsWith('preferredLanguage='))
+const cookieLanguage = cookies
+  .split(';')
+  .map((cookie) => cookie.trim())
+  .find((cookie) => cookie.startsWith('preferredLanguage='))
   ?.split('=')[1];
 
 // Get the user's preferred language from the browser if no cookie
 const acceptLanguage = Astro.request.headers.get('accept-language') || '';
 // Define the type for supported languages
-type SupportedLanguage = typeof supportedLanguages[number];
+type SupportedLanguage = (typeof supportedLanguages)[number];
 
 // Use cookie language if available, otherwise detect from browser
 const preferredLanguage =
-  (cookieLanguage && supportedLanguages.includes(cookieLanguage as SupportedLanguage))
+  cookieLanguage && supportedLanguages.includes(cookieLanguage as SupportedLanguage)
     ? cookieLanguage
     : acceptLanguage
         .split(',')
-        .map(lang => lang.split(';')[0].trim().substring(0, 2))
-        .find(lang => supportedLanguages.includes(lang as SupportedLanguage)) || 'en';
+        .map((lang) => lang.split(';')[0].trim().substring(0, 2))
+        .find((lang) => supportedLanguages.includes(lang as SupportedLanguage)) || 'en';
 
 // Get the hash fragment if present
 const url = new URL(Astro.request.url);

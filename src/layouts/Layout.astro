@@ -34,25 +34,31 @@ const { language, textDirection } = I18N;
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
   <head>
     <CommonMeta />
+    <link rel="alternate" hreflang="en" href="https://www.365devnet.eu/en/" />
+    <link rel="alternate" hreflang="nl" href="https://www.365devnet.eu/nl/" />
+    <link rel="alternate" hreflang="de" href="https://www.365devnet.eu/de/" />
+    <link rel="alternate" hreflang="fr" href="https://www.365devnet.eu/fr/" />
     <Favicons />
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
-    
+
     <!-- Structured Data for SEO -->
-    <StructuredData data={{
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "365DevNet",
-      "url": Astro.url.origin,
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": `${Astro.url.origin}/search?q={search_term_string}`,
-        "query-input": "required name=search_term_string"
-      }
-    }} />
+    <StructuredData
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: '365DevNet',
+        url: Astro.url.origin,
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${Astro.url.origin}/search?q={search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      }}
+    />
 
     <!-- Comment the line below to disable View Transitions -->
     <ClientRouter fallback="swap" />

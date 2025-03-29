@@ -13,7 +13,7 @@ export function getAdminNotificationSubject(): string {
 
 export function getAdminNotificationHtml(props: AdminNotificationProps): string {
   const { name, email, message, submittedAt, ipAddress, userAgent } = props;
-  
+
   return `
 <!DOCTYPE html>
 <html>
@@ -92,7 +92,7 @@ export function getAdminNotificationHtml(props: AdminNotificationProps): string 
 
 export function getAdminNotificationText(props: AdminNotificationProps): string {
   const { name, email, message, submittedAt, ipAddress, userAgent } = props;
-  
+
   return `
 New Contact Form Submission
 

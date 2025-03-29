@@ -163,7 +163,7 @@ import { UI } from 'astrowind:config';
   // Handle smooth scrolling for anchor links across all pages
   function setupSmoothScrolling() {
     // Handle links that start with # (pure anchor links)
-    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((anchor) => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
 
@@ -173,23 +173,23 @@ import { UI } from 'astrowind:config';
         if (targetElement) {
           window.scrollTo({
             top: targetElement.offsetTop - 50, // Offset for header
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
         }
       });
     });
 
     // Handle links that contain # but don't start with it (page + anchor)
-    document.querySelectorAll('a[href*="#"]:not([href^="#"])').forEach(anchor => {
+    document.querySelectorAll('a[href*="#"]:not([href^="#"])').forEach((anchor) => {
       anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         const isHashLink = this.getAttribute('data-hash-link') === 'true';
-        
+
         // Check if this is a link to the current page
         // First, extract the path part (before the hash)
         const hrefPath = href.split('#')[0];
         const currentPath = window.location.pathname;
-        
+
         // Consider it's the current page if:
         // 1. The path matches exactly
         // 2. The href is just a hash (like '/#services')
@@ -198,23 +198,23 @@ import { UI } from 'astrowind:config';
           currentPath === hrefPath ||
           hrefPath === '' ||
           (hrefPath === '/' && (currentPath === '/' || currentPath.endsWith('/index.html')));
-        
+
         // For hash links, we want to update the URL and scroll to the element
         if (isHashLink || isCurrentPage) {
           e.preventDefault();
-          
+
           const hashIndex = href.indexOf('#');
           if (hashIndex !== -1) {
             const targetId = href.substring(hashIndex + 1);
             const targetElement = document.getElementById(targetId);
-            
+
             if (targetElement) {
               // Update the URL with the hash fragment
               history.pushState(null, null, href);
-              
+
               window.scrollTo({
                 top: targetElement.offsetTop - 50, // Offset for header
-                behavior: 'smooth'
+                behavior: 'smooth',
               });
             } else {
               // If the target element doesn't exist on the current page, navigate to the page
@@ -245,50 +245,48 @@ import { UI } from 'astrowind:config';
     function updateUrlsWithLanguage() {
       const currentLang = getStoredLanguage();
       const supportedLanguages = ['en', 'nl', 'de', 'fr'];
-      
+
       // Update all internal links to include the language prefix
-      document.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(link => {
+      document.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach((link) => {
         const href = link.getAttribute('href');
         if (!href) return;
-        
+
         // Skip hash-only links (e.g., "#services")
         if (href.startsWith('#')) {
           return;
         }
-        
+
         // Extract hash fragment if present
         let hashFragment = '';
         let pathWithoutHash = href;
-        
+
         if (href.includes('#')) {
           const parts = href.split('#');
           pathWithoutHash = parts[0];
           hashFragment = '#' + parts[1];
         }
-        
+
         // Parse the URL path (without hash) to check for existing language code
         const pathSegments = pathWithoutHash.split('/').filter(Boolean);
         const hasLanguagePrefix = pathSegments.length > 0 && supportedLanguages.includes(pathSegments[0]);
-        
+
         // If it already has a language prefix but it's different from the current language,
         // update it to the current language
         if (hasLanguagePrefix && pathSegments[0] !== currentLang) {
           // Replace the existing language prefix with the current one
           pathSegments[0] = currentLang;
           const newPath = '/' + pathSegments.join('/');
-          
+
           // Set the new href with the hash fragment (if any)
           link.setAttribute('href', newPath + hashFragment);
           return;
         }
-        
+
         // If it doesn't have a language prefix, add the current language
         if (!hasLanguagePrefix) {
           // Create the new path with the language prefix
-          const newPath = pathWithoutHash === '/' ?
-            `/${currentLang}` :
-            `/${currentLang}${pathWithoutHash}`;
-          
+          const newPath = pathWithoutHash === '/' ? `/${currentLang}` : `/${currentLang}${pathWithoutHash}`;
+
           // Set the new href with the hash fragment (if any)
           link.setAttribute('href', newPath + hashFragment);
         }
@@ -300,11 +298,11 @@ import { UI } from 'astrowind:config';
       // Store the selected language in localStorage
       if (event.detail && event.detail.langCode) {
         storeLanguagePreference(event.detail.langCode);
-        
+
         // Always update all internal links with the new language
         // regardless of whether we're doing a full page reload
         updateUrlsWithLanguage();
-        
+
         // If this event includes a path but doesn't indicate it will reload,
         // force a full page reload to ensure all content is properly translated
         if (event.detail.path && !event.detail.willReload) {
@@ -312,13 +310,13 @@ import { UI } from 'astrowind:config';
         }
       }
     });
-    
+
     // Process links when the page loads
     updateUrlsWithLanguage();
-    
+
     // Process links after client-side navigation
     document.addEventListener('astro:page-load', updateUrlsWithLanguage);
-    
+
     // Also update links when the DOM content is loaded
     document.addEventListener('DOMContentLoaded', updateUrlsWithLanguage);
 
@@ -327,25 +325,25 @@ import { UI } from 'astrowind:config';
       if (window.location.hash) {
         const targetId = window.location.hash.substring(1);
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
           // Use setTimeout to ensure the page has fully loaded
           setTimeout(() => {
             window.scrollTo({
               top: targetElement.offsetTop - 50, // Offset for header
-              behavior: 'smooth'
+              behavior: 'smooth',
             });
           }, 100);
         }
       }
     }
-    
+
     scrollToHashOnLoad();
 
     // Make language functions available globally
     window.languageUtils = {
       getStoredLanguage,
-      storeLanguagePreference
+      storeLanguagePreference,
     };
   }
 
@@ -471,36 +469,36 @@ import { UI } from 'astrowind:config';
     if (!contactForm) return;
 
     // Form validation and submission
-    contactForm.addEventListener('submit', async function(e) {
+    contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
-      
+
       // Reset previous error messages
       resetFormErrors();
-      
+
       // Client-side validation
       if (!validateForm(contactForm)) {
         return;
       }
-      
+
       // Show loading state
       const submitButton = contactForm.querySelector('button[type="submit"]');
       const originalButtonText = submitButton.innerHTML;
       submitButton.disabled = true;
       submitButton.innerHTML = 'Sending...';
-      
+
       try {
         const formData = new FormData(contactForm);
-        
+
         // Add timestamp to help prevent duplicate submissions
         formData.append('timestamp', Date.now().toString());
-        
+
         // Submit the form to Netlify
         const response = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString()
+          body: new URLSearchParams(formData).toString(),
         });
-        
+
         if (response.ok) {
           // Show success message
           document.getElementById('form-success').classList.remove('hidden');
@@ -516,14 +514,14 @@ import { UI } from 'astrowind:config';
         submitButton.innerHTML = originalButtonText;
       }
     });
-    
+
     // Add input validation on blur
-    contactForm.querySelectorAll('input, textarea').forEach(input => {
-      input.addEventListener('blur', function() {
+    contactForm.querySelectorAll('input, textarea').forEach((input) => {
+      input.addEventListener('blur', function () {
         validateInput(this);
       });
-      
-      input.addEventListener('input', function() {
+
+      input.addEventListener('input', function () {
         // Remove error styling when user starts typing
         this.classList.remove('border-red-500');
         const feedbackElement = this.closest('div').querySelector('.invalid-feedback');
@@ -536,29 +534,29 @@ import { UI } from 'astrowind:config';
 
   function validateForm(form) {
     let isValid = true;
-    
+
     // Validate all inputs
-    form.querySelectorAll('input, textarea').forEach(input => {
+    form.querySelectorAll('input, textarea').forEach((input) => {
       if (!validateInput(input)) {
         isValid = false;
       }
     });
-    
+
     return isValid;
   }
 
   function validateInput(input) {
     if (!input.required) return true;
-    
+
     let isValid = true;
     const feedbackElement = input.closest('div').querySelector('.invalid-feedback');
-    
+
     // Reset previous error
     if (feedbackElement) {
       feedbackElement.classList.add('hidden');
     }
     input.classList.remove('border-red-500');
-    
+
     // Checkbox validation (special case for disclaimer)
     if (input.type === 'checkbox') {
       if (input.required && !input.checked) {
@@ -582,7 +580,7 @@ import { UI } from 'astrowind:config';
       }
       return isValid;
     }
-    
+
     // Check if empty
     if (input.required && !input.value.trim()) {
       isValid = false;
@@ -592,7 +590,7 @@ import { UI } from 'astrowind:config';
       }
       input.classList.add('border-red-500');
     }
-    
+
     // Email validation
     if (input.type === 'email' && input.value.trim()) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -605,7 +603,7 @@ import { UI } from 'astrowind:config';
         input.classList.add('border-red-500');
       }
     }
-    
+
     // Textarea minimum length
     if (input.tagName === 'TEXTAREA' && input.value.trim().length < 10) {
       isValid = false;
@@ -615,26 +613,26 @@ import { UI } from 'astrowind:config';
       }
       input.classList.add('border-red-500');
     }
-    
+
     return isValid;
   }
 
   function resetFormErrors() {
     // Hide all error messages
-    document.querySelectorAll('.invalid-feedback').forEach(el => {
+    document.querySelectorAll('.invalid-feedback').forEach((el) => {
       el.classList.add('hidden');
     });
-    
+
     // Remove error styling
-    document.querySelectorAll('input, textarea').forEach(input => {
+    document.querySelectorAll('input, textarea').forEach((input) => {
       input.classList.remove('border-red-500');
     });
-    
+
     // Remove checkbox container error styling
-    document.querySelectorAll('.flex.items-start').forEach(container => {
+    document.querySelectorAll('.flex.items-start').forEach((container) => {
       container.classList.remove('checkbox-error');
     });
-    
+
     // Hide form-level messages
     document.getElementById('form-success')?.classList.add('hidden');
     document.getElementById('form-error')?.classList.add('hidden');

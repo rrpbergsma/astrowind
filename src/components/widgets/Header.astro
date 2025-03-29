@@ -7,7 +7,7 @@ import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import LanguageDropdown from '~/components/LanguageDropdown.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
-import { trimSlash, getAsset } from '~/utils/permalinks';
+import { trimSlash } from '~/utils/permalinks';
 import { getHeaderData } from '~/navigation';
 
 interface Link {
@@ -40,21 +40,23 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 const pathSegments = currentPath.split('/').filter(Boolean);
 
 // Define the type for supported languages
-type SupportedLanguage = typeof supportedLanguages[number];
+type SupportedLanguage = (typeof supportedLanguages)[number];
 
 // Check for language in URL path
-let currentLang = pathSegments[0] && supportedLanguages.includes(pathSegments[0] as SupportedLanguage)
-  ? pathSegments[0] as SupportedLanguage
-  : null;
+let currentLang =
+  pathSegments[0] && supportedLanguages.includes(pathSegments[0] as SupportedLanguage)
+    ? (pathSegments[0] as SupportedLanguage)
+    : null;
 
 // If no language in URL, check cookies
 if (!currentLang) {
   const cookies = Astro.request.headers.get('cookie') || '';
-  const cookieLanguage = cookies.split(';')
-    .map(cookie => cookie.trim())
-    .find(cookie => cookie.startsWith('preferredLanguage='))
+  const cookieLanguage = cookies
+    .split(';')
+    .map((cookie) => cookie.trim())
+    .find((cookie) => cookie.startsWith('preferredLanguage='))
     ?.split('=')[1];
-  
+
   if (cookieLanguage && supportedLanguages.includes(cookieLanguage as SupportedLanguage)) {
     currentLang = cookieLanguage as SupportedLanguage;
   } else {
@@ -65,7 +67,6 @@ if (!currentLang) {
 
 // Get translated header data - ensure we're using the current language
 const headerData = getHeaderData(currentLang);
-console.log(`Header initialized with language: ${currentLang}`);
 
 const {
   id = 'header',
@@ -74,7 +75,7 @@ const {
   isDark = false,
   isFullWidth = false,
   showToggleTheme = false,
-  showRssFeed = false,
+
   position = 'center',
 } = Astro.props;
 ---
@@ -93,7 +94,7 @@ const {
       'relative text-default py-3 px-3 md:px-6 mx-auto w-full',
       {
         'md:flex md:justify-between': position !== 'center',
-        },
+      },
       {
         'md:grid md:grid-cols-3 md:items-center': position === 'center',
       },
@@ -112,7 +113,8 @@ const {
       <!-- Improved mobile navigation accessibility -->
       <style>
         @media (max-width: 767px) {
-          nav ul li a, nav ul li button {
+          nav ul li a,
+          nav ul li button {
             padding: 0.75rem 1rem; /* Larger touch targets */
             min-height: 44px; /* Minimum touch target size */
             display: flex;

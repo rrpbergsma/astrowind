@@ -44,7 +44,11 @@ const {
   <div class="mx-auto max-w-7xl p-4 md:px-8">
     <div class={`md:flex ${isReversed ? 'md:flex-row-reverse' : ''} md:gap-16`}>
       <div class="md:basis-1/2 self-center">
-        {content && <div class="mb-12 text-lg dark:text-slate-400 content-backdrop p-3 rounded-md" set:html={content} />}
+        {
+          content && (
+            <div class="mb-12 text-lg dark:text-slate-400 content-backdrop p-3 rounded-md" set:html={content} />
+          )
+        }
 
         {
           callToAction && (

@@ -32,7 +32,7 @@ const {
 } = Astro.props as Props;
 
 // Transform the work experience items to the format expected by ModernTimeline
-const timelineItems = items.map(item => {
+const timelineItems = items.map((item) => {
   // Extract year from date if available
   let year: string | undefined = undefined;
   if (item.date) {
@@ -43,7 +43,7 @@ const timelineItems = items.map(item => {
       year = dateMatch[1];
     }
   }
-  
+
   return {
     title: `<span class="${compact ? 'text-lg' : 'text-xl'}">${item.title}</span>${item.company ? `<span class="block ${compact ? 'text-sm' : 'text-sm'} font-normal text-gray-600 dark:text-gray-400">${item.company}</span>` : ''}`,
     description: `<div class="transform-origin-top transition-transform duration-300">${item.description || ''}${item.description && (item.date || item.location) ? '<div class="mt-2"></div>' : ''}${item.date ? `<span class="block text-sm font-semibold text-gray-500 dark:text-gray-400">${item.date}</span>` : ''}${item.location ? `<span class="block text-sm text-gray-500 dark:text-gray-400">${item.location}</span>` : ''}</div>`,
@@ -56,15 +56,21 @@ const timelineItems = items.map(item => {
 
 <WidgetWrapper id={id} isDark={isDark} bg={bg} classes={classes}>
   <div class={`flex flex-col gap-${compact ? '8' : '12'} md:gap-${compact ? '12' : '16'}`}>
-    {title && (
-      <div class="flex flex-col gap-4 text-center">
-        {tagline && (
-          <p class="text-sm font-semibold uppercase tracking-wide text-primary dark:text-blue-200">{tagline}</p>
-        )}
-        {title && <h2 class={`${compact ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl'} font-bold font-heading`}>{title}</h2>}
-        {subtitle && <p class={`${compact ? 'text-lg' : 'text-xl'} text-muted dark:text-slate-400`}>{subtitle}</p>}
-      </div>
-    )}
+    {
+      title && (
+        <div class="flex flex-col gap-4 text-center">
+          {tagline && (
+            <p class="text-sm font-semibold uppercase tracking-wide text-primary dark:text-blue-200">{tagline}</p>
+          )}
+          {title && (
+            <h2 class={`${compact ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl'} font-bold font-heading`}>
+              {title}
+            </h2>
+          )}
+          {subtitle && <p class={`${compact ? 'text-lg' : 'text-xl'} text-muted dark:text-slate-400`}>{subtitle}</p>}
+        </div>
+      )
+    }
     <ModernTimeline
       items={timelineItems}
       compact={compact}

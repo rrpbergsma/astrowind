@@ -199,7 +199,7 @@ const getBreakpoints = ({
   if (layout === 'constrained') {
     // Use imageSizes when width is smaller than the smallest deviceSize
     const sizesToUse = width < config.deviceSizes[0] ? config.imageSizes : config.deviceSizes;
-    
+
     return [
       // Always include the image at 1x and 2x the specified width
       width,

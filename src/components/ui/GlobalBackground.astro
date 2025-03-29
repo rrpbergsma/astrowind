@@ -70,7 +70,7 @@ const iconNames: string[] = [
   'tabler:brand-github',
   'tabler:device-desktop',
   'tabler:brand-azure',
-  
+
   // Additional tech-related icons
   'tabler:cpu',
   'tabler:device-mobile',
@@ -79,7 +79,7 @@ const iconNames: string[] = [
   'tabler:shield',
   'tabler:lock',
   'tabler:key',
-  
+
   // Tangentially related icons for visual diversity
   'tabler:bulb',
   'tabler:compass',
@@ -101,17 +101,13 @@ const getRandomRotation = (): string => {
 // Function to get a random size
 const getRandomSize = (isDarkMode: boolean = false): string => {
   // Slightly larger size range for dark mode for better visibility
-  return isDarkMode
-    ? `${getRandomInRange(160, 200)}px`
-    : `${getRandomInRange(140, 180)}px`;
+  return isDarkMode ? `${getRandomInRange(160, 200)}px` : `${getRandomInRange(140, 180)}px`;
 };
 
 // Function to get a random opacity
 const getRandomOpacity = (isDarkMode: boolean = false): string => {
   // Higher opacity range for dark mode for better visibility
-  return isDarkMode
-    ? getRandomInRange(0.45, 0.55).toFixed(2)
-    : getRandomInRange(0.32, 0.38).toFixed(2);
+  return isDarkMode ? getRandomInRange(0.45, 0.55).toFixed(2) : getRandomInRange(0.32, 0.38).toFixed(2);
 };
 
 // Create a spacious layout with well-separated icons
@@ -119,14 +115,14 @@ const createSpacedIcons = (): BaseIconObject[] => {
   const icons: BaseIconObject[] = [];
   const rows = 10; // Increased from 6 to 10 for more coverage across the entire page
   const cols = 6;
-  
+
   // Define larger margins to keep icons away from edges (in percentage)
   const marginX = 10;
   const marginY = 5; // Reduced from 10 to 5 to allow icons to span more of the page height
-  
+
   // Minimum distance between icons (in percentage points)
   const minDistance = 15; // Reduced from 20 to 15 to allow more icons
-  
+
   // Create a base grid of positions
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
@@ -134,62 +130,59 @@ const createSpacedIcons = (): BaseIconObject[] => {
       // For small screens: 88% chance to skip (showing ~1/3 of the icons)
       // For larger screens: 65% chance to skip (original density)
       const skipProbability = 0.65;
-      
+
       // We'll add a data attribute to each icon to control visibility based on screen size
       let visibilityClass = '';
-      
+
       // Generate a random number to determine if we skip this position
       const randomValue = Math.random();
-      
+
       // Skip for all screen sizes if below the base threshold
       if (randomValue < skipProbability) {
         continue;
       }
-      
+
       // For values between 0.65 and 0.88, create the icon but mark it to be hidden on small screens
       if (randomValue < 0.88) {
         visibilityClass = 'hidden sm:block'; // Hidden on small screens, visible on sm and up
       }
-      
+
       // Base position in the grid with margins applied
-      const baseX = marginX + ((col / cols) * (100 - 2 * marginX));
-      const baseY = marginY + ((row / rows) * (100 - 2 * marginY));
-      
+      const baseX = marginX + (col / cols) * (100 - 2 * marginX);
+      const baseY = marginY + (row / rows) * (100 - 2 * marginY);
+
       // Add limited randomness to the position (±5%) to maintain spacing
       const randomOffsetX = getRandomInRange(-5, 5);
       const randomOffsetY = getRandomInRange(-5, 5);
-      
+
       // Ensure positions stay within margins
       const x = Math.max(marginX, Math.min(100 - marginX, baseX + randomOffsetX));
       const y = Math.max(marginY, Math.min(100 - marginY, baseY + randomOffsetY));
-      
+
       // Check if this position is too close to any existing icon
       let tooClose = false;
       for (const existingIcon of icons) {
         // Extract numeric values from percentage strings
         const existingX = parseFloat(existingIcon.x);
         const existingY = parseFloat(existingIcon.y);
-        
+
         // Calculate distance between points
-        const distance = Math.sqrt(
-          Math.pow(x - existingX, 2) +
-          Math.pow(y - existingY, 2)
-        );
-        
+        const distance = Math.sqrt(Math.pow(x - existingX, 2) + Math.pow(y - existingY, 2));
+
         // If too close to an existing icon, skip this position
         if (distance < minDistance) {
           tooClose = true;
           break;
         }
       }
-      
+
       if (tooClose) {
         continue;
       }
-      
+
       // Randomly select an icon from the expanded set
       const iconIndex = Math.floor(Math.random() * iconNames.length);
-      
+
       icons.push({
         icon: iconNames[iconIndex],
         x: `${x}%`,
@@ -201,15 +194,14 @@ const createSpacedIcons = (): BaseIconObject[] => {
       });
     }
   }
-  
+
   return icons;
 };
-
 
 const icons: BaseIconObject[] = createSpacedIcons();
 
 // Assign random colors to each icon
-const iconsWithColors: IconWithColors[] = icons.map(icon => ({
+const iconsWithColors: IconWithColors[] = icons.map((icon) => ({
   icon: icon.icon,
   x: icon.x,
   y: icon.y,
@@ -224,17 +216,19 @@ const iconsWithColors: IconWithColors[] = icons.map(icon => ({
 
 <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-5]" aria-hidden="true">
   <div class:list={['absolute inset-0', { 'backdrop-blur-sm bg-white/5 dark:bg-gray-900/10': isDark }]}></div>
-  
+
   {/* Decorative background icons with random placement */}
   <div id="background-icons" class="absolute inset-0 overflow-hidden">
-    {iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor, visibilityClass }) => (
-      <div
-        class={`absolute ${lightColor} ${darkColor} ${visibilityClass}`}
-        style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate});`}
-      >
-        <Icon name={icon} style={`width: ${size}; height: ${size};`} />
-      </div>
-    ))}
+    {
+      iconsWithColors.map(({ icon, x, y, size, opacity, rotate, lightColor, darkColor, visibilityClass }) => (
+        <div
+          class={`absolute ${lightColor} ${darkColor} ${visibilityClass}`}
+          style={`left: ${x}; top: ${y}; opacity: ${opacity}; transform: rotate(${rotate});`}
+        >
+          <Icon name={icon} style={`width: ${size}; height: ${size};`} />
+        </div>
+      ))
+    }
   </div>
 </div>
 

@@ -5,12 +5,18 @@ const { lang = 'en' } = Astro.params;
 const t = getTranslation(lang);
 ---
 
-<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 p-4 content-backdrop shadow-lg transform transition-transform duration-300 translate-y-full" style="display: none;">
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 p-4 content-backdrop shadow-lg transform transition-transform duration-300 translate-y-full"
+  style="display: none;"
+>
   <div class="container mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
     <div class="text-sm text-gray-800 dark:text-gray-200 font-medium">
       <p>
-        {t.cookies.message} 
-        <a href={`/${lang}/privacy#cookie-usage`} class="text-blue-600 dark:text-blue-400 hover:underline">{t.cookies.learnMore}</a>
+        {t.cookies.message}
+        <a href={`/${lang}/privacy#cookie-usage`} class="text-blue-600 dark:text-blue-400 hover:underline"
+          >{t.cookies.learnMore}</a
+        >
       </p>
     </div>
     <div class="flex-shrink-0">
@@ -41,7 +47,7 @@ const t = getTranslation(lang);
   // Helper function to set cookie with expiration
   function setCookie(name, value, days) {
     const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     const expires = `expires=${date.toUTCString()}`;
     document.cookie = `${name}=${value}; ${expires}; path=/; SameSite=Lax`;
   }
@@ -49,7 +55,7 @@ const t = getTranslation(lang);
   function setupCookieBanner() {
     const cookieBanner = document.getElementById('cookie-banner');
     const acceptButton = document.getElementById('accept-cookies');
-    
+
     if (!cookieBanner || !acceptButton) return;
 
     // Check if user has already accepted cookies
@@ -83,7 +89,7 @@ const t = getTranslation(lang);
     acceptButton.addEventListener('click', () => {
       // Store consent in cookie (primary storage)
       setCookie('cookieConsentAccepted', 'true', 365);
-      
+
       // Also store in localStorage as backup
       try {
         localStorage.setItem('cookieConsentAccepted', 'true');
@@ -91,10 +97,10 @@ const t = getTranslation(lang);
         console.error('Error setting localStorage:', e);
         // Continue with cookie storage
       }
-      
+
       // Hide the banner with animation
       cookieBanner.classList.add('translate-y-full');
-      
+
       // Remove from DOM after animation completes
       setTimeout(() => {
         cookieBanner.style.display = 'none';

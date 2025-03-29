@@ -11,7 +11,7 @@ import { getTranslation, supportedLanguages } from '~/i18n/translations';
 import OurCommitmentImage from '~/assets/images/OurCommitment.webp';
 
 export async function getStaticPaths() {
-  return supportedLanguages.map(lang => ({
+  return supportedLanguages.map((lang) => ({
     params: { lang },
   }));
 }
@@ -52,72 +52,75 @@ const metadata = {
   <!-- Features Widget -->
   <Features
     id="services"
-    tagline={t.homepage?.services?.tagline || "Services"}
-    title={t.homepage?.services?.title || "How I Can Help Your Organization"}
-    subtitle={t.homepage?.services?.subtitle || "I offer a range of specialized IT services to help businesses optimize their operations and digital infrastructure."}
-    items={(t.homepage?.services?.items || [
-      {
-        title: 'Workflow Automation',
-        description:
-          'Streamline your business processes with Power Automate solutions that reduce manual effort and increase operational efficiency.',
-        icon: 'tabler:settings-automation',
-      },
-      {
-        title: 'Intelligent Chatbots',
-        description:
-          'Develop smart chatbots in Copilot Studio that enhance user interactions through natural language processing and automated responses.',
-        icon: 'tabler:message-chatbot',
-      },
-      {
-        title: 'API Integrations',
-        description:
-          'Create seamless connections between your applications and services with custom API integrations for efficient data exchange.',
-        icon: 'tabler:api',
-      },
-      {
-        title: 'Microsoft 365 Management',
-        description:
-          'Optimize your Microsoft 365 environment with expert administration, security configurations, and service optimization.',
-        icon: 'tabler:brand-office',
-      },
-      {
-        title: 'SharePoint Solutions',
-        description:
-          'Set up, manage, and optimize SharePoint Online and on-premise deployments for effective document management and collaboration.',
-        icon: 'tabler:share',
-      },
-      {
-        title: 'IT Infrastructure Oversight',
-        description:
-          'Manage global IT infrastructures, including servers, networks, and end-user devices to ensure reliable operations.',
-        icon: 'tabler:server',
-      },
-    ]).map(item => ({...item, icon: item.icon || 'tabler:check'}))}
+    tagline={t.homepage?.services?.tagline || 'Services'}
+    title={t.homepage?.services?.title || 'How I Can Help Your Organization'}
+    subtitle={t.homepage?.services?.subtitle ||
+      'I offer a range of specialized IT services to help businesses optimize their operations and digital infrastructure.'}
+    items={(
+      t.homepage?.services?.items || [
+        {
+          title: 'Workflow Automation',
+          description:
+            'Streamline your business processes with Power Automate solutions that reduce manual effort and increase operational efficiency.',
+          icon: 'tabler:settings-automation',
+        },
+        {
+          title: 'Intelligent Chatbots',
+          description:
+            'Develop smart chatbots in Copilot Studio that enhance user interactions through natural language processing and automated responses.',
+          icon: 'tabler:message-chatbot',
+        },
+        {
+          title: 'API Integrations',
+          description:
+            'Create seamless connections between your applications and services with custom API integrations for efficient data exchange.',
+          icon: 'tabler:api',
+        },
+        {
+          title: 'Microsoft 365 Management',
+          description:
+            'Optimize your Microsoft 365 environment with expert administration, security configurations, and service optimization.',
+          icon: 'tabler:brand-office',
+        },
+        {
+          title: 'SharePoint Solutions',
+          description:
+            'Set up, manage, and optimize SharePoint Online and on-premise deployments for effective document management and collaboration.',
+          icon: 'tabler:share',
+        },
+        {
+          title: 'IT Infrastructure Oversight',
+          description:
+            'Manage global IT infrastructures, including servers, networks, and end-user devices to ensure reliable operations.',
+          icon: 'tabler:server',
+        },
+      ]
+    ).map((item) => ({ ...item, icon: item.icon || 'tabler:check' }))}
   />
 
   <!-- Content Widget -->
   <Content
     isReversed
-    tagline={t.homepage?.approach?.tagline || "About My Approach"}
-    title={t.homepage?.approach?.title || "Our Commitment"}
+    tagline={t.homepage?.approach?.tagline || 'About My Approach'}
+    title={t.homepage?.approach?.title || 'Our Commitment'}
     items={[]}
     image={{
       src: OurCommitmentImage,
-      alt: 'IT Excellence and Innovation'
+      alt: 'IT Excellence and Innovation',
     }}
   >
     <Fragment slot="content">
       <div class="text-lg dark:text-slate-400">
-        {(t.homepage?.approach?.missionContent || [
-          'We are committed to driving IT excellence through strategic cloud optimization, process automation, and enterprise-grade technical support. We leverage cutting-edge technology to address complex business challenges and deliver measurable value.',
-          'With deep expertise in Microsoft technologies and automation, we empower organizations to transform their digital capabilities and achieve their business objectives. We design solutions that enhance user experience and maximize productivity, ensuring technology empowers your business.',
-          'We stay ahead of the curve by researching and implementing emerging technologies, providing scalable solutions that adapt to your evolving needs. Our approach aligns technical solutions with your core business objectives, delivering measurable ROI and a competitive advantage.',
-          'Our mission is to leverage technology to solve real business challenges and create value through innovation. With over 15 years of IT experience, we bring a wealth of knowledge in Microsoft technologies, automation tools, and system integration to help organizations transform their digital capabilities and achieve their strategic goals.'
-        ]).map((paragraph, index, array) => (
-          <p class={index === array.length - 1 ? '' : 'mb-4'}>
-            {paragraph}
-          </p>
-        ))}
+        {
+          (
+            t.homepage?.approach?.missionContent || [
+              'We are committed to driving IT excellence through strategic cloud optimization, process automation, and enterprise-grade technical support. We leverage cutting-edge technology to address complex business challenges and deliver measurable value.',
+              'With deep expertise in Microsoft technologies and automation, we empower organizations to transform their digital capabilities and achieve their business objectives. We design solutions that enhance user experience and maximize productivity, ensuring technology empowers your business.',
+              'We stay ahead of the curve by researching and implementing emerging technologies, providing scalable solutions that adapt to your evolving needs. Our approach aligns technical solutions with your core business objectives, delivering measurable ROI and a competitive advantage.',
+              'Our mission is to leverage technology to solve real business challenges and create value through innovation. With over 15 years of IT experience, we bring a wealth of knowledge in Microsoft technologies, automation tools, and system integration to help organizations transform their digital capabilities and achieve their strategic goals.',
+            ]
+          ).map((paragraph, index, array) => <p class={index === array.length - 1 ? '' : 'mb-4'}>{paragraph}</p>)
+        }
       </div>
     </Fragment>
   </Content>
@@ -164,15 +167,19 @@ const metadata = {
   >
     <Fragment slot="title">{t.homepage?.callToAction?.title || 'Ready to optimize your IT systems?'}</Fragment>
     <Fragment slot="subtitle">
-      {t.homepage?.callToAction?.subtitle || 'Let\'s discuss how I can help your organization streamline processes, enhance collaboration, and drive digital transformation.'}
+      {
+        t.homepage?.callToAction?.subtitle ||
+          "Let's discuss how I can help your organization streamline processes, enhance collaboration, and drive digital transformation."
+      }
     </Fragment>
   </CallToAction>
 
   <!-- Contact Widget -->
   <Contact
     id="contact"
-    title={t.homepage?.contact?.title || "Get in Touch"}
-    subtitle={t.homepage?.contact?.subtitle || "Have a project in mind or questions about my services? Reach out and let's start a conversation."}
+    title={t.homepage?.contact?.title || 'Get in Touch'}
+    subtitle={t.homepage?.contact?.subtitle ||
+      "Have a project in mind or questions about my services? Reach out and let's start a conversation."}
     inputs={[
       {
         type: 'text',
@@ -193,11 +200,11 @@ const metadata = {
       rows: 8,
     }}
     disclaimer={{
-      label: t.homepage?.contact?.disclaimer ||
+      label:
+        t.homepage?.contact?.disclaimer ||
         'By submitting this form, you agree to our privacy policy and allow us to use your information to contact you about our services.',
     }}
-    description={t.homepage?.contact?.description || "I'll respond to your message as soon as possible. You can also connect with me on LinkedIn or GitHub."}
+    description={t.homepage?.contact?.description ||
+      "I'll respond to your message as soon as possible. You can also connect with me on LinkedIn or GitHub."}
   />
-
-  
 </Layout>

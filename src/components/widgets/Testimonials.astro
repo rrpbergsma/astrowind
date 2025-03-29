@@ -26,7 +26,12 @@ const {
     {
       testimonials &&
         testimonials.map(({ title, linkUrl, name, issueDate, description, image }) => (
-          <a href={linkUrl} target="_blank" rel="noopener noreferrer" class="flex flex-col justify-start items-center p-2 md:p-4 rounded-md shadow-md backdrop-blur-sm bg-white/15 dark:bg-transparent border border-gray-200 dark:border-slate-600 hover:bg-white/30 hover:backdrop-blur-md dark:hover:backdrop-blur-md transition-all duration-300 ease-in-out hover:shadow-lg hover:translate-y-[-2px] w-[425px] mx-auto sm:mx-0">
+          <a
+            href={linkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col justify-start items-center p-2 md:p-4 rounded-md shadow-md backdrop-blur-sm bg-white/15 dark:bg-transparent border border-gray-200 dark:border-slate-600 hover:bg-white/30 hover:backdrop-blur-md dark:hover:backdrop-blur-md transition-all duration-300 ease-in-out hover:shadow-lg hover:translate-y-[-2px] w-[425px] mx-auto sm:mx-0"
+          >
             {title && <h2 class="text-lg font-medium leading-6 pb-4 text-center">{title}</h2>}
             {image && (
               <div class="h-[160px] w-[160px] border-slate-200 dark:border-slate-600 mx-auto">
@@ -42,10 +47,10 @@ const {
                 />
               </div>
             )}
-  
+
             {/* Horizontal line directly under the image */}
             <hr class="border-slate-200 dark:border-slate-600 my-4" />
-  
+
             {/* Text content takes up the remaining space */}
             <div class="flex flex-col flex-grow items-center">
               {name && <p class="text-lg font-semibold text-center">{name}</p>}
@@ -56,8 +61,7 @@ const {
         ))
     }
   </div>
-  
-  
+
   {
     callToAction && (
       <div class="flex justify-center mx-auto w-fit mt-8 md:mt-12 font-medium">
@@ -68,12 +72,12 @@ const {
 </WidgetWrapper>
 
 <style>
-@media (max-width: 640px) {
-  .grid {
-    justify-content: center;
+  @media (max-width: 640px) {
+    .grid {
+      justify-content: center;
+    }
+    .grid > a {
+      margin: 0 auto;
+    }
   }
-  .grid > a {
-    margin: 0 auto;
-  }
-}
 </style>

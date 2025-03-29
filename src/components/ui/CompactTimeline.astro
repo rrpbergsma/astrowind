@@ -22,7 +22,7 @@ const {
 
 {
   items && items.length && (
-    <div class={twMerge("grid grid-cols-1 md:grid-cols-2 gap-4", containerClass)}>
+    <div class={twMerge('grid grid-cols-1 md:grid-cols-2 gap-4', containerClass)}>
       {items.map(({ title, description, icon, classes: itemClasses = {} }) => (
         <div
           class={twMerge(
@@ -44,7 +44,11 @@ const {
             {description && (
               <div class="text-muted mt-2 overflow-hidden">
                 <div
-                  class={twMerge('text-sm max-h-[6rem] hover:max-h-[300px] transition-all duration-500 ease-description', descriptionClass, itemClasses?.description)}
+                  class={twMerge(
+                    'text-sm max-h-[6rem] hover:max-h-[300px] transition-all duration-500 ease-description',
+                    descriptionClass,
+                    itemClasses?.description
+                  )}
                   set:html={description}
                 />
               </div>
@@ -61,7 +65,7 @@ const {
   .ease-description {
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  
+
   /* Fade effect for the gradient overlay */
   .hover\:opacity-0:hover {
     opacity: 0;
